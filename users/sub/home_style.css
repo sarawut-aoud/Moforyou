@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Mali:wght@500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+ 
+    font-family: 'Itim', cursive;
+    font: bold;
+    font-size: 18px;
+}
+.bg{
+  background: rgb(165, 83, 16);
+}
+.logo {
+  padding-top: 0;
+  width: 50%;
+}
+.row div1{
+  padding-top: 20px;
+}
+.button{
+  border : none;
+  border-radius: 20px;
+  width: 200px;
+  height: 50px;
+  background-color: rgb(238, 121, 25);
+  color: #fff;
+}
+.button:hover{
+  box-shadow: 0 12px 16px  rgba(0,0,0,0.24);
+}
+.img-resp {
+  max-width: 100%;
+  height: auto;
+}
+
+
