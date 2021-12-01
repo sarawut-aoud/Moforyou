@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Bootstrap 5 -->
+<link rel="stylesheet" href="../../plugins/bootstrap5/css/bootstrap.min.css">
+<!-- DataTables -->
 <!-- Tempusdominus Bootstrap 4 -->
 <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- DataTables -->
@@ -26,6 +29,7 @@
 <!-- Toastr -->
 <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 
+
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -34,6 +38,8 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- Bootstrap 5 -->
+<script src="../../plugins/bootstrap5/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- daterangepicker -->

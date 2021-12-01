@@ -52,10 +52,12 @@
 
     .login100-form-btn:hover {
         background: rgba(236, 161, 0, 1);
-    } .main-footer {
-            padding: 0 0 0 0;
-            width: 100%;
-        }
+    }
+
+    .main-footer {
+        padding: 0 0 0 0;
+        width: 100%;
+    }
 </style>
 
 <body class="hold-transition login-page bg-gd">
@@ -78,14 +80,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password">
-                            <div class="input-group-append">
+
+                        <!-- <div class="input-group mb-3"> -->
+                        <div class="  form-floating mb-3 mt-3">
+                            <input type="password" class="form-control" id="floatingInputValue" placeholder="Password">
+                            <label for="floatingInputValue" > <i class="fas fa-lock"></i> password</label>
+                            <!-- <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
                                 </div>
-                            </div>
+                            </div> -->
+
                         </div>
+
+
+
                         <div class="col-12">
                             <button type="submit" class="btn login100-form-btn btn-block">เข้าสู่ระบบ</button>
                         </div>
@@ -112,7 +121,7 @@
     </div>
     <!-- /.login-box -->
 
-    
+
 </body>
 
 </html>
