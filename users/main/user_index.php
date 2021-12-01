@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
@@ -10,19 +6,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
-   <?php require '../../build/script.php' ;?>
+    <?php require '../../build/script.php'; ?>
 </head>
 <style>
-     .main-footer {
-            padding: 0 0 0 0;
-            width: 100%;
-        }
+    .main-footer {
+        padding: 0 0 0 0;
+        width: 100%;
+    }
+
+    .fas {
+        color: white;
+    }
+
+    .fas:hover {
+        color: saddlebrown;
+    }
 </style>
+
 <body class="hold-transition sidebar-collapse layout-top-nav">
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php require '../sub/navbar.php' ;?>
+        <?php require '../sub/navbar.php'; ?>
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
@@ -30,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container">
-                    
+
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
@@ -102,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
-        <?php require '../sub/footer.php' ;?>
+        <?php require '../sub/footer.php'; ?>
     </div>
     <!-- ./wrapper -->
 </body>

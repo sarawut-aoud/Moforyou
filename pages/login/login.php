@@ -70,21 +70,24 @@
             </div>
 
             <div class="card-body">
+                <p class="login-box-msg">เยี่ยมชม <u><a style="font-size: 22px;" href="../main_pages/index">หน้าแรก</a></u></p>
                 <div class="col-12">
-                    <form action="../forms/_login" method="post">
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Username or Email">
-                            <div class="input-group-append">
+                    <form id="loginForm">
+                        <!-- <div class="input-group mb-3"> -->
+                        <div class="  form-floating mb-3 mt-3">
+                            <input type="text" name="use_txt" class="form-control" placeholder="Username or Email">
+                            <label for="floatingInputValue"> <small><i class="fas fa-user-circle"></i> Username or Email </small></label>
+                            <!-- <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user-circle"></span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!-- <div class="input-group mb-3"> -->
-                        <div class="  form-floating mb-3 mt-3">
-                            <input type="password" class="form-control" id="floatingInputValue" placeholder="Password">
-                            <label for="floatingInputValue" > <i class="fas fa-lock"></i> password</label>
+                        <div class=" form-floating mb-3 mt-3">
+                            <input type="password" name="password" class="form-control" id="floatingInputValue" placeholder="Password">
+                            <label for="floatingInputValue"><small> <i class="fas fa-lock"></i> password </small></label>
                             <!-- <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -93,14 +96,12 @@
 
                         </div>
 
-
-
-                        <div class="col-12">
+                        <div class="col-12 mt-5">
                             <button type="submit" class="btn login100-form-btn btn-block">เข้าสู่ระบบ</button>
                         </div>
                         <!-- /.col -->
+                    </form>
                 </div>
-                </form>
                 <center>
                     <p class="mb-1 mt-2">
                         <a href="forgot-password">ลืมรหัสผ่าน</a>

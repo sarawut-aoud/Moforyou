@@ -5,8 +5,8 @@
             <span class="brand-text text-white">MoFoYou</span>
         </a>
 
-        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler order-1"  data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fad fa-search" style="color: white;"></span>
         </button>
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
@@ -19,7 +19,7 @@
                     <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
+                            <i class="fad fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" style="color: white;">
                     <i class="fas fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
+                    <span class="badge badge-primary navbar-badge">15</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <span class="dropdown-header">15 Notifications</span>
@@ -56,13 +56,9 @@
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
-            <li class=" nav-item " >
-                <a class="nav-link " href="#" style="color: white;">
-                    <i class="fas fa-user-cog ml-2"></i>
-                </a>
-            </li>
+           
             <li class=" nav-item ">
-                <a class="nav-link " href="../../pages/main_pages/index" style="color: white;">
+                <a class="nav-link " href="../../pages/main_pages/index">
                     <i class="fas fa-unlock-alt mr-2"></i>
                 </a>
             </li>
