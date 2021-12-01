@@ -64,7 +64,7 @@
     <div class="login-box">
         <!-- /.login-logo -->
 
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header text-center card-head">
                 <a href="#" class="h1 text-white">MoFouYou</a>
             </div>

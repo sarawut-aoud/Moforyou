@@ -1,189 +1,110 @@
 <!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin|Dashboard</title>
-    <?php
-    include '../../build/script.php';
-    ?>
+    <title>MoForYou</title>
+
+   <?php require '../../build/script.php' ;?>
 </head>
-
-</script>
-
-<body class="hold-transition sidebar-mini layout-fixed">
+<style>
+     .main-footer {
+            padding: 0 0 0 0;
+            width: 100%;
+        }
+</style>
+<body class="hold-transition sidebar-collapse layout-top-nav">
     <div class="wrapper">
 
-
-        <?php
-        // Navbar Admin
-        require '../sub/navbar.php';
-        // Aside Admin
-        require '../sub/aside.php';
-        // Manage Pages Admin
-        require '../sub/side_manage.php';
-        // Reports Admin   
-        require '../sub/side_reports.php';
-        ?>
-
-        </ul>
-
-        <!-- /.sidebar-menu -->
-        <!-- /.sidebar -->
-        </aside>
+        <!-- Navbar -->
+        <?php require '../sub/navbar.php' ;?>
+        <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>ManagePages โคเนื้อ</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="./admin_index">Home</a></li>
-                                <li class="breadcrumb-item active">Cow</li>
-                            </ol>
-                        </div>
-                    </div>
+            <div class="content-header">
+                <div class="container">
+                   
                 </div><!-- /.container-fluid -->
-            </section>
+            </div>
             <!-- /.content-header -->
 
-            <!-- Main Content -->
-            <section class="content">
-                <div class="container-fluid">
+            <!-- Main content -->
+            <div class="content">
+                <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Insert Example</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
 
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-right">
-                                        <button type="" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
-                                    </div>
-                                </form>
-                                <!-- /.form end -->
+                                    <p class="card-text">
+                                        Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
                             </div>
-                            <!-- /.card -->
+
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+
+                                    <p class="card-text">
+                                        Some quick example text to build on the card title and make up the bulk of the card's
+                                        content.
+                                    </p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                        <!-- /.col-md-6 -->
+                        <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
+                                    <h5 class="card-title m-0">Featured</h5>
                                 </div>
-                                <!-- /.card-header -->
                                 <div class="card-body">
-                                    <!-- table -->
-                                    <table id="example1" class="table table-bordered table-striped table-hover">
-                                        <!-- head table -->
-                                        <thead>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- /.head table -->
-                                        <!-- body table -->
-                                        <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
-                                    </table>
-                                    <!-- /.table -->
+                                    <h6 class="card-title">Special title treatment</h6>
+
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
+
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">Featured</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">Special title treatment</h6>
+
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.col -->
+                        <!-- /.col-md-6 -->
                     </div>
                     <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </section>
+                </div><!-- /.container-fluid -->
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require '../sub/fooster.php'; ?>
-
+        <!-- Main Footer -->
+        <?php require '../sub/footer.php' ;?>
     </div>
     <!-- ./wrapper -->
-
 </body>
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
 
 </html>
