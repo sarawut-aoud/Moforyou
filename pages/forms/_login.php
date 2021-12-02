@@ -1,3 +1,20 @@
+<?php
+require '../../connect/functions.php';
+
+$userdata = new db_con();
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $fname = $_POST['fname'];
+    $card = $_POST['card'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
+
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +27,6 @@
     
 </body>
 <script>
-    window.location.href ='../../admin/main/admin_index';
+    window.location.href = '../login/login';
 </script>
 </html>
