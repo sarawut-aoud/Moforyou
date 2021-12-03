@@ -1,24 +1,30 @@
 <?php
 require '../../connect/functions.php';
 
-$userdata = new db_con();
+$userdata = new DB_con();
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
-    $fname = $_POST['fname'];
     $card = $_POST['card'];
+    $fname = $_POST['fname'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
 
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
-        if($sql){
-            echo "<script>alert('Registor Successful!');</script>";
-            echo "<script>window.location.href='./login'</script>";
-        }else{
-            echo "<script>alert('Something went wrong! Please try again.');</script>";
-            echo "<script>window.location.href='./login'</script>";
-        }
-    
+
+    // echo "<script>  setTimeout(function(){
+    //         Swal.fire({
+    //             icon: 'success',
+    //             title: 'สำเร็จ',
+    //           },function(){
+    //               window.localtion ='./login';
+    //           });
+    //                     },1000);
+    //     </script>";
+    // } else {
+    //     echo "<script>alert('Something went wrong! Please try again.');</script>";
+    //     echo "<script>window.location.href='./login'</script>";
+    // }
 }
 ?>
 <!DOCTYPE html>
@@ -92,78 +98,58 @@ if (isset($_POST['submit'])) {
             <div class="card-body">
                 <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
 
-                <form method="post" >
-                    <div class="input-group mb-3">
+                <form method="post">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user-circle"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> Username </small></label>
                         <span id="usernameavailable"></span>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> password </small></label>
+
                     </div>
-                    <span id="message" style="font-size: 12px; "></span>
-                    <div class="input-group mb-3">
+                    <!-- <span id="message" style="font-size: 12px; "></span> -->
+                    <div class="form-floating mb-3 mt-3">
 
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Retype password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
+                        <label for="floatingInputValue"> <small> Retype password </small></label>
+                        <div class=" input-group-append">
+                            <span id="message"></span>
                         </div>
 
                     </div>
 
 
-                    <div class="input-group  mt-4 mb-3">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control " id="fname" name="fname" placeholder="ชื่อ - นามสกุล">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> ชื่อ - นามสกุล </small></label>
+
                     </div>
 
-                    <div class="input-group mb-3">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="card" name="card" placeholder="บัตรประชาชน" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-id-card"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> บัตรประชาชน </small></label>
+
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> Email </small></label>
+
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-mobile-alt"></span>
-                            </div>
-                        </div>
+                        <label for="floatingInputValue"> <small> เบอร์โทรศัพท์ </small></label>
+
                     </div>
 
-                   
-                        <!-- /.col -->
-                        <div class="col-12">
-                        <button type="submit" name="submit" id="submit"  class="btn login100-form-btn btn-block">สมัคร</button>
-                        </div>
-                        <!-- /.col -->
-                    
+
+                    <!-- /.col -->
+                    <div class="col-12">
+                        <button type="submit" name="submit" id="submit" class="btn login100-form-btn btn-block">สมัคร</button>
+                    </div>
+                    <!-- /.col -->
+
                 </form>
                 <center>
                     <p class="mt-4 mb-0">
@@ -181,32 +167,28 @@ if (isset($_POST['submit'])) {
 <script>
     $('#password, #confirm_password').on('keyup', function() {
         if ($('#password').val() == $('#confirm_password').val()) {
-            $('#message').html('ใช้งานได้').css('color', 'green');
+            $('#message').html('').css('color', 'green');
         } else
-            $('#message').html('รหัสผ่านไม่ตรง').css('color', 'red');
+            $('#message').html('').css('color', 'red');
     });
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    // });
 
-        $('.swalDefaultSuccess').click(function sucess() {
-            Toast.fire({
-                icon: 'success',
-                title: 'ทำการสมัครสมาชิกเรียบร้อย !!'
-            })
-        });
-        $('.swalDefaultError').click(function error() {
-            Toast.fire({
-                icon: 'error',
-                title: 'เกิดข้อผิกพลาด !'
-            })
-        });
-    });
 
+
+    // setTimeout(function(){
+    //     Toast.fire({
+    //         icon: 'success',
+    //         title: 'Signed in successfully'
+    //     },function(){
+    //         window.localtion ="./login";
+    //     });
+    // },1000);
 </script>
 
 </html>

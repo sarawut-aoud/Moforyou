@@ -5,7 +5,7 @@
     define('DB_PASS',''); // Database Password
     define('DB_NAME','db_moforyou'); // Database Name
 
-    class db_con {
+    class DB_con {
         // Connect Database
         function __construct()
         {
@@ -20,7 +20,7 @@
         // Resgistration 
         public function register($card,$fname,$email,$phone,$username,$password){
             $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
-            VALUES('$card','$fname','$email','$phone','$username','$password',)");
+            VALUES('$card','$fname','$email','$phone','$username','$password')");
             return $reg;
         }
     }
