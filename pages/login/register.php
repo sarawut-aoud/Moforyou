@@ -1,32 +1,3 @@
-<?php
-require '../../connect/functions.php';
-
-$userdata = new DB_con();
-if (isset($_POST['submit'])) {
-    $card = $_POST['card'];
-    $fname = $_POST['fname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
-
-    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
-
-    // echo "<script>  setTimeout(function(){
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: 'สำเร็จ',
-    //           },function(){
-    //               window.localtion ='./login';
-    //           });
-    //                     },1000);
-    //     </script>";
-    // } else {
-    //     echo "<script>alert('Something went wrong! Please try again.');</script>";
-    //     echo "<script>window.location.href='./login'</script>";
-    // }
-}
-?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -38,6 +9,46 @@ if (isset($_POST['submit'])) {
     <?php require '../../build/script.php'; ?>
 </head>
 <style>
+    .Short {
+        width: 100%;
+        background-color: #dc3545;
+        margin-top: 5px;
+        height: 3px;
+        color: #dc3545;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .Weak {
+        width: 100%;
+        background-color: #ffc107;
+        margin-top: 5px;
+        height: 3px;
+        color: #ffc107;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .Good {
+        width: 100%;
+        background-color: #28a745;
+        margin-top: 5px;
+        height: 3px;
+        color: #28a745;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .Strong {
+        width: 100%;
+        background-color: #d39e00;
+        margin-top: 5px;
+        height: 3px;
+        color: #d39e00;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
     .bg-gd {
         background: rgb(255, 255, 255);
         background: -moz-linear-gradient(315deg, rgba(255, 255, 255, 1) 50%, rgba(207, 116, 27, 1) 50%);
@@ -107,17 +118,15 @@ if (isset($_POST['submit'])) {
                     <div class="form-floating mb-3 mt-3">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         <label for="floatingInputValue"> <small> password </small></label>
-
+                        <div id="strengthMessage"></div>
                     </div>
                     <!-- <span id="message" style="font-size: 12px; "></span> -->
                     <div class="form-floating mb-3 mt-3">
 
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Retype password" required>
+                        <input type="password" class="form-control " id="confirm_password" name="confirm_password" placeholder="Retype password" required></input>
                         <label for="floatingInputValue"> <small> Retype password </small></label>
-                        <div class=" input-group-append">
-                            <span id="message"></span>
-                        </div>
-
+                        <!-- <span id="message" class=" fas fa-check-circle "></span> -->
+                        <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
                     </div>
 
 
@@ -165,30 +174,107 @@ if (isset($_POST['submit'])) {
 
 </body>
 <script>
-    $('#password, #confirm_password').on('keyup', function() {
-        if ($('#password').val() == $('#confirm_password').val()) {
-            $('#message').html('').css('color', 'green');
-        } else
-            $('#message').html('').css('color', 'red');
+    // ระดับ password
+    $(document).ready(function() {
+        $('#password').keyup(function() {
+            $('#strengthMessage').html(checkStrength($('#password').val()))
+        })
+
+        function checkStrength(password) {
+            var strength = 0
+            if (password.length < 6) {
+                $('#strengthMessage').removeClass()
+                $('#strengthMessage').addClass('Short')
+                return 'Too short'
+            }
+            if (password.length > 7) strength += 1
+            // If password contains both lower and uppercase characters, increase strength value.  
+            if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+            // If it has numbers and characters, increase strength value.  
+            if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+            // If it has one special character, increase strength value.  
+            if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+            // If it has two special characters, increase strength value.  
+            if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+            // Calculated strength value, we can return messages  
+            // If value is less than 2  
+            if (strength < 2) {
+                $('#strengthMessage').removeClass()
+                $('#strengthMessage').addClass('Weak')
+                return 'Weak'
+            } else if (strength == 2) {
+                $('#strengthMessage').removeClass()
+                $('#strengthMessage').addClass('Good')
+                return 'Good'
+            } else {
+                $('#strengthMessage').removeClass()
+                $('#strengthMessage').addClass('Strong')
+                return 'Strong'
+            }
+        }
     });
-    // const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-end',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    // });
+    // Check Confrim Password
+    $(document).ready(function() {
+        $("#password, #confirm_password").on('keyup', function() {
+            var password = $("#password").val();
+            var confirmPassword = $("#confirm_password").val();
 
-
-
-    // setTimeout(function(){
-    //     Toast.fire({
-    //         icon: 'success',
-    //         title: 'Signed in successfully'
-    //     },function(){
-    //         window.localtion ="./login";
-    //     });
-    // },1000);
+            if (password != confirmPassword)
+                $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+            else
+                $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+        })
+    });
 </script>
+
+<?php
+require '../../connect/functions.php';
+
+$userdata = new DB_con();
+if (isset($_POST['submit'])) {
+    $card = $_POST['card'];
+    $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
+
+    if ($sql) {
+        echo "<script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+        })
+        Toast.fire({
+            icon: 'success',
+            title: 'สมัครข้อมูลเสร็จสิ้น'
+        }).then((result)=> {
+            window.location.href = '../login/register';
+        })
+       
+    </script>";
+    } else {
+        echo "<script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+        })
+        Toast.fire({
+            icon: 'error',
+            title: 'เกิดข้อผิดพลาด'
+        }).then((result)=> {
+            window.location.href = '../login/register';
+        })
+       
+    </script>";
+    }
+}
+?>
 
 </html>
