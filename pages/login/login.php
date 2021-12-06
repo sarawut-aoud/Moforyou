@@ -1,3 +1,9 @@
+<?php
+ob_start();
+require '../../connect/functions.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Log in | MFU</title>
 
-    <?php require '../../build/script.php'; ?>
+    <?php
+
+    require '../../build/script.php'; ?>
 </head>
 <style>
     .bg-gd {
@@ -72,10 +80,10 @@
             <div class="card-body">
                 <p class="login-box-msg">เยี่ยมชม <u><a style="font-size: 22px;" href="../main_pages/index">หน้าแรก</a></u></p>
                 <div class="col-12">
-                    <form id="loginForm">
+                    <form method="post" id="loginForm">
                         <!-- <div class="input-group mb-3"> -->
                         <div class="  form-floating mb-3 mt-3">
-                            <input type="text" name="use_txt" class="form-control" placeholder="Username or Email">
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Username or Email">
                             <label for="floatingInputValue"> <small><i class="fas fa-user-circle"></i> Username or Email </small></label>
                             <!-- <div class="input-group-append">
                                 <div class="input-group-text">
@@ -86,7 +94,7 @@
 
                         <!-- <div class="input-group mb-3"> -->
                         <div class=" form-floating mb-3 mt-3">
-                            <input type="password" name="password" class="form-control" id="floatingInputValue" placeholder="Password">
+                            <input type="password" name="password" id="password" class="form-control" id="floatingInputValue" placeholder="Password">
                             <label for="floatingInputValue"><small> <i class="fas fa-lock"></i> password </small></label>
                             <!-- <div class="input-group-append">
                                 <div class="input-group-text">
@@ -97,7 +105,7 @@
                         </div>
 
                         <div class="col-12 mt-5">
-                            <button type="submit" class="btn login100-form-btn btn-block">เข้าสู่ระบบ</button>
+                            <button type="submit" name="login" id="login" class="btn login100-form-btn btn-block">เข้าสู่ระบบ</button>
                         </div>
                         <!-- /.col -->
                     </form>
@@ -124,5 +132,47 @@
 
 
 </body>
+<script>
+
+</script>
+
 
 </html>
+<?php
+
+$userdata = new DB_con();
+
+if (isset($_POST['login'])) {
+    session_start();
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $result = $userdata->login($username, $password);
+    $num = mysqli_fetch_array($result);
+
+    if ($num > 0) {
+
+        $_SESSION['id'] = $num['id'];
+        $_SESSION['fullname'] = $num['fullname'];
+        echo "<script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+        })
+        Toast.fire({
+            icon: 'success',
+            title: 'รหัสผ่านถูกต้อง'
+        }).then((result)=>{
+            window.location.href='../../users/main/user_index';
+        })
+       
+    </script>";
+           
+    } else {
+        echo "<script>alert('Something went wrong! Please try again.');</script>";
+        // echo "<script>window.location.href='./login'</script>";
+    }
+}
+?>

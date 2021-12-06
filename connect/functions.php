@@ -16,12 +16,23 @@
                 echo "Failed to connect to MySQL : ". mysqli_connect_error();
             }
         }
+        // Check username
+        public function usernameavaliable($username){
+            $checkuser = mysqli_query($this->dbcon,"SELECT username FROM tbl_farmer WHERE username = '$username' ");
+            return $checkuser;
+        }
 
         // Resgistration 
         public function register($card,$fname,$email,$phone,$username,$password){
             $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
             VALUES('$card','$fname','$email','$phone','$username','$password')");
             return $reg;
+        }
+
+        // Login 
+        public function login($username,$password){
+            $log = mysqli_query($this->dbcon,"SELECT id, fullname FROM tbl_farmer WHERE username = '$username' AND password = '$password'");
+            return $log;
         }
     }
 ?>

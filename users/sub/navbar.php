@@ -58,7 +58,7 @@
             </li>
            
             <li class=" nav-item ">
-                <a class="nav-link " href="../../pages/main_pages/index">
+                <a class="nav-link " href="../../pages/login/logout">
                     <i class="fas fa-unlock-alt mr-2"></i>
                 </a>
             </li>

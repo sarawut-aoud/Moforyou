@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if ($_SESSION['id'] == "") {
+  header("location: ../../../main_2/pages/login/login");
+} else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -113,3 +120,6 @@
 </body>
 
 </html>
+<?php
+}
+?>

@@ -68,7 +68,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="btn btn-danger" href="../../pages/main_pages/index" role="button">ออกจากระบบ</a>
+              <a class="btn btn-danger" href="../../pages/login/logout" role="button">ออกจากระบบ</a>
           </li>
       </ul>
   </nav>

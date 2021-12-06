@@ -111,9 +111,9 @@
 
                 <form method="post">
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" onblur="checkusername(this.value)">
                         <label for="floatingInputValue"> <small> Username </small></label>
-                        <span id="usernameavailable"></span>
+                        <span  id="usernameavailable"></span>
                     </div>
                     <div class="form-floating mb-3 mt-3">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
@@ -225,6 +225,18 @@
                 $("#CheckPasswordMatch").html("Password match !").css("color", "green");
         })
     });
+
+    // Check Username
+    function checkusername(val) {
+        $.ajax({
+            type: 'POST',
+            url: 'checkuser_available.php',
+            data: 'username=' + val,
+            success: function(data) {
+                $('#usernameavailable').html(data);
+            }
+        });
+    }
 </script>
 
 <?php
@@ -239,8 +251,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
-    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
 
+    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
     if ($sql) {
         echo "<script>
         const Toast = Swal.mixin({
@@ -252,11 +264,10 @@ if (isset($_POST['submit'])) {
         Toast.fire({
             icon: 'success',
             title: 'สมัครข้อมูลเสร็จสิ้น'
-        }).then((result)=> {
-            window.location.href = '../login/register';
         })
        
     </script>";
+       
     } else {
         echo "<script>
         const Toast = Swal.mixin({
@@ -267,13 +278,16 @@ if (isset($_POST['submit'])) {
         })
         Toast.fire({
             icon: 'error',
-            title: 'เกิดข้อผิดพลาด'
-        }).then((result)=> {
-            window.location.href = '../login/register';
+            title: 'ไม่สามารถสมัครข้อมูลได้'
+        }).then((result)=>{
+            window.location = './login';
         })
        
     </script>";
     }
+    // .then((result)=> {
+    //     window.location.href = '../login/register';
+    // })
 }
 ?>
 
