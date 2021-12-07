@@ -18,17 +18,18 @@
     Swal.fire({
         icon: 'success',
         title: 'Logout...',
-        text: 'You loguot successful',
-        showCancelButton: true,
+        text: 'ทำการออกจากระบบเรียบร้อย',
+        showCancelButton: false,
         showConfirmButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'ตกลง',
+        
     }).then((result) => {
         if (result.isConfirmed) {
             window.location = "../main_pages/index";
         }else {
-            window.history.back(-1);
+            window.history.go(-1);
         }
     })
 
