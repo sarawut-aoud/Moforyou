@@ -17,8 +17,8 @@
             }
         }
         // Check username
-        public function usernameavaliable($username){
-            $checkuser = mysqli_query($this->dbcon,"SELECT username FROM tbl_farmer WHERE username = '$username' ");
+        public function usernameavailable($uname) {
+            $checkuser = mysqli_query($this->dbcon, "SELECT username FROM tbl_farmer WHERE username = '$uname'");
             return $checkuser;
         }
 

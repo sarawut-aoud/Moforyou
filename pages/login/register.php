@@ -113,7 +113,7 @@
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username" onblur="checkusername(this.value)">
                         <label for="floatingInputValue"> <small> Username </small></label>
-                        <span  id="usernameavailable"></span>
+                        <div class="text-center" id="usernameavailable"></div>
                     </div>
                     <div class="form-floating mb-3 mt-3">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
@@ -127,6 +127,7 @@
                         <label for="floatingInputValue"> <small> Retype password </small></label>
                         <!-- <span id="message" class=" fas fa-check-circle "></span> -->
                         <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
+
                     </div>
 
 
@@ -174,6 +175,38 @@
 
 </body>
 <script>
+    // Check Username
+    function checkusername(val) {
+        $.ajax({
+            type: 'POST',
+            url: '../../connect/checkuser_available.php',
+            data: 'username=' + val,
+            success: function(data) {
+                $('#usernameavailable').html(data);
+            }
+        });
+    };
+    // Check Confrim Password
+    $('#confirm_password').keyup(function() {
+        var pass = $('#password').val();
+        var cpass = $('#confirm_password').val();
+        if (cpass == "") {
+            $('#confirm_password').attr({
+                class: 'form-control'
+            });
+        } else if (pass != cpass) {
+            $('#confirm_password').attr({
+                class: 'form-control is-invalid'
+            });
+
+        } else {
+            $('#confirm_password').attr({
+                class: 'form-control is-valid'
+            });
+
+        }
+    });
+
     // ระดับ password
     $(document).ready(function() {
         $('#password').keyup(function() {
@@ -213,32 +246,7 @@
             }
         }
     });
-    // Check Confrim Password
-    $(document).ready(function() {
-        $("#password, #confirm_password").on('keyup', function() {
-            var password = $("#password").val();
-            var confirmPassword = $("#confirm_password").val();
-
-            if (password != confirmPassword)
-                $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
-            else
-                $("#CheckPasswordMatch").html("Password match !").css("color", "green");
-        })
-    });
-
-    // Check Username
-    function checkusername(val) {
-        $.ajax({
-            type: 'POST',
-            url: 'checkuser_available.php',
-            data: 'username=' + val,
-            success: function(data) {
-                $('#usernameavailable').html(data);
-            }
-        });
-    }
 </script>
-
 <?php
 require '../../connect/functions.php';
 
@@ -252,43 +260,52 @@ if (isset($_POST['submit'])) {
     $password = md5($_POST['password']);
 
 
+
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
+
     if ($sql) {
-        echo "<script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000,
-        })
-        Toast.fire({
-            icon: 'success',
-            title: 'สมัครข้อมูลเสร็จสิ้น'
-        })
-       
-    </script>";
-       
+        echo "<script>alert('Registor Successful!');</script>";
+        echo "<script>window.location.href='./login'</script>";
     } else {
-        echo "<script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000,
-        })
-        Toast.fire({
-            icon: 'error',
-            title: 'ไม่สามารถสมัครข้อมูลได้'
-        }).then((result)=>{
-            window.location = './login';
-        })
-       
-    </script>";
+        echo "<script>alert('Something went wrong! Please try again.');</script>";
+        echo "<script>window.location.href='./register'</script>";
     }
-    // .then((result)=> {
-    //     window.location.href = '../login/register';
-    // })
+
+    // if ($sql) {
+    //     echo "<script>
+    //         const Toast = Swal.mixin({
+    //             toast: true,
+    //             position: 'center',
+    //             showConfirmButton: false,
+    //             timer: 3000,
+    //         })
+    //         Toast.fire({
+    //             icon: 'success',
+    //             title: 'สมัครข้อมูลเสร็จสิ้น'
+    //         }).then((result)=>{
+    //             window.location = './register';
+    //         })
+
+    //     </script>";
+    // } else {
+    //     echo "<script>
+    //         const Toast = Swal.mixin({
+    //             toast: true,
+    //             position: 'center',
+    //             showConfirmButton: false,
+    //             timer: 3000,
+    //         })
+    //         Toast.fire({
+    //             icon: 'error',
+    //             title: 'ไม่สามารถสมัครข้อมูลได้'
+    //         }).then((result)=>{
+    //             window.location = './login';
+    //         })
+
+    //     </script>";
+    // }
 }
 ?>
+
 
 </html>
