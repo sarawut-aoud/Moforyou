@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Forgot Password </title>
-    
+
     <?php require '../../build/script.php'; ?>
 </head>
 <style>
@@ -52,11 +52,14 @@
 
     .login100-form-btn:hover {
         background: rgba(236, 161, 0, 1);
-    } .main-footer {
-            padding: 0 0 0 0;
-            width: 100%;
-        }
+    }
+
+    .main-footer {
+        padding: 0 0 0 0;
+        width: 100%;
+    }
 </style>
+
 <body class="hold-transition login-page bg-gd">
     <div class="login-box">
         <div class="card">
@@ -81,15 +84,17 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <p class="mt-3 mb-1">
-                    <a href="login">Login</a>
-                </p>
+                <div class="d-flex mt-3 mb-1 ">   
+                        <a href="login" class="me-auto p-2">เข้าสู่ระบบ</a>
+                        <a href="../main_pages/index" class="p-2">ย้อนกลับ</a>
+                   
+                </div>
             </div>
             <!-- /.login-card-body -->
         </div>
     </div>
     <!-- /.login-box -->
-    
+
 </body>
 
 </html>
