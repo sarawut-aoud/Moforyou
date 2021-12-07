@@ -77,59 +77,84 @@ require '../../connect/functions.php';
 
 </html>
 <?php
-
+ob_start();
 $userdata = new DB_con();
 
 if (isset($_POST['login'])) {
-    
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
+
 
     $result = $userdata->login($username, $password);
-    $num = mysqli_fetch_array($result);
-    
-    if(($username =="admin")&&($password=="masterkey")){
-        session_start();
-        $_SESSION['valid_name'] = "admin";
-        $_SESSION['name'] = "admin";
-        echo "<script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000,
-        })
-        Toast.fire({
-            icon: 'success',
-            title: 'รหัสผ่านถูกต้อง'
-        }).then((result)=>{
-            window.location.href='../../admin/main/admin_index';
-        })
-       
-    </script>";
-    }else
-    if ($num > 0) {
-        session_start();
-        $_SESSION['id'] = $num['id'];
-        $_SESSION['fullname'] = $num['fullname'];
-        echo "<script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000,
-        })
-        Toast.fire({
-            icon: 'success',
-            title: 'รหัสผ่านถูกต้อง'
-        }).then((result)=>{
-            window.location.href='../../users/main/user_index';
-        })
-       
-    </script>";
-    }else {
-        echo "<script>alert('Something went wrong! Please try again.');</script>";
-        // echo "<script>window.location.href='./login'</script>";
+    $num = mysqli_num_rows($result);
+
+    if (!empty($username) && !empty($password)) {
+        if ($num > 0) {
+            $result = $userdata->login($username, $password);
+            $total = mysqli_num_rows($result);
+            if ($total) {
+                session_start();
+                $_SESSION["id"] = $username;
+                $_SESSION["pwd"] = $password;
+                echo "<script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'center',
+                showConfirmButton: false,
+                timer: 3000,
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'รหัสผ่านถูกต้อง'
+            }).then((result)=>{
+                window.location.href='../../users/main/user_index';
+            })
+           
+        </script>";
+                exit();
+            } 
+        } else {
+            if ($username == "admin" && $password == "masterkey") {
+                session_start();
+                $_SESSION["id"] = $username;
+                $_SESSION["pwd"] = $username;
+                echo "<script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center',
+                    showConfirmButton: false,
+                    timer: 3000,
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'รหัสผ่านถูกต้อง'
+                }).then((result)=>{
+                    window.location.href='../../admin/main/admin_index';
+                })
+               
+            </script>";
+                exit();
+            } else {
+                echo "<script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center',
+                    showConfirmButton: false,
+                    timer: 3000,
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'ไม่พบผู้ใช้งาน'
+                }).then((result)=>{
+                    window.location.href='../../pages/login/login';
+                })
+               
+            </script>";
+                exit();
+            }
+        }
+    } else {
+        exit();
     }
 }
 ?>

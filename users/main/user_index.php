@@ -1,9 +1,5 @@
 <?php
-session_start();
-
-if ($_SESSION['id'] == "") {
-  header("location: ../../../main_2/pages/login/login");
-} else {
+ require '../../connect/session_ckeck.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +116,3 @@ if ($_SESSION['id'] == "") {
 </body>
 
 </html>
-<?php
-}
-?>

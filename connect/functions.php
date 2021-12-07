@@ -24,14 +24,14 @@
 
         // Resgistration 
         public function register($card,$fname,$email,$phone,$username,$password){
-            $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
-            VALUES('$card','$fname','$email','$phone','$username','$password')");
+            $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password,status) 
+            VALUES('$card','$fname','$email','$phone','$username','$password','0')");
             return $reg;
         }
 
         // Login 
         public function login($username,$password){
-            $log = mysqli_query($this->dbcon,"SELECT id, fullname FROM tbl_farmer WHERE username = '$username' AND password = '$password'");
+            $log = mysqli_query($this->dbcon,"SELECT id, fullname ,status FROM tbl_farmer WHERE username = '$username' AND password = MD5('".$password."')");
             return $log;
         }
     }
