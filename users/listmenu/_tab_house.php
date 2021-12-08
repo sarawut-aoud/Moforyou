@@ -1,3 +1,6 @@
+<?
+require '../../connect/session_ckeck.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,7 @@
                 <div class="content-header">
                     <div class="container">
                         <!-- Manage -->
-                        <div class="row  ">
+                        <div class="row">
                             <div class="col-md-6">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
@@ -53,49 +56,7 @@
 
                             </div>
                             <!-- ./col -->
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรงเรือน</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <!-- table -->
-                                        <table id="example2" class="table table-bordered table-striped table-hover">
-                                            <!-- head table -->
-                                            <thead>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>Name thai</th>
-                                                    <th>Name English</th>
-                                                </tr>
-                                            </thead>
-                                            <!-- /.head table -->
-                                            <!-- body table -->
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                            <!-- /.body table -->
-                                            <!-- foot table -->
-                                            <tfoot>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>Name thai</th>
-                                                    <th>Name English</th>
-                                                </tr>
-                                            </tfoot>
-                                            <!-- /.foot table -->
-                                        </table>
-                                        <!-- /.table -->
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-                            </div>
+
 
                         </div>
                         <!-- ./row -->
@@ -103,6 +64,56 @@
                     </div><!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-outline card-blue">
+                                    <h3 class=" text-center">โรงเรือน</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <!-- table -->
+                                    <table id="example1" class="table table-bordered table-striped table-hover">
+                                        <!-- head table -->
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ชื่อโรงเรือน</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- /.head table -->
+                                        <!-- body table -->
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 20%;">123</td>
+                                                <td style="width: 50%;">145</td>
+                                                <td style="width:30%;">111</td>
+                                            </tr>
+                                        </tbody>
+                                        <!-- /.body table -->
+                                        <!-- foot table -->
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ชื่อโรงเรือน</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
+                                            </tr>
+                                        </tfoot>
+                                        <!-- /.foot table -->
+                                    </table>
+                                    <!-- /.table -->
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                </div>
+
 
             </div>
             <!-- /.content-wrapper -->
@@ -119,7 +130,7 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "buttons": ["csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>
