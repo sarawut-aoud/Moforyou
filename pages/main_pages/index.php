@@ -5,79 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
+
     <?php require '../../build/script.php'; ?>
-
-    <style>
-        .card-head {
-            background: rgb(195, 104, 0);
-            background: -moz-linear-gradient(90deg, rgba(195, 104, 0, 1) 0%, rgba(236, 161, 0, 1) 38%, rgba(255, 188, 0, 1) 100%);
-            background: -webkit-linear-gradient(90deg, rgba(195, 104, 0, 1) 0%, rgba(236, 161, 0, 1) 38%, rgba(255, 188, 0, 1) 100%);
-            background: linear-gradient(90deg, rgba(195, 104, 0, 1) 0%, rgba(236, 161, 0, 1) 38%, rgba(255, 188, 0, 1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c36800", endColorstr="#ffbc00", GradientType=1);
-        }
-
-        .btn {
-            line-height: 1.5;
-            color: #fff;
-            text-transform: uppercase;
-            width: 100%;
-            height: 50px;
-            border-radius: 25px;
-            background: #c36800;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 25px;
-
-            -webkit-transition: all 0.4s;
-            -o-transition: all 0.4s;
-            -moz-transition: all 0.4s;
-            transition: all 0.4s;
-        }
-
-        .btn:hover {
-            background: rgba(236, 161, 0, 1);
-
-        }
-
-        .btn.active {
-            background: rgba(236, 161, 0, 1);
-        }
-
-        .txt-resp {
-            display: inline;
-        }
-
-        .main-footer {
-            padding: 0 0 0 0;
-            width: 100%;
-        }
-
-        /* Extra small devices (phones, 600px and down) */
-        @media only screen and (max-width: 600px) {
-            .txt-resp {
-                display: none;
-            }
-        }
-
-        /* Small devices (portrait tablets and large phones, 600px and up) */
-        @media only screen and (min-width: 600px) {
-            .txt-resp {
-                display: none;
-            }
-        }
-
-        /* Medium devices (landscape tablets, 768px and up) */
-        @media only screen and (min-width: 768px) {
-            .txt-resp {
-                display: inline;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./_main_page.css">
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
     <div class="wrapper mb-5">
@@ -87,11 +17,11 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-        
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid ">
-                   
+
                     <div class="row justify-content-center">
                         <div class="col">
                             <ul class="nav nav-pills " id="custom-content-below-tab" role="tablist">
