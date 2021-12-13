@@ -55,9 +55,7 @@ require '../../connect/session_ckeck.php';
                                 <!-- /.card -->
 
                             </div>
-                            <!-- ./col -->
-
-
+                         <!-- ./col -->
                         </div>
                         <!-- ./row -->
 
