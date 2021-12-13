@@ -1,3 +1,11 @@
+
+.nav-link{
+   color: #fff; 
+}
+.nav-link:hover{
+  color:rgb(78, 58, 31);
+}
+
 .card-head {
     background: rgb(195, 104, 0);
     background: -moz-linear-gradient(90deg, rgba(195, 104, 0, 1) 0%, rgba(236, 161, 0, 1) 38%, rgba(255, 188, 0, 1) 100%);
@@ -6,7 +14,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c36800", endColorstr="#ffbc00", GradientType=1);
 }
 
-.btn {
+.bt{
     line-height: 1.5;
     color: #fff;
     text-transform: uppercase;
@@ -29,12 +37,12 @@
     transition: all 0.4s;
 }
 
-.btn:hover {
+.bt:hover {
     background: rgba(236, 161, 0, 1);
 
 }
 
-.btn.active {
+.bt.active {
     background: rgba(236, 161, 0, 1);
 }
 
@@ -46,6 +54,7 @@
     padding: 0 0 0 0;
     width: 100%;
 }
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

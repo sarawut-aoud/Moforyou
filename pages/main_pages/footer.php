@@ -3,7 +3,7 @@
      <nav class="nav navbar-expand justify-content-center">
          <ul class="navbar-nav ">
              <li class="nav-item ">
-                 <a class="nav-link" role="button" style="color: white;" href="./index">
+                 <a class="nav-link" role="button"  href="./index">
                      <i class="fas fa-home" style="font-size:30px"></i>
                  </a>
              </li>

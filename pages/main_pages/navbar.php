@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: rgba(207, 116, 27, 1);">
+<nav class="main-header navbar navbar-expand-md " style="background-color: rgba(207, 116, 27, 1);">
   <div class="container-fluid">
     <a href="./index" class="navbar-brand">
       <div class="txt-resp">
@@ -10,13 +10,13 @@
 
     <!-- Right navbar links -->
     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-      <li class="nav-item ">
-        <a class="nav-link" href="../login/register" style="color: white;">
+      <li class="nav-item regis">
+        <a class="nav-link" href="../login/register" >
           <i class="fas fa-pen-alt"></i>
         </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="../login/login" style="color: white;">
+      <li class="nav-item login">
+        <a class="nav-link" href="../login/login" >
           <i class="fas fa-lock-alt"></i>
         </a>
       </li>
