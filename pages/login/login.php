@@ -78,7 +78,7 @@ require '../../connect/functions.php';
 </html>
 <?php
 ob_start();
-$userdata = new DB_con();
+$userdata = new farmmer();
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];

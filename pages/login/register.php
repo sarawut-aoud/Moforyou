@@ -147,7 +147,7 @@
 <?php
 require '../../connect/functions.php';
 
-$userdata = new DB_con();
+$userdata = new farmmer();
 if (isset($_POST['submit'])) {
     $card = $_POST['card'];
     $fname = $_POST['fname'];

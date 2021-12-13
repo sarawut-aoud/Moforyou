@@ -27,9 +27,9 @@
         
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location = "../main_pages/index";
+            window.open('../../pages/login/login');
         }else {
-            window.history.go(-1);
+            window.open('../../pages/login/login');
         }
     })
 
