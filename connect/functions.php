@@ -47,7 +47,7 @@ class farm extends Database
     }
     // Check Resgistration Farm
     public function checkregisfarm($id){
-        $checkfarm = mysqli_query($this->dbcon,"SELECT id FROM tbl_farm WHERE id_farmer = '$id'");
+        $checkfarm = mysqli_query($this->dbcon,"SELECT * FROM tbl_farm WHERE farmmer_id = '$id'");
         return $checkfarm;
     }
 }

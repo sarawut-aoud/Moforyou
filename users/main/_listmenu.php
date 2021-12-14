@@ -1,130 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require '../../connect/session_ckeck.php';
+require_once '../../connect/functions.php';
+require_once '../../connect/alert.php';
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MoForYou</title>
+$id = $_SESSION['id'];
 
-    <?php require '../../build/script.php'; ?>
-    <link rel="stylesheet" href="./_listmenu.css">
-</head>
+$sql = new farm();
+$fcheck = $sql->checkregisfarm($id);
 
+// เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+$result = mysqli_num_rows($fcheck);
+//ถ้าไม่มีส่งไปหน้าลงทะเบียน
+if (empty($result)) {
+    echo "<script>window.location= '../register-farm/regis_farm' </script>";
+} else {
+    // ถ้ามีแสดงหน้า list
+?>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body class="hold-transition sidebar-collapse layout-top-nav">
-    <div class="wrapper">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MoForYou</title>
 
-        <!-- Navbar -->
-        <?php require '../sub/navbar.php'; ?>
-        <!-- /.navbar -->
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container">
-                    <!-- Manage -->
-                    <div class="row  ">
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <!-- list Manage -->
-                                    <h2 class=" col-md-12 col-sm-12 text-center">รายการเมนู</h2>
-                                    <hr class="mt-2 mb-2">
-                                    <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
-                                        <li class="nav-item  col-md-12 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_regis " href="../register-farm/regis_farm" role="button">ลงทะเบียนฟาร์ม</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-1" role="button" aria-selected="false">ฝูงโค</a>
-                                        </li>
-                                        <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-1" href="../listmenu/_tab_house" role="button">โรงเรือน</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-1 " href="#tab-farm" role="button">โคเนื้อ</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">สายพันธุ์โคเนื้อ</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">ผสมพันธุ์</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">โรค/อาการป่วย</a>
-                                        </li>
-                                    </ul>
+        <?php require '../../build/script.php'; ?>
+        <link rel="stylesheet" href="./_listmenu.css">
+    </head>
 
 
-                                    <!--/. list Manage -->
+    <body class="hold-transition sidebar-collapse layout-top-nav">
+        <div class="wrapper">
+
+            <!-- Navbar -->
+            <?php require '../sub/navbar.php'; ?>
+            <!-- /.navbar -->
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container">
+                        <!-- Manage -->
+                        <div class="row  ">
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <!-- list Manage -->
+                                        <h2 class=" col-md-12 col-sm-12 text-center">รายการเมนู</h2>
+                                        <hr class="mt-2 mb-2">
+                                        <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
+                                            <li class="nav-item  col-md-12 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_regis " href="../register-farm/regis_farm" role="button">ลงทะเบียนฟาร์ม</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-1" role="button" aria-selected="false">ฝูงโค</a>
+                                            </li>
+                                            <li class="nav-item col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-1" href="../listmenu/_tab_house" role="button">โรงเรือน</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-1 " href="#tab-farm" role="button">โคเนื้อ</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">สายพันธุ์โคเนื้อ</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">ผสมพันธุ์</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">โรค/อาการป่วย</a>
+                                            </li>
+                                        </ul>
+
+
+                                        <!--/. list Manage -->
+                                    </div>
+                                    <!-- ./card-body -->
                                 </div>
-                                <!-- ./card-body -->
+                                <!-- ./card -->
                             </div>
-                            <!-- ./card -->
+                            <!-- ./col -->
                         </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- ./row -->
+                        <!-- ./row -->
 
-                    <!-- Report -->
-                    <div class="row  ">
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-body">
-                                <h2 class=" col-md-12 col-sm-12 text-center">รายงานข้อมูล</h2>
-                                    <hr class="mt-2 mb-2">
-                                    <!-- list Manage -->
-                                    <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list" role="button" aria-selected="false">โคเนื้อ</a>
-                                        </li>
-                                        <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list" href="#tab-specise" role="button">สายพันธุ์โคเนื้อ</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
+                        <!-- Report -->
+                        <div class="row  ">
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <h2 class=" col-md-12 col-sm-12 text-center">รายงานข้อมูล</h2>
+                                        <hr class="mt-2 mb-2">
+                                        <!-- list Manage -->
+                                        <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list" role="button" aria-selected="false">โคเนื้อ</a>
+                                            </li>
+                                            <li class="nav-item col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list" href="#tab-specise" role="button">สายพันธุ์โคเนื้อ</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
 
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                        </li>
-                                    </ul>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                            </li>
+                                        </ul>
 
-                                    <!--/. list Manage -->
+                                        <!--/. list Manage -->
+                                    </div>
+                                    <!-- ./card-body -->
                                 </div>
-                                <!-- ./card-body -->
+                                <!-- ./card -->
                             </div>
-                            <!-- ./card -->
-                        </div>
-                        <!-- ./col -->
+                            <!-- ./col -->
 
-                    </div>
-                    <!-- ./row -->
-                </div><!-- /.container-fluid -->
+                        </div>
+                        <!-- ./row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <!-- Main content -->
+
+
             </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
-
-           
+            <!-- /.content-wrapper -->
+            <!-- Main Footer -->
+            <?php require '../sub/footer.php'; ?>
         </div>
-        <!-- /.content-wrapper -->
-        <!-- Main Footer -->
-        <?php require '../sub/footer.php'; ?>
-    </div>
-    <!-- ./wrapper -->
-</body>
+        <!-- ./wrapper -->
+    </body>
 
-</html>
+    </html>
+<?php
+}
+?>

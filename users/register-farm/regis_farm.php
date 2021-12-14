@@ -1,6 +1,7 @@
 <?php
 require '../../connect/session_ckeck.php';
 
+
 // api
 require  '../../connect/api_map.php';
 ?>

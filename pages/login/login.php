@@ -93,10 +93,11 @@ if (isset($_POST['login'])) {
     if (!empty($username) && !empty($password)) {
         if ($num > 0) {
             $result = $userdata->login($username, $password, $email);
-            $total = mysqli_num_rows($result);
+            $total = mysqli_fetch_array($result);
             if ($total) {
                 session_start();
-                $_SESSION["id"] = $username;
+                $_SESSION["id"] =  $total['id'];
+                $_SESSION["user"] = $username;
                 $_SESSION["pwd"] = $password;
                 echo success_1("Login Sucessful !", "../../users/main/user_index");
                 exit();

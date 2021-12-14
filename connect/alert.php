@@ -89,17 +89,12 @@ function success_h3($msg, $redirect = '')
     </script>";
 }
 
-function error($msg, $redirect = '')
+function error($msg, $redirect )
 {
-  $direction = '';
-  if (empty($redirect)) {
-    $direction = "window.history.go(-1);";
-  } else {
-    $direction = "window.location = '$redirect'";
-  }
-
+ 
   return "<script>
     Swal.fire({
+        icon: 'warning',
         title: '<h1>$msg</h1>',
         text: '',
         type: 'error',
@@ -108,7 +103,7 @@ function error($msg, $redirect = '')
         //cancelButtonColor: '#d33',
         confirmButtonText: 'ตกลง'
       }).then((result) => {
-        $direction
+        window.location = '$redirect'
       })
     </script>";
 }
