@@ -1,4 +1,4 @@
-<?
+<?php
 require '../../connect/session_ckeck.php';
 ?>
 <!DOCTYPE html>
@@ -28,8 +28,8 @@ require '../../connect/session_ckeck.php';
                 <div class="content-header">
                     <div class="container">
                         <!-- Manage -->
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
@@ -48,14 +48,14 @@ require '../../connect/session_ckeck.php';
                                         <!-- /.card-body -->
 
                                         <div class="card-footer text-end">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit"  id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
 
                             </div>
-                         <!-- ./col -->
+                            <!-- ./col -->
                         </div>
                         <!-- ./row -->
 
@@ -88,7 +88,14 @@ require '../../connect/session_ckeck.php';
                                             <tr>
                                                 <td style="width: 20%;">123</td>
                                                 <td style="width: 50%;">145</td>
-                                                <td style="width:30%;">111</td>
+                                                <td style="width:30%;" class="text-center">
+                                                    <a class="btn btn-info" href="#">
+                                                        <i class="far fa-pen-alt"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger" href="#">
+                                                        <i class="far fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                         <!-- /.body table -->

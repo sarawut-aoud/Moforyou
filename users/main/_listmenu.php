@@ -33,7 +33,7 @@
                                     <hr class="mt-2 mb-2">
                                     <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                         <li class="nav-item  col-md-12 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_regis " href="#tab-farm" role="button">ลงทะเบียนฟาร์ม</a>
+                                            <a class="btn btn-lg bt_regis " href="../register-farm/regis_farm" role="button">ลงทะเบียนฟาร์ม</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                             <a class="btn btn-lg bt_list-1" role="button" aria-selected="false">ฝูงโค</a>

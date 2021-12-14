@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Bootstrap 5 -->
 <link rel="stylesheet" href="../../plugins/bootstrap5/css/bootstrap.min.css">
-<!-- DataTables -->
+<!-- Select2 -->
+<link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- Tempusdominus Bootstrap 4 -->
 <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- DataTables -->
@@ -30,6 +32,7 @@
 <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 
 
+
 <!-- jQuery -->
 
 <script src="../../plugins/jquery/jquery.js"></script>
@@ -43,6 +46,8 @@
 <script src="../../plugins/bootstrap5/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
 <!-- daterangepicker -->
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
@@ -78,7 +83,11 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../dist/js/pages/dashboard.js"></script>
 
-
+<script>
+    $(function() {
+        $('.select2').select2()
+    })
+</script>
 <!-- Font All pages -->
 <style>
   * {
