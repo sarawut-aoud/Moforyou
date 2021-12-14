@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2021 at 03:48 PM
+-- Generation Time: Dec 14, 2021 at 04:18 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -20,6 +20,74 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_moforyou`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_breed`
+--
+
+CREATE TABLE `tbl_breed` (
+  `id` int(11) NOT NULL COMMENT 'รหัสการผสมพันธ',
+  `breed_date` datetime NOT NULL COMMENT 'วันที่ผสมพันธ',
+  `cow_id_male` smallint(6) NOT NULL COMMENT 'รหัสโคเนื้อเพศผู้',
+  `cow_id_female` smallint(6) NOT NULL COMMENT 'รหัสโคเนื้อเพศเมีย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cow`
+--
+
+CREATE TABLE `tbl_cow` (
+  `id` int(11) NOT NULL COMMENT 'รหัสโคเนื้อ',
+  `cow_name` varchar(50) NOT NULL COMMENT 'ชื่อโคเนื้อ ',
+  `cow_date` datetime NOT NULL COMMENT 'วันที่เกิดโคเนื้อ ',
+  `hight` decimal(5,2) NOT NULL COMMENT 'ส่วนสูง',
+  `weight` decimal(5,2) NOT NULL COMMENT 'น้ำหนัก',
+  `cow_father` varchar(100) NOT NULL COMMENT 'พ่อโค',
+  `cow_mother` varchar(100) NOT NULL COMMENT 'แม่โค',
+  `spec_id` tinyint(4) NOT NULL COMMENT 'รหัสสายพันธุ์',
+  `herd_id` smallint(6) NOT NULL COMMENT 'รหัสฝูง'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_disease`
+--
+
+CREATE TABLE `tbl_disease` (
+  `id` smallint(6) NOT NULL,
+  `detail` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_doctor`
+--
+
+CREATE TABLE `tbl_doctor` (
+  `id` tinyint(4) NOT NULL,
+  `name` varchar(50) NOT NULL COMMENT 'ชื่อสัตวแพทย์',
+  `phone` varchar(10) NOT NULL COMMENT 'เบอร์โทรสัตวแพทย์'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_farm`
+--
+
+CREATE TABLE `tbl_farm` (
+  `id` smallint(6) NOT NULL COMMENT 'รหัสฟาร์ม',
+  `farmname` varchar(50) NOT NULL COMMENT 'ชื่อฟาร์ม',
+  `address` varchar(200) NOT NULL COMMENT 'ที่อยู่',
+  `district_id` smallint(6) NOT NULL COMMENT 'รหัสอำเภอ',
+  `farmmer_id` tinyint(4) NOT NULL COMMENT 'รหัสเจ้าของฟาร์ม'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ข้อมูลฟาร์ม';
 
 -- --------------------------------------------------------
 
@@ -50,6 +118,48 @@ INSERT INTO `tbl_farmer` (`id`, `card`, `fullname`, `email`, `phone`, `picture`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_food`
+--
+
+CREATE TABLE `tbl_food` (
+  `id` smallint(6) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_foodrecord`
+--
+
+CREATE TABLE `tbl_foodrecord` (
+  `id` int(11) NOT NULL,
+  `date` datetime NOT NULL COMMENT 'วันที่ให้อาหาร',
+  `weight_food` decimal(5,2) NOT NULL COMMENT 'น้ำหนักอาหาร',
+  `weight_cow` decimal(5,2) NOT NULL COMMENT 'น.น. โคเนื้อ',
+  `cow_id` int(11) NOT NULL,
+  `food_id` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_heal`
+--
+
+CREATE TABLE `tbl_heal` (
+  `id` int(11) NOT NULL,
+  `detail` varchar(100) NOT NULL COMMENT 'รายละเอียดการรักษา',
+  `date_start` datetime NOT NULL COMMENT 'วันที่เริ่มการรักษา',
+  `date_end` datetime NOT NULL COMMENT 'วันที่สิ้นสุดการรักษา',
+  `doctor_id` tinyint(4) NOT NULL,
+  `cow_id` int(11) NOT NULL,
+  `disease_id` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_herd`
 --
 
@@ -69,6 +179,18 @@ CREATE TABLE `tbl_house` (
   `id` smallint(6) NOT NULL COMMENT 'รหัสโรงเรือน',
   `house_name` varchar(50) NOT NULL COMMENT 'ชื่อโรงเรือน',
   `farm_id` smallint(6) NOT NULL COMMENT 'รหัสฟาร์ม'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_species`
+--
+
+CREATE TABLE `tbl_species` (
+  `id` tinyint(4) NOT NULL COMMENT 'รหัสสายพันธุ์',
+  `spec_name` varchar(100) NOT NULL COMMENT 'ชื่อสายพันธุ์',
+  `sepc_detail` varchar(300) NOT NULL COMMENT 'รายละเอียดสายพันธุ์'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8675,9 +8797,57 @@ INSERT INTO `thai_tombons` (`id`, `zip_code`, `name_th`, `name_en`, `amphure_id`
 --
 
 --
+-- Indexes for table `tbl_breed`
+--
+ALTER TABLE `tbl_breed`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_cow`
+--
+ALTER TABLE `tbl_cow`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_disease`
+--
+ALTER TABLE `tbl_disease`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_doctor`
+--
+ALTER TABLE `tbl_doctor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_farm`
+--
+ALTER TABLE `tbl_farm`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_farmer`
 --
 ALTER TABLE `tbl_farmer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_food`
+--
+ALTER TABLE `tbl_food`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_foodrecord`
+--
+ALTER TABLE `tbl_foodrecord`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_heal`
+--
+ALTER TABLE `tbl_heal`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -8690,6 +8860,12 @@ ALTER TABLE `tbl_herd`
 -- Indexes for table `tbl_house`
 --
 ALTER TABLE `tbl_house`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_species`
+--
+ALTER TABLE `tbl_species`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -8721,10 +8897,58 @@ ALTER TABLE `thai_tombons`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_breed`
+--
+ALTER TABLE `tbl_breed`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการผสมพันธ';
+
+--
+-- AUTO_INCREMENT for table `tbl_cow`
+--
+ALTER TABLE `tbl_cow`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสโคเนื้อ';
+
+--
+-- AUTO_INCREMENT for table `tbl_disease`
+--
+ALTER TABLE `tbl_disease`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_doctor`
+--
+ALTER TABLE `tbl_doctor`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_farm`
+--
+ALTER TABLE `tbl_farm`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'รหัสฟาร์ม';
+
+--
 -- AUTO_INCREMENT for table `tbl_farmer`
 --
 ALTER TABLE `tbl_farmer`
   MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'รหัสเจ้าของฟาร์ม', AUTO_INCREMENT=245;
+
+--
+-- AUTO_INCREMENT for table `tbl_food`
+--
+ALTER TABLE `tbl_food`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_foodrecord`
+--
+ALTER TABLE `tbl_foodrecord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_heal`
+--
+ALTER TABLE `tbl_heal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_herd`
@@ -8737,6 +8961,12 @@ ALTER TABLE `tbl_herd`
 --
 ALTER TABLE `tbl_house`
   MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'รหัสโรงเรือน';
+
+--
+-- AUTO_INCREMENT for table `tbl_species`
+--
+ALTER TABLE `tbl_species`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสายพันธุ์';
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
