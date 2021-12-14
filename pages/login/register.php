@@ -115,6 +115,7 @@
             if (password.length < 6) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Short')
+                $(':input[type="submit"]').prop('disabled', true);
                 return 'Too short'
             }
             if (password.length > 7) strength += 1
@@ -131,14 +132,17 @@
             if (strength < 2) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Weak')
+                $(':input[type="submit"]').prop('disabled', false);
                 return 'Weak'
             } else if (strength == 2) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Good')
+                $(':input[type="submit"]').prop('disabled', false);
                 return 'Good'
             } else {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Strong')
+                $(':input[type="submit"]').prop('disabled', false);
                 return 'Strong'
             }
         }
@@ -146,7 +150,7 @@
 </script>
 <?php
 require '../../connect/functions.php';
-
+require '../../connect/alert.php';
 $userdata = new farmmer();
 if (isset($_POST['submit'])) {
     $card = $_POST['card'];
@@ -161,8 +165,8 @@ if (isset($_POST['submit'])) {
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
 
     if ($sql) {
-        echo "<script>alert('Registor Successful!');</script>";
-        echo "<script>window.location.href='./login'</script>";
+        echo success_1("Successful!!","./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
+      
     } else {
         echo "<script>alert('Something went wrong! Please try again.');</script>";
         echo "<script>window.location.href='./register'</script>";

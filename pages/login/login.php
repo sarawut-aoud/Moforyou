@@ -77,83 +77,44 @@ require '../../connect/functions.php';
 
 </html>
 <?php
+require '../../connect/alert.php';
 ob_start();
 $userdata = new farmmer();
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $email = $_POST['username'];
 
 
-    $result = $userdata->login($username, $password);
+    $result = $userdata->login($username, $password, $email);
     $num = mysqli_num_rows($result);
 
     if (!empty($username) && !empty($password)) {
         if ($num > 0) {
-            $result = $userdata->login($username, $password);
+            $result = $userdata->login($username, $password, $email);
             $total = mysqli_num_rows($result);
             if ($total) {
                 session_start();
                 $_SESSION["id"] = $username;
                 $_SESSION["pwd"] = $password;
-                echo "<script>
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'center',
-                showConfirmButton: false,
-                timer: 3000,
-            })
-            Toast.fire({
-                icon: 'success',
-                title: 'รหัสผ่านถูกต้อง'
-            }).then((result)=>{
-                window.location.href='../../users/main/user_index';
-            })
-           
-        </script>";
+                echo success_1("Login Sucessful !", "../../users/main/user_index");
                 exit();
-            } 
+            }
         } else {
             if ($username == "admin" && $password == "masterkey") {
                 session_start();
                 $_SESSION["id"] = $username;
                 $_SESSION["pwd"] = $username;
-                echo "<script>
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'center',
-                    showConfirmButton: false,
-                    timer: 3000,
-                })
-                Toast.fire({
-                    icon: 'success',
-                    title: 'รหัสผ่านถูกต้อง'
-                }).then((result)=>{
-                    window.location.href='../../admin/main/admin_index';
-                })
-               
-            </script>";
+                echo success_1("Login Sucessful !", "../../admin/main/admin_index");
                 exit();
             } else {
-                echo "<script>
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'center',
-                    showConfirmButton: false,
-                    timer: 3000,
-                })
-                Toast.fire({
-                    icon: 'error',
-                    title: 'ไม่พบผู้ใช้งาน'
-                }).then((result)=>{
-                    window.location.href='../../pages/login/login';
-                })
-               
-            </script>";
+                echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
                 exit();
             }
         }
     } else {
+        echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
         exit();
     }
 }

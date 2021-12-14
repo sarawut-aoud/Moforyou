@@ -27,9 +27,9 @@
         
     }).then((result) => {
         if (result.isConfirmed) {
-            window.open('../../pages/login/login');
+            window.location = '../../pages/login/login';
         }else {
-            window.open('../../pages/login/login');
+            window.location='../../pages/login/login';
         }
     })
 

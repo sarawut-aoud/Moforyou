@@ -29,29 +29,29 @@
                             <div class="card ">
                                 <div class="card-body">
                                     <!-- list Manage -->
-                                    <span class="btn btn-lg bt_list col-md-12 col-sm-12 " href="#">รายการเมนู</span>
+                                    <h2 class=" col-md-12 col-sm-12 text-center">รายการเมนู</h2>
                                     <hr class="mt-2 mb-2">
                                     <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                         <li class="nav-item  col-md-12 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ลงทะเบียนฟาร์ม</a>
+                                            <a class="btn btn-lg bt_regis " href="#tab-farm" role="button">ลงทะเบียนฟาร์ม</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list" role="button" aria-selected="false">ฝูงโค</a>
+                                            <a class="btn btn-lg bt_list-1" role="button" aria-selected="false">ฝูงโค</a>
                                         </li>
                                         <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list" href="../listmenu/_tab_house" role="button">โรงเรือน</a>
+                                            <a class="btn btn-lg bt_list-1" href="../listmenu/_tab_house" role="button">โรงเรือน</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">โคเนื้อ</a>
+                                            <a class="btn btn-lg bt_list-1 " href="#tab-farm" role="button">โคเนื้อ</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">สายพันธุ์โคเนื้อ</a>
+                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">สายพันธุ์โคเนื้อ</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ผสมพันธุ์</a>
+                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">ผสมพันธุ์</a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list " href="#tab-farm" role="button">โรค/อาการป่วย</a>
+                                            <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">โรค/อาการป่วย</a>
                                         </li>
                                     </ul>
 
@@ -71,7 +71,7 @@
                         <div class="col">
                             <div class="card ">
                                 <div class="card-body">
-                                    <span class="btn btn-lg bt_list col-md-12 col-sm-12 " href="#">รายงานข้อมูล</span>
+                                <h2 class=" col-md-12 col-sm-12 text-center">รายงานข้อมูล</h2>
                                     <hr class="mt-2 mb-2">
                                     <!-- list Manage -->
                                     <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
