@@ -5,11 +5,13 @@
         ?>
             <div class="col">
                 <div class="card text-center">
-                    <img src="..." class="card-img-top" alt="...">
+                    <div class="text-center">
+                        <img src="../../../../main_2/dist/img/image-01.jpg" class="rounded card-img-top" alt="image" >
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        
+
                         <a href="#" class="btn btn-success">Go somewhere</a>
                     </div>
                 </div>

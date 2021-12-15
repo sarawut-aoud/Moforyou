@@ -9,8 +9,10 @@ require_once '../../connect/functions.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
-
-    <?php require '../../build/script.php'; ?>
+    
+    <?php require '../../build/script.php';
+           
+    ?>
 </head>
 <style>
     .main-footer {
@@ -57,16 +59,27 @@ require_once '../../connect/functions.php';
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
+                                        <div class="text-center">
+                                            <img src="../../../../main_2/dist/img/user-01.jpg" class="rounded card-img-top  w-25" alt="image">
+                                        </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อโรงเรือน">
+                                            <label for="fname">ชื่อ-นามสกุล</label>
+                                            <input type="text" class="form-control" id="fname" placeholder="ชื่อ-นามสกุล">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">เบอร์โทรศัพท์</label>
+                                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="123-456-7890" pattern="^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$">
                                         </div>
 
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer text-end">
-                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-info">ยืนยัน</button>
                                     </div>
                                 </form>
                             </div>
@@ -107,5 +120,5 @@ require_once '../../connect/functions.php';
         </div>
         <!-- ./wrapper -->
 </body>
-
+<script type="text/javascript" src="../../dist/js/phone.js"></script>
 </html>

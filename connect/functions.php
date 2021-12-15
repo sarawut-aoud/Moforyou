@@ -60,12 +60,16 @@ class farm extends Database
 class house extends Database
 {
     // Insert  
-    public function addhouse($hnmae, $farm_id)
+    public function addhouse($hname, $farm_id)
     {
-        $add_house = mysqli_query($this->dbcon, "INSERT INTO tbl_house(housename,farm_id)VALUES('$hnmae','$farm_id')");
+        $add_house = mysqli_query($this->dbcon, "INSERT INTO tbl_house(housename,farm_id)VALUES('$hname','$farm_id')");
         return $add_house;
     }
     // Update
+    public function updatehouse($hname, $farm_id){
+        $up_house = mysqli_query($this->dbcon,"UPDATE tbl_house SET housename = '$hname' WHERE farm_id = '$farm_id'");
+        return $up_house;
+    }
     // Delete
     // Select
 }
