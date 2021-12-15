@@ -1,5 +1,19 @@
 <?php
 require '../../connect/session_ckeck.php';
+require_once '../../connect/functions.php';
+  //เก็บ id จาก session
+  $id = $_SESSION['id'];
+
+  $sql = new farm();
+  $fcheck = $sql->checkregisfarm($id);
+  
+  // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+  $result = mysqli_num_rows($fcheck);
+  //ถ้าไม่มีส่งไปหน้าลงทะเบียน
+  if (empty($result)) {
+      require_once '../alert/check_farm.php';
+  } else {
+      // ถ้ามีแสดง tag นี้
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,3 +155,4 @@ require '../../connect/session_ckeck.php';
 </script>
 
 </html>
+<?php } ?>

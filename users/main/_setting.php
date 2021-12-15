@@ -1,3 +1,7 @@
+<?php
+require '../../connect/session_ckeck.php';
+require_once '../../connect/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +49,52 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">แก้ไขข้อมูลส่วนตัว</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อโรงเรือน">
+                                        </div>
 
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer text-end">
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">แก้ไขข้อมูลฟาร์ม</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อโรงเรือน">
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer text-end">
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
                         </div>
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->

@@ -1,20 +1,18 @@
 <?php
 require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
-require_once '../../connect/alert.php';
-
 $id = $_SESSION['id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
 
-// เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+    // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
 $result = mysqli_num_rows($fcheck);
 //ถ้าไม่มีส่งไปหน้าลงทะเบียน
 if (empty($result)) {
-     echo "<script>window.location= '../register-farm/regis_farm' </script>";
-}else{
-    // ถ้ามีแสดงหน้า list
+    require_once '../alert/check_farm.php';
+} else {
+    // ถ้ามีแสดง tag นี้
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -131,6 +129,6 @@ if (empty($result)) {
     </body>
 
     </html>
-<?php 
-    
+<?php
+
 } ?>

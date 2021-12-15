@@ -50,6 +50,11 @@ class farm extends Database
         $checkfarm = mysqli_query($this->dbcon,"SELECT * FROM tbl_farm WHERE farmmer_id = '$id'");
         return $checkfarm;
     }
+    // Update 
+    public function updatefarm($farmname,$address,$dis_id,$farmmer_id){
+        $upfarm = mysqli_query($this->dbcon,"UPDATE tbl_farm SET farmname ='$farmname',address = '$address',district_id='$dis_id' WHERE farmmer_id='$farmmer_id'");
+        return $upfarm;
+    }
 }
 // โรงเรือน
 class house extends Database
