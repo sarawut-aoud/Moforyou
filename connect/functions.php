@@ -87,7 +87,8 @@ class house extends Database
     // Insert  
     public function addhouse($hname, $farm_id)
     {
-        $add_house = mysqli_query($this->dbcon, "INSERT INTO tbl_house(housename,farm_id)VALUES('$hname','$farm_id')");
+        $add_house = mysqli_query($this->dbcon,"INSERT INTO tbl_house(housename,farm_id)
+            VALUES('$hname','$farm_id')");
         return $add_house;
     }
     // Update
@@ -107,7 +108,23 @@ class herd extends Database
     // Delete
     // Select
 }
+class specise extends Database{
 
+    // Insert
+    public function addspec($specname,$specdetail,$specpic){
+        $add_spec = mysqli_query($this->dbcon,"INSERT INTO tbl_species(spec_name,spec_detail,spec_pic)
+            VALUES('$specname','$specdetail','$specpic')");
+        return $add_spec;
+    }
+    // Update
+    // Delete
+    // Select
+    public function selspec(){
+        $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species");
+        return $sel_spec;
+    }
+
+}
 // ผสมพันธุ์
 class breed extends Database
 {

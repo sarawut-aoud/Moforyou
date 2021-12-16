@@ -1,18 +1,29 @@
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
-        for ($i = 0; $i < 6; $i++) {
+
+        $sel_data = new specise();
+        $result = $sel_data->selspec();
+
+        // $datapic = mysqli_fetch_array($result);
+        while ($row = mysqli_fetch_array($result)) {
+
         ?>
             <div class="col">
-                <div class="card text-center">
+                <div class="card text-center ">
                     <div class="text-center">
-                        <img src="../../../../main_2/dist/img/image-01.jpg" class="rounded card-img-top" alt="image"  width="100%" height="225">
+                        <img src="<?php if ($row['spec_pic']=='') {
+                                        echo "../../../../main_2/dist/img/image-01.jpg";
+                                    } else {
+                                        echo $row['spec_pic'];
+                                    } ?>
+                                    " class="rounded card-img-top " alt="image" width="100%" height="225">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <h3 class="text-center"><?php echo $row['spec_name'] ?></h3>
+                        <p class="card-text"><?php echo $row['spec_detail']; ?></p>
 
-                        <a href="#" class="btn btn-success">Go somewhere</a>
+                        <!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
                     </div>
                 </div>
             </div>

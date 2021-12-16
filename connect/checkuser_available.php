@@ -1,6 +1,6 @@
 <?php
 require_once "functions.php";
-$usernamecheck = new farmmer();
+$usernamecheck = new registra();
 
 // Getting post value
 $username = $_POST['username'];

@@ -35,10 +35,10 @@ require '../../connect/functions.php';
                             <label for="floatingInputValue"> <small><i class="fas fa-user-circle"></i> Username or Email </small></label>
 
                         </div>
-
+                        
                         <div class=" form-floating mb-3 mt-3">
-                            <input type="password" name="password" id="password" class="form-control" id="floatingInputValue" placeholder="Password">
-                            <label for="floatingInputValue"><small> <i class="fas fa-lock"></i> password </small></label>
+                            <input type="password" name="password" id="password" class="form-control" id="floatingInputValue" placeholder="Password" >
+                            </i><label for="floatingInputValue"><small> <i class="fas fa-lock"></i> password </small></label>
                         </div>
 
                         <div class="col-12 mt-5">

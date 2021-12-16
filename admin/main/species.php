@@ -1,3 +1,9 @@
+<?php
+require_once '../../connect/session_ckeck.php';
+require '../../connect/functions.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,20 +70,24 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="post" >
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="Namespecise">ชื่อสายพันธุ์</label>
-                                            <input type="text" class="form-control" id="specise_name" placeholder="ชื่อสายพันธุ์">
+                                        <div class="form-group ">
+                                            <label for="Picturespecise">ภาพ</label>
+                                            <input type="url"  class="form-control" id="specpic" name="specpic">
                                         </div>
                                         <div class="form-group">
-                                            <label for="Specisedetail">Password</label>
-                                            <input type="text" class="form-control" id="specise_detail" placeholder="รายละเอียด">
+                                            <label for="Namespecise">ชื่อสายพันธุ์</label>
+                                            <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Specisedetail">รายละเอียด</label>
+                                            <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer text-right">
-                                        <button type="" class="btn btn-primary">Submit</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-warning">Reset</button>
                                     </div>
                                 </form>
@@ -97,29 +107,44 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>สายพันธุ์</th>
+                                                <th>รายละเอียด</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info" data-toggle="modal" data-target="#md-spec" >
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <?php require '../modal/md_spec.php';?>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $sel_data = new specise();
+                                            $result = $sel_data->selspec();
+
+
+                                            while ($row = mysqli_fetch_object($result)) {
+
+
+                                            ?>
+                                                <tr>
+                                                    <td style="width: 15%;" align="center">
+                                                        <img src="<?php echo $row->spec_pic; ?>" class="rounded w-75 " alt="image">
+                                                    </td>
+                                                    <td style="width: 15%;"><?php echo $row->spec_name; ?></td>
+                                                    <td><?php echo $row->spec_detail; ?>
+                                                    </td>
+                                                    <td style="width: 15%;">
+                                                        <center>
+                                                            <a class="btn btn-info" data-toggle="modal" data-target="#md-spec">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <?php require '../modal/md_spec.php'; ?>
+                                                            <a class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </center>
+
+                                                    </td>
+
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
                                         <!-- foot table -->
@@ -127,6 +152,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>สายพันธุ์</th>
+                                                <th>รายละเอียด</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </tfoot>
@@ -174,3 +200,44 @@
 </script>
 
 </html>
+<?php
+
+
+require '../../connect/alert.php';
+
+$specdata = new specise();
+if (isset($_POST['submit'])) {
+    $specname = $_POST['specname'];
+    $specdetail = $_POST['specdetail'];
+    $specpic = $_POST['specpic'];
+    // $fileupload = $_FILES['photo']['tmp_name'];
+    // $fileupload_name = uniqid() . $_FILES['photo']['name'];
+
+    $sql = $specdata->addspec($specname, $specdetail, $specpic);
+
+    if ($sql) {
+        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
+
+    } else {
+        warning('โปรดลองอีกครั้ง');
+    }
+}
+
+// $fileupload = $_FILES['photo']['tmp_name'];
+// $fileupload_name = uniqid().$_FILES['photo']['name'];
+// if($std_name && $std_address && $std_tel){
+// 	$sql = "SELECT * FROM student WHERE std_name = '$std_name'";
+// 	$result = mysql_query($sql,$conn);
+// 	$total = mysql_fetch_array($result);
+
+// 	if($total == 0){
+// 		if($fileupload != ""){
+// 			if(!is_dir("./picture")){
+// 				mkdir("./picture");
+// 			}
+// 			copy($fileupload,"./picture/".$fileupload_name);
+// 			$sql = "INSERT INTO student (std_name,std_address,std_tel,pa_id,c_id,std_pic) VALUES ('$std_name','$std_address','$std_tel','$pa_id','$c_id','$fileupload_name')";	
+// 		}else{
+// 			$sql = "INSERT INTO student (std_name,std_address,std_tel,pa_id,c_id) VALUES ('$std_name','$std_address','$std_tel','$pa_id','$c_id')";	
+// 		}
+?>

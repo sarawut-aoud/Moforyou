@@ -1,3 +1,6 @@
+<?php
+require '../../connect/functions.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 
