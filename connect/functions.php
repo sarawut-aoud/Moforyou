@@ -1,7 +1,7 @@
 <?php
 require_once 'database.php';
-// เจ้าของฟาร์ม / สมัคร user
-class farmmer extends Database
+//  สมัคร user
+class registra extends Database
 {
 
     // Check username
@@ -20,11 +20,12 @@ class farmmer extends Database
     }
 
     // Login 
-    public function login($username, $password,$email)
+    public function login($username, $password, $email)
     {
         $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE (username = '$username' OR email = '$email')AND password = MD5('" . $password . "')");
         return $log;
     }
+    
     // test pagination 
     public function pagin()
     {
@@ -37,23 +38,47 @@ class farmmer extends Database
         return $page;
     }
 }
+// Farmer
+class farmer extends Database
+{
+    //Select 
+    public function selectfarmer($id)
+    {
+        $sel_farmer = mysqli_query($this->dbcon,"SELECT * FROM tbl_farmer WHERE id='$id' ");
+        return $sel_farmer;
+    }
+    // Update Farmer 
+    public function updatefarmmer($fname, $phone, $email, $pic)
+    {
+        $upfarmmer = mysqli_query($this->dbcon, "UPDATE");
+    }
+}
 // ฟาร์ม
 class farm extends Database
 {
     // Resgistration Farm
-    public function registerfarm(){
-        $regfarm = mysqli_query($this->dbcon,"INSERT INTO tbl_farm()VALUES()");
+    public function registerfarm()
+    {
+        $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm()VALUES()");
         return $regfarm;
     }
     // Check Resgistration Farm
-    public function checkregisfarm($id){
-        $checkfarm = mysqli_query($this->dbcon,"SELECT * FROM tbl_farm WHERE farmmer_id = '$id'");
+    public function checkregisfarm($id)
+    {
+        $checkfarm = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm WHERE farmmer_id = '$id'");
         return $checkfarm;
     }
     // Update 
-    public function updatefarm($farmname,$address,$dis_id,$farmmer_id){
-        $upfarm = mysqli_query($this->dbcon,"UPDATE tbl_farm SET farmname ='$farmname',address = '$address',district_id='$dis_id' WHERE farmmer_id='$farmmer_id'");
+    public function updatefarm($farmname, $address, $dis_id, $farmmer_id)
+    {
+        $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET farmname ='$farmname',address = '$address',district_id='$dis_id' WHERE farmmer_id='$farmmer_id'");
         return $upfarm;
+    }
+    //Select
+    public function selectfarm($id)
+    {
+        $sel_farm = mysqli_query($this->dbcon,"SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
+        return $sel_farm;
     }
 }
 // โรงเรือน
@@ -66,8 +91,9 @@ class house extends Database
         return $add_house;
     }
     // Update
-    public function updatehouse($hname, $farm_id){
-        $up_house = mysqli_query($this->dbcon,"UPDATE tbl_house SET housename = '$hname' WHERE farm_id = '$farm_id'");
+    public function updatehouse($hname, $farm_id)
+    {
+        $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET housename = '$hname' WHERE farm_id = '$farm_id'");
         return $up_house;
     }
     // Delete
@@ -95,3 +121,4 @@ class report extends Database
 {
     // Select .. 
 }
+?>

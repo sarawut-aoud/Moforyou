@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card text-center">
                     <div class="text-center">
-                        <img src="../../../../main_2/dist/img/image-01.jpg" class="rounded card-img-top" alt="image" >
+                        <img src="../../../../main_2/dist/img/image-01.jpg" class="rounded card-img-top" alt="image"  width="100%" height="225">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>

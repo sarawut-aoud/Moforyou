@@ -74,7 +74,8 @@
 <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="../../plugins/toastr/toastr.min.js"></script>
-
+<!-- Input mask -->
+<script src="../../plugins/imask/imask.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.js"></script>

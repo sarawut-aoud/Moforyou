@@ -40,15 +40,17 @@
                         <label for="floatingInputValue"> <small> ชื่อ - นามสกุล </small></label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="card" name="card" placeholder="บัตรประชาชน" required>
+                        <input type="tel" class="form-control" id="card" name="card" placeholder="X-XXXX-XXXXX-XX-X" aria-invalid aria-required="true" required>
                         <label for="floatingInputValue"> <small> บัตรประชาชน </small></label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" 
+                        pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                        required>
                         <label for="floatingInputValue"> <small> Email </small></label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
+                        <input type="tel"class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
                         <label for="floatingInputValue"> <small> เบอร์โทรศัพท์ </small></label>
                     </div>
                     <!-- /.col -->
@@ -70,6 +72,9 @@
     <!-- /.register-box -->
 
 </body>
+
+<script type="text/javascript" src="../../dist/js/phone.js"></script>
+<script type="text/javascript" src="../../dist/js/id_card.js"></script>
 <script>
     // Check Username
     function checkusername(val) {
@@ -151,7 +156,7 @@
 <?php
 require '../../connect/functions.php';
 require '../../connect/alert.php';
-$userdata = new farmmer();
+$userdata = new registra();
 if (isset($_POST['submit'])) {
     $card = $_POST['card'];
     $fname = $_POST['fname'];

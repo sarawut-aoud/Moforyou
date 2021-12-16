@@ -79,7 +79,7 @@ require '../../connect/functions.php';
 <?php
 require '../../connect/alert.php';
 ob_start();
-$userdata = new farmmer();
+$userdata = new registra();
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
