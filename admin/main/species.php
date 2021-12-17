@@ -64,36 +64,73 @@ require '../../connect/functions.php';
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">เพิ่มข้อมูลสายพันธุ์</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">เพิ่มข้อมูลสายพันธุ์</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <form method="post">
+                                            <div class="card-body">
+                                                <div class="form-group ">
+                                                    <label for="Picturespecise">ภาพ</label>
+                                                    <input type="url" class="form-control" id="specpic" name="specpic">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Namespecise">ชื่อสายพันธุ์</label>
+                                                    <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Specisedetail">รายละเอียด</label>
+                                                    <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer text-right">
+                                                <button type="submit" id="submit" name="submit" class="btn btn-primary">Submit</button>
+                                                <button type="reset" class="btn btn-warning">Reset</button>
+                                            </div>
+                                        </form>
+                                        <!-- /.form end -->
+                                    </div>
+                                    <!-- /.card -->
                                 </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form method="post" >
-                                    <div class="card-body">
-                                        <div class="form-group ">
-                                            <label for="Picturespecise">ภาพ</label>
-                                            <input type="url"  class="form-control" id="specpic" name="specpic">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Namespecise">ชื่อสายพันธุ์</label>
-                                            <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Specisedetail">รายละเอียด</label>
-                                            <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
-                                        </div>
+                                <div class="col-md-6">
+                                <div class="card card-warning">
+                                    <div class="card-header">
+                                        <h3 class="card-title">แก้ไขข้อมูลสายพันธุ์</h3>
                                     </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-right">
-                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
-                                    </div>
-                                </form>
-                                <!-- /.form end -->
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form method="post">
+                                        <div class="card-body">
+                                            
+                                            <div class="form-group ">
+                                                <label for="Picturespecise">ภาพ</label>
+                                                <input type="url" class="form-control" id="specpic" name="specpic">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Namespecise">ชื่อสายพันธุ์</label>
+                                                <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Specisedetail">รายละเอียด</label>
+                                                <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer text-right">
+                                            <button type="submit_edit" id="submit_edit" name="submit_edit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+                                    <!-- /.form end -->
+                                </div>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
+
+
                             <div class="card">
                                 <div class="card-header card-outline card-blue">
                                     <h3 class="text-center">สายพันธุ์</h3>
@@ -125,7 +162,7 @@ require '../../connect/functions.php';
                                             ?>
                                                 <tr>
                                                     <td style="width: 15%;" align="center">
-                                                        <img src="<?php echo $row->spec_pic; ?>" class="rounded w-75 " alt="image">
+                                                        <img src="<?php echo $row->spec_pic; ?>" class="rounded w-100"  alt="image">
                                                     </td>
                                                     <td style="width: 15%;"><?php echo $row->spec_name; ?></td>
                                                     <td><?php echo $row->spec_detail; ?>
@@ -136,8 +173,9 @@ require '../../connect/functions.php';
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
                                                             <?php require '../modal/md_spec.php'; ?>
-                                                            <a class="btn btn-danger">
-                                                                <i class="fas fa-trash-alt"></i>
+                                                            <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
+                                                                <i class=" fas fa-trash-alt"></i>
+                                                                <!-- href="../delete/delete_species?del=<?php echo $row->id; ?> -->
                                                             </a>
                                                         </center>
 
@@ -197,6 +235,22 @@ require '../../connect/functions.php';
             "responsive": true,
         });
     });
+
+    function del(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = "../delete/delete_species?del=" + id;
+            }
+        })
+    };
 </script>
 
 </html>
@@ -222,6 +276,7 @@ if (isset($_POST['submit'])) {
         warning('โปรดลองอีกครั้ง');
     }
 }
+
 
 // $fileupload = $_FILES['photo']['tmp_name'];
 // $fileupload_name = uniqid().$_FILES['photo']['name'];

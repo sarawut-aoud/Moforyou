@@ -118,6 +118,10 @@ class specise extends Database{
     }
     // Update
     // Delete
+    public function delspec($id){
+        $del_spec = mysqli_query($this->dbcon,"DELETE FROM tbl_species WHERE id='$id'");
+        return $del_spec;
+    }
     // Select
     public function selspec(){
         $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species");
