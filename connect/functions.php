@@ -87,18 +87,26 @@ class house extends Database
     // Insert  
     public function addhouse($hname, $farm_id)
     {
-        $add_house = mysqli_query($this->dbcon,"INSERT INTO tbl_house(housename,farm_id)
+        $add_house = mysqli_query($this->dbcon,"INSERT INTO tbl_house(house_name,farm_id)
             VALUES('$hname','$farm_id')");
         return $add_house;
     }
     // Update
     public function updatehouse($hname, $farm_id)
     {
-        $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET housename = '$hname' WHERE farm_id = '$farm_id'");
+        $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET house_name = '$hname' WHERE farm_id = '$farm_id'");
         return $up_house;
     }
     // Delete
+    public function delhouse($id){
+        $del_house = mysqli_query($this->dbcon,"DELETE FROM tbl_house WHERE id='$id'");
+        return $del_house;
+    }
     // Select
+    public function selhouse($id){
+        $sel_house = mysqli_query($this->dbcon,"SELECT * FROM tbl_house WHERE farm_id='$id'");
+        return $sel_house;
+    }
 }
 // ฝูง
 class herd extends Database

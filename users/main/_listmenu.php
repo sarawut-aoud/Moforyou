@@ -58,9 +58,7 @@ if (empty($result)) {
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 " href="../listmenu/_tabcow" role="button">โคเนื้อ</a>
                                             </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">สายพันธุ์โคเนื้อ</a>
-                                            </li>
+                                            
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-2 " href="../listmenu/_tabbreed" role="button">ผสมพันธุ์</a>
                                             </li>

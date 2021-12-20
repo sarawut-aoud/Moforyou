@@ -66,6 +66,7 @@ require_once '../../connect/functions.php';
                                     <h3 class="card-title">แก้ไขข้อมูลส่วนตัว</h3>
                                 </div>
                                 <!-- /.card-header -->
+                                 <!-- --------------------Information -------------------------------------- -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
@@ -109,12 +110,26 @@ require_once '../../connect/functions.php';
                                     <h3 class="card-title">แก้ไขข้อมูลฟาร์ม</h3>
                                 </div>
                                 <!-- /.card-header -->
+                                <!-- --------------------farm -------------------------------------- -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="farmname">ชื่อฟาร์ม</label>
-                                            <input type="text" class="form-control" id="farmname" value="<?php echo $result2->farmname; ?>">
+                                            <input type="text" class="form-control " id="farmname" 
+                                            value="<?php 
+                                                        if (empty($result2)){
+                                                            echo "ยังไม่ได้ลงทะเบียน";
+                                                        }else{
+                                                            echo $result2->farmname; 
+                                                        }
+                                            ?>" <?php 
+                                            if (empty($result2)){
+                                                echo "disabled readonly";
+                                            }else{
+                                               echo "";
+                                            }
+                                ?>>
                                         </div>
 
                                     </div>
@@ -131,19 +146,20 @@ require_once '../../connect/functions.php';
                                             <h3 class="card-title">แก้ไขรหัสผ่าน</h3>
                                         </div>
                                         <!-- /.card-header -->
+                                         <!-- --------------------Password -------------------------------------- -->
                                         <!-- form start -->
                                         <form>
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านเดิม</label>
-                                                    <input type="text" class="form-control" id="old_pass" placeholder="รหัสผ่านเดิม">
+                                                    <input type="password" class="form-control" id="old_pass" placeholder="รหัสผ่านเดิม">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านใหม่</label>
-                                                    <input type="text" class="form-control" id="passnew" placeholder="รหัสผ่านใหม่">
+                                                    <input type="password" class="form-control" id="passnew" placeholder="รหัสผ่านใหม่">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่">
+                                                    <input type="password" class="form-control" id="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่">
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
