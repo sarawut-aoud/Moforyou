@@ -82,8 +82,9 @@ ob_start();
 $userdata = new registra();
 
 if (isset($_POST['login'])) {
+    
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
     $email = $_POST['username'];
 
 
@@ -92,7 +93,8 @@ if (isset($_POST['login'])) {
 
     if (!empty($username) && !empty($password)) {
         if ($num > 0) {
-            $result = $userdata->login($username, $password, $email);
+            $result = $userdata->login($password,$username,$email);
+         
             $total = mysqli_fetch_array($result);
             if ($total) {
                 session_start();

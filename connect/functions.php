@@ -1,5 +1,6 @@
 <?php
 require_once 'database.php';
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //  สมัคร user
 class registra extends Database
 {
@@ -18,11 +19,12 @@ class registra extends Database
             VALUES('$card','$fname','$email','$phone','$username','$password')");
         return $reg;
     }
-
+    
     // Login 
-    public function login($username, $password, $email)
+    public function login($password,$username,$email)
     {
         $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE (username = '$username' OR email = '$email')AND password = MD5('" . $password . "')");
+     
         return $log;
     }
     
@@ -125,6 +127,10 @@ class specise extends Database{
         return $add_spec;
     }
     // Update
+    public function updatespec(){
+        $up_spec = mysqli_query($this->dbcon,"UPDATE SET spec_name = '' ,spec_detail ='' ,spec_pic=''  FROM tbl_species WHERE id = '' ");
+        return $up_spec;
+    }
     // Delete
     public function delspec($id){
         $del_spec = mysqli_query($this->dbcon,"DELETE FROM tbl_species WHERE id='$id'");
@@ -137,13 +143,40 @@ class specise extends Database{
     }
 
 }
+class cow extends Database{
+    // Insert
+    public function addcow(){
+        $add_cow = mysqli_query($this->dbcon,"INSERT INTO tbl_cow()   
+        VALUES()");
+        return $add_cow;
+    }
+    // Update
+
+    // Delete
+
+    // Select
+    public function selcow(){
+        $sel_cow = mysqli_query($this->dbcon,"SELECT * FROM tbl_cow ");
+    }
+}
 // ผสมพันธุ์
 class breed extends Database
 {
-    // Insert 
+    // Insert
+
     // Update
+
     // Delete
+    
     // Select
+}
+// Food
+class food extends Database{
+
+}
+// Disease
+class disease extends Database{
+
 }
 // All Report
 class report extends Database
