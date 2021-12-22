@@ -72,7 +72,7 @@ require '../../connect/functions.php';
                                         </div>
                                         <!-- /.card-header -->
                                         <!-- form start -->
-                                        <form method="post">
+                                        <form  method="post">
                                             <div class="card-body">
                                                 <div class="form-group ">
                                                     <label for="Picturespecise">ภาพ</label>
@@ -109,7 +109,7 @@ require '../../connect/functions.php';
                                             
                                             <div class="form-group ">
                                                 <label for="Picturespecise">ภาพ</label>
-                                                <input type="url" class="form-control" id="specpic" name="specpic">
+                                                <input type="file" class="form-control" id="specpic" name="specpic">
                                             </div>
                                             <div class="form-group">
                                                 <label for="Namespecise">ชื่อสายพันธุ์</label>

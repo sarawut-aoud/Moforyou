@@ -1,8 +1,8 @@
 <?php
 require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
-$id = $_SESSION['id'];
 
+$id = $_SESSION['id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
 
@@ -13,6 +13,7 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
+    
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -80,8 +81,8 @@ if (empty($result)) {
                                         <h5 class="card-title">Card title</h5>
 
                                         <p class="card-text">
-                                            Some quick example text to build on the card title and make up the bulk of the card's
-                                            content.
+                                           <?php  echo $_SESSION['fullname']; ?>
+                                        
                                         </p>
                                         <a href="#" class="card-link">Card link</a>
                                         <a href="#" class="card-link">Another link</a>

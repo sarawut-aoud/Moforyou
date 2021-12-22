@@ -1,6 +1,5 @@
 <?php
 require_once 'database.php';
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //  สมัคร user
 class registra extends Database
 {
@@ -15,16 +14,27 @@ class registra extends Database
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
-        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
-            VALUES('$card','$fname','$email','$phone','$username','$password')");
+        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer
+        (card,
+        fullname,
+        email,
+        phone,
+        username,
+        password) 
+        VALUES(
+        '$card',
+        '$fname',
+        '$email',
+        '$phone',
+        '$username',
+        '$password')");
         return $reg;
     }
     
     // Login 
     public function login($password,$username,$email)
     {
-        $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE (username = '$username' OR email = '$email')AND password = MD5('" . $password . "')");
-     
+        $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE (username = '" .$username. "' OR email = '". $email ."' )AND password = MD5('" . $password . "')");
         return $log;
     }
     

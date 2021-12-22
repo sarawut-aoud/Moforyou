@@ -1,8 +1,7 @@
 <?php
-ob_start();
+
 require '../../connect/functions.php';
-
-
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,9 +34,9 @@ require '../../connect/functions.php';
                             <label for="floatingInputValue"> <small><i class="fas fa-user-circle"></i> Username or Email </small></label>
 
                         </div>
-                        
+
                         <div class=" form-floating mb-3 mt-3">
-                            <input type="password" name="password" id="password" class="form-control" id="floatingInputValue" placeholder="Password" >
+                            <input type="password" name="password" id="password" class="form-control" id="floatingInputValue" placeholder="Password">
                             </i><label for="floatingInputValue"><small> <i class="fas fa-lock"></i> password </small></label>
                         </div>
 
@@ -81,34 +80,33 @@ require '../../connect/alert.php';
 ob_start();
 $userdata = new registra();
 
-if (isset($_POST['login'])) {
-    
+if (isset($_POST['username'])) {
+
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
     $email = $_POST['username'];
 
+    $result = $userdata->login($password, $username, $email);
+   
 
-    $result = $userdata->login($username, $password, $email);
-    $num = mysqli_num_rows($result);
+    // if (!empty($username) && !empty($password)) {
+        if (mysqli_num_rows($result) == 1) {
+            $result = $userdata->login($password, $username, $email);
+            $row = mysqli_fetch_array($result);
 
-    if (!empty($username) && !empty($password)) {
-        if ($num > 0) {
-            $result = $userdata->login($password,$username,$email);
-         
-            $total = mysqli_fetch_array($result);
-            if ($total) {
                 session_start();
-                $_SESSION["id"] =  $total['id'];
+                $_SESSION["id"] =  $row['id'];
+                $_SESSION["fullname"] = $row['fullname'];
                 $_SESSION["user"] = $username;
-                $_SESSION["pwd"] = $password;
                 echo success_1("Login Sucessful !", "../../users/main/user_index");
                 exit();
-            }
+            
         } else {
             if ($username == "admin" && $password == "masterkey") {
                 session_start();
                 $_SESSION["id"] = $username;
-                $_SESSION["pwd"] = $username;
+                $_SESSION["user"] = $username;
+                $_SESSION["fullname"] = "Sarawut Aoudkla";
                 echo success_1("Login Sucessful !", "../../admin/main/admin_index");
                 exit();
             } else {
@@ -116,9 +114,10 @@ if (isset($_POST['login'])) {
                 exit();
             }
         }
-    } else {
-        echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
-        exit();
-    }
+    // } else {
+    //     echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
+    //     exit();
+    // }
 }
+
 ?>
