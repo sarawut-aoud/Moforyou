@@ -81,15 +81,15 @@ ob_start();
 $userdata = new registra();
 
 if (isset($_POST['username'])) {
-
-    $username = $_POST['username'];
+    $username=$_REQUEST['username'];
+    $email=mysqli_escape_string($_REQUEST['username']);
     $password = $_POST['password'];
-    $email = $_POST['username'];
+  
 
     $result = $userdata->login($password, $username, $email);
    
 
-    // if (!empty($username) && !empty($password)) {
+     if (!empty($username) && !empty($password)) {
         if (mysqli_num_rows($result) == 1) {
             $result = $userdata->login($password, $username, $email);
             $row = mysqli_fetch_array($result);
@@ -114,10 +114,10 @@ if (isset($_POST['username'])) {
                 exit();
             }
         }
-    // } else {
-    //     echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
-    //     exit();
-    // }
+     } else {
+         echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
+         exit();
+     }
 }
 
 ?>

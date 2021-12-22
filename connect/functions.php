@@ -34,7 +34,7 @@ class registra extends Database
     // Login 
     public function login($password,$username,$email)
     {
-        $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE (username = '" .$username. "' OR email = '". $email ."' )AND password = MD5('" . $password . "')");
+        $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE username = '" .$username. "' OR email = '$email' AND password = MD5('" . $password . "')");
         return $log;
     }
     
