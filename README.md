@@ -1,5 +1,6 @@
 ## MofoYou
-....web-application responsive 
+
+  - web-application responsive 
 
 ![image](https://user-images.githubusercontent.com/72249659/147035145-e035bcd4-e650-472d-8974-8a7e663b3a8e.png)
 
