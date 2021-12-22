@@ -21,8 +21,6 @@
               echo success("ลบข้อมูลสำเร็จ","../main/species");
             }
         }
-    
-    
     ?>
 </body>
 </html>

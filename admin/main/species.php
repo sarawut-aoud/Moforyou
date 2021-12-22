@@ -72,15 +72,21 @@ require '../../connect/functions.php';
                                         </div>
                                         <!-- /.card-header -->
                                         <!-- form start -->
-                                        <form  method="post">
+                                        <form method="POST" enctype="multipart/form-data">
                                             <div class="card-body">
                                                 <div class="form-group ">
                                                     <label for="Picturespecise">ภาพ</label>
-                                                    <input type="url" class="form-control" id="specpic" name="specpic">
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="form-control" id="file" name="file" onchange="readURL(this)" required>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="Namespecise">ชื่อสายพันธุ์</label>
-                                                    <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
+                                                    <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="Specisedetail">รายละเอียด</label>
@@ -98,103 +104,111 @@ require '../../connect/functions.php';
                                     <!-- /.card -->
                                 </div>
                                 <div class="col-md-6">
-                                <div class="card card-warning">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Preview</h3>
+                                    <div class="card card-warning">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Preview</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <form method="post">
+                                            <div class="card-body">
+                                                <div id="imgControl" class="d-none">
+                                                    <img id="imgUpload" class="rounded mx-auto d-block h-50 w-50">
+
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                        </form>
+                                        <!-- /.form end -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-header card-outline card-blue">
+                                        <h3 class="text-center">สายพันธุ์</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <form method="post">
-                                        <div class="card-body">
-                                            
-                                            
-                                           
-                                        </div>
-                                        <!-- /.card-body -->
-                                        
-                                    </form>
-                                    <!-- /.form end -->
+                                    <div class="card-body">
+                                        <!-- table -->
+                                        <table id="example1" class="table table-bordered table-striped table-hover">
+                                            <!-- head table -->
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>สายพันธุ์</th>
+                                                    <th>รายละเอียด</th>
+                                                    <th>Edit&Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /.head table -->
+                                            <!-- body table -->
+                                            <tbody>
+                                                <?php
+                                                $sel_data = new specise();
+                                                $result = $sel_data->selspec();
+                                                while ($row = mysqli_fetch_object($result)) {
+                                                ?>
+                                                    <tr>
+                                                        <td style="width: 15%;" align="center">
+                                                            <?php
+                                                            if ($row->spec_pic != NULL) {
+                                                            ?>
+                                                                <img src="<?php echo "../../dist/img/spec_upload/$row->spec_pic"; ?>" class="rounded w-100" >
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <img src="../../dist/img/image-01.jpg" class="rounded w-100" alt="image">
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                           
+                                                        </td>
+                                                        <td style="width: 15%;"><?php echo $row->spec_name; ?></td>
+                                                        <td><?php echo $row->spec_detail; ?>
+                                                        </td>
+                                                        <td style="width: 15%;">
+                                                            <center>
+                                                                <a class="btn btn-info" data-toggle="modal" data-target="#md-spec">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <?php require '../modal/md_spec.php'; ?>
+                                                                <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
+                                                                    <i class=" fas fa-trash-alt"></i>
+                                                                    <!-- href="../delete/delete_species?del=<?php echo $row->id; ?> -->
+                                                                </a>
+                                                            </center>
+
+                                                        </td>
+
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                            <!-- /.body table -->
+                                            <!-- foot table -->
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>สายพันธุ์</th>
+                                                    <th>รายละเอียด</th>
+                                                    <th>Edit&Delete</th>
+                                                </tr>
+                                            </tfoot>
+                                            <!-- /.foot table -->
+                                        </table>
+                                        <!-- /.table -->
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
                             </div>
-
-
-                            <div class="card">
-                                <div class="card-header card-outline card-blue">
-                                    <h3 class="text-center">สายพันธุ์</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <!-- table -->
-                                    <table id="example1" class="table table-bordered table-striped table-hover">
-                                        <!-- head table -->
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>สายพันธุ์</th>
-                                                <th>รายละเอียด</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- /.head table -->
-                                        <!-- body table -->
-                                        <tbody>
-                                            <?php
-                                            $sel_data = new specise();
-                                            $result = $sel_data->selspec();
-
-
-                                            while ($row = mysqli_fetch_object($result)) {
-
-
-                                            ?>
-                                                <tr>
-                                                    <td style="width: 15%;" align="center">
-                                                        <img src="<?php echo $row->spec_pic; ?>" class="rounded w-100"  alt="image">
-                                                    </td>
-                                                    <td style="width: 15%;"><?php echo $row->spec_name; ?></td>
-                                                    <td><?php echo $row->spec_detail; ?>
-                                                    </td>
-                                                    <td style="width: 15%;">
-                                                        <center>
-                                                            <a class="btn btn-info" data-toggle="modal" data-target="#md-spec">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                            <?php require '../modal/md_spec.php'; ?>
-                                                            <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
-                                                                <i class=" fas fa-trash-alt"></i>
-                                                                <!-- href="../delete/delete_species?del=<?php echo $row->id; ?> -->
-                                                            </a>
-                                                        </center>
-
-                                                    </td>
-
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                        <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>สายพันธุ์</th>
-                                                <th>รายละเอียด</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
-                                    </table>
-                                    <!-- /.table -->
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
+                        <!-- /.row -->
                     </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
+                    <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>
@@ -206,6 +220,17 @@ require '../../connect/functions.php';
 
 </body>
 <script>
+    function readURL(input) {
+        if (input.files[0]) {
+            let reader = new FileReader();
+            document.querySelector('#imgControl').classList.replace("d-none", "d-block");
+            reader.onload = function(e) {
+                let element = document.querySelector('#imgUpload');
+                element.setAttribute("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     $(function() {
         $("#example1").DataTable({
             "responsive": true,
@@ -244,43 +269,70 @@ require '../../connect/functions.php';
 </html>
 <?php
 
+function imageResize($imageResourceId, $width, $height)
+{
+    $targetWidth = $width < 1280 ? $width : 1280;
+    $targetHeight = ($height / $width) * $targetWidth;
+    $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
+    imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+    return $targetLayer;
+}
 
 require '../../connect/alert.php';
 
 $specdata = new specise();
 if (isset($_POST['submit'])) {
+
+    date_default_timezone_set('Asia/Bangkok');
+    $time = date('Ymdhis');
+
     $specname = $_POST['specname'];
     $specdetail = $_POST['specdetail'];
-    $specpic = $_POST['specpic'];
-    // $fileupload = $_FILES['photo']['tmp_name'];
-    // $fileupload_name = uniqid() . $_FILES['photo']['name'];
 
-    $sql = $specdata->addspec($specname, $specdetail, $specpic);
+    $specpic = $_FILES['file']['tmp_name'];
+    $sourceProperties = getimagesize($specpic);
+    $fileNewName = $time;
+    $folderPath = "../../dist/img/spec_img/";
+    // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  เก็บแค่ path
+    $ext = $_FILES['file']['name']; 
+    $imageType = $sourceProperties[2];
 
-    if ($sql) {
+    switch ($imageType) {
+
+        case IMAGETYPE_PNG:
+            $imageResourceId = imagecreatefrompng($specpic);
+            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+            imagepng($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+            break;
+
+        case IMAGETYPE_GIF:
+            $imageResourceId = imagecreatefromgif($specpic);
+            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+            imagegif($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+            break;
+
+        case IMAGETYPE_JPEG:
+            $imageResourceId = imagecreatefromjpeg($specpic);
+            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+            imagejpeg($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+            break;
+
+        default:
+            echo "Invalid Image type.";
+            exit;
+            break;
+    }
+
+
+    if (!empty($specpic)) {
+         copy($specpic, "../../dist/img/spec_upload/" . $ext);
+        $sql = $specdata->addspec_pic($specname, $specdetail, $ext);
         echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
-
     } else {
-        warning('โปรดลองอีกครั้ง');
+        $sql = $specdata->addspec($specname, $specdetail);
+        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
     }
 }
 
 
-// $fileupload = $_FILES['photo']['tmp_name'];
-// $fileupload_name = uniqid().$_FILES['photo']['name'];
-// if($std_name && $std_address && $std_tel){
-// 	$sql = "SELECT * FROM student WHERE std_name = '$std_name'";
-// 	$result = mysql_query($sql,$conn);
-// 	$total = mysql_fetch_array($result);
-
-// 	if($total == 0){
-// 		if($fileupload != ""){
-// 			if(!is_dir("./picture")){
-// 				mkdir("./picture");
-// 			}
-// 			copy($fileupload,"./picture/".$fileupload_name);
-// 			$sql = "INSERT INTO student (std_name,std_address,std_tel,pa_id,c_id,std_pic) VALUES ('$std_name','$std_address','$std_tel','$pa_id','$c_id','$fileupload_name')";	
-// 		}else{
-// 			$sql = "INSERT INTO student (std_name,std_address,std_tel,pa_id,c_id) VALUES ('$std_name','$std_address','$std_tel','$pa_id','$c_id')";	
-// 		}
 ?>

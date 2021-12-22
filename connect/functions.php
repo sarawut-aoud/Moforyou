@@ -130,10 +130,30 @@ class herd extends Database
 }
 class specise extends Database{
 
-    // Insert
-    public function addspec($specname,$specdetail,$specpic){
-        $add_spec = mysqli_query($this->dbcon,"INSERT INTO tbl_species(spec_name,spec_detail,spec_pic)
-            VALUES('$specname','$specdetail','$specpic')");
+    // Insert Picure
+    public function addspec_pic($specname,$specdetail,$specpic){
+        $add_specpic = mysqli_query($this->dbcon,
+        "INSERT INTO tbl_species(
+            spec_name,
+            spec_detail,
+            spec_pic)
+            VALUES(
+            '$specname',
+            '$specdetail',
+            '$specpic')
+            ");
+        return $add_specpic;
+    }
+    // Insert No picture
+    public function addspec($specname,$specdetail){
+        $add_spec = mysqli_query($this->dbcon,
+        "INSERT INTO tbl_species(
+            spec_name,
+            spec_detail)
+            VALUES(
+            '$specname',
+            '$specdetail')
+            ");
         return $add_spec;
     }
     // Update
@@ -146,10 +166,15 @@ class specise extends Database{
         $del_spec = mysqli_query($this->dbcon,"DELETE FROM tbl_species WHERE id='$id'");
         return $del_spec;
     }
-    // Select
+    // Select ALL
     public function selspec(){
-        $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species");
+        $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species  ");
         return $sel_spec;
+    }
+    // Select Check Picture
+    public function selspecpic($specname){
+        $sel_specpic = mysqli_query($this->dbcon,"SELECT * FROM tbl_species WHERE spce_name='$specname' ");
+        return $sel_specpic;
     }
 
 }
