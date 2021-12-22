@@ -30,7 +30,7 @@ ob_start();
                     <form method="post" id="loginForm">
 
                         <div class="  form-floating mb-3 mt-3">
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Username or Email">
+                            <input type="text" name="username" id="username" class="form-control" autocomplete="off" placeholder="Username or Email">
                             <label for="floatingInputValue"> <small><i class="fas fa-user-circle"></i> Username or Email </small></label>
 
                         </div>
@@ -76,48 +76,48 @@ ob_start();
 
 </html>
 <?php
+
 require '../../connect/alert.php';
 ob_start();
-$userdata = new registra();
 
 if (isset($_POST['username'])) {
-    $username=$_REQUEST['username'];
-    $email=mysqli_escape_string($_REQUEST['username']);
+    $userdata = new registra();
+
+    $username = $_POST['username'];
+    $email = $_POST['username'];
     $password = $_POST['password'];
-  
+    
+    // หลีกเลี่ยง SQL Injection
+    $email_escape = $userdata->real_escape_string($email);
+    $username_escape = $userdata->real_escape_string($username);
 
-    $result = $userdata->login($password, $username, $email);
-   
-
-     if (!empty($username) && !empty($password)) {
+    $result = $userdata->login($password, $username_escape,   $email_escape);
+    if (!empty($username) && !empty($password)) {
         if (mysqli_num_rows($result) == 1) {
-            $result = $userdata->login($password, $username, $email);
             $row = mysqli_fetch_array($result);
 
-                session_start();
-                $_SESSION["id"] =  $row['id'];
-                $_SESSION["fullname"] = $row['fullname'];
-                $_SESSION["user"] = $username;
-                echo success_1("Login Sucessful !", "../../users/main/user_index");
-                exit();
-            
+            session_start();
+            $_SESSION["id"] =  $row['id'];
+            $_SESSION["fullname"] = $row['fullname'];
+            $_SESSION["user"] = $username;
+            echo success_1("Login Sucessful !", "../../users/main/user_index");
+            exit();
+        } else 
+            if (($username == "admin" && $password == "masterkey")) {
+            session_start();
+            $_SESSION["id"] = $username;
+            $_SESSION["user"] = $username;
+            $_SESSION["fullname"] = "Sarawut Aoudkla";
+            echo success_1("Login Sucessful !", "../../admin/main/admin_index");
+            exit();
         } else {
-            if ($username == "admin" && $password == "masterkey") {
-                session_start();
-                $_SESSION["id"] = $username;
-                $_SESSION["user"] = $username;
-                $_SESSION["fullname"] = "Sarawut Aoudkla";
-                echo success_1("Login Sucessful !", "../../admin/main/admin_index");
-                exit();
-            } else {
-                echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
-                exit();
-            }
+            echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
+            exit();
         }
-     } else {
-         echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
-         exit();
-     }
+    } else {
+        echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
+        exit();
+    }
 }
 
 ?>

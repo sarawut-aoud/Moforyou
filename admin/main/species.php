@@ -100,30 +100,18 @@ require '../../connect/functions.php';
                                 <div class="col-md-6">
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">แก้ไขข้อมูลสายพันธุ์</h3>
+                                        <h3 class="card-title">Preview</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <form method="post">
                                         <div class="card-body">
                                             
-                                            <div class="form-group ">
-                                                <label for="Picturespecise">ภาพ</label>
-                                                <input type="file" class="form-control" id="specpic" name="specpic">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Namespecise">ชื่อสายพันธุ์</label>
-                                                <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Specisedetail">รายละเอียด</label>
-                                                <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
-                                            </div>
+                                            
+                                           
                                         </div>
                                         <!-- /.card-body -->
-                                        <div class="card-footer text-right">
-                                            <button type="submit_edit" id="submit_edit" name="submit_edit" class="btn btn-success">Submit</button>
-                                        </div>
+                                        
                                     </form>
                                     <!-- /.form end -->
                                 </div>
