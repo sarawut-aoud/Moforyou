@@ -52,6 +52,7 @@ function success($msg, $redirect)
 {
   return "<script>
     Swal.fire({
+        icon: 'success',
         title: '<h1>$msg</h1>',
         text: '',
         type: 'success',

@@ -171,11 +171,12 @@ class specise extends Database{
         $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species  ");
         return $sel_spec;
     }
-    // Select Check Picture
-    public function selspecpic($specname){
-        $sel_specpic = mysqli_query($this->dbcon,"SELECT * FROM tbl_species WHERE spce_name='$specname' ");
-        return $sel_specpic;
+    // Select Id 
+    public function selectid($id){
+        $selspec_id = mysqli_query($this->dbcon,"SELECT * FROM tbl_species WHERE id = '$id' ");
+        return $selspec_id;
     }
+   
 
 }
 class cow extends Database{
@@ -218,4 +219,3 @@ class report extends Database
 {
     // Select .. 
 }
-?>
