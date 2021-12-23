@@ -156,7 +156,7 @@ require '../../connect/functions.php';
                                                             <?php
                                                             if ($row->spec_pic != NULL) {
                                                             ?>
-                                                                <img src="<?php echo "../../dist/img/spec_upload/$row->spec_pic"; ?>" class="rounded w-100" >
+                                                                <img src="<?php echo "../../dist/img/spec_upload/$row->spec_pic"; ?>" class="rounded w-100">
                                                             <?php
                                                             } else {
                                                             ?>
@@ -164,14 +164,14 @@ require '../../connect/functions.php';
                                                             <?php
                                                             }
                                                             ?>
-                                                           
+
                                                         </td>
                                                         <td style="width: 15%;"><?php echo $row->spec_name; ?></td>
                                                         <td><?php echo $row->spec_detail; ?>
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <a class="btn btn-info" data-toggle="modal" data-target="#md-spec">
+                                                                <a class="btn btn-info update_data" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a>
                                                                 <?php require '../modal/md_spec.php'; ?>
@@ -219,18 +219,27 @@ require '../../connect/functions.php';
     <!-- ./wrapper -->
 
 </body>
+<script src="../../dist/js/imgshow.js"></script>
 <script>
-    function readURL(input) {
-        if (input.files[0]) {
-            let reader = new FileReader();
-            document.querySelector('#imgControl').classList.replace("d-none", "d-block");
-            reader.onload = function(e) {
-                let element = document.querySelector('#imgUpload');
-                element.setAttribute("src", e.target.result);
+    // ajax 
+    $('.update_data').click(function() { //เมื่อมีการกดปุ่ม view_data
+        var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
+        $.ajax({
+            url: "fetch.php",
+            method: "post",
+            data: {
+                id: uid
+            },
+            dataType: "json",
+            success: function(data) {
+                $('#id').val(data.id);
+                $('#specname').val(data.spec_name);
+                $('#specdetail').val(data.spec_detail);
+                // $('#addModal').modal('show');
             }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+        });
+    });
+    // data table
     $(function() {
         $("#example1").DataTable({
             "responsive": true,
@@ -251,13 +260,14 @@ require '../../connect/functions.php';
 
     function del(id) {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete ",
+            title: 'คุณแน่ใจ ?',
+            text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
             icon: 'warning',
             showCancelButton: true,
+            CancelButtonText: 'ยกเลิก',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ตกลง'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location = "../delete/delete_species?del=" + id;
@@ -294,7 +304,7 @@ if (isset($_POST['submit'])) {
     $fileNewName = $time;
     $folderPath = "../../dist/img/spec_img/";
     // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  เก็บแค่ path
-    $ext = $_FILES['file']['name']; 
+    $ext = $_FILES['file']['name'];
     $imageType = $sourceProperties[2];
 
     switch ($imageType) {
@@ -325,7 +335,7 @@ if (isset($_POST['submit'])) {
 
 
     if (!empty($specpic)) {
-         copy($specpic, "../../dist/img/spec_upload/" . $ext);
+        copy($specpic, "../../dist/img/spec_upload/" . $ext);
         $sql = $specdata->addspec_pic($specname, $specdetail, $ext);
         echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
     } else {
