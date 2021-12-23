@@ -113,7 +113,7 @@ CREATE TABLE `tbl_farmer` (
 
 INSERT INTO `tbl_farmer` (`id`, `card`, `fullname`, `email`, `phone`, `picture`, `username`, `password`, `regdate`) VALUES
 (243, '1160400251822', 'sara', 'u.sarawut586@gmail.com', '0979284920', NULL, 'tarsarawut', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-06 16:21:33'),
-(244, '1160400251822', 'sara', 'u.sarawut586@gmail.com', '0979284920', NULL, 'tarsarawut', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-06 16:21:35');
+
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,8 @@ CREATE TABLE `tbl_house` (
 CREATE TABLE `tbl_species` (
   `id` tinyint(4) NOT NULL COMMENT 'รหัสสายพันธุ์',
   `spec_name` varchar(100) NOT NULL COMMENT 'ชื่อสายพันธุ์',
-  `sepc_detail` varchar(300) NOT NULL COMMENT 'รายละเอียดสายพันธุ์'
+  `spec_detail` varchar(300) NOT NULL COMMENT 'รายละเอียดสายพันธุ์'
+  `spec_pic` varchar(300) NOT NULL COMMENT 'รูปภาพ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
