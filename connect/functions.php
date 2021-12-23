@@ -195,13 +195,13 @@ class specise extends Database
         return $add_spec;
     }
     // Update
-    public function updatespec()
+    public function updatespec($id,$specname,$specdetail)
     {
         $up_spec = mysqli_query($this->dbcon, "UPDATE  tbl_species SET 
-        spec_name = '' ,
-        spec_detail ='' ,
-        spec_pic=''   
-        WHERE id = '' 
+        spec_name = '$specname' ,
+        spec_detail ='$specdetail' 
+          
+        WHERE id = '$id' 
         ");
         return $up_spec;
     }

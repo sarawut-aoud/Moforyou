@@ -78,7 +78,7 @@ require '../../connect/functions.php';
                                                     <label for="Picturespecise">ภาพ</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="form-control" id="file" name="file" onchange="readURL(this)" required>
+                                                            <input type="file" class="form-control" id="file" name="file" onchange="readURL(this)">
 
                                                         </div>
                                                     </div>
@@ -171,9 +171,12 @@ require '../../connect/functions.php';
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <a class="btn btn-info view_data" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
+                                                                <!-- <a class="btn btn-info view_data" data-toggle="modal" name="edit"
+                                                                 data-target="#md-spec" id="<?php echo $row->id; ?> ">
+                                                                    <i class="fas fa-pencil-alt"></i> -->
+                                                                <button type="button" class="btn btn-info edit_data" name="edit" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
                                                                     <i class="fas fa-pencil-alt"></i>
-                                                                </a>
+                                                                </button>
                                                                 <?php require '../modal/md_spec.php'; ?>
                                                                 <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
                                                                     <i class=" fas fa-trash-alt"></i>
@@ -221,77 +224,79 @@ require '../../connect/functions.php';
 </body>
 <script src="../../dist/js/imgshow.js"></script>
 <script>
- 
-        // update
-        $('.update_data').click(function() { //เมื่อมีการกดปุ่ม view_data
-            var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
+    $(document).on('click', '.edit_data', function() {
+        var id = $(this).attr("id");
+        $.ajax({
+            url: "../process/select_spec.php",
+            method: "POST",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function(data) {
+
+                $('#specname_modal').val(data.spec_name);
+                $('#specdetail_modal').val(data.spec_detail);
+                $('#id').val(data.id);
+                // $('#insert').val("Update");
+                // $('#md-spec').modal('show');
+            }
+        });
+    });
+    $('#edit_form').on("submit", function(event) {
+        event.preventDefault();
+        if ($('#specname_modal').val() == "") {
+            alert("Name is required");
+        } else if ($('#specdetail_modal').val() == '') {
+            alert("Detail is required");
+        } else {
             $.ajax({
-                url: "fetch.php",
-                method: "post",
-                data: {
-                    id: uid
-                },
-                dataType: "json",
+                url: "../process/update_spec.php",
+                method: "POST",
+                data: $('#edit_form').serialize(),
                 success: function(data) {
-                    $('#id').val(data.id);
-                    $('#specname').val(data.spec_name);
-                    $('#specdetail').val(data.spec_detail);
-                    // $('#addModal').modal('show');
+                    $('#edit_form')[0].reset();
+                    $('#md-spec').modal('hide');
+                    $('#example1').html(data);
                 }
             });
+        }
+    });
+    // data table
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
-        //View
-        $('.view_data').click(function() { //เมื่อมีการกดปุ่ม view_data
-            var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
-            $.ajax({
-                url: "select_spec.php", //ส่งข้อมูลไปทีไฟล์ select.php
-                method: "post", //ด้วย method post
-                data: {
-                    id: uid
-                }, //ส่งข้อมูลไปในรูปแบบ JSON
-                success: function(data) { // หากส้งข้อมูลสำเร็จ
-                    $('#detail').html(data); //นำข้อมูลไปแสดงที่ Modal body ตรง id detail ในไฟล์ viewModal.php
-                    $('#md-spec').modal('show'); //เรียก Modal มาแสดง
-                }
-            });
-        });
+    });
 
-        // data table
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-
-        function del(id) {
-            Swal.fire({
-                title: 'คุณแน่ใจ ?',
-                text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
-                icon: 'warning',
-                showCancelButton: true,
-                CancelButtonText: 'ยกเลิก',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ตกลง'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = "../delete/delete_species?del=" + id;
-                }
-            })
-        };
-    
+    function del(id) {
+        Swal.fire({
+            title: 'คุณแน่ใจ ?',
+            text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
+            icon: 'warning',
+            showCancelButton: true,
+            CancelButtonText: 'ยกเลิก',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ตกลง'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = "../delete/delete_species?del=" + id;
+            }
+        })
+    };
 </script>
 
 </html>
@@ -313,46 +318,44 @@ if (isset($_POST['submit'])) {
 
     date_default_timezone_set('Asia/Bangkok');
     $time = date('Ymdhis');
-
     $specname = $_POST['specname'];
     $specdetail = $_POST['specdetail'];
-
     $specpic = $_FILES['file']['tmp_name'];
-    $sourceProperties = getimagesize($specpic);
-    $fileNewName = $time;
-    $folderPath = "../../dist/img/spec_img/";
-    // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  เก็บแค่ path
-    $ext = $_FILES['file']['name'];
-    $imageType = $sourceProperties[2];
-
-    switch ($imageType) {
-
-        case IMAGETYPE_PNG:
-            $imageResourceId = imagecreatefrompng($specpic);
-            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-            imagepng($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-            break;
-
-        case IMAGETYPE_GIF:
-            $imageResourceId = imagecreatefromgif($specpic);
-            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-            imagegif($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-            break;
-
-        case IMAGETYPE_JPEG:
-            $imageResourceId = imagecreatefromjpeg($specpic);
-            $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-            imagejpeg($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-            break;
-
-        default:
-            echo "Invalid Image type.";
-            exit;
-            break;
-    }
-
-
+   
     if (!empty($specpic)) {
+        
+        $sourceProperties = getimagesize($specpic);
+        $fileNewName = $time;
+        $folderPath = "../../dist/img/spec_img/";
+        // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  เก็บแค่ path
+        $ext = $_FILES['file']['name'];
+        $imageType = $sourceProperties[2];
+
+        switch ($imageType) {
+
+            case IMAGETYPE_PNG:
+                $imageResourceId = imagecreatefrompng($specpic);
+                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+                imagepng($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+                break;
+
+            case IMAGETYPE_GIF:
+                $imageResourceId = imagecreatefromgif($specpic);
+                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+                imagegif($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+                break;
+
+            case IMAGETYPE_JPEG:
+                $imageResourceId = imagecreatefromjpeg($specpic);
+                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
+                imagejpeg($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
+                break;
+
+            default:
+                echo "Invalid Image type.";
+                exit;
+                break;
+        }
         copy($specpic, "../../dist/img/spec_upload/" . $ext);
         $sql = $specdata->addspec_pic($specname, $specdetail, $ext);
         echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
