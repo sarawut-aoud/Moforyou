@@ -3,20 +3,18 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Large Modal</h4>
+              <h4 class="modal-title " >แก้ไขข้อมูล</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="card-header">
-                    <h3 class="card-title">แก้ไขข้อมูล</h3>
-                </div>
+            <div class="modal-body" id="detail">
+                
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" enctype="multipart/form-data">
+                <!-- <form method="POST" enctype="multipart/form-data">
                     
-                    <input type="hidden" id="<?php echo $row->id; ?>" name="id">
+                   
                     <div class="card-body">
                         <div class="form-group ">
                             <label for="Picturespecise">ภาพ</label>
@@ -33,16 +31,16 @@
                         </div>
                         <div class="form-group">
                             <label for="Namespecise">ชื่อสายพันธุ์</label>
-                            <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์" required value="<?php echo $row->spec_name; ?>">
+                            <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์" required >
                         </div>
                         <div class="form-group">
                             <label for="Specisedetail">รายละเอียด</label>
                             <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /.card-body -->
 
-                </form>
+                <!-- </form> -->
                 <!-- /.form end -->
 
             </div>

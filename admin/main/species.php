@@ -171,7 +171,7 @@ require '../../connect/functions.php';
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <a class="btn btn-info update_data" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
+                                                                <a class="btn btn-info view_data" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a>
                                                                 <?php require '../modal/md_spec.php'; ?>
@@ -221,59 +221,77 @@ require '../../connect/functions.php';
 </body>
 <script src="../../dist/js/imgshow.js"></script>
 <script>
-    // ajax 
-    $('.update_data').click(function() { //เมื่อมีการกดปุ่ม view_data
-        var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
-        $.ajax({
-            url: "fetch.php",
-            method: "post",
-            data: {
-                id: uid
-            },
-            dataType: "json",
-            success: function(data) {
-                $('#id').val(data.id);
-                $('#specname').val(data.spec_name);
-                $('#specdetail').val(data.spec_detail);
-                // $('#addModal').modal('show');
-            }
+ 
+        // update
+        $('.update_data').click(function() { //เมื่อมีการกดปุ่ม view_data
+            var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
+            $.ajax({
+                url: "fetch.php",
+                method: "post",
+                data: {
+                    id: uid
+                },
+                dataType: "json",
+                success: function(data) {
+                    $('#id').val(data.id);
+                    $('#specname').val(data.spec_name);
+                    $('#specdetail').val(data.spec_detail);
+                    // $('#addModal').modal('show');
+                }
+            });
         });
-    });
-    // data table
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        //View
+        $('.view_data').click(function() { //เมื่อมีการกดปุ่ม view_data
+            var uid = $(this).attr("id"); //รับค่า id จากปุ่มวิวมาใส่ไว้ใน uid
+            $.ajax({
+                url: "select_spec.php", //ส่งข้อมูลไปทีไฟล์ select.php
+                method: "post", //ด้วย method post
+                data: {
+                    id: uid
+                }, //ส่งข้อมูลไปในรูปแบบ JSON
+                success: function(data) { // หากส้งข้อมูลสำเร็จ
+                    $('#detail').html(data); //นำข้อมูลไปแสดงที่ Modal body ตรง id detail ในไฟล์ viewModal.php
+                    $('#md-spec').modal('show'); //เรียก Modal มาแสดง
+                }
+            });
         });
-    });
 
-    function del(id) {
-        Swal.fire({
-            title: 'คุณแน่ใจ ?',
-            text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
-            icon: 'warning',
-            showCancelButton: true,
-            CancelButtonText: 'ยกเลิก',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ตกลง'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = "../delete/delete_species?del=" + id;
-            }
-        })
-    };
+        // data table
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+        function del(id) {
+            Swal.fire({
+                title: 'คุณแน่ใจ ?',
+                text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
+                icon: 'warning',
+                showCancelButton: true,
+                CancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ตกลง'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = "../delete/delete_species?del=" + id;
+                }
+            })
+        };
+    
 </script>
 
 </html>
