@@ -86,7 +86,7 @@
                 </form>
                 <div class="d-flex mt-3 mb-1 ">   
                         <a href="login" class="me-auto p-2">เข้าสู่ระบบ</a>
-                        <a href="../main_pages/index" class="p-2">ย้อนกลับ</a>
+                        <a href="../login/login" class="p-2">ย้อนกลับ</a>
                    
                 </div>
             </div>

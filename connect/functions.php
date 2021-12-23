@@ -15,29 +15,35 @@ class registra extends Database
     public function register($card, $fname, $email, $phone, $username, $password)
     {
         $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer
-        (card,
-        fullname,
-        email,
-        phone,
-        username,
-        password) 
-        VALUES(
-        '$card',
-        '$fname',
-        '$email',
-        '$phone',
-        '$username',
-        '$password')");
+        (
+            card,
+            fullname,
+            email,
+            phone,
+            username,
+            password
+        ) 
+        VALUES
+        (
+            '$card',
+            '$fname',
+            '$email',
+            '$phone',
+            '$username',
+            '$password'
+        )
+        ");
         return $reg;
     }
-    
+
     // Login 
-    public function login($password,$username,$email)
+    public function login($password, $username, $email)
     {
-        $log = mysqli_query($this->dbcon, "SELECT id, fullname  FROM tbl_farmer WHERE username = '" .$username. "' OR email = '$email' AND password = MD5('" . $password . "')");
+        $log = mysqli_query($this->dbcon, "SELECT id, fullname  F
+        ROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' AND password = MD5('" . $password . "')");
         return $log;
     }
-    
+
     // test pagination 
     public function pagin()
     {
@@ -56,7 +62,7 @@ class farmer extends Database
     //Select 
     public function selectfarmer($id)
     {
-        $sel_farmer = mysqli_query($this->dbcon,"SELECT * FROM tbl_farmer WHERE id='$id' ");
+        $sel_farmer = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
         return $sel_farmer;
     }
     // Update Farmer 
@@ -71,7 +77,12 @@ class farm extends Database
     // Resgistration Farm
     public function registerfarm()
     {
-        $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm()VALUES()");
+        $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm
+        ()
+        VALUES
+        ()
+        
+        ");
         return $regfarm;
     }
     // Check Resgistration Farm
@@ -83,13 +94,18 @@ class farm extends Database
     // Update 
     public function updatefarm($farmname, $address, $dis_id, $farmmer_id)
     {
-        $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET farmname ='$farmname',address = '$address',district_id='$dis_id' WHERE farmmer_id='$farmmer_id'");
+        $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET 
+        farmname ='$farmname',
+        address = '$address',
+        district_id='$dis_id' 
+        WHERE farmmer_id='$farmmer_id'
+        ");
         return $upfarm;
     }
     //Select
     public function selectfarm($id)
     {
-        $sel_farm = mysqli_query($this->dbcon,"SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
+        $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
         return $sel_farm;
     }
 }
@@ -99,24 +115,37 @@ class house extends Database
     // Insert  
     public function addhouse($hname, $farm_id)
     {
-        $add_house = mysqli_query($this->dbcon,"INSERT INTO tbl_house(house_name,farm_id)
-            VALUES('$hname','$farm_id')");
+        $add_house = mysqli_query($this->dbcon, "INSERT INTO tbl_house
+        (
+            house_name,
+            farm_id
+        )
+        VALUES
+        (
+            '$hname',
+            '$farm_id'
+        )
+        ");
         return $add_house;
     }
     // Update
     public function updatehouse($hname, $farm_id)
     {
-        $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET house_name = '$hname' WHERE farm_id = '$farm_id'");
+        $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET 
+        house_name = '$hname' 
+        WHERE farm_id = '$farm_id'");
         return $up_house;
     }
     // Delete
-    public function delhouse($id){
-        $del_house = mysqli_query($this->dbcon,"DELETE FROM tbl_house WHERE id='$id'");
+    public function delhouse($id)
+    {
+        $del_house = mysqli_query($this->dbcon, "DELETE FROM tbl_house WHERE id='$id'");
         return $del_house;
     }
     // Select
-    public function selhouse($id){
-        $sel_house = mysqli_query($this->dbcon,"SELECT * FROM tbl_house WHERE farm_id='$id'");
+    public function selhouse($id)
+    {
+        $sel_house = mysqli_query($this->dbcon, "SELECT * FROM tbl_house WHERE farm_id='$id'");
         return $sel_house;
     }
 }
@@ -128,61 +157,79 @@ class herd extends Database
     // Delete
     // Select
 }
-class specise extends Database{
+class specise extends Database
+{
 
     // Insert Picure
-    public function addspec_pic($specname,$specdetail,$specpic){
-        $add_specpic = mysqli_query($this->dbcon,
-        "INSERT INTO tbl_species(
+    public function addspec_pic($specname, $specdetail, $specpic)
+    {
+        $add_specpic = mysqli_query($this->dbcon,"INSERT INTO tbl_species
+        (
             spec_name,
             spec_detail,
-            spec_pic)
-            VALUES(
+            spec_pic
+        )
+            VALUES
+        (
             '$specname',
             '$specdetail',
-            '$specpic')
-            ");
+            '$specpic'
+        )
+        ");
         return $add_specpic;
     }
     // Insert No picture
-    public function addspec($specname,$specdetail){
-        $add_spec = mysqli_query($this->dbcon,
-        "INSERT INTO tbl_species(
+    public function addspec($specname, $specdetail)
+    {
+        $add_spec = mysqli_query($this->dbcon,"INSERT INTO tbl_species
+        (
             spec_name,
-            spec_detail)
-            VALUES(
+            spec_detail
+        )
+        VALUES
+        (
             '$specname',
-            '$specdetail')
-            ");
+            '$specdetail'
+        )
+        ");
         return $add_spec;
     }
     // Update
-    public function updatespec(){
-        $up_spec = mysqli_query($this->dbcon,"UPDATE SET spec_name = '' ,spec_detail ='' ,spec_pic=''  FROM tbl_species WHERE id = '' ");
+    public function updatespec()
+    {
+        $up_spec = mysqli_query($this->dbcon, "UPDATE  tbl_species SET 
+        spec_name = '' ,
+        spec_detail ='' ,
+        spec_pic=''   
+        WHERE id = '' 
+        ");
         return $up_spec;
     }
     // Delete
-    public function delspec($id){
-        $del_spec = mysqli_query($this->dbcon,"DELETE FROM tbl_species WHERE id='$id'");
+    public function delspec($id)
+    {
+        $del_spec = mysqli_query($this->dbcon, "DELETE FROM tbl_species WHERE id='$id'");
         return $del_spec;
     }
     // Select ALL
-    public function selspec(){
-        $sel_spec = mysqli_query($this->dbcon,"SELECT * FROM tbl_species  ");
+    public function selspec()
+    {
+        $sel_spec = mysqli_query($this->dbcon, "SELECT * FROM tbl_species  ");
         return $sel_spec;
     }
     // Select Id 
-    public function selectid($id){
-        $selspec_id = mysqli_query($this->dbcon,"SELECT * FROM tbl_species WHERE id = '$id' ");
+    public function selectid($id)
+    {
+        $selspec_id = mysqli_query($this->dbcon, "SELECT * FROM tbl_species WHERE id = '$id' ");
         return $selspec_id;
     }
-   
-
 }
-class cow extends Database{
+class cow extends Database
+{
     // Insert
-    public function addcow(){
-        $add_cow = mysqli_query($this->dbcon,"INSERT INTO tbl_cow()   
+    public function addcow()
+    {
+        $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow()   
         VALUES()");
         return $add_cow;
     }
@@ -191,8 +238,9 @@ class cow extends Database{
     // Delete
 
     // Select
-    public function selcow(){
-        $sel_cow = mysqli_query($this->dbcon,"SELECT * FROM tbl_cow ");
+    public function selcow()
+    {
+        $sel_cow = mysqli_query($this->dbcon, "SELECT * FROM tbl_cow ");
     }
 }
 // ผสมพันธุ์
@@ -203,16 +251,16 @@ class breed extends Database
     // Update
 
     // Delete
-    
+
     // Select
 }
 // Food
-class food extends Database{
-
+class food extends Database
+{
 }
 // Disease
-class disease extends Database{
-
+class disease extends Database
+{
 }
 // All Report
 class report extends Database
