@@ -195,6 +195,18 @@ class specise extends Database
         return $add_spec;
     }
     // Update
+    public function updatespce_pic($id,$specname,$specdetail,$specpic)
+    {
+        $up_specpic = mysqli_query($this->dbcon,"UPDATE tbl_species SET
+        spec_name = '$specname' ,
+        spec_detail ='$specdetail',
+        spec_pic = '$specpic'
+        
+        WHERE id = '$id'
+        ");
+        return $up_specpic;
+    }
+    // Update No Picture
     public function updatespec($id,$specname,$specdetail)
     {
         $up_spec = mysqli_query($this->dbcon, "UPDATE  tbl_species SET 

@@ -234,9 +234,9 @@ require '../../connect/functions.php';
             },
             dataType: "json",
             success: function(data) {
-
                 $('#specname_modal').val(data.spec_name);
                 $('#specdetail_modal').val(data.spec_detail);
+                $('#file_modal').val(data.spec_pic);
                 $('#id').val(data.id);
                 // $('#insert').val("Update");
                 // $('#md-spec').modal('show');
@@ -270,15 +270,6 @@ require '../../connect/functions.php';
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
     });
 
     function del(id) {
@@ -316,46 +307,23 @@ require '../../connect/alert.php';
 $specdata = new specise();
 if (isset($_POST['submit'])) {
 
-    date_default_timezone_set('Asia/Bangkok');
+
     $time = date('Ymdhis');
     $specname = $_POST['specname'];
     $specdetail = $_POST['specdetail'];
     $specpic = $_FILES['file']['tmp_name'];
-   
+
     if (!empty($specpic)) {
-        
+
         $sourceProperties = getimagesize($specpic);
         $fileNewName = $time;
         $folderPath = "../../dist/img/spec_img/";
-        // $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);  เก็บแค่ path
         $ext = $_FILES['file']['name'];
         $imageType = $sourceProperties[2];
 
-        switch ($imageType) {
+        require_once '../../connect/resize.php'; // Resize Picture
+        echo resize($specpic, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
 
-            case IMAGETYPE_PNG:
-                $imageResourceId = imagecreatefrompng($specpic);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagepng($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-                break;
-
-            case IMAGETYPE_GIF:
-                $imageResourceId = imagecreatefromgif($specpic);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagegif($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-                break;
-
-            case IMAGETYPE_JPEG:
-                $imageResourceId = imagecreatefromjpeg($specpic);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagejpeg($targetLayer, $folderPath . $fileNewName . "_upload" . $ext);
-                break;
-
-            default:
-                echo "Invalid Image type.";
-                exit;
-                break;
-        }
         copy($specpic, "../../dist/img/spec_upload/" . $ext);
         $sql = $specdata->addspec_pic($specname, $specdetail, $ext);
         echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"

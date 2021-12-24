@@ -3,7 +3,7 @@ define('DB_SERVER', 'localhost'); // Hostname
 define('DB_USER', 'root'); //Database Username
 define('DB_PASS', ''); // Database Password
 define('DB_NAME', 'db_moforyou'); // Database Name
-
+date_default_timezone_set('Asia/Bangkok');
 class Database
 {
     // Connect Database
