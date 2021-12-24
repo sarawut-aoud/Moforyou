@@ -9,7 +9,7 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-function readURLmodal(input) {
+function readURLedit(input) {
     if (input.files[0]) {
         let reader = new FileReader();
         document.querySelector('#imgControl2').classList.replace("d-none", "d-block");

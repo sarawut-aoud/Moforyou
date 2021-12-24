@@ -174,10 +174,11 @@ require '../../connect/functions.php';
                                                                 <!-- <a class="btn btn-info view_data" data-toggle="modal" name="edit"
                                                                  data-target="#md-spec" id="<?php echo $row->id; ?> ">
                                                                     <i class="fas fa-pencil-alt"></i> -->
-                                                                <button type="button" class="btn btn-info edit_data" name="edit" data-toggle="modal" data-target="#md-spec" id="<?php echo $row->id; ?> ">
+                                                                <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
                                                                     <i class="fas fa-pencil-alt"></i>
-                                                                </button>
-                                                                <?php require '../modal/md_spec.php'; ?>
+
+                                                                </a>
+
                                                                 <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
                                                                     <i class=" fas fa-trash-alt"></i>
                                                                     <!-- href="../delete/delete_species?del=<?php echo $row->id; ?> -->
@@ -224,44 +225,7 @@ require '../../connect/functions.php';
 </body>
 <script src="../../dist/js/imgshow.js"></script>
 <script>
-    $(document).on('click', '.edit_data', function() {
-        var id = $(this).attr("id");
-        $.ajax({
-            url: "../process/select_spec.php",
-            method: "POST",
-            data: {
-                id: id
-            },
-            dataType: "json",
-            success: function(data) {
-                $('#specname_modal').val(data.spec_name);
-                $('#specdetail_modal').val(data.spec_detail);
-                $('#file_modal').val(data.spec_pic);
-                $('#id').val(data.id);
-                // $('#insert').val("Update");
-                // $('#md-spec').modal('show');
-            }
-        });
-    });
-    $('#edit_form').on("submit", function(event) {
-        event.preventDefault();
-        if ($('#specname_modal').val() == "") {
-            alert("Name is required");
-        } else if ($('#specdetail_modal').val() == '') {
-            alert("Detail is required");
-        } else {
-            $.ajax({
-                url: "../process/update_spec.php",
-                method: "POST",
-                data: $('#edit_form').serialize(),
-                success: function(data) {
-                    $('#edit_form')[0].reset();
-                    $('#md-spec').modal('hide');
-                    $('#example1').html(data);
-                }
-            });
-        }
-    });
+   
     // data table
     $(function() {
         $("#example1").DataTable({
