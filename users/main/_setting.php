@@ -112,7 +112,7 @@ require_once '../../connect/functions.php';
                                 <!-- /.card-header -->
                                 <!-- --------------------farm -------------------------------------- -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="farmname">ชื่อฟาร์ม</label>
