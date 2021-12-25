@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  btn.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  });
+  // btn.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   event.stopImmediatePropagation();
+  // });
 
   function validateInput(event, value) {
     const maxLength = 13;
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $("#card").attr({
         class: "form-control py-4 is-valid",
       });
+
     } else if (
       value !== undefined &&
       value.toString().length == maxLength &&
@@ -48,15 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       $("#card").attr({
         class: "form-control py-4 is-invalid",
       });
-    }  else if (
-      value ==""
-    ) {
-      btn.disabled = false;
-      input.setAttribute("aria-invalid", false);
-      $("#card").attr({
-        class: "form-control py-4 ",
-      });
-    }else {
+
+    } else {
       btn.disabled = true;
       input.setAttribute("aria-invalid", true);
       $("#card").attr({

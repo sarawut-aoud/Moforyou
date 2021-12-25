@@ -14,7 +14,7 @@ class registra extends Database
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
-        $reg = mysqli_query($this->dbcon,"INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
+        $reg = mysqli_query($this->dbcon,"INSERT INTO tbl_farmer(card,fullname,email,phone,username,password)
         VALUES('$card','$fname','$email','$phone','$username','$password')");
         return $reg;
     }
@@ -43,6 +43,11 @@ class registra extends Database
 // Farmer
 class farmer extends Database
 {
+    // Check Pass
+    public function passavailable($pass){
+        $checkpass = mysqli_query($this->dbcon,"SELECT password FROM tbl_farmer WHERE password = '$pass'");
+        return $checkpass;
+    }
     //Select 
     public function selectfarmer($id)
     {
@@ -53,6 +58,11 @@ class farmer extends Database
     public function updatefarmmer($fname, $phone, $email, $pic)
     {
         $upfarmmer = mysqli_query($this->dbcon, "UPDATE");
+    }
+    // Update Password
+    public function updatepass($id,$password){
+        $up_pass = mysqli_query($this->dbcon,"UPDATE  tbl_farmer set password = '$password'  WHERE id='$id' ");
+        return $up_pass;
     }
 }
 // ฟาร์ม

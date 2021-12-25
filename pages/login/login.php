@@ -86,7 +86,7 @@ if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $email = $_POST['username'];
     $password = $_POST['password'];
-    
+
     // หลีกเลี่ยง SQL Injection
     $email_escape = $userdata->real_escape_string($email);
     $username_escape = $userdata->real_escape_string($username);
@@ -94,14 +94,18 @@ if (isset($_POST['username'])) {
     $result = $userdata->login($password, $username_escape,   $email_escape);
     if (!empty($username) && !empty($password)) {
         if ($username != "admin" && $password != "masterkey") {
-            $row = mysqli_fetch_array($result);
-
-            session_start();
-            $_SESSION["id"] =  $row['id'];
-            $_SESSION["fullname"] = $row['fullname'];
-            $_SESSION["user"] = $username;
-            echo success_1("Login Sucessful !", "../../users/main/user_index");
-            exit();
+            if (mysqli_num_rows($result) == 1) {
+                $row = mysqli_fetch_array($result);
+                session_start();
+                $_SESSION["id"] =  $row['id'];
+                $_SESSION["fullname"] = $row['fullname'];
+                $_SESSION["user"] = $username;
+                echo success_1("Login Sucessful !", "../../users/main/user_index");
+                exit();
+            } else {
+                echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
+                exit();
+            }
         } else 
             if (($username == "admin" && $password == "masterkey")) {
             session_start();

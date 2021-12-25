@@ -75,7 +75,7 @@
 <!-- Toastr -->
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- Input mask -->
-<script src="../../plugins/imask/imask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.3.0/imask.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.js"></script>
