@@ -14,7 +14,7 @@ class registra extends Database
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
-        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
+        $reg = mysqli_query($this->dbcon,"INSERT INTO tbl_farmer(card,fullname,email,phone,username,password) 
         VALUES('$card','$fname','$email','$phone','$username','$password')");
         return $reg;
     }
