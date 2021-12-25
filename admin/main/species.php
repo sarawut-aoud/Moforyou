@@ -167,7 +167,7 @@ require '../../connect/functions.php';
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
+                                                                <a class="btn btn-info edit_data" href="../update-form/_spec?id=<?php echo $row->id; ?>">
                                                                     <i class="fas fa-pencil-alt"></i>
 
                                                                 </a>
@@ -258,7 +258,6 @@ require '../../connect/alert.php';
 
 $specdata = new specise();
 if (isset($_POST['submit'])) {
-
 
     $time = date('Ymdhis');
     $specname = $_POST['specname'];
