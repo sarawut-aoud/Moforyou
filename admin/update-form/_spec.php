@@ -75,7 +75,7 @@ $data = mysqli_fetch_object($query);
                                         </div>
                                         <!-- /.card-header -->
                                         <!-- form start -->
-                                        <form action="../process/update_spec.php" method="POST" enctype="multipart/form-data">
+                                        <form  method="POST" enctype="multipart/form-data">
                                             <div class="card-body">
                                                 <div class="form-group row">
                                                     <div class="input-group">
@@ -210,3 +210,48 @@ $data = mysqli_fetch_object($query);
 </script>
 
 </html>
+<?php 
+ require_once '../../connect/resize.php';
+ require_once '../../connect/alert.php';
+if(isset($_POST['submit'])){
+    function imageResize($imageResourceId, $width, $height)
+    {
+      $targetWidth = $width < 1280 ? $width : 1280;
+      $targetHeight = ($height / $width) * $targetWidth;
+      $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
+      imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+      return $targetLayer;
+    }
+  
+    $sql = new specise();
+    $time = date('Ymdhis');
+    $id = $_POST['id'];
+    $spec_pic = $_POST['spec_pic'];
+    $name = $sql->real_escape_string($_POST["specname"]);
+    $detail = $sql->real_escape_string($_POST["specdetail"]);
+    $specpic = $_FILES['file']['tmp_name'];
+  
+    if ($specpic  != '') {
+  
+      $ext = $_FILES['file']['name'];
+      $sourceProperties = getimagesize($specpic);
+      $fileNewName = $time;
+      $folderPath = "../../dist/img/spec_img/";
+  
+      $imageType = $sourceProperties[2];
+      echo resize($specpic, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+  
+      if ($spec_pic != "") {
+        @unlink("../../dist/img/spec_upload/$spec_pic");
+      }
+      copy($specpic, "../../dist/img/spec_upload/" . $ext);
+      $sql = $sql->updatespce_pic($id, $name, $detail, $ext);
+      echo success_1('แก้ไขข้อมูลเรียบร้อย', '../main/species');
+    } else {
+      $query = $sql->updatespec($id, $name, $detail);
+      echo success_1('แก้ไขข้อมูลเรียบร้อย', '../main/species');
+    }
+   
+}
+   
+?>
