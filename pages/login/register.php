@@ -1,74 +1,89 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration</title>
-    <?php require '../../build/script.php'; ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Registrationn</title>
+    <?php
+    require_once '../../build/script.php';
+    ?>
     <link rel="stylesheet" href="./_login.css">
 </head>
 
-<body class="hold-transition register-page bg-gd">
-    <div class="col-md-4 mt-5">
-        <div class="card">
-            <div class="card-header text-center card-head">
-                <a href="#" class="h1 text-white">MoForYou</a>
-            </div>
-            <div class="card-body">
-                <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
-                <!-- Form -->
-                <form method="post">
-                    <div class="form-floating mb-3 mt-3 ">
-                        <input type="text" class="form-control " id="username" name="username" placeholder="Username" onblur="checkusername(this.value)">
-                        <label for="floatingInputValue"> <small> Username </small></label>
-                        <span class="text-center " id="usernameavailable"></span>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                        <label for="floatingInputValue"> <small> password </small></label>
-                        <div id="strengthMessage"></div>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="password" class="form-control " id="confirm_password" name="confirm_password" placeholder="Retype password" required></input>
-                        <label for="floatingInputValue"> <small> Retype password </small></label>
-                        <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control " id="fname" name="fname" placeholder="ชื่อ - นามสกุล">
-                        <label for="floatingInputValue"> <small> ชื่อ - นามสกุล </small></label>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="tel" class="form-control" id="card" name="card" placeholder="X-XXXX-XXXXX-XX-X" aria-invalid aria-required="true" required>
-                        <label for="floatingInputValue"> <small> บัตรประชาชน </small></label>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" required>
-                        <label for="floatingInputValue"> <small> Email </small></label>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
-                        <label for="floatingInputValue"> <small> เบอร์โทรศัพท์ </small></label>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-12">
-                        <button type="submit" name="submit" id="submit" class="btn login100-form-btn btn-block">สมัคร</button>
-                    </div>
-                    <!-- /.col -->
-                </form>
-                <!-- /.Form -->
-                <center>
-                    <p class="mt-4 mb-0">
-                        <a href="login" class="text-center">ฉันเป็นสมาชิกอยู่แล้ว</a>
-                    </p>
-                </center>
-            </div>
-            <!-- /.form-box -->
-        </div><!-- /.card -->
-    </div>
-    <!-- /.register-box -->
+<body class="bg-gd">
 
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header card-head ">
+                            <h3 class="h1 text-center text-white my-4">MoForYou</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
+                            <form method="post">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1">Full Name</label>
+                                            <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1">Phone</label>
+                                            <input class="form-control py-4" id="phone" name="phone" type="tel" placeholder="0XX-XXX-XXXX" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="small mb-1">Email</label>
+                                    <input class="form-control py-4" id="email" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="small mb-1" for="card">บัตรประชาชน</label>
+                                    <input class="form-control py-4" id="card" name="card" type="tel" placeholder="X-XXXX-XXXXX-XX-X" aria-invalid aria-required="true" required >
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="small md-1">Username</label>
+                                    <input class="form-control py-4" id="username" name="username" type="text" placeholder="Enter Username" onblur="checkusername(this.value)" required>
+                                    <span class="text-center " id="usernameavailable"></span>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="password">Password</label>
+                                            <input class="form-control py-4" id="password" name="password" type="password" placeholder="Enter password" required>
+                                            <div id="strengthMessage"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1">Confirm Password</label>
+                                            <input class="form-control py-4" id="confirm_password" name="confirm_password" type="password" placeholder="Confirm password" required>
+                                            <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-4 mb-0">
+                                    <button  type="submit" name="submit" id="submit" class="btn login100-form-btn ">สมัคร</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="small"><a href="login">ฉันเป็นสมาชิกอยู่แล้ว</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
@@ -92,16 +107,16 @@
         var cpass = $('#confirm_password').val();
         if (cpass == "") {
             $('#confirm_password').attr({
-                class: 'form-control'
+                class: 'form-control py-4'
             });
         } else if (pass != cpass) {
             $('#confirm_password').attr({
-                class: 'form-control is-invalid'
+                class: 'form-control py-4 is-invalid'
             });
 
         } else {
             $('#confirm_password').attr({
-                class: 'form-control is-valid'
+                class: 'form-control py-4 is-valid'
             });
 
         }
@@ -151,6 +166,8 @@
         }
     });
 </script>
+
+</html>
 <?php
 require '../../connect/functions.php';
 require '../../connect/alert.php';
@@ -163,8 +180,6 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
-
-
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
 
     if ($sql) {
@@ -174,10 +189,5 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Something went wrong! Please try again.');</script>";
         echo "<script>window.location.href='./register'</script>";
     }
-
-    
 }
 ?>
-
-
-</html>
