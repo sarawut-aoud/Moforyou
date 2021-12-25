@@ -54,7 +54,7 @@ $data = mysqli_fetch_object($query);
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <a class="btn btn-info btn-sm " href="" onclick="window.history.back();"><i class="fas fa-arrow-alt-left"></i></a>
+                                <button class="btn btn-info btn-sm " href="" onclick="window.history.go(-1);"><i class="fas fa-arrow-alt-left"></i></button>
                             </ol>
                         </div>
                     </div>
@@ -107,10 +107,10 @@ $data = mysqli_fetch_object($query);
                                             <div class="card-footer text-right">
                                                 <button type="submit" id="submit" name="submit" class="btn btn-info">Save</button>
                                                 <button type="reset" class="btn btn-warning">Reset</button>
-                                                
+
                                             </div>
-                                            <input type="hidden" id="id" name="id" value="<?php echo $data->id; ?>" >
-                                            <input type="hidden" id="spec_pic" name="spec_pic" value="<?php echo $data->spec_pic; ?>" >
+                                            <input type="hidden" id="id" name="id" value="<?php echo $data->id; ?>">
+                                            <input type="hidden" id="spec_pic" name="spec_pic" value="<?php echo $data->spec_pic; ?>">
                                         </form>
                                         <!-- /.form end -->
                                     </div>
@@ -130,22 +130,30 @@ $data = mysqli_fetch_object($query);
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h4 class="text-center">รูปภาพที่อัพโหลด</h4>
+
                                                     </div>
                                                 </div>
-                                                <?php
-                                                if ($data->spec_pic != NULL) {
-                                                ?>
-                                                    <div class="col-sm">
-                                                        <img src="<?php echo "../../dist/img/spec_upload/$data->spec_pic"; ?>" class="rounded float-start d-block h-25 w-25">
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <?php
+                                                        if ($data->spec_pic != NULL) {
+                                                        ?>
+
+                                                            <img src="<?php echo "../../dist/img/spec_upload/$data->spec_pic"; ?>" class="rounded   h-100 w-100">
+
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
-                                                <?php
-                                                }
-                                                ?>
-                                                <div class="col-sm">
-                                                    <div id="imgControl2" class="d-none">
-                                                        <img id="imgUpload2" class="rounded float-end d-block h-50 w-50">
+
+                                                    <div class="col">
+                                                        <div id="imgControl2" class="d-none">
+                                                            <img id="imgUpload2" class="rounded  h-100 w-100">
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <!-- /.card-body -->
 

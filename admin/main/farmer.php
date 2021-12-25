@@ -1,3 +1,7 @@
+<?php
+require_once '../../connect/session_ckeck.php';
+require '../../connect/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +60,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header card-outline card-blue">
-                                    <h3 class="text-center">เจ้าของฟาร์ม  Farmer</h3>
+                                    <h3 class="text-center">เจ้าของฟาร์ม Farmer</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -82,10 +86,10 @@
                                                 <td>0979-90900</td>
                                                 <td>
                                                     <center>
-                                                    <a class="btn btn-info" data-toggle="modal" data-target="#md-farmer" >
+                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
                                                             <i class="fas fa-pencil-alt"></i>
+
                                                         </a>
-                                                        <?php require '../modal/md_farmer.php';?>
                                                         <a class="btn btn-danger">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>

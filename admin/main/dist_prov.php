@@ -1,5 +1,8 @@
 <?php
 
+require_once '../../connect/session_ckeck.php';
+require '../../connect/functions.php';
+
 require '../../connect/api_map.php';
 ?>
 <!DOCTYPE html>

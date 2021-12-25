@@ -1,11 +1,7 @@
 <?php
 session_start();
-
 if (isset($_SESSION["id"]) && isset($_SESSION["user"])) {
-
-
 } else {
-
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -23,7 +19,7 @@ if (isset($_SESSION["id"]) && isset($_SESSION["user"])) {
 	<body>
 		<script>
 			Swal.fire({
-				
+
 				title: '<h1>โปรดทำการเข้าสู่ระบบ !!</h1>',
 				icon: 'warning',
 				text: '',

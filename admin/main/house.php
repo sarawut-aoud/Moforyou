@@ -1,3 +1,7 @@
+<?php
+require_once '../../connect/session_ckeck.php';
+require '../../connect/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,10 +82,10 @@
                                                 <td>X</td>
                                                 <td>
                                                     <center>
-                                                        <a class="btn btn-info" data-toggle="modal" data-target="#md-house">
+                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
                                                             <i class="fas fa-pencil-alt"></i>
+
                                                         </a>
-                                                        <?php require '../modal/md_house.php'; ?>
                                                         <a class="btn btn-danger">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>

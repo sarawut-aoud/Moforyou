@@ -1,9 +1,7 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +14,8 @@ require '../../connect/functions.php';
     ?>
 </head>
 
-</script>
-
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-
         <?php
         // Navbar Admin
         require '../sub/navbar.php';
@@ -32,13 +26,10 @@ require '../../connect/functions.php';
         // Reports Admin   
         require '../sub/side_reports.php';
         ?>
-
         </ul>
-
         <!-- /.sidebar-menu -->
         <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -58,7 +49,6 @@ require '../../connect/functions.php';
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content-header -->
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -74,23 +64,29 @@ require '../../connect/functions.php';
                                         <!-- form start -->
                                         <form method="POST" enctype="multipart/form-data">
                                             <div class="card-body">
-                                                <div class="form-group ">
-                                                    <label for="Picturespecise">ภาพ</label>
+                                                <div class="form-group row">
                                                     <div class="input-group">
-                                                        <div class="custom-file">
+                                                        <label for="Picturespecise" class="col-sm-2  control-label col-form-label">รูปภาพ : </label>
+                                                        <div class="col-sm">
                                                             <input type="file" class="form-control" id="file" name="file" onchange="readURL(this)">
-
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <label for="Namespecise">ชื่อสายพันธุ์</label>
-                                                    <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์" required>
+                                                <div class="form-group row">
+                                                    <div class="input-group">
+                                                        <label for="Namespecise" class="col-sm-2  control-label col-form-label">ชื่อสายพันธุ์ : </label>
+                                                        <div class="col-sm">
+                                                            <input type="text" class="form-control" id="specname" name="specname" placeholder="ชื่อสายพันธุ์" required>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="Specisedetail">รายละเอียด</label>
-                                                    <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
+                                                <div class="form-group row">
+                                                    <div class="input-group">
+                                                        <label for="Specisedetail" class="col-sm-2  control-label col-form-label">รายละเอียด : </label>
+                                                        <div class="col-sm">
+                                                            <textarea type="text" class="form-control" id="specdetail" name="specdetail"></textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
@@ -171,22 +167,15 @@ require '../../connect/functions.php';
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <!-- <a class="btn btn-info view_data" data-toggle="modal" name="edit"
-                                                                 data-target="#md-spec" id="<?php echo $row->id; ?> ">
-                                                                    <i class="fas fa-pencil-alt"></i> -->
                                                                 <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
                                                                     <i class="fas fa-pencil-alt"></i>
 
                                                                 </a>
-
                                                                 <a class="btn btn-danger" onclick="del(<?php echo $row->id; ?>)">
                                                                     <i class=" fas fa-trash-alt"></i>
-                                                                    <!-- href="../delete/delete_species?del=<?php echo $row->id; ?> -->
                                                                 </a>
                                                             </center>
-
                                                         </td>
-
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -225,7 +214,6 @@ require '../../connect/functions.php';
 </body>
 <script src="../../dist/js/imgshow.js"></script>
 <script>
-   
     // data table
     $(function() {
         $("#example1").DataTable({
