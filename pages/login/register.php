@@ -20,7 +20,7 @@
                 <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
                 <!-- Form -->
                 <form method="post">
-                    <div class="form-floating mb-3 mt-3 " >
+                    <div class="form-floating mb-3 mt-3 ">
                         <input type="text" class="form-control " id="username" name="username" placeholder="Username" onblur="checkusername(this.value)">
                         <label for="floatingInputValue"> <small> Username </small></label>
                         <span class="text-center " id="usernameavailable"></span>
@@ -44,13 +44,11 @@
                         <label for="floatingInputValue"> <small> บัตรประชาชน </small></label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" 
-                        pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
-                        required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" required>
                         <label for="floatingInputValue"> <small> Email </small></label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input type="tel"class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
                         <label for="floatingInputValue"> <small> เบอร์โทรศัพท์ </small></label>
                     </div>
                     <!-- /.col -->
@@ -59,7 +57,7 @@
                     </div>
                     <!-- /.col -->
                 </form>
-                 <!-- /.Form -->
+                <!-- /.Form -->
                 <center>
                     <p class="mt-4 mb-0">
                         <a href="login" class="text-center">ฉันเป็นสมาชิกอยู่แล้ว</a>
@@ -84,7 +82,7 @@
             data: 'username=' + val,
             success: function(data) {
                 $('#usernameavailable').html(data);
-              
+
             }
         });
     };
@@ -170,46 +168,14 @@ if (isset($_POST['submit'])) {
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
 
     if ($sql) {
-        echo success_1("Successful!!","./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
-      
+        echo success_1("Successful!!", "./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
+
     } else {
         echo "<script>alert('Something went wrong! Please try again.');</script>";
         echo "<script>window.location.href='./register'</script>";
     }
 
-    // if ($sql) {
-    //     echo "<script>
-    //         const Toast = Swal.mixin({
-    //             toast: true,
-    //             position: 'center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //         })
-    //         Toast.fire({
-    //             icon: 'success',
-    //             title: 'สมัครข้อมูลเสร็จสิ้น'
-    //         }).then((result)=>{
-    //             window.location = './register';
-    //         })
-
-    //     </script>";
-    // } else {
-    //     echo "<script>
-    //         const Toast = Swal.mixin({
-    //             toast: true,
-    //             position: 'center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //         })
-    //         Toast.fire({
-    //             icon: 'error',
-    //             title: 'ไม่สามารถสมัครข้อมูลได้'
-    //         }).then((result)=>{
-    //             window.location = './login';
-    //         })
-
-    //     </script>";
-    // }
+    
 }
 ?>
 

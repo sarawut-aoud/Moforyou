@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = false;
       input.setAttribute("aria-invalid", false);
       $("#card").attr({
-        class: "form-control is-valid",
+        class: "form-control py-4 is-valid",
       });
     } else if (
       value !== undefined &&
@@ -46,13 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = true;
       input.setAttribute("aria-invalid", true);
       $("#card").attr({
-        class: "form-control is-invalid",
+        class: "form-control py-4 is-invalid",
       });
-    } else {
+    }  else if (
+      value ==""
+    ) {
+      btn.disabled = false;
+      input.setAttribute("aria-invalid", false);
+      $("#card").attr({
+        class: "form-control py-4 ",
+      });
+    }else {
       btn.disabled = true;
       input.setAttribute("aria-invalid", true);
       $("#card").attr({
-        class: "form-control is-invalid",
+        class: "form-control py-4 is-invalid",
       });
     }
   }
