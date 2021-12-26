@@ -91,34 +91,34 @@ if (empty($result)) {
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
                                             <thead>
-                                                
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>ชื่อโรงเรือน</th>
-                                                        <th>แก้ไข / ลบข้อมูล</th>
-                                                    </tr>
-                                              
+
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>ชื่อโรงเรือน</th>
+                                                    <th>แก้ไข / ลบข้อมูล</th>
+                                                </tr>
+
                                             </thead>
                                             <!-- /.head table -->
                                             <!-- body table -->
                                             <tbody>
-                                            <?php
+                                                <?php
                                                 $datahouse = new house();
-                                                $row = $datahouse->selhouse($id);
+                                                $row = $datahouse->gethouseFarmid($id);
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                 ?>
-                                                <tr>
-                                                    <td style="width: 20%;"><?php echo $rs->id; ?></td>
-                                                    <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
-                                                    <td style="width:30%;" class="text-center">
-                                                        <a class="btn btn-info" href="#">
-                                                            <i class="far fa-pen-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger" href="#">
-                                                            <i class="far fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td style="width: 20%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                        <td style="width:30%;" class="text-center">
+                                                            <a class="btn btn-info" href="../update-form/_house?id=<?php echo $rs->id; ?>">
+                                                                <i class="far fa-pen-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger" onclick="del(<?php echo $rs->id; ?>)">
+                                                                <i class="far fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 <?php } ?>
                                             </tbody>
                                             <!-- /.body table -->
@@ -143,7 +143,7 @@ if (empty($result)) {
                     </div>
 
 
-                </div >
+                </div>
                 <!-- /.content-wrapper -->
             </section>
             <!-- Main Footer -->
@@ -152,15 +152,25 @@ if (empty($result)) {
 
         <!-- ./wrapper -->
     </body>
+    <script src="../../dist/js/datatable.js">
+    </script>
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
+        function del(id) {
+            Swal.fire({
+                title: 'คุณแน่ใจ ?',
+                text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
+                icon: 'warning',
+                showCancelButton: true,
+                CancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ตกลง'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = "../delete-form/del_house?del=" + id;
+                }
+            })
+        };
     </script>
 
     </html>

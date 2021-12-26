@@ -40,12 +40,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">Email</label>
-                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
-                                     aria-describedby="emailHelp" placeholder="Enter email address" required>
+                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">บัตรประชาชน</label>
-                                    <input class="form-control py-4" id="card" name="card" type="tel"   placeholder="X-XXXX-XXXXX-XX-X" aria-invalid aria-required="true" required>
+                                    <input class="form-control py-4" id="card" name="card" type="tel" placeholder="X-XXXX-XXXXX-XX-X" aria-invalid aria-required="true" required>
                                 </div>
 
                                 <div class="form-group">
@@ -86,7 +85,7 @@
 </body>
 
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
-<script  type="text/javascript" src="../../dist/js/id_card.js"></script>
+<script type="text/javascript" src="../../dist/js/id_card.js"></script>
 <script>
     // Check Username
     function checkusername(val) {
@@ -176,7 +175,7 @@ if (isset($_POST['submit'])) {
     $card = preg_replace('/[-]/i', '', $_POST['card']);
     $fname = $_POST['fname'];
     $email = $_POST['email'];
-    $phone = preg_replace('/[-]/i', '','',$_POST['phone']);
+    $phone = preg_replace('/[-]/i', '', '', $_POST['phone']);
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 

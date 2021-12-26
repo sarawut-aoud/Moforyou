@@ -152,7 +152,7 @@ $result2 = mysqli_fetch_object($farm);
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านเดิม</label>
-                                                    <input type="password" class="form-control" id="old_pass" name="old_pass"onblur="checkpass(this.value)" placeholder="รหัสผ่านเดิม">
+                                                    <input type="password" class="form-control" id="old_pass" name="old_pass" onblur="checkpass(this.value)" placeholder="รหัสผ่านเดิม">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านใหม่</label>
@@ -167,6 +167,7 @@ $result2 = mysqli_fetch_object($farm);
                                             <div class="card-footer text-end">
                                                 <button type="submit" id="submit_pass" name="submit_pass" class="btn btn-warning">ยืนยัน</button>
                                             </div>
+                                            <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>" 
                                         </form>
                                     </div>
                                 </div>
@@ -192,7 +193,7 @@ $result2 = mysqli_fetch_object($farm);
         $.ajax({
             type: 'POST',
             url: '../../connect/checkpass.php',
-            data: 'old_pass=' + val,
+            data: {id: $("#id").val(), old_pass:  val},
             success: function(data) {
                 $('#old_pass').html(data);
 

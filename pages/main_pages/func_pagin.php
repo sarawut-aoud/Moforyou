@@ -1,6 +1,6 @@
 <?php
     require_once '../../connect/functions.php';
-    $sql = new farmmer();
+    $sql = new registra();
 ?>
 <!DOCTYPE html>
 <html>

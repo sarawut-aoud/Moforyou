@@ -48,17 +48,17 @@ if (empty($result)) {
                                         <h2 class=" col-md-12 col-sm-12 text-center">รายการเมนู</h2>
                                         <hr class="mt-2 mb-2">
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
-
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-1" role="button"  href="../listmenu/_tabherd" >ฝูงโค</a>
-                                            </li>
                                             <li class="nav-item col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1" href="../listmenu/_tabhouse" role="button">โรงเรือน</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-1" role="button" href="../listmenu/_tabherd">ฝูงโค</a>
+                                            </li>
+
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 " href="../listmenu/_tabcow" role="button">โคเนื้อ</a>
                                             </li>
-                                            
+
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-2 " href="../listmenu/_tabbreed" role="button">ผสมพันธุ์</a>
                                             </li>
@@ -88,7 +88,7 @@ if (empty($result)) {
                                         <!-- list Manage -->
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                                <a class="btn btn-lg bt_list " href="../report/rep-house" role="button">โรงเรือน</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list" role="button" aria-selected="false">โคเนื้อ</a>

@@ -212,17 +212,11 @@ require '../../connect/functions.php';
     <!-- ./wrapper -->
 
 </body>
+
 <script src="../../dist/js/imgshow.js"></script>
+<script src="../../dist/js/datatable.js">// data table ปริ้น -1 </script>
 <script>
-    // data table
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
+    
 
     function del(id) {
         Swal.fire({

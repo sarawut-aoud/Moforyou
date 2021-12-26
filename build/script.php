@@ -77,6 +77,7 @@
 <!-- Input mask -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.3.0/imask.min.js"></script>
 
+
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->

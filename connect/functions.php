@@ -44,8 +44,8 @@ class registra extends Database
 class farmer extends Database
 {
     // Check Pass
-    public function passavailable($pass){
-        $checkpass = mysqli_query($this->dbcon,"SELECT password FROM tbl_farmer WHERE password = '$pass'");
+    public function passavailable($id){
+        $checkpass = mysqli_query($this->dbcon,"SELECT password , id FROM tbl_farmer WHERE  id = '$id'");
         return $checkpass;
     }
     //Select 
@@ -106,6 +106,12 @@ class farm extends Database
 // โรงเรือน
 class house extends Database
 {
+    // Selcet id where Farm_id
+    public function gethouseFarmid($id)
+    {
+        $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        return $sel_houseFid;
+    }
     // Insert  
     public function addhouse($hname, $farm_id)
     {
@@ -123,11 +129,11 @@ class house extends Database
         return $add_house;
     }
     // Update
-    public function updatehouse($hname, $farm_id)
+    public function updatehouse($hname, $id)
     {
         $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET 
         house_name = '$hname' 
-        WHERE farm_id = '$farm_id'");
+        WHERE id = '$id'");
         return $up_house;
     }
     // Delete
@@ -136,10 +142,10 @@ class house extends Database
         $del_house = mysqli_query($this->dbcon, "DELETE FROM tbl_house WHERE id='$id'");
         return $del_house;
     }
-    // Select
+    // Select all
     public function selhouse($id)
     {
-        $sel_house = mysqli_query($this->dbcon, "SELECT * FROM tbl_house WHERE farm_id='$id'");
+        $sel_house = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE id='$id'");
         return $sel_house;
     }
 }
