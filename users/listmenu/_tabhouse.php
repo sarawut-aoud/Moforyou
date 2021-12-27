@@ -44,7 +44,10 @@ if (empty($result)) {
                         <div class="container">
                             <!-- Manage -->
                             <div class="row justify-content-center">
-                                <div class="col-md-8">
+                            <div class="col-md-4">
+                                    <button class="btn btn-info col-3 btn-lg float-start"" ><i class="fas fa-qrcode"></i></button>
+                                </div>   
+                            <div class="col-md-8">
                                     <!-- general form elements -->
                                     <div class="card card-primary">
                                         <div class="card-header">

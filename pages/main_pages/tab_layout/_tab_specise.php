@@ -6,22 +6,27 @@
         $result = $sel_data->selspec();
 
         // $datapic = mysqli_fetch_array($result);
-        while ($row = mysqli_fetch_array($result)) {
+        while ($row = mysqli_fetch_object($result)) {
 
         ?>
             <div class="col">
                 <div class="card text-center ">
                     <div class="text-center">
-                        <img src="<?php if ($row['spec_pic']=='') {
-                                        echo "../../../../main_2/dist/img/image-01.jpg";
-                                    } else {
-                                        echo $row['spec_pic'];
-                                    } ?>
-                                    " class="rounded card-img-top " alt="image" width="100%" height="225">
+                        <?php
+                        if ($row->spec_pic != NULL) {
+                        ?>
+                            <img src="<?php echo "../../dist/img/spec_upload/$row->spec_pic" ?>" class="rounded w-100 card-img-top">
+                        <?php
+                        } else {
+                        ?>
+                            <img src="../../main_2/dist/img/image-01.jpg" class="rounded w-50 card-img-top" alt="image">
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="card-body">
-                        <h3 class="text-center"><?php echo $row['spec_name'] ?></h3>
-                        <p class="card-text"><?php echo $row['spec_detail']; ?></p>
+                        <h3 class="text-center"><?php echo $row->spec_name; ?></h3>
+                        <p class="card-text"><?php echo $row->spec_detail; ?></p>
 
                         <!-- <a href="#" class="btn btn-success">Go somewhere</a> -->
                     </div>

@@ -1,6 +1,7 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

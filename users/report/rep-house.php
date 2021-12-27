@@ -43,9 +43,10 @@ if (empty($result)) {
 
                     <div class="content-header">
                         <div class="container">
-                            <div class="row mb-4 mt-4 justify-content-center ">
+                            <div class="row mb-4 mt-4 justify-content-beetween ">
+                              
                                 <div class="col-md-12">
-                                    <button class="btn btn-info col-3 btn-lg float-end"" href="" onclick=" window.history.go(-1);"><i class="fas fa-arrow-alt-left"></i></button>
+                                    <button class="btn btn-info col-3 btn-lg float-end""  onclick=" window.history.go(-1);"><i class="fas fa-arrow-alt-left"></i></button>
                                 </div>
                             </div>
                             <div class="row  mb-5">
@@ -64,7 +65,7 @@ if (empty($result)) {
                                                     <tr>
                                                         <th>#</th>
                                                         <th>ชื่อโรงเรือน</th>
-                                                        <th>แก้ไข / ลบข้อมูล</th>
+
                                                     </tr>
 
                                                 </thead>
@@ -79,14 +80,7 @@ if (empty($result)) {
                                                         <tr>
                                                             <td style="width: 20%;"><?php echo $rs->id; ?></td>
                                                             <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
-                                                            <td style="width:30%;" class="text-center">
-                                                                <a class="btn btn-info" href="../update-form/_house?id=<?php echo $rs->id; ?>">
-                                                                    <i class="far fa-pen-alt"></i>
-                                                                </a>
-                                                                <a class="btn btn-danger" onclick="del(<?php echo $rs->id; ?>)">
-                                                                    <i class="far fa-trash"></i>
-                                                                </a>
-                                                            </td>
+                                                            <!--  -->
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -96,7 +90,7 @@ if (empty($result)) {
                                                     <tr>
                                                         <th>#</th>
                                                         <th>ชื่อโรงเรือน</th>
-                                                        <th>แก้ไข / ลบข้อมูล</th>
+
                                                     </tr>
                                                 </tfoot>
                                                 <!-- /.foot table -->
@@ -122,6 +116,7 @@ if (empty($result)) {
     </body>
     <script src="../../dist/js/datatableprint.js">
     </script>
+
     </html>
 <?php
 }

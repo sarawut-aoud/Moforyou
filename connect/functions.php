@@ -7,7 +7,7 @@ class registra extends Database
     // Check username
     public function usernameavailable($uname)
     {
-        $checkuser = mysqli_query($this->dbcon, "SELECT username FROM tbl_farmer WHERE username = '$uname'");
+        $checkuser = mysqli_query($this->dbcon, "SELECT username FROM tbl_farmer WHERE username = '$uname'  ");
         return $checkuser;
     }
 

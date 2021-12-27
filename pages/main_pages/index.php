@@ -19,11 +19,11 @@ require '../../connect/functions.php'
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper mt-5">
 
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid ">
+            <section class="content-header ">
+                <div class="container-fluid mt-2">
 
                     <div class="row justify-content-center">
                         <div class="col">
@@ -66,9 +66,9 @@ require '../../connect/functions.php'
         </div>
         <!-- /.content-wrapper -->
         <?php require './footer.php'; ?>
-        <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <!-- <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
             <i class="fas fa-chevron-up"></i>
-        </a>
+        </a> -->
     </div>
     <!-- ./wrapper -->
 
@@ -96,18 +96,18 @@ require '../../connect/functions.php'
     });
     
     
-    var topbutton = document.getElementById("back-to-top");
-    window.onscroll = function() {
-        scrollFunction()
-    };
+    // var topbutton = document.getElementById("back-to-top");
+    // window.onscroll = function() {
+    //     scrollFunction()
+    // };
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            topbutton.style.display = "block";
-        } else {
-            topbutton.style.display = "none";
-        }
-    }
+    // function scrollFunction() {
+    //     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    //         topbutton.style.display = "block";
+    //     } else {
+    //         topbutton.style.display = "none";
+    //     }
+    // }
 </script>
 
 </html>

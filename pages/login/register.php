@@ -104,19 +104,22 @@
         var pass = $('#password').val();
         var cpass = $('#confirm_password').val();
         if (cpass == "") {
+
             $('#confirm_password').attr({
                 class: 'form-control py-4'
             });
+            $('#submit').prop('disabled', false);
         } else if (pass != cpass) {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-invalid'
-            });
 
+            });
+            $('#submit').prop('disabled', true);
         } else {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-valid'
             });
-
+            $('#submit').prop('disabled', false);
         }
     });
 
@@ -125,7 +128,7 @@
         $('#password').keyup(function() {
             $('#strengthMessage').html(checkStrength($('#password').val()))
         })
-
+       
         function checkStrength(password) {
             var strength = 0
             if (password.length < 6) {
@@ -145,6 +148,7 @@
             if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
             // Calculated strength value, we can return messages  
             // If value is less than 2  
+
             if (strength < 2) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Weak')
@@ -175,7 +179,7 @@ if (isset($_POST['submit'])) {
     $card = preg_replace('/[-]/i', '', $_POST['card']);
     $fname = $_POST['fname'];
     $email = $_POST['email'];
-    $phone = preg_replace('/[-]/i', '', '', $_POST['phone']);
+    $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
