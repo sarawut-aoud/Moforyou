@@ -33,6 +33,22 @@ function error_1($msg)
            })
      </script>";
 }
+function error_2($msg,$text)
+{
+  return "<script>
+           const Toast = Swal.mixin({
+              toast: true,
+               position: 'center',
+              showConfirmButton: false,
+               timer: 3000,
+           })
+           Toast.fire({
+               icon: 'error',
+               title: '$msg',
+               text: '$text',
+           })
+     </script>";
+}
 function warning($msg){
   return "<script>
   const Toast = Swal.mixin({

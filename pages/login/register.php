@@ -128,7 +128,7 @@
         $('#password').keyup(function() {
             $('#strengthMessage').html(checkStrength($('#password').val()))
         })
-       
+
         function checkStrength(password) {
             var strength = 0
             if (password.length < 6) {
@@ -172,18 +172,28 @@
 </html>
 <?php
 require '../../connect/functions.php';
+require '../../connect/func_pass.php';
 require '../../connect/alert.php';
 
 if (isset($_POST['submit'])) {
+   
+    /// data
     $userdata = new registra();
     $card = preg_replace('/[-]/i', '', $_POST['card']);
     $fname = $_POST['fname'];
     $email = $_POST['email'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
+    /// password
+    $sql = new Setpwd();
 
-    $sql = $userdata->register($card, $fname, $email, $phone, $username, $password);
+    $encode = $sql->encode($password); // เข้ารหัส pass
+    $pass_sha = $sql->Setsha256($encode); //เอา ชื่อ + pass เข้า hmac 
+    $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
+ 
+
+    $sql = $userdata->register($card, $fname, $email, $phone, $username, $pwd_hashed);
 
     if ($sql) {
         echo success_1("Successful!!", "./login"); // "แสดงอะไร","ส่งไปหน้าไหน"

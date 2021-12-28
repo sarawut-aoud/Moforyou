@@ -78,11 +78,13 @@ ob_start();
 <?php
 
 require '../../connect/alert.php';
+require '../../connect/func_pass.php';
 ob_start();
 
 if (isset($_POST['username'])) {
-    $userdata = new registra();
 
+    // data
+    $userdata = new registra();
     $username = $_POST['username'];
     $email = $_POST['username'];
     $password = $_POST['password'];
@@ -91,32 +93,46 @@ if (isset($_POST['username'])) {
     $email_escape = $userdata->real_escape_string($email);
     $username_escape = $userdata->real_escape_string($username);
 
-    $result = $userdata->login($password, $username_escape,   $email_escape);
+
     if (!empty($username) && !empty($password)) {
         if ($username != "admin" && $password != "masterkey") {
+            $sql = new Setpwd(); //password
+        
+            $result = $userdata->Getpwd($username_escape,$email_escape);
             if (mysqli_num_rows($result) == 1) {
-                $row = mysqli_fetch_array($result);
+                $rs = mysqli_fetch_array($result);
+                $encode = $sql->encode($password); // เข้ารหัส password
+                $pass_sha = $sql->Setsha256($encode); //เอา ชื่อ + pass เข้า hmac 
+                if (password_verify($pass_sha, $rs['password'])) { // เปรียบเทียบ password ที่รับค่า และ password from db
+                    // Select data จาก Username or Email
+                
+                    $row = mysqli_fetch_array($result);
+                    session_start();
+                    $_SESSION["id"] =  $row['id'];
+                    $_SESSION["fullname"] = $row['fullname'];
+                    $_SESSION["user"] = $username;
+                    echo success_1("Login Sucessful !", "../../users/main/user_index");
+                    exit();
+                } else {
+                    echo error_2("รหัสผ่านผิด โปรดลองอีกครั้ง", '');
+                    exit();
+                }
+            } else {
+                echo error_1("ฃื่อเข้าใช้งานผิด โปรดลองอีกครั้ง");
+                exit();
+            }
+        } else {
+            if (($username == "admin" && $password == "masterkey")) {
                 session_start();
-                $_SESSION["id"] =  $row['id'];
-                $_SESSION["fullname"] = $row['fullname'];
+                $_SESSION["id"] = $username;
                 $_SESSION["user"] = $username;
-                echo success_1("Login Sucessful !", "../../users/main/user_index");
+                $_SESSION["fullname"] = "Sarawut Aoudkla";
+                echo success_1("Login Sucessful !", "../../admin/main/admin_index");
                 exit();
             } else {
                 echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
                 exit();
             }
-        } else 
-            if (($username == "admin" && $password == "masterkey")) {
-            session_start();
-            $_SESSION["id"] = $username;
-            $_SESSION["user"] = $username;
-            $_SESSION["fullname"] = "Sarawut Aoudkla";
-            echo success_1("Login Sucessful !", "../../admin/main/admin_index");
-            exit();
-        } else {
-            echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
-            exit();
         }
     } else {
         echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
