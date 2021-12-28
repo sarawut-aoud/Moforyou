@@ -1,34 +1,25 @@
 <?php
-include './connect/database.php';
-include './connect/func_pass.php';
-include './connect/functions.php';
+@$get_data = file_get_contents('https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tombon.json');
 
-$options = [
-    'cost' => 10,
-];
-$sql = new Setpwd();
-$userdata = new registra();
-$username_escape = 'user2';
-$email_escape = 'user.test@mail.com';
+$map = json_decode($get_data);
 
-$getpwd = $userdata->Getpwd($username_escape, $email_escape);
-$rs = mysqli_fetch_array($getpwd);
-$encode = $sql->encode('123456789'); // เข้ารหัส password
-$pass_sha = strtr($sql->Setsha256($encode),'+','/'); //เอา ชื่อ + pass เข้า hmac 
-$pwd_hashed = strtr(password_hash($pass_sha, PASSWORD_ARGON2I),'+','/');
-$pwd_encode = strtr($sql->encode($pwd_hashed),'+','/');
+// print_r ออกมาดู
+// echo '<pre>';
+// print_r($map);
+// print_r($get_data);
+// echo '</pre>';
 
 
-$pwd_decode = strtr($sql->decode($rs['password']),'+','/');
 
-echo  $encode . "<br>";
-echo  $pass_sha . "<br>";
-echo $pwd_hashed . "<br>";
-echo $pwd_encode . "<br>";
-echo  $pwd_decode . "<br>";
+     $id = 54;
+    // $map_val=$map[$id];
+    // echo $map_val;
+    // $sql = "SELECT * FROM amphures WHERE province_id='$id'";
+    // $query = mysqli_query($con, $sql);
+    
+    foreach ($map[$id] as $values => $amp) {
+        echo $values .$amp;
+       
+    }
 
-if (password_verify($pwd_decode, $pwd_hashed)) {
-    echo "match";
-} else
-    echo "error";
 ?>

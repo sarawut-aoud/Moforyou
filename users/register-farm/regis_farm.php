@@ -1,9 +1,9 @@
 <?php
 require '../../connect/session_ckeck.php';
-
-
 // api
 require  '../../connect/api_map.php';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,23 +53,32 @@ require  '../../connect/api_map.php';
                                             </div>
                                             <div class="row">
 
-                                                <div class="col-xl-6 col-md-12 col-sm-12">
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        <label for="district">จังหวัด</label>
-                                                        <select class="form-control select2" id="province">
-                                                            <option selected="selected">จังหวัด</option>
-                                                            <?php for ($i = 0; $i < 77; $i++) { ?>
-                                                                <option value="<?php echo $i; ?>"><?php echo $map[$i]->name_th; ?></option>
+                                                        <label for="province">จังหวัด</label>
+                                                        <select class="form-control select2" id="provinces">
+                                                            <option selected="selected">-กรุณาเลือกจังหวัด-</option>
+                                                            <?php foreach ($map as $values_prov) { ?>
+                                                                <option value="<?php echo $values_prov->id; ?>"><?php echo $values_prov->name_th; ?></option>
                                                             <?php }
                                                             ?>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6 col-md-12 col-sm-12">
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        <label for="district">อำเภอ</label>
-                                                        <select class="form-control select2" id="district">
-                                                            <option selected="selected">อำเภอ</option>
+                                                        <label for="amphures">อำเภอ</label>
+                                                        <select class="form-control select2" id="amphures" disabled>
+                                                            <!-- <option selected="selected">อำเภอ</option> -->
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="district">ตำบล</label>
+                                                        <select class="form-control select2" id="districts" disabled>
+                                                            <!-- <option selected="selected">ตำบล</option> -->
 
                                                         </select>
                                                     </div>
@@ -104,6 +113,6 @@ require  '../../connect/api_map.php';
 
     <!-- ./wrapper -->
 </body>
-
+<script src="../../dist/js/api-province.js"></script>
 
 </html>

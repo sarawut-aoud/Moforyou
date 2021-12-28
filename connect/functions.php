@@ -22,14 +22,14 @@ class registra extends Database
     // Login 
     public function login($password, $username, $email)
     {
-        $log = mysqli_query($this->dbcon, "SELECT id, fullname,username,password
+        $log = mysqli_query($this->dbcon, "SELECT id,fullname,username,password,email
         FROM tbl_farmer 
         WHERE username = '" . $username . "' OR email = '$email' AND password = ('" . $password . "')");
         return $log;
     }
     //password 
     public function Getpwd($username,$email){
-        $getpass=mysqli_query($this->dbcon,"SELECT id, fullname,username,password FROM tbl_farmer WHERE username = '$username' OR email = '$email'");
+        $getpass=mysqli_query($this->dbcon,"SELECT id,fullname,username,password FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
         return $getpass;
     } 
 
