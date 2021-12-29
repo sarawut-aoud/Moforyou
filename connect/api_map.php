@@ -36,21 +36,26 @@ if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
 }
 
 
-if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
-    @$get_tombon = file_get_contents('https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_tombon.json');
-    $tumbon = json_decode($get_tombon);
-    $i = $_POST['id'];
+// if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
+//     @$get_tombon = file_get_contents('https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_tombon.json');
+//     $tumbon = json_decode($get_tombon);
+//     $id = $_POST['id'];
 
-    // $sql = "SELECT * FROM districts WHERE amphure_id='$id'";
-    // $query = mysqli_query($con, $sql);
-    echo '<option value="" selected disabled>-กรุณาเลือกตำบล-</option>';
+//     // $sql = "SELECT * FROM districts WHERE amphure_id='$id'";
+//     // $query = mysqli_query($con, $sql);
+//     echo '<option value="" selected disabled>-กรุณาเลือกตำบล-</option>';
   
-    foreach ($tumbon[substr($i,0,4)] as $value) {
-        if (is_array($value) || is_object($value)) {
-        echo  "<option value='$value->id'>$value->name_th</option>";
-        }
-    }
-}
+//     foreach ($tumbon as $value) {
+       
+       
+          
+//             echo  "<option value='".strstr( $value->id, $id)."'>$value->name_th</option>";
+        
+
+      
+        
+//     }
+// }
             
 
 

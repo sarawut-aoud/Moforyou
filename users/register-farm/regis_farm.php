@@ -53,7 +53,7 @@ require  '../../connect/api_map.php';
                                             </div>
                                             <div class="row">
 
-                                                <div class="col-xl-4 col-md-12 col-sm-12">
+                                                <div class="col-xl-6 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="province">จังหวัด</label>
                                                         <select class="form-control select2" id="provinces">
@@ -65,7 +65,7 @@ require  '../../connect/api_map.php';
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-12 col-sm-12">
+                                                <div class="col-xl-6 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="amphures">อำเภอ</label>
                                                         <select class="form-control select2" id="amphures" disabled>
@@ -74,15 +74,15 @@ require  '../../connect/api_map.php';
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-md-12 col-sm-12">
+                                                <!-- <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="district">ตำบล</label>
                                                         <select class="form-control select2" id="districts" disabled>
-                                                            <!-- <option selected="selected">ตำบล</option> -->
+                                                           
 
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
 
 
