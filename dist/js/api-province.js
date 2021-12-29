@@ -9,21 +9,22 @@ $("#provinces").change(function () {
       $("#amphures").html(data);
       $("#districts").html(" ");
       $("#districts").val(" ");
-      $("#amphures").prop('disabled', false);
+      $("#amphures").prop("disabled", false);
     },
   });
 });
 
-$("#amphures").change(function () {
-  var id_amphures = $(this).val();
-
-  $.ajax({
-    type: "POST",
-    url: "../../connect/api_map.php",
-    data: { id: id_amphures, function: "amphures" },
-    success: function (data) {
-      $("#districts").html(data);
-      $("#districts").prop('disabled', false);
-    },
+  $("#amphures").change(function () {
+    var id_amphures = $(this).val();
+  
+    $.ajax({
+      type: "POST",
+      url: "../../connect/api_map.php",
+      data: { id: id_amphures,  function: "amphures" },
+      success: function (data) {
+        $("#districts").html(data);
+        $("#districts").prop("disabled", false);
+      },
+    });
   });
-});
+
