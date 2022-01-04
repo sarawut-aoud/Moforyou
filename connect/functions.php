@@ -1,5 +1,34 @@
 <?php
 require_once 'database.php';
+
+class mapthailand extends Database
+{
+    public function distall()
+    {
+        $sel = mysqli_query($this->dbcon, 
+        "SELECT * 
+        FROM ((district 
+        INNER JOIN amphur ON district.AMPHUR_ID = amphur.AMPHUR_ID )
+        INNER JOIN province ON district.PROVINCE_ID = province.PROVINCE_ID ) 
+        ");
+        return $sel;
+    }
+    public function dist()
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM district  ");
+        return $sel;
+    }
+    public function amphur()
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur");
+        return $sel;
+    }
+    public function prov()
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM province ");
+        return $sel;
+    }
+}
 //  สมัคร user
 class registra extends Database
 {
@@ -14,7 +43,7 @@ class registra extends Database
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
-        $reg = mysqli_query($this->dbcon,"INSERT INTO tbl_farmer(card,fullname,email,phone,username,password)
+        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password)
         VALUES('$card','$fname','$email','$phone','$username','$password')");
         return $reg;
     }
@@ -28,10 +57,11 @@ class registra extends Database
         return $log;
     }
     //password 
-    public function Getpwd($username,$email){
-        $getpass=mysqli_query($this->dbcon,"SELECT id,fullname,username,password FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
+    public function Getpwd($username, $email)
+    {
+        $getpass = mysqli_query($this->dbcon, "SELECT id,fullname,username,password FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
         return $getpass;
-    } 
+    }
 
     // test pagination 
     public function pagin()
@@ -49,8 +79,9 @@ class registra extends Database
 class farmer extends Database
 {
     // Check Pass
-    public function passavailable($id){
-        $checkpass = mysqli_query($this->dbcon,"SELECT password , id FROM tbl_farmer WHERE  id = '$id'");
+    public function passavailable($id)
+    {
+        $checkpass = mysqli_query($this->dbcon, "SELECT password , id FROM tbl_farmer WHERE  id = '$id'");
         return $checkpass;
     }
     //Select 
@@ -65,8 +96,9 @@ class farmer extends Database
         $upfarmmer = mysqli_query($this->dbcon, "UPDATE");
     }
     // Update Password
-    public function updatepass($id,$password){
-        $up_pass = mysqli_query($this->dbcon,"UPDATE  tbl_farmer set password = '$password'  WHERE id='$id' ");
+    public function updatepass($id, $password)
+    {
+        $up_pass = mysqli_query($this->dbcon, "UPDATE  tbl_farmer set password = '$password'  WHERE id='$id' ");
         return $up_pass;
     }
 }
@@ -168,7 +200,7 @@ class specise extends Database
     // Insert Picure
     public function addspec_pic($specname, $specdetail, $specpic)
     {
-        $add_specpic = mysqli_query($this->dbcon,"INSERT INTO tbl_species
+        $add_specpic = mysqli_query($this->dbcon, "INSERT INTO tbl_species
         (
             spec_name,
             spec_detail,
@@ -186,7 +218,7 @@ class specise extends Database
     // Insert No picture
     public function addspec($specname, $specdetail)
     {
-        $add_spec = mysqli_query($this->dbcon,"INSERT INTO tbl_species
+        $add_spec = mysqli_query($this->dbcon, "INSERT INTO tbl_species
         (
             spec_name,
             spec_detail
@@ -200,9 +232,9 @@ class specise extends Database
         return $add_spec;
     }
     // Update
-    public function updatespce_pic($id,$specname,$specdetail,$specpic)
+    public function updatespce_pic($id, $specname, $specdetail, $specpic)
     {
-        $up_specpic = mysqli_query($this->dbcon,"UPDATE tbl_species SET
+        $up_specpic = mysqli_query($this->dbcon, "UPDATE tbl_species SET
         spec_name = '$specname' ,
         spec_detail ='$specdetail',
         spec_pic = '$specpic'
@@ -212,7 +244,7 @@ class specise extends Database
         return $up_specpic;
     }
     // Update No Picture
-    public function updatespec($id,$specname,$specdetail)
+    public function updatespec($id, $specname, $specdetail)
     {
         $up_spec = mysqli_query($this->dbcon, "UPDATE  tbl_species SET 
         spec_name = '$specname' ,
