@@ -72,17 +72,11 @@ while ($rs = mysqli_fetch_object($distall)) {
     $post[] = array(
         'id' => $d_id, 'id_code' => $d_code, 'name_th' => trim($d_name),
 
-        array(
-
-            'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,
-
-            array(
-                'id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name)
-
-            )
-
-        )
-    );
+        'amphur'=>[
+            'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode ],
+            'province'=>['id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name)]
+        );
+    
 }
 
 
