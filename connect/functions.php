@@ -6,9 +6,10 @@ class mapthailand extends Database
     public function distall()
     {
         $sel = mysqli_query($this->dbcon, 
-        "SELECT province.PROVINCE_ID,PROVINCE_NAME,PROVINCE_CODE,AMPHUR_ID,AMPHUR_CODE,AMPHUR_NAME
-        FROM province  
-        INNER  JOIN amphur ON amphur.PROVINCE_ID = province.PROVINCE_ID;
+        "SELECT *
+        FROM ((district 
+        INNER JOIN amphur ON district.AMPHUR_ID = amphur.AMPHUR_ID )
+        INNER JOIN province  ON district.PROVINCE_ID = province.PROVINCE_ID ) 
         ");
         return $sel;
     }
