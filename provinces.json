@@ -2,463 +2,386 @@
     {
         "id": "1",
         "id_code": "10",
-        "name_th": "\u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e\u0e21\u0e2b\u0e32\u0e19\u0e04\u0e23",
-        "geo_id": "2"
+        "name_th": "\u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e\u0e21\u0e2b\u0e32\u0e19\u0e04\u0e23"
     },
     {
         "id": "2",
         "id_code": "11",
-        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e1b\u0e23\u0e32\u0e01\u0e32\u0e23",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e1b\u0e23\u0e32\u0e01\u0e32\u0e23"
     },
     {
         "id": "3",
         "id_code": "12",
-        "name_th": "\u0e19\u0e19\u0e17\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e19\u0e19\u0e17\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "4",
         "id_code": "13",
-        "name_th": "\u0e1b\u0e17\u0e38\u0e21\u0e18\u0e32\u0e19\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e1b\u0e17\u0e38\u0e21\u0e18\u0e32\u0e19\u0e35"
     },
     {
         "id": "5",
         "id_code": "14",
-        "name_th": "\u0e1e\u0e23\u0e30\u0e19\u0e04\u0e23\u0e28\u0e23\u0e35\u0e2d\u0e22\u0e38\u0e18\u0e22\u0e32",
-        "geo_id": "2"
+        "name_th": "\u0e1e\u0e23\u0e30\u0e19\u0e04\u0e23\u0e28\u0e23\u0e35\u0e2d\u0e22\u0e38\u0e18\u0e22\u0e32"
     },
     {
         "id": "6",
         "id_code": "15",
-        "name_th": "\u0e2d\u0e48\u0e32\u0e07\u0e17\u0e2d\u0e07",
-        "geo_id": "2"
+        "name_th": "\u0e2d\u0e48\u0e32\u0e07\u0e17\u0e2d\u0e07"
     },
     {
         "id": "7",
         "id_code": "16",
-        "name_th": "\u0e25\u0e1e\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e25\u0e1e\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "8",
         "id_code": "17",
-        "name_th": "\u0e2a\u0e34\u0e07\u0e2b\u0e4c\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e34\u0e07\u0e2b\u0e4c\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "9",
         "id_code": "18",
-        "name_th": "\u0e0a\u0e31\u0e22\u0e19\u0e32\u0e17",
-        "geo_id": "2"
+        "name_th": "\u0e0a\u0e31\u0e22\u0e19\u0e32\u0e17"
     },
     {
         "id": "10",
         "id_code": "19",
-        "name_th": "\u0e2a\u0e23\u0e30\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e23\u0e30\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "11",
         "id_code": "20",
-        "name_th": "\u0e0a\u0e25\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "5"
+        "name_th": "\u0e0a\u0e25\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "12",
         "id_code": "21",
-        "name_th": "\u0e23\u0e30\u0e22\u0e2d\u0e07",
-        "geo_id": "5"
+        "name_th": "\u0e23\u0e30\u0e22\u0e2d\u0e07"
     },
     {
         "id": "13",
         "id_code": "22",
-        "name_th": "\u0e08\u0e31\u0e19\u0e17\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "5"
+        "name_th": "\u0e08\u0e31\u0e19\u0e17\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "14",
         "id_code": "23",
-        "name_th": "\u0e15\u0e23\u0e32\u0e14",
-        "geo_id": "5"
+        "name_th": "\u0e15\u0e23\u0e32\u0e14"
     },
     {
         "id": "15",
         "id_code": "24",
-        "name_th": "\u0e09\u0e30\u0e40\u0e0a\u0e34\u0e07\u0e40\u0e17\u0e23\u0e32",
-        "geo_id": "5"
+        "name_th": "\u0e09\u0e30\u0e40\u0e0a\u0e34\u0e07\u0e40\u0e17\u0e23\u0e32"
     },
     {
         "id": "16",
         "id_code": "25",
-        "name_th": "\u0e1b\u0e23\u0e32\u0e08\u0e35\u0e19\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "5"
+        "name_th": "\u0e1b\u0e23\u0e32\u0e08\u0e35\u0e19\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "17",
         "id_code": "26",
-        "name_th": "\u0e19\u0e04\u0e23\u0e19\u0e32\u0e22\u0e01",
-        "geo_id": "2"
+        "name_th": "\u0e19\u0e04\u0e23\u0e19\u0e32\u0e22\u0e01"
     },
     {
         "id": "18",
         "id_code": "27",
-        "name_th": "\u0e2a\u0e23\u0e30\u0e41\u0e01\u0e49\u0e27",
-        "geo_id": "5"
+        "name_th": "\u0e2a\u0e23\u0e30\u0e41\u0e01\u0e49\u0e27"
     },
     {
         "id": "19",
         "id_code": "30",
-        "name_th": "\u0e19\u0e04\u0e23\u0e23\u0e32\u0e0a\u0e2a\u0e35\u0e21\u0e32",
-        "geo_id": "3"
+        "name_th": "\u0e19\u0e04\u0e23\u0e23\u0e32\u0e0a\u0e2a\u0e35\u0e21\u0e32"
     },
     {
         "id": "20",
         "id_code": "31",
-        "name_th": "\u0e1a\u0e38\u0e23\u0e35\u0e23\u0e31\u0e21\u0e22\u0e4c",
-        "geo_id": "3"
+        "name_th": "\u0e1a\u0e38\u0e23\u0e35\u0e23\u0e31\u0e21\u0e22\u0e4c"
     },
     {
         "id": "21",
         "id_code": "32",
-        "name_th": "\u0e2a\u0e38\u0e23\u0e34\u0e19\u0e17\u0e23\u0e4c",
-        "geo_id": "3"
+        "name_th": "\u0e2a\u0e38\u0e23\u0e34\u0e19\u0e17\u0e23\u0e4c"
     },
     {
         "id": "22",
         "id_code": "33",
-        "name_th": "\u0e28\u0e23\u0e35\u0e2a\u0e30\u0e40\u0e01\u0e29",
-        "geo_id": "3"
+        "name_th": "\u0e28\u0e23\u0e35\u0e2a\u0e30\u0e40\u0e01\u0e29"
     },
     {
         "id": "23",
         "id_code": "34",
-        "name_th": "\u0e2d\u0e38\u0e1a\u0e25\u0e23\u0e32\u0e0a\u0e18\u0e32\u0e19\u0e35",
-        "geo_id": "3"
+        "name_th": "\u0e2d\u0e38\u0e1a\u0e25\u0e23\u0e32\u0e0a\u0e18\u0e32\u0e19\u0e35"
     },
     {
         "id": "24",
         "id_code": "35",
-        "name_th": "\u0e22\u0e42\u0e2a\u0e18\u0e23",
-        "geo_id": "3"
+        "name_th": "\u0e22\u0e42\u0e2a\u0e18\u0e23"
     },
     {
         "id": "25",
         "id_code": "36",
-        "name_th": "\u0e0a\u0e31\u0e22\u0e20\u0e39\u0e21\u0e34",
-        "geo_id": "3"
+        "name_th": "\u0e0a\u0e31\u0e22\u0e20\u0e39\u0e21\u0e34"
     },
     {
         "id": "26",
         "id_code": "37",
-        "name_th": "\u0e2d\u0e33\u0e19\u0e32\u0e08\u0e40\u0e08\u0e23\u0e34\u0e0d",
-        "geo_id": "3"
+        "name_th": "\u0e2d\u0e33\u0e19\u0e32\u0e08\u0e40\u0e08\u0e23\u0e34\u0e0d"
     },
     {
         "id": "27",
         "id_code": "39",
-        "name_th": "\u0e2b\u0e19\u0e2d\u0e07\u0e1a\u0e31\u0e27\u0e25\u0e33\u0e20\u0e39",
-        "geo_id": "3"
+        "name_th": "\u0e2b\u0e19\u0e2d\u0e07\u0e1a\u0e31\u0e27\u0e25\u0e33\u0e20\u0e39"
     },
     {
         "id": "28",
         "id_code": "40",
-        "name_th": "\u0e02\u0e2d\u0e19\u0e41\u0e01\u0e48\u0e19",
-        "geo_id": "3"
+        "name_th": "\u0e02\u0e2d\u0e19\u0e41\u0e01\u0e48\u0e19"
     },
     {
         "id": "29",
         "id_code": "41",
-        "name_th": "\u0e2d\u0e38\u0e14\u0e23\u0e18\u0e32\u0e19\u0e35",
-        "geo_id": "3"
+        "name_th": "\u0e2d\u0e38\u0e14\u0e23\u0e18\u0e32\u0e19\u0e35"
     },
     {
         "id": "30",
         "id_code": "42",
-        "name_th": "\u0e40\u0e25\u0e22",
-        "geo_id": "3"
+        "name_th": "\u0e40\u0e25\u0e22"
     },
     {
         "id": "31",
         "id_code": "43",
-        "name_th": "\u0e2b\u0e19\u0e2d\u0e07\u0e04\u0e32\u0e22",
-        "geo_id": "3"
+        "name_th": "\u0e2b\u0e19\u0e2d\u0e07\u0e04\u0e32\u0e22"
     },
     {
         "id": "32",
         "id_code": "44",
-        "name_th": "\u0e21\u0e2b\u0e32\u0e2a\u0e32\u0e23\u0e04\u0e32\u0e21",
-        "geo_id": "3"
+        "name_th": "\u0e21\u0e2b\u0e32\u0e2a\u0e32\u0e23\u0e04\u0e32\u0e21"
     },
     {
         "id": "33",
         "id_code": "45",
-        "name_th": "\u0e23\u0e49\u0e2d\u0e22\u0e40\u0e2d\u0e47\u0e14",
-        "geo_id": "3"
+        "name_th": "\u0e23\u0e49\u0e2d\u0e22\u0e40\u0e2d\u0e47\u0e14"
     },
     {
         "id": "34",
         "id_code": "46",
-        "name_th": "\u0e01\u0e32\u0e2c\u0e2a\u0e34\u0e19\u0e18\u0e38\u0e4c",
-        "geo_id": "3"
+        "name_th": "\u0e01\u0e32\u0e2c\u0e2a\u0e34\u0e19\u0e18\u0e38\u0e4c"
     },
     {
         "id": "35",
         "id_code": "47",
-        "name_th": "\u0e2a\u0e01\u0e25\u0e19\u0e04\u0e23",
-        "geo_id": "3"
+        "name_th": "\u0e2a\u0e01\u0e25\u0e19\u0e04\u0e23"
     },
     {
         "id": "36",
         "id_code": "48",
-        "name_th": "\u0e19\u0e04\u0e23\u0e1e\u0e19\u0e21",
-        "geo_id": "3"
+        "name_th": "\u0e19\u0e04\u0e23\u0e1e\u0e19\u0e21"
     },
     {
         "id": "37",
         "id_code": "49",
-        "name_th": "\u0e21\u0e38\u0e01\u0e14\u0e32\u0e2b\u0e32\u0e23",
-        "geo_id": "3"
+        "name_th": "\u0e21\u0e38\u0e01\u0e14\u0e32\u0e2b\u0e32\u0e23"
     },
     {
         "id": "38",
         "id_code": "50",
-        "name_th": "\u0e40\u0e0a\u0e35\u0e22\u0e07\u0e43\u0e2b\u0e21\u0e48",
-        "geo_id": "1"
+        "name_th": "\u0e40\u0e0a\u0e35\u0e22\u0e07\u0e43\u0e2b\u0e21\u0e48"
     },
     {
         "id": "39",
         "id_code": "51",
-        "name_th": "\u0e25\u0e33\u0e1e\u0e39\u0e19",
-        "geo_id": "1"
+        "name_th": "\u0e25\u0e33\u0e1e\u0e39\u0e19"
     },
     {
         "id": "40",
         "id_code": "52",
-        "name_th": "\u0e25\u0e33\u0e1b\u0e32\u0e07",
-        "geo_id": "1"
+        "name_th": "\u0e25\u0e33\u0e1b\u0e32\u0e07"
     },
     {
         "id": "41",
         "id_code": "53",
-        "name_th": "\u0e2d\u0e38\u0e15\u0e23\u0e14\u0e34\u0e15\u0e16\u0e4c",
-        "geo_id": "1"
+        "name_th": "\u0e2d\u0e38\u0e15\u0e23\u0e14\u0e34\u0e15\u0e16\u0e4c"
     },
     {
         "id": "42",
         "id_code": "54",
-        "name_th": "\u0e41\u0e1e\u0e23\u0e48",
-        "geo_id": "1"
+        "name_th": "\u0e41\u0e1e\u0e23\u0e48"
     },
     {
         "id": "43",
         "id_code": "55",
-        "name_th": "\u0e19\u0e48\u0e32\u0e19",
-        "geo_id": "1"
+        "name_th": "\u0e19\u0e48\u0e32\u0e19"
     },
     {
         "id": "44",
         "id_code": "56",
-        "name_th": "\u0e1e\u0e30\u0e40\u0e22\u0e32",
-        "geo_id": "1"
+        "name_th": "\u0e1e\u0e30\u0e40\u0e22\u0e32"
     },
     {
         "id": "45",
         "id_code": "57",
-        "name_th": "\u0e40\u0e0a\u0e35\u0e22\u0e07\u0e23\u0e32\u0e22",
-        "geo_id": "1"
+        "name_th": "\u0e40\u0e0a\u0e35\u0e22\u0e07\u0e23\u0e32\u0e22"
     },
     {
         "id": "46",
         "id_code": "58",
-        "name_th": "\u0e41\u0e21\u0e48\u0e2e\u0e48\u0e2d\u0e07\u0e2a\u0e2d\u0e19",
-        "geo_id": "1"
+        "name_th": "\u0e41\u0e21\u0e48\u0e2e\u0e48\u0e2d\u0e07\u0e2a\u0e2d\u0e19"
     },
     {
         "id": "47",
         "id_code": "60",
-        "name_th": "\u0e19\u0e04\u0e23\u0e2a\u0e27\u0e23\u0e23\u0e04\u0e4c",
-        "geo_id": "2"
+        "name_th": "\u0e19\u0e04\u0e23\u0e2a\u0e27\u0e23\u0e23\u0e04\u0e4c"
     },
     {
         "id": "48",
         "id_code": "61",
-        "name_th": "\u0e2d\u0e38\u0e17\u0e31\u0e22\u0e18\u0e32\u0e19\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e2d\u0e38\u0e17\u0e31\u0e22\u0e18\u0e32\u0e19\u0e35"
     },
     {
         "id": "49",
         "id_code": "62",
-        "name_th": "\u0e01\u0e33\u0e41\u0e1e\u0e07\u0e40\u0e1e\u0e0a\u0e23",
-        "geo_id": "2"
+        "name_th": "\u0e01\u0e33\u0e41\u0e1e\u0e07\u0e40\u0e1e\u0e0a\u0e23"
     },
     {
         "id": "50",
         "id_code": "63",
-        "name_th": "\u0e15\u0e32\u0e01",
-        "geo_id": "4"
+        "name_th": "\u0e15\u0e32\u0e01"
     },
     {
         "id": "51",
         "id_code": "64",
-        "name_th": "\u0e2a\u0e38\u0e42\u0e02\u0e17\u0e31\u0e22",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e38\u0e42\u0e02\u0e17\u0e31\u0e22"
     },
     {
         "id": "52",
         "id_code": "65",
-        "name_th": "\u0e1e\u0e34\u0e29\u0e13\u0e38\u0e42\u0e25\u0e01",
-        "geo_id": "2"
+        "name_th": "\u0e1e\u0e34\u0e29\u0e13\u0e38\u0e42\u0e25\u0e01"
     },
     {
         "id": "53",
         "id_code": "66",
-        "name_th": "\u0e1e\u0e34\u0e08\u0e34\u0e15\u0e23",
-        "geo_id": "2"
+        "name_th": "\u0e1e\u0e34\u0e08\u0e34\u0e15\u0e23"
     },
     {
         "id": "54",
         "id_code": "67",
-        "name_th": "\u0e40\u0e1e\u0e0a\u0e23\u0e1a\u0e39\u0e23\u0e13\u0e4c",
-        "geo_id": "2"
+        "name_th": "\u0e40\u0e1e\u0e0a\u0e23\u0e1a\u0e39\u0e23\u0e13\u0e4c"
     },
     {
         "id": "55",
         "id_code": "70",
-        "name_th": "\u0e23\u0e32\u0e0a\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "4"
+        "name_th": "\u0e23\u0e32\u0e0a\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "56",
         "id_code": "71",
-        "name_th": "\u0e01\u0e32\u0e0d\u0e08\u0e19\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "4"
+        "name_th": "\u0e01\u0e32\u0e0d\u0e08\u0e19\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "57",
         "id_code": "72",
-        "name_th": "\u0e2a\u0e38\u0e1e\u0e23\u0e23\u0e13\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e38\u0e1e\u0e23\u0e23\u0e13\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "58",
         "id_code": "73",
-        "name_th": "\u0e19\u0e04\u0e23\u0e1b\u0e10\u0e21",
-        "geo_id": "2"
+        "name_th": "\u0e19\u0e04\u0e23\u0e1b\u0e10\u0e21"
     },
     {
         "id": "59",
         "id_code": "74",
-        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e2a\u0e32\u0e04\u0e23",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e2a\u0e32\u0e04\u0e23"
     },
     {
         "id": "60",
         "id_code": "75",
-        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e2a\u0e07\u0e04\u0e23\u0e32\u0e21",
-        "geo_id": "2"
+        "name_th": "\u0e2a\u0e21\u0e38\u0e17\u0e23\u0e2a\u0e07\u0e04\u0e23\u0e32\u0e21"
     },
     {
         "id": "61",
         "id_code": "76",
-        "name_th": "\u0e40\u0e1e\u0e0a\u0e23\u0e1a\u0e38\u0e23\u0e35",
-        "geo_id": "4"
+        "name_th": "\u0e40\u0e1e\u0e0a\u0e23\u0e1a\u0e38\u0e23\u0e35"
     },
     {
         "id": "62",
         "id_code": "77",
-        "name_th": "\u0e1b\u0e23\u0e30\u0e08\u0e27\u0e1a\u0e04\u0e35\u0e23\u0e35\u0e02\u0e31\u0e19\u0e18\u0e4c",
-        "geo_id": "4"
+        "name_th": "\u0e1b\u0e23\u0e30\u0e08\u0e27\u0e1a\u0e04\u0e35\u0e23\u0e35\u0e02\u0e31\u0e19\u0e18\u0e4c"
     },
     {
         "id": "63",
         "id_code": "80",
-        "name_th": "\u0e19\u0e04\u0e23\u0e28\u0e23\u0e35\u0e18\u0e23\u0e23\u0e21\u0e23\u0e32\u0e0a",
-        "geo_id": "6"
+        "name_th": "\u0e19\u0e04\u0e23\u0e28\u0e23\u0e35\u0e18\u0e23\u0e23\u0e21\u0e23\u0e32\u0e0a"
     },
     {
         "id": "64",
         "id_code": "81",
-        "name_th": "\u0e01\u0e23\u0e30\u0e1a\u0e35\u0e48",
-        "geo_id": "6"
+        "name_th": "\u0e01\u0e23\u0e30\u0e1a\u0e35\u0e48"
     },
     {
         "id": "65",
         "id_code": "82",
-        "name_th": "\u0e1e\u0e31\u0e07\u0e07\u0e32",
-        "geo_id": "6"
+        "name_th": "\u0e1e\u0e31\u0e07\u0e07\u0e32"
     },
     {
         "id": "66",
         "id_code": "83",
-        "name_th": "\u0e20\u0e39\u0e40\u0e01\u0e47\u0e15",
-        "geo_id": "6"
+        "name_th": "\u0e20\u0e39\u0e40\u0e01\u0e47\u0e15"
     },
     {
         "id": "67",
         "id_code": "84",
-        "name_th": "\u0e2a\u0e38\u0e23\u0e32\u0e29\u0e0e\u0e23\u0e4c\u0e18\u0e32\u0e19\u0e35",
-        "geo_id": "6"
+        "name_th": "\u0e2a\u0e38\u0e23\u0e32\u0e29\u0e0e\u0e23\u0e4c\u0e18\u0e32\u0e19\u0e35"
     },
     {
         "id": "68",
         "id_code": "85",
-        "name_th": "\u0e23\u0e30\u0e19\u0e2d\u0e07",
-        "geo_id": "6"
+        "name_th": "\u0e23\u0e30\u0e19\u0e2d\u0e07"
     },
     {
         "id": "69",
         "id_code": "86",
-        "name_th": "\u0e0a\u0e38\u0e21\u0e1e\u0e23",
-        "geo_id": "6"
+        "name_th": "\u0e0a\u0e38\u0e21\u0e1e\u0e23"
     },
     {
         "id": "70",
         "id_code": "90",
-        "name_th": "\u0e2a\u0e07\u0e02\u0e25\u0e32",
-        "geo_id": "6"
+        "name_th": "\u0e2a\u0e07\u0e02\u0e25\u0e32"
     },
     {
         "id": "71",
         "id_code": "91",
-        "name_th": "\u0e2a\u0e15\u0e39\u0e25",
-        "geo_id": "6"
+        "name_th": "\u0e2a\u0e15\u0e39\u0e25"
     },
     {
         "id": "72",
         "id_code": "92",
-        "name_th": "\u0e15\u0e23\u0e31\u0e07",
-        "geo_id": "6"
+        "name_th": "\u0e15\u0e23\u0e31\u0e07"
     },
     {
         "id": "73",
         "id_code": "93",
-        "name_th": "\u0e1e\u0e31\u0e17\u0e25\u0e38\u0e07",
-        "geo_id": "6"
+        "name_th": "\u0e1e\u0e31\u0e17\u0e25\u0e38\u0e07"
     },
     {
         "id": "74",
         "id_code": "94",
-        "name_th": "\u0e1b\u0e31\u0e15\u0e15\u0e32\u0e19\u0e35",
-        "geo_id": "6"
+        "name_th": "\u0e1b\u0e31\u0e15\u0e15\u0e32\u0e19\u0e35"
     },
     {
         "id": "75",
         "id_code": "95",
-        "name_th": "\u0e22\u0e30\u0e25\u0e32",
-        "geo_id": "6"
+        "name_th": "\u0e22\u0e30\u0e25\u0e32"
     },
     {
         "id": "76",
         "id_code": "96",
-        "name_th": "\u0e19\u0e23\u0e32\u0e18\u0e34\u0e27\u0e32\u0e2a",
-        "geo_id": "6"
+        "name_th": "\u0e19\u0e23\u0e32\u0e18\u0e34\u0e27\u0e32\u0e2a"
     },
     {
         "id": "77",
         "id_code": "97",
-        "name_th": "\u0e1a\u0e36\u0e07\u0e01\u0e32\u0e2c",
-        "geo_id": "3"
+        "name_th": "\u0e1a\u0e36\u0e07\u0e01\u0e32\u0e2c"
     }
 ]
