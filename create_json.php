@@ -4,6 +4,36 @@ require_once './connect/functions.php';
 $sql = new mapthailand();
 $prov = $sql->prov();
 $dis = $sql->distall();
+
+
+
+
+// ลูป ค่า i < 77 ให้ i++ 
+	//select form prov จาก i 
+	//while object
+		// เก็บเข้า array
+		    // check ถ้า aid == pid 
+			// *****ลูป ค่า j < i ให้ j++ 
+				//select form amphur จาก  j และ pid จาก i
+				//while object
+					// เก็บเข้า array
+						// ***ลูป ค่า x < j ให้ x++ 
+							//select form district จาก  x แลพ aid = j และ pid จาก i
+							//while object
+///! end
+
+//* เก็บ เข้า array 
+								//?  เก็บเข้า array
+
+
+
+
+
+
+
+
+
+
 while ($rs = mysqli_fetch_object($dis)) {
   
     $p_id = $rs->PROVINCE_ID;
@@ -33,7 +63,8 @@ while ($rs = mysqli_fetch_object($dis)) {
             'amphur'=>  [
                         array('id'=>$a_id,'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode ,
                             'tombon'=> [
-                                array('id'=>$d_id,'name_th'=>trim($d_name))
+                              
+                                // array('id'=>$d_id,'name_th'=>trim($d_name))
                             ]
                         )]
     );
