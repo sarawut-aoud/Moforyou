@@ -13,16 +13,17 @@ class mapthailand extends Database
         ");
         return $sel;
     }
-    public function dist()
+    public function dist($aid,$pid)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM district  ");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM district  WHERE AMPHUR_ID = '$aid' AND PROVINCE_ID = '$pid' ");
         return $sel;
     }
-    public function amphur()
+    public function amphur($pid)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE  PROVINCE_ID = '$pid' ");
         return $sel;
     }
+ 
     public function prov()
     {
         $sel = mysqli_query($this->dbcon, "SELECT * FROM province ");

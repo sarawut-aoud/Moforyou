@@ -1,0 +1,262 @@
+[
+    {
+        "id": "301",
+        "id_code": "120101",
+        "name_th": "\u0e2a\u0e27\u0e19\u0e43\u0e2b\u0e0d\u0e48"
+    },
+    {
+        "id": "302",
+        "id_code": "120102",
+        "name_th": "\u0e15\u0e25\u0e32\u0e14\u0e02\u0e27\u0e31\u0e0d"
+    },
+    {
+        "id": "303",
+        "id_code": "120103",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e40\u0e02\u0e19"
+    },
+    {
+        "id": "304",
+        "id_code": "120104",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e01\u0e23\u0e30\u0e2a\u0e2d"
+    },
+    {
+        "id": "305",
+        "id_code": "120105",
+        "name_th": "\u0e17\u0e48\u0e32\u0e17\u0e23\u0e32\u0e22"
+    },
+    {
+        "id": "306",
+        "id_code": "120106",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e44\u0e1c\u0e48"
+    },
+    {
+        "id": "307",
+        "id_code": "120107",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e28\u0e23\u0e35\u0e40\u0e21\u0e37\u0e2d\u0e07"
+    },
+    {
+        "id": "308",
+        "id_code": "120108",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e01\u0e23\u0e48\u0e32\u0e07"
+    },
+    {
+        "id": "309",
+        "id_code": "120109",
+        "name_th": "\u0e44\u0e17\u0e23\u0e21\u0e49\u0e32"
+    },
+    {
+        "id": "310",
+        "id_code": "120110",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e23\u0e31\u0e01\u0e19\u0e49\u0e2d\u0e22"
+    },
+    {
+        "id": "311",
+        "id_code": "120201",
+        "name_th": "\u0e27\u0e31\u0e14\u0e0a\u0e25\u0e2d"
+    },
+    {
+        "id": "312",
+        "id_code": "120202",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e01\u0e23\u0e27\u0e22"
+    },
+    {
+        "id": "313",
+        "id_code": "120203",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e2a\u0e35\u0e17\u0e2d\u0e07"
+    },
+    {
+        "id": "314",
+        "id_code": "120204",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e02\u0e19\u0e38\u0e19"
+    },
+    {
+        "id": "315",
+        "id_code": "120205",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e02\u0e38\u0e19\u0e01\u0e2d\u0e07"
+    },
+    {
+        "id": "316",
+        "id_code": "120206",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e04\u0e39\u0e40\u0e27\u0e35\u0e22\u0e07"
+    },
+    {
+        "id": "317",
+        "id_code": "120207",
+        "name_th": "\u0e21\u0e2b\u0e32\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e34\u0e4c"
+    },
+    {
+        "id": "318",
+        "id_code": "120208",
+        "name_th": "\u0e1b\u0e25\u0e32\u0e22\u0e1a\u0e32\u0e07"
+    },
+    {
+        "id": "319",
+        "id_code": "120209",
+        "name_th": "\u0e28\u0e32\u0e25\u0e32\u0e01\u0e25\u0e32\u0e07"
+    },
+    {
+        "id": "320",
+        "id_code": "120301",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e21\u0e48\u0e27\u0e07"
+    },
+    {
+        "id": "321",
+        "id_code": "120302",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e41\u0e21\u0e48\u0e19\u0e32\u0e07"
+    },
+    {
+        "id": "322",
+        "id_code": "120303",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e40\u0e25\u0e19"
+    },
+    {
+        "id": "323",
+        "id_code": "120304",
+        "name_th": "\u0e40\u0e2a\u0e32\u0e18\u0e07\u0e2b\u0e34\u0e19"
+    },
+    {
+        "id": "324",
+        "id_code": "120305",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e43\u0e2b\u0e0d\u0e48"
+    },
+    {
+        "id": "325",
+        "id_code": "120306",
+        "name_th": "\u0e1a\u0e49\u0e32\u0e19\u0e43\u0e2b\u0e21\u0e48"
+    },
+    {
+        "id": "326",
+        "id_code": "120401",
+        "name_th": "\u0e42\u0e2a\u0e19\u0e25\u0e2d\u0e22"
+    },
+    {
+        "id": "327",
+        "id_code": "120402",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e1a\u0e31\u0e27\u0e17\u0e2d\u0e07"
+    },
+    {
+        "id": "328",
+        "id_code": "120403",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e23\u0e31\u0e01\u0e43\u0e2b\u0e0d\u0e48"
+    },
+    {
+        "id": "329",
+        "id_code": "120404",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e04\u0e39\u0e23\u0e31\u0e14"
+    },
+    {
+        "id": "330",
+        "id_code": "120405",
+        "name_th": "\u0e25\u0e30\u0e2b\u0e32\u0e23"
+    },
+    {
+        "id": "331",
+        "id_code": "120406",
+        "name_th": "\u0e25\u0e33\u0e42\u0e1e"
+    },
+    {
+        "id": "332",
+        "id_code": "120407",
+        "name_th": "\u0e1e\u0e34\u0e21\u0e25\u0e23\u0e32\u0e0a"
+    },
+    {
+        "id": "333",
+        "id_code": "120408",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e23\u0e31\u0e01\u0e1e\u0e31\u0e12\u0e19\u0e32"
+    },
+    {
+        "id": "334",
+        "id_code": "120501",
+        "name_th": "\u0e44\u0e17\u0e23\u0e19\u0e49\u0e2d\u0e22"
+    },
+    {
+        "id": "335",
+        "id_code": "120502",
+        "name_th": "\u0e23\u0e32\u0e29\u0e0e\u0e23\u0e4c\u0e19\u0e34\u0e22\u0e21"
+    },
+    {
+        "id": "336",
+        "id_code": "120503",
+        "name_th": "\u0e2b\u0e19\u0e2d\u0e07\u0e40\u0e1e\u0e23\u0e32\u0e07\u0e32\u0e22"
+    },
+    {
+        "id": "337",
+        "id_code": "120504",
+        "name_th": "\u0e44\u0e17\u0e23\u0e43\u0e2b\u0e0d\u0e48"
+    },
+    {
+        "id": "338",
+        "id_code": "120505",
+        "name_th": "\u0e02\u0e38\u0e19\u0e28\u0e23\u0e35"
+    },
+    {
+        "id": "339",
+        "id_code": "120506",
+        "name_th": "\u0e04\u0e25\u0e2d\u0e07\u0e02\u0e27\u0e32\u0e07"
+    },
+    {
+        "id": "340",
+        "id_code": "120507",
+        "name_th": "\u0e17\u0e27\u0e35\u0e27\u0e31\u0e12\u0e19\u0e32"
+    },
+    {
+        "id": "341",
+        "id_code": "120601",
+        "name_th": "\u0e1b\u0e32\u0e01\u0e40\u0e01\u0e23\u0e47\u0e14"
+    },
+    {
+        "id": "342",
+        "id_code": "120602",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e15\u0e25\u0e32\u0e14"
+    },
+    {
+        "id": "343",
+        "id_code": "120603",
+        "name_th": "\u0e1a\u0e49\u0e32\u0e19\u0e43\u0e2b\u0e21\u0e48"
+    },
+    {
+        "id": "344",
+        "id_code": "120604",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e1e\u0e39\u0e14"
+    },
+    {
+        "id": "345",
+        "id_code": "120605",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e15\u0e30\u0e44\u0e19\u0e22\u0e4c"
+    },
+    {
+        "id": "346",
+        "id_code": "120606",
+        "name_th": "\u0e04\u0e25\u0e2d\u0e07\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e14\u0e21"
+    },
+    {
+        "id": "347",
+        "id_code": "120607",
+        "name_th": "\u0e17\u0e48\u0e32\u0e2d\u0e34\u0e10"
+    },
+    {
+        "id": "348",
+        "id_code": "120608",
+        "name_th": "\u0e40\u0e01\u0e32\u0e30\u0e40\u0e01\u0e23\u0e47\u0e14"
+    },
+    {
+        "id": "349",
+        "id_code": "120609",
+        "name_th": "\u0e2d\u0e49\u0e2d\u0e21\u0e40\u0e01\u0e23\u0e47\u0e14"
+    },
+    {
+        "id": "350",
+        "id_code": "120610",
+        "name_th": "\u0e04\u0e25\u0e2d\u0e07\u0e02\u0e48\u0e2d\u0e22"
+    },
+    {
+        "id": "351",
+        "id_code": "120611",
+        "name_th": "\u0e1a\u0e32\u0e07\u0e1e\u0e25\u0e31\u0e1a"
+    },
+    {
+        "id": "352",
+        "id_code": "120612",
+        "name_th": "\u0e04\u0e25\u0e2d\u0e07\u0e40\u0e01\u0e25\u0e37\u0e2d"
+    }
+]
