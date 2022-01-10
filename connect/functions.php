@@ -20,7 +20,7 @@ class mapthailand extends Database
     }
     public function amphur($pid)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE  PROVINCE_ID = '$pid' ");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE PROVINCE_ID = '$pid' ");
         return $sel;
     }
  

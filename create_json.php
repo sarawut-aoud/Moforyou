@@ -1,56 +1,46 @@
 <?php
 require_once './connect/functions.php';
+$get_data = file_get_contents('./json/provinces.json');
+$data = json_decode($get_data);
 
 $sql = new mapthailand();
-for($i=66;$i<=72;$i++){
-  $aid = $i;
-  $pid = 4;
-//    $dis = $sql->amphur($pid);
-   $dis = $sql->dist($aid,$pid);
+
+
+
+$i = 1;
+$j = 1;
+
+
+do {
   
-  while ($rs = mysqli_fetch_object($dis)) {
+  $p_id = $data[$i-1]->id;
+  $p_code = $data[$i-1]->id_code;
+  $p_name = $data[$i-1]->name_th;
+  // echo $p_id;
   
-    // $p_id = $rs->PROVINCE_ID;
-    // $p_code = $rs->PROVINCE_CODE;
-    // $p_name = $rs->PROVINCE_NAME;
+  $dis = $sql->amphur($j);
+  $rs = mysqli_fetch_object($dis);
+  $apid = $rs->PROVINCE_ID;
+  echo $apid;
+ do {
+  
+    if($apid == $p_id){
+      $a_id = $rs->AMPHUR_ID;
+      $a_code = $rs->AMPHUR_CODE;
+      $a_name = $rs->AMPHUR_NAME;
+      $zipcode = $rs->POSTCODE;
+      // echo $a_id."<br>";
+      $amp[] = array('id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode);
+    }
    
-    // $a_id = $rs->AMPHUR_ID;
-    // $a_code = $rs->AMPHUR_CODE;
-    // $a_name = $rs->AMPHUR_NAME;
-    // $zipcode = $rs->POSTCODE;
-   
-    $d_id = $rs->DISTRICT_ID;
-    $d_code = $rs->DISTRICT_CODE;
-    $d_name = $rs->DISTRICT_NAME;
-   
-  
-  
-    $post[] = array(
-        'id'=>$d_id,'id_code'=>$d_code,'name_th'=>trim($d_name)
-    //   'id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name),
-    //   'amphur' =>  [
-        // array(
-        //    'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,'tombon' => []
-        
-      
-    );
-    // 'amphur' =>  array('id' => $d_amp_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode),
-    //  'district' => ['id' => $d_id, 'id_code' => $d_code, 'name_th' => trim($d_name)]]
-  
-  
-  
-    // 'id' => $d_id, 'id_code' => $d_code, 'name_th' => trim($d_name),
-  
-    // 'amphur' => array([
-    //     'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode
-    // ]),
-    // 'province' => array('id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name))
-  
-  }
-  $filename = './json/rs_amp'.$i.'.json';
-  $fp = fopen($filename, 'w');
-  fwrite($fp, json_encode($post, JSON_PRETTY_PRINT));   // here it will print the array pretty
+  } while ($apid>$p_id);
+
+ 
+  $i = $i + 1;
+} while ($i <=77 || $j<=78);
+$post[] = array('id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name), 'amphur' => $amp);
+
+$filename = './json/amphur.json';
+$fp = fopen($filename, 'w');
+fwrite($fp, json_encode($post, JSON_PRETTY_PRINT));   // here it will print the array pretty
 fclose($fp);
-}
-
-

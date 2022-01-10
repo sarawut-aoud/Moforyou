@@ -4,8 +4,7 @@ require_once './connect/functions.php';
 $sql = new mapthailand();
 
 
-    $pid = 13;
-   $dis = $sql->amphur($pid);
+   $dis = $sql->amphur(1);
   
   
   while ($rs = mysqli_fetch_object($dis)) {
@@ -18,22 +17,23 @@ $sql = new mapthailand();
      $a_code = $rs->AMPHUR_CODE;
      $a_name = $rs->AMPHUR_NAME;
      $zipcode = $rs->POSTCODE;
-   
+    $pid = $rs->PROVINCE_ID;
    
     
-  
+ 
   
     $post[] = array(
      
-            'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,'tombon' => []
-        
-      
-    );
+        'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,'provinec'=>$pid);
+  
+     
   }
-  $filename = 'rs_amp.json';
+  
+  $filename = './amphur.json';
   $fp = fopen($filename, 'w');
   fwrite($fp, json_encode($post, JSON_PRETTY_PRINT));   // here it will print the array pretty
   fclose($fp);
 
 
+  
 
