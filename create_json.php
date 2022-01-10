@@ -2,11 +2,11 @@
 require_once './connect/functions.php';
 
 $sql = new mapthailand();
-for($i=58;$i<=63;$i++){
+for($i=66;$i<=72;$i++){
   $aid = $i;
-  $pid = 3;
-  // $dis = $sql->amphur($pid);
-  $dis = $sql->dist($aid,$pid);
+  $pid = 4;
+//    $dis = $sql->amphur($pid);
+   $dis = $sql->dist($aid,$pid);
   
   while ($rs = mysqli_fetch_object($dis)) {
   
@@ -26,15 +26,11 @@ for($i=58;$i<=63;$i++){
   
   
     $post[] = array(
-       'id'=>$d_id,'id_code'=>$d_code,'name_th'=>trim($d_name)
+        'id'=>$d_id,'id_code'=>$d_code,'name_th'=>trim($d_name)
     //   'id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name),
     //   'amphur' =>  [
         // array(
-          //  'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode
-          //  ,'tombon' => [
-  
-           
-          //  ]
+        //    'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,'tombon' => []
         
       
     );
@@ -51,10 +47,10 @@ for($i=58;$i<=63;$i++){
     // 'province' => array('id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name))
   
   }
-  
   $filename = './json/rs_amp'.$i.'.json';
   $fp = fopen($filename, 'w');
   fwrite($fp, json_encode($post, JSON_PRETTY_PRINT));   // here it will print the array pretty
-  fclose($fp);
-  
+fclose($fp);
 }
+
+

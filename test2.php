@@ -1,5 +1,5 @@
 <?php
-     $get_data = file_get_contents('./rs.json');
+     $get_data = file_get_contents('./json/rs_amp.json');
     //  @$get_data = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
     $data = json_decode($get_data);
 
