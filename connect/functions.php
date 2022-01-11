@@ -3,19 +3,10 @@ require_once 'database.php';
 
 class mapthailand extends Database
 {
-    public function distall()
+   
+    public function tombon($aid)
     {
-        $sel = mysqli_query($this->dbcon, 
-        "SELECT *
-        FROM ((district 
-        INNER JOIN amphur ON district.AMPHUR_ID = amphur.AMPHUR_ID )
-        INNER JOIN province  ON district.PROVINCE_ID = province.PROVINCE_ID ) 
-        ");
-        return $sel;
-    }
-    public function dist($aid,$pid)
-    {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM district  WHERE AMPHUR_ID = '$aid' AND PROVINCE_ID = '$pid' ");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM district WHERE AMPHUR_ID = '$aid'  ");
         return $sel;
     }
     public function amphur($pid)
@@ -24,9 +15,9 @@ class mapthailand extends Database
         return $sel;
     }
  
-    public function prov()
+    public function prov($id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM province ");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM province WHERE PROVINCE_ID = '$id'");
         return $sel;
     }
 }
