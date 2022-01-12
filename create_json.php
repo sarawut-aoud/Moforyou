@@ -35,7 +35,7 @@ do {
       }
       
     }   
-  } while ($j< $p_id);
+  } while ($j> $p_id);
   $i=$i + 1;
   $post[] = array('id' => $p_id, 'id_code' => $p_code, 'name_th' => trim($p_name), 'amphur' => $amp);
 } while ($i <=76 );

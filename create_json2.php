@@ -4,7 +4,7 @@ require_once './connect/functions.php';
 $sql = new mapthailand();
 
 
-   $dis = $sql->amphur(1);
+   $dis = $sql->amphur();
   
   
   while ($rs = mysqli_fetch_object($dis)) {
@@ -22,9 +22,7 @@ $sql = new mapthailand();
     
  
   
-    $post[] = array(
-     
-        'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode,'provinec'=>$pid);
+    $post[] = array('provinec'=>$pid, 'id' => $a_id, 'id_code' => $a_code, 'name_th' => trim($a_name), 'zipcode' => $zipcode);
   
      
   }

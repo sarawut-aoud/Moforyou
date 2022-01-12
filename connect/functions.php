@@ -9,9 +9,9 @@ class mapthailand extends Database
         $sel = mysqli_query($this->dbcon, "SELECT * FROM district WHERE AMPHUR_ID = '$aid'  ");
         return $sel;
     }
-    public function amphur($pid)
+    public function amphur($id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE PROVINCE_ID = '$pid' ");
+        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE PROVINCE_ID = '$id' ");
         return $sel;
     }
  
