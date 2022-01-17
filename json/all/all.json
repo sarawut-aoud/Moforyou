@@ -1,0 +1,77 @@
+[
+    {
+        "id": "1",
+        "code": "10",
+        "name_th": "\u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e\u0e21\u0e2b\u0e32\u0e19\u0e04\u0e23   ",
+        "amphur": [
+            {
+                "id": "1",
+                "code": "1001",
+                "name_th": "\u0e40\u0e02\u0e15\u0e1e\u0e23\u0e30\u0e19\u0e04\u0e23   ",
+                "zipcode": "10200",
+                "tombon": [
+                    {
+                        "id": "1",
+                        "code": "100101",
+                        "name_th": "\u0e1e\u0e23\u0e30\u0e1a\u0e23\u0e21\u0e21\u0e2b\u0e32\u0e23\u0e32\u0e0a\u0e27\u0e31\u0e07"
+                    },
+                    {
+                        "id": "2",
+                        "code": "100102",
+                        "name_th": "\u0e27\u0e31\u0e07\u0e1a\u0e39\u0e23\u0e1e\u0e32\u0e20\u0e34\u0e23\u0e21\u0e22\u0e4c   "
+                    },
+                    {
+                        "id": "3",
+                        "code": "100103",
+                        "name_th": "\u0e27\u0e31\u0e14\u0e23\u0e32\u0e0a\u0e1a\u0e1e\u0e34\u0e18   "
+                    },
+                    {
+                        "id": "4",
+                        "code": "100104",
+                        "name_th": "\u0e2a\u0e33\u0e23\u0e32\u0e0d\u0e23\u0e32\u0e29\u0e0e\u0e23\u0e4c   "
+                    },
+                    {
+                        "id": "5",
+                        "code": "100105",
+                        "name_th": "\u0e28\u0e32\u0e25\u0e40\u0e08\u0e49\u0e32\u0e1e\u0e48\u0e2d\u0e40\u0e2a\u0e37\u0e2d   "
+                    },
+                    {
+                        "id": "6",
+                        "code": "100106",
+                        "name_th": "\u0e40\u0e2a\u0e32\u0e0a\u0e34\u0e07\u0e0a\u0e49\u0e32   "
+                    },
+                    {
+                        "id": "7",
+                        "code": "100107",
+                        "name_th": "\u0e1a\u0e27\u0e23\u0e19\u0e34\u0e40\u0e27\u0e28   "
+                    },
+                    {
+                        "id": "8",
+                        "code": "100108",
+                        "name_th": "\u0e15\u0e25\u0e32\u0e14\u0e22\u0e2d\u0e14   "
+                    },
+                    {
+                        "id": "9",
+                        "code": "100109",
+                        "name_th": "\u0e0a\u0e19\u0e30\u0e2a\u0e07\u0e04\u0e23\u0e32\u0e21   "
+                    },
+                    {
+                        "id": "10",
+                        "code": "100110",
+                        "name_th": "\u0e1a\u0e49\u0e32\u0e19\u0e1e\u0e32\u0e19\u0e16\u0e21   "
+                    },
+                    {
+                        "id": "11",
+                        "code": "100111",
+                        "name_th": "\u0e1a\u0e32\u0e07\u0e02\u0e38\u0e19\u0e1e\u0e23\u0e2b\u0e21   "
+                    },
+                    {
+                        "id": "12",
+                        "code": "100112",
+                        "name_th": "\u0e27\u0e31\u0e14\u0e2a\u0e32\u0e21\u0e1e\u0e23\u0e30\u0e22\u0e32   "
+                    }
+                ]
+            }
+        ]
+    }
+]
