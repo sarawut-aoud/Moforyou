@@ -20,10 +20,6 @@ if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
     $map = json_decode($get_data);
 
     $i = $_POST['id'];
-    // $map_val = $map->$id;
-
-    // $sql = "SELECT * FROM amphures WHERE province_id='$id'";
-    // $query = mysqli_query($con, $sql);
     echo '<option value="" selected disabled>-กรุณาเลือกอำเภอ-</option>';
     foreach ($map[$i - 1] as $value) {
         if (is_array($value) || is_object($value)) {
@@ -35,13 +31,9 @@ if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
     }
 }
 
-
 if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
-    // @$get_tombon = file_get_contents('https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_tombon.json');
-    // $tumbon = json_decode($get_tombon);
-    $id = $_POST['id'];
 
-   
+    $id = $_POST['id'];
 
     echo '<option value="" selected disabled>-กรุณาเลือกตำบล-</option>';
     foreach ($query as $value2) {
@@ -51,8 +43,3 @@ if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
 }
             
 
-
-// (ทั้งหมด) https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tombon.json
-// (จังหวัด) https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json
-// (อำเภอ) https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_amphure.json
-// (ตำบล) https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_tombon.json

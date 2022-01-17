@@ -1,26 +1,6 @@
 <?php
 require_once 'database.php';
 
-class mapthailand extends Database
-{
-   
-    public function tombon($aid)
-    {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM district WHERE AMPHUR_ID = '$aid'  ");
-        return $sel;
-    }
-    public function amphur($id)
-    {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM amphur WHERE PROVINCE_ID = '$id' ");
-        return $sel;
-    }
- 
-    public function prov($id)
-    {
-        $sel = mysqli_query($this->dbcon, "SELECT * FROM province WHERE PROVINCE_ID = '$id'");
-        return $sel;
-    }
-}
 //  สมัคร user
 class registra extends Database
 {
@@ -115,12 +95,10 @@ class farm extends Database
         return $checkfarm;
     }
     // Update 
-    public function updatefarm($farmname, $address, $dis_id, $farmmer_id)
+    public function updatefarm($farmname,  $farmmer_id)
     {
         $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET 
-        farmname ='$farmname',
-        address = '$address',
-        district_id='$dis_id' 
+        farmname ='$farmname'
         WHERE farmmer_id='$farmmer_id'
         ");
         return $upfarm;
