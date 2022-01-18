@@ -9,7 +9,7 @@
                 echo "menu-open";
               } else if ($cut[3] == 'main' and $cut[4] == 'farm') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'species') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'species' ) {
                 echo "menu-open";
               } else if ($cut[3] == 'main' and $cut[4] == 'cow') {
                 echo "menu-open";

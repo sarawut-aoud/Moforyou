@@ -117,19 +117,19 @@ $result2 = mysqli_fetch_object($farm);
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="farmname">ชื่อฟาร์ม</label>
-                                            <input type="text" class="form-control " placeholder="ชื่อฟาร์ม" id="farmname" value="<?php
-                                                                                                            if (empty($result2)) {
-                                                                                                                echo "ยังไม่ได้ลงทะเบียน";
-                                                                                                            } else {
-                                                                                                                echo $result2->farmname;
-                                                                                                            }
-                                                                                                            ?>" <?php
-                                                if (empty($result2)) {
-                                                    echo "disabled readonly";
-                                                } else {
-                                                    echo "";
-                                                }
-                                                ?>>
+                                            <input type="text" class="form-control " placeholder="ชื่อฟาร์ม" id="farmname" name="farmname" value="<?php
+                                                                                                                                    if (empty($result2)) {
+                                                                                                                                        echo "ยังไม่ได้ลงทะเบียน";
+                                                                                                                                    } else {
+                                                                                                                                        echo $result2->farmname;
+                                                                                                                                    }
+                                                                                                                                    ?>" <?php
+                                                                                                                                        if (empty($result2)) {
+                                                                                                                                            echo "disabled readonly";
+                                                                                                                                        } else {
+                                                                                                                                            echo "";
+                                                                                                                                        }
+                                                                                                                                        ?>>
                                         </div>
 
                                     </div>
@@ -167,8 +167,7 @@ $result2 = mysqli_fetch_object($farm);
                                             <div class="card-footer text-end">
                                                 <button type="submit" id="submit_pass" name="submit_pass" class="btn btn-warning">ยืนยัน</button>
                                             </div>
-                                            <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>" 
-                                        </form>
+                                            <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>" </form>
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -187,13 +186,15 @@ $result2 = mysqli_fetch_object($farm);
 </body>
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
 <script>
-    
-     // Check Password
-     function checkpass(val) {
+    // Check Password
+    function checkpass(val) {
         $.ajax({
             type: 'POST',
             url: '../../connect/checkpass.php',
-            data: {id: $("#id").val(), old_pass:  val},
+            data: {
+                id: $("#id").val(),
+                old_pass: val
+            },
             success: function(data) {
                 $('#old_pass').html(data);
 
@@ -235,8 +236,8 @@ $result2 = mysqli_fetch_object($farm);
                 $('#submit_pass').prop('disabled', true);
                 return 'Too short'
             }
-        
-            
+
+
             if (password.length > 7) strength += 1
             // If password contains both lower and uppercase characters, increase strength value.  
             if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
@@ -248,7 +249,7 @@ $result2 = mysqli_fetch_object($farm);
             if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
             // Calculated strength value, we can return messages  
             // If value is less than 2  
-           if (strength < 2) {
+            if (strength < 2) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Weak')
                 $(':input[type="submit_pass"]').prop('disabled', false);
@@ -278,10 +279,17 @@ require_once '../../connect/alert.php';
 // แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
     $sql = new farmer();
-} else 
-        if (isset($_POST['submit_farm'])) {
+} 
+if (isset($_POST['submit_farm'])) {
+    $farmname = trim($_POST['farmname']);
     $sql = new farm();
-} else {
+    $query = $sql->updatefarm($farmname,$id); //? $id -> secsion -> farmmer_id
+    if($query){
+        echo success('แก้ไขชื่อฟาร์มเรียบร้อย','./_setting');
+    }
+
+} 
+if(isset($_POST['submit_pass'])){
     $sql = new farmer();
     // $password = md5($_POST['passnew']);
 

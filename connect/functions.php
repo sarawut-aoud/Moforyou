@@ -1,7 +1,5 @@
 <?php
 require_once 'database.php';
-
-
 //  สมัคร user
 class registra extends Database
 {
@@ -96,12 +94,10 @@ class farm extends Database
         return $checkfarm;
     }
     // Update 
-    public function updatefarm($farmname, $address, $dis_id, $farmmer_id)
+    public function updatefarm($farmname,  $farmmer_id)
     {
         $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET 
-        farmname ='$farmname',
-        address = '$address',
-        district_id='$dis_id' 
+        farmname ='$farmname'
         WHERE farmmer_id='$farmmer_id'
         ");
         return $upfarm;

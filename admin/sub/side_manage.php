@@ -84,7 +84,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/species" class="nav-link <?php if ($cut[4] == 'species') {
+      <a href="../main/species" class="nav-link <?php if ($cut[4] == 'species' ) {
                                                     echo "active";
                                                   }  ?>">
         <i class="far fa-circle nav-icon"></i>
