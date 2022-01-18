@@ -45,15 +45,15 @@ require  '../../connect/api_map.php';
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="farmname">ชื่อฟาร์ม</label>
-                                                <input type="text" class="form-control" id="farmname" placeholder="ชื่อฟาร์ม">
+                                                <input type="text" class="form-control" id="farmname" name="farmname" placeholder="ชื่อฟาร์ม">
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">ที่อยู่</label>
-                                                <textarea type="text" class="form-control" id="address" placeholder="ที่อยู่"></textarea>
+                                                <textarea type="text" class="form-control" id="address" name="address" placeholder="ที่อยู่"></textarea>
                                             </div>
                                             <div class="row">
 
-                                                <div class="col-xl-6 col-md-12 col-sm-12">
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="province">จังหวัด</label>
                                                         <select class="form-control select2" id="provinces">
@@ -65,7 +65,7 @@ require  '../../connect/api_map.php';
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6 col-md-12 col-sm-12">
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="amphures">อำเภอ</label>
                                                         <select class="form-control select2" id="amphures" disabled>
@@ -74,15 +74,15 @@ require  '../../connect/api_map.php';
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-xl-4 col-md-12 col-sm-12">
+                                                 <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="district">ตำบล</label>
-                                                        <select class="form-control select2" id="districts" disabled>
+                                                        <select class="form-control select2" id="districts" name="districts" disabled>
                                                            
 
                                                         </select>
                                                     </div>
-                                                </div> -->
+                                                </div> 
                                             </div>
 
 
@@ -116,3 +116,13 @@ require  '../../connect/api_map.php';
 <script src="../../dist/js/api-province.js"></script>
 
 </html>
+<?php
+    require_once '../connect/functions.php';
+    require_once '../connect/alert.php';
+
+if(isset($_POST['submit'])){
+    $farmame = trim($_POST['farmname']);
+    $address = $_POST['address'];
+    $tombon_id = $_POST['districts'];
+}
+?>
