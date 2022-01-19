@@ -9,10 +9,7 @@ if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
     $map = json_decode($get_data);
     $id = $_POST['id']; //todo รับค่าจาก ajax province
 
-<<<<<<< HEAD
-=======
-    $i = $_POST['id'];
->>>>>>> 904afd79fe322c5532bf6298baeddf8508f7cec4
+
     echo '<option value="" selected disabled>-กรุณาเลือกอำเภอ-</option>';
 
     foreach ($map as $value) {
@@ -23,16 +20,10 @@ if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
 }
 
 if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
-<<<<<<< HEAD
     @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
     $tombon = json_decode($get_tombon);
     $id = $_POST['id'];
 
-=======
-
-    $id = $_POST['id'];
-
->>>>>>> 904afd79fe322c5532bf6298baeddf8508f7cec4
     echo '<option value="" selected disabled>-กรุณาเลือกตำบล-</option>';
     foreach ($tombon as $value) {
        if($id == $value->amphur){
@@ -41,8 +32,3 @@ if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
         
     }
 }
-<<<<<<< HEAD
-=======
-            
-
->>>>>>> 904afd79fe322c5532bf6298baeddf8508f7cec4
