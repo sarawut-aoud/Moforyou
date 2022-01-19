@@ -72,7 +72,7 @@ $result2 = mysqli_fetch_object($farm);
                                 <form>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img src="../../dist/img/user-01.jpg" class="rounded card-img-top  w-25" alt="image">
+                                            <img src="../../dist/img/user-01.jpg" id="file" name="file"  class="rounded card-img-top  w-25" alt="image">
 
                                         </div>
                                         <div class="form-group d-flex justify-content-center">
@@ -80,11 +80,11 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
-                                            <input type="text" class="form-control" id="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname; ?>">
+                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $result->email; ?>">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $result->email; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">เบอร์โทรศัพท์</label>
@@ -92,7 +92,7 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">บัตรประชาชน</label>
-                                            <input type="tel" class="form-control" name="card" id="card" placeholder="123-456-7890" disabled value="<?php echo $result->card; ?>">
+                                            <input type="tel" class="form-control" placeholder="123-456-7890" disabled value="<?php echo $result->card; ?>">
                                         </div>
 
                                     </div>
@@ -118,12 +118,12 @@ $result2 = mysqli_fetch_object($farm);
                                         <div class="form-group">
                                             <label for="farmname">ชื่อฟาร์ม</label>
                                             <input type="text" class="form-control " placeholder="ชื่อฟาร์ม" id="farmname" name="farmname" value="<?php
-                                                                                                                                    if (empty($result2)) {
-                                                                                                                                        echo "ยังไม่ได้ลงทะเบียน";
-                                                                                                                                    } else {
-                                                                                                                                        echo $result2->farmname;
-                                                                                                                                    }
-                                                                                                                                    ?>" <?php
+                                                                                                                                                    if (empty($result2)) {
+                                                                                                                                                        echo "ยังไม่ได้ลงทะเบียน";
+                                                                                                                                                    } else {
+                                                                                                                                                        echo $result2->farmname;
+                                                                                                                                                    }
+                                                                                                                                                    ?>" <?php
                                                                                                                                         if (empty($result2)) {
                                                                                                                                             echo "disabled readonly";
                                                                                                                                         } else {
@@ -274,26 +274,72 @@ $result2 = mysqli_fetch_object($farm);
 
 require_once '../../connect/resize.php';
 require_once '../../connect/alert.php';
+require_once '../../connect/func_pass.php';
 
-
-// แก้ไขข้อมูลส่วนตัว
+//todo: แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
+    $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $sql = new farmer();
-} 
+    //? function ลดขนาดรูปภาพ
+    function imageResize($imageResourceId, $width, $height)
+    {
+        $targetWidth = $width < 1280 ? $width : 1280;
+        $targetHeight = ($height / $width) * $targetWidth;
+        $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
+        imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+        return $targetLayer;
+    }
+    //todo: check ว่ามีรูปภาพหรือไม่
+    if(!empty($picture)){
+        $sourceProperties = getimagesize($picture);
+        $fileNewName = $time;
+        $folderPath = "../../dist/img/user_img/";
+        $ext = $_FILES['file']['name'];
+        $imageType = $sourceProperties[2];
+
+        require_once '../../connect/resize.php';
+        echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+        copy($specpic, "../../dist/img/user_upload/" . $ext);
+        $sql = $sql->updatefarmmer_pic($id,$fname, $phone,$email, $ext);
+        echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
+    }else{
+        $query = $sql->updatefarmmer($id,$fname,$phone,$email);
+        echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
+    }
+   
+}
+//todo แก้ไข้ฟาร์ม
 if (isset($_POST['submit_farm'])) {
     $farmname = trim($_POST['farmname']);
     $sql = new farm();
-    $query = $sql->updatefarm($farmname,$id); //? $id -> secsion -> farmmer_id
-    if($query){
-        echo success('แก้ไขชื่อฟาร์มเรียบร้อย','./_setting');
+    $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
+    if ($query) {
+        echo success('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting');
+    } else {
+        echo warning("โปรดลองอีกครั้ง");
     }
+}
+// todo: แก้ไข้ password
+if (isset($_POST['submit_pass'])) {
+    $user = new farmer();
+    $password_new = $_POST['passnew'];
 
-} 
-if(isset($_POST['submit_pass'])){
-    $sql = new farmer();
-    // $password = md5($_POST['passnew']);
+    //* เข้ารหัส password ที่ถูกแก้ไข
+    $pwd = new Setpwd();
+    $encode = $pwd->encode($password_new);
+    $pass_sha = $pwd->Setsha256($encode);
+    $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
 
-    // $updatepass = $sql->updatepass($id, $password);
+
+    $updatepass = $user->updatepass($id, $password); //? $id ->SESSION -> farmer_id
+
+    if ($updatepass) {
+        echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
+    } else {
+        echo warning("โปรดลองอีกครั้ง");
+    }
 }
 
 

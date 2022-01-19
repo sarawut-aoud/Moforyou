@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
     $sql = new Setpwd();
 
     $encode = $sql->encode($password); // เข้ารหัส pass
-    $pass_sha = $sql->Setsha256($encode); //เอา ชื่อ + pass เข้า hmac 
+    $pass_sha = $sql->Setsha256($encode); //เอา pass+user เข้า hmac 
     $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
  
 
