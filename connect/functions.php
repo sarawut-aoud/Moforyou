@@ -1,9 +1,9 @@
 <?php
 require_once 'database.php';
+
 //  สมัคร user
 class registra extends Database
 {
-
     // Check username
     public function usernameavailable($uname)
     {

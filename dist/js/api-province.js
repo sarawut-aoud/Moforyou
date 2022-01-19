@@ -13,18 +13,17 @@ $("#provinces").change(function () {
     },
   });
 });
+// fetch amphur
+$("#amphures").change(function () {
+  var id_amphures = $(this).val();
 
-  $("#amphures").change(function () {
-    var id_amphures = $(this).val();
-  
-    $.ajax({
-      type: "POST",
-      url: "../../connect/api_map.php",
-      data: { id: id_amphures,  function: "amphures" },
-      success: function (data) {
-        $("#districts").html(data);
-        $("#districts").prop("disabled", false);
-      },
-    });
+  $.ajax({
+    type: "POST",
+    url: "../../connect/api_map.php",
+    data: { id: id_amphures, function: "amphures" },
+    success: function (data) {
+      $("#districts").html(data);
+      $("#districts").prop("disabled", false);
+    },
   });
-
+});

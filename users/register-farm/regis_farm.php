@@ -124,5 +124,6 @@ if(isset($_POST['submit'])){
     $farmame = trim($_POST['farmname']);
     $address = $_POST['address'];
     $tombon_id = $_POST['districts'];
+    //
 }
 ?>

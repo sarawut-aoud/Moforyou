@@ -26,9 +26,8 @@ if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
 
     echo '<option value="" selected disabled>-กรุณาเลือกตำบล-</option>';
     foreach ($tombon as $value) {
-       if($id == $value->amphur){
+       if($id == $value->amphur){ //? check id amphur
         echo "<option value='$value->id'>$value->name_th</option>";
        }
-        
     }
 }
