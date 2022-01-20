@@ -72,11 +72,17 @@ $result2 = mysqli_fetch_object($farm);
                                 <form>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img src="../../dist/img/user-01.jpg" id="file" name="file"  class="rounded card-img-top  w-25" alt="image">
-
+                                            <?php
+                                            if ($result->picture != NULL) {
+                                            ?>
+                                                <img src="<?php echo "../../dist/img/user_upload/$result->picture"; ?>" class="rounded w-100">
+                                            <?php
+                                            } else { ?>
+                                                <img src="../../dist/img/user-01.jpg" class="rounded card-img-top  w-25" alt="image">
+                                            <?php } ?>
                                         </div>
                                         <div class="form-group d-flex justify-content-center">
-                                            <input type="file" class="form-control form-control-sm mt-2 col-6 " accept="image/*;capture=camera">
+                                            <input type="file" class="form-control form-control-sm mt-2 col-6 " id="file" name="file" accept="image/*;capture=camera">
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
@@ -88,11 +94,11 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">เบอร์โทรศัพท์</label>
-                                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="123-456-7890" pattern="^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$" value="<?php echo $result->phone; ?>">
+                                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="123-456-7890" value="<?php echo $result->phone; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">บัตรประชาชน</label>
-                                            <input type="tel" class="form-control" placeholder="123-456-7890" disabled value="<?php echo $result->card; ?>">
+                                            <input type="tel" class="form-control" disabled value="<?php echo $result->card; ?>">
                                         </div>
 
                                     </div>
@@ -124,12 +130,12 @@ $result2 = mysqli_fetch_object($farm);
                                                                                                                                                         echo $result2->farmname;
                                                                                                                                                     }
                                                                                                                                                     ?>" <?php
-                                                                                                                                        if (empty($result2)) {
-                                                                                                                                            echo "disabled readonly";
-                                                                                                                                        } else {
-                                                                                                                                            echo "";
-                                                                                                                                        }
-                                                                                                                                        ?>>
+                                                                                                                                                        if (empty($result2)) {
+                                                                                                                                                            echo "disabled readonly";
+                                                                                                                                                        } else {
+                                                                                                                                                            echo "";
+                                                                                                                                                        }
+                                                                                                                                                        ?>>
                                         </div>
 
                                     </div>
@@ -156,18 +162,19 @@ $result2 = mysqli_fetch_object($farm);
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านใหม่</label>
-                                                    <input type="password" class="form-control" id="passnew" placeholder="รหัสผ่านใหม่">
+                                                    <input type="password" class="form-control" id="passnew" name="passnew" placeholder="รหัสผ่านใหม่">
                                                     <div id="strengthMessage"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control" id="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่">
+                                                    <input type="password" class="form-control" id="confrim_passnew" name="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่">
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer text-end">
-                                                <button type="submit" id="submit_pass" name="submit_pass" class="btn btn-warning">ยืนยัน</button>
+                                                <button type="submit" id="submit_pass" name="submit_pass" class="btn btn-warning" disabled>ยืนยัน</button>
                                             </div>
-                                            <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>" </form>
+                                            <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>">
+                                        </form>
                                     </div>
                                 </div>
                                 <!-- /.card -->
@@ -209,15 +216,18 @@ $result2 = mysqli_fetch_object($farm);
             $('#confrim_passnew').attr({
                 class: 'form-control '
             });
+            $('#submit_pass').prop('disabled',true);
         } else if (pass != cpass) {
             $('#confrim_passnew').attr({
                 class: 'form-control  is-invalid'
             });
+            $('#submit_pass').prop('disabled',true);
 
         } else {
             $('#confrim_passnew').attr({
                 class: 'form-control  is-valid'
             });
+            $('#submit_pass').prop('disabled',false);
 
         }
     });
@@ -233,7 +243,7 @@ $result2 = mysqli_fetch_object($farm);
             if (password.length < 6) {
                 $('#strengthMessage').removeClass()
                 $('#strengthMessage').addClass('Short')
-                $('#submit_pass').prop('disabled', true);
+                 $('#submit_pass').prop('disabled', true);
                 return 'Too short'
             }
 
@@ -282,6 +292,7 @@ if (isset($_POST['submit_farmer'])) {
     $email = $_POST['email'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $sql = new farmer();
+
     //? function ลดขนาดรูปภาพ
     function imageResize($imageResourceId, $width, $height)
     {
@@ -291,8 +302,9 @@ if (isset($_POST['submit_farmer'])) {
         imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
         return $targetLayer;
     }
+
     //todo: check ว่ามีรูปภาพหรือไม่
-    if(!empty($picture)){
+    if (!empty($picture)) {
         $sourceProperties = getimagesize($picture);
         $fileNewName = $time;
         $folderPath = "../../dist/img/user_img/";
@@ -302,13 +314,12 @@ if (isset($_POST['submit_farmer'])) {
         require_once '../../connect/resize.php';
         echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
         copy($specpic, "../../dist/img/user_upload/" . $ext);
-        $sql = $sql->updatefarmmer_pic($id,$fname, $phone,$email, $ext);
+        $sql = $sql->updatefarmmer_pic($id, $fname, $phone, $email, $ext);
         echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
-    }else{
-        $query = $sql->updatefarmmer($id,$fname,$phone,$email);
+    } else {
+        $query = $sql->updatefarmmer($id, $fname, $phone, $email);
         echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
     }
-   
 }
 //todo แก้ไข้ฟาร์ม
 if (isset($_POST['submit_farm'])) {
@@ -332,10 +343,8 @@ if (isset($_POST['submit_pass'])) {
     $pass_sha = $pwd->Setsha256($encode);
     $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
 
-
-    $updatepass = $user->updatepass($id, $password); //? $id ->SESSION -> farmer_id
-
-    if ($updatepass) {
+    if ($password_new != '') {
+        $updatepass = $user->updatepass($id, $password); //? $id ->SESSION -> farmer_id
         echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
     } else {
         echo warning("โปรดลองอีกครั้ง");
