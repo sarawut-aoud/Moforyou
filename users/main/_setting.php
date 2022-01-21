@@ -31,11 +31,11 @@ $result2 = mysqli_fetch_object($farm);
         width: 100%;
     }
 
-    .fas {
+    .far {
         color: white;
     }
 
-    .fas:hover {
+    .far:hover {
         color: saddlebrown;
     }
 </style>
@@ -86,7 +86,7 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
-                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname; ?>">
+                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname . $id; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -154,24 +154,40 @@ $result2 = mysqli_fetch_object($farm);
                                         <!-- /.card-header -->
                                         <!-- --------------------Password -------------------------------------- -->
                                         <!-- form start -->
-                                        <form method="post">
+                                        <form method="post" class="password-strength ">
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="farmname">รหัสผ่านเดิม</label>
                                                     <input type="password" class="form-control" id="old_pass" name="old_pass" onblur="checkpass(this.value)" placeholder="รหัสผ่านเดิม">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="farmname">รหัสผ่านใหม่</label>
-                                                    <input type="password" class="form-control" id="passnew" name="passnew" placeholder="รหัสผ่านใหม่">
-                                                    <div id="strengthMessage"></div>
+                                                    <div class="input-group">
+                                                        <input class="password-strength__input form-control" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" />
+                                                        <div class="input-group-append">
+                                                            <button class="password-strength__visibility btn btn-outline-secondary" type="button">
+                                                                <span class="password-strength__visibility-icon" data-visible="hidden">
+                                                                    <i class="fas fa-eye-slash"></i>
+                                                                </span><span class="password-strength__visibility-icon js-hidden" data-visible="visible">
+                                                                    <i class="fas fa-eye"></i></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
+                                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                                    <small>
+                                                        <div class="password-strength__bar-block progress mb-4 rounded-2" style="height:15px;">
+                                                            <div class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </small>
+
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control" id="confrim_passnew" name="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่">
+                                                    <input type="password" class="form-control" id="confrim_passnew" name="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่" maxlength="20">
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer text-end">
-                                                <button type="submit" id="submit_pass" name="submit_pass" class="btn btn-warning" disabled>ยืนยัน</button>
+                                                <button type="submit" id="submit_pass" name="submit_pass" class="password-strength__submit btn btn-warning" disabled>ยืนยัน</button>
                                             </div>
                                             <input type="hidden" id="id" name="id" value="<?php echo $result->id; ?>">
                                         </form>
@@ -192,6 +208,7 @@ $result2 = mysqli_fetch_object($farm);
             <!-- ./wrapper -->
 </body>
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
+<script src="../../dist/js/check_pwd_strong.js"></script>
 <script>
     // Check Password
     function checkpass(val) {
@@ -210,71 +227,25 @@ $result2 = mysqli_fetch_object($farm);
     };
     // Check Confrim Password
     $('#confrim_passnew').keyup(function() {
-        var pass = $('#passnew').val();
+        var pass = $('#password-input').val();
         var cpass = $('#confrim_passnew').val();
         if (cpass == "") {
             $('#confrim_passnew').attr({
                 class: 'form-control '
             });
-            $('#submit_pass').prop('disabled',true);
+            $('#submit_pass').prop('disabled', true);
         } else if (pass != cpass) {
             $('#confrim_passnew').attr({
                 class: 'form-control  is-invalid'
             });
-            $('#submit_pass').prop('disabled',true);
+            $('#submit_pass').prop('disabled', true);
 
         } else {
             $('#confrim_passnew').attr({
                 class: 'form-control  is-valid'
             });
-            $('#submit_pass').prop('disabled',false);
+            $('#submit_pass').prop('disabled', false);
 
-        }
-    });
-
-    // ระดับ password
-    $(document).ready(function() {
-        $('#passnew').keyup(function() {
-            $('#strengthMessage').html(checkStrength($('#passnew').val()))
-        })
-
-        function checkStrength(password) {
-            var strength = 0
-            if (password.length < 6) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Short')
-                 $('#submit_pass').prop('disabled', true);
-                return 'Too short'
-            }
-
-
-            if (password.length > 7) strength += 1
-            // If password contains both lower and uppercase characters, increase strength value.  
-            if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
-            // If it has numbers and characters, increase strength value.  
-            if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
-            // If it has one special character, increase strength value.  
-            if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-            // If it has two special characters, increase strength value.  
-            if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-            // Calculated strength value, we can return messages  
-            // If value is less than 2  
-            if (strength < 2) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Weak')
-                $(':input[type="submit_pass"]').prop('disabled', false);
-                return 'Weak'
-            } else if (strength == 2) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Good')
-                $(':input[type="submit_pass"]').prop('disabled', false);
-                return 'Good'
-            } else {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Strong')
-                $(':input[type="submit_pass"]').prop('disabled', false);
-                return 'Strong'
-            }
         }
     });
 </script>
@@ -288,6 +259,7 @@ require_once '../../connect/func_pass.php';
 
 //todo: แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
+    $id = $_SESSION['id'];
     $fname = $_POST['fname'];
     $email = $_POST['email'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
@@ -323,6 +295,7 @@ if (isset($_POST['submit_farmer'])) {
 }
 //todo แก้ไข้ฟาร์ม
 if (isset($_POST['submit_farm'])) {
+    $id = $_SESSION['id'];
     $farmname = trim($_POST['farmname']);
     $sql = new farm();
     $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
@@ -335,20 +308,28 @@ if (isset($_POST['submit_farm'])) {
 // todo: แก้ไข้ password
 if (isset($_POST['submit_pass'])) {
     $user = new farmer();
-    $password_new = $_POST['passnew'];
-
+    $id = $_SESSION['id'];
+    $password_new = $_POST['password-input'];
+    $pwdconfrim = $_POST['confrim_passnew'];
     //* เข้ารหัส password ที่ถูกแก้ไข
     $pwd = new Setpwd();
     $encode = $pwd->encode($password_new);
     $pass_sha = $pwd->Setsha256($encode);
     $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
-
-    if ($password_new != '') {
-        $updatepass = $user->updatepass($id, $password); //? $id ->SESSION -> farmer_id
+    $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
+    if( $updatepass){
         echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
-    } else {
-        echo warning("โปรดลองอีกครั้ง");
     }
+    // if (empty($pwdconfrim)) {
+       
+    //     if ($updatepass) {
+           
+    //     }
+    // } else {
+    //     echo warning("โปรดลองอีกครั้ง");
+    // }
+
+   
 }
 
 

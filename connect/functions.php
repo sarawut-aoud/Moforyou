@@ -62,20 +62,21 @@ class farmer extends Database
         return $sel_farmer;
     }
     // Update Farmer No picture
-    public function updatefarmmer($id,$fname, $phone, $email)
+    public function updatefarmmer($id, $fname, $phone, $email)
     {
         $upfarmmer = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET fullname = '$fname' , phone = '$phone' , email = '$email' WHERE id = '$id'");
         return $upfarmmer;
     }
     // Update Farmer Picture
-    public function updatefarmmer_pic($id,$fname,$phone,$email,$picture){
-        $update_pic = mysqli_query($this->dbcon,"UPDATE tbl_farmer SET fullname = '$fname' , phone = '$phone' , email = '$email' , picture = '$picture' WHERE id = '$id'");
+    public function updatefarmmer_pic($id, $fname, $phone, $email, $picture)
+    {
+        $update_pic = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET fullname = '$fname' , phone = '$phone' , email = '$email' , picture = '$picture' WHERE id = '$id'");
         return $update_pic;
     }
     // Update Password
     public function updatepass($id, $password)
     {
-        $up_pass = mysqli_query($this->dbcon, "UPDATE  tbl_farmer set password = '$password'  WHERE id='$id' ");
+        $up_pass = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET password = '$password'  WHERE id ='$id' ");
         return $up_pass;
     }
 }

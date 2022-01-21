@@ -49,21 +49,21 @@
 
                                 <div class="form-group">
                                     <label class="small md-1">Username</label>
-                                    <input class="form-control py-4" id="username" name="username" type="text" placeholder="Enter Username" onblur="checkusername(this.value)" required>
+                                    <input class="form-control py-4" id="username" name="username" type="text" autocomplete="off" placeholder="Enter Username" onblur="checkusername(this.value)" required>
                                     <span class="text-center " id="usernameavailable"></span>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Password</label>
-                                            <input class="form-control py-4" id="password" name="password" type="password" placeholder="Enter password" required>
+                                            <input class="form-control py-4" id="password" name="password-input" type="password-input" autocomplete="off"placeholder="Enter password" required maxlength="20">
                                             <div id="strengthMessage"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Confirm Password</label>
-                                            <input class="form-control py-4" id="confirm_password" name="confirm_password" type="password" placeholder="Confirm password" required>
+                                            <input class="form-control py-4" id="confirm_password" name="confirm_password" autocomplete="off" type="password" placeholder="Confirm password" required maxlength="20">
                                             <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
         </div>
     </main>
 </body>
-
+<script src="../../dist/js/check_pwd_strong.js"></script>
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
 <script type="text/javascript" src="../../dist/js/id_card.js"></script>
 <script>
@@ -101,7 +101,7 @@
     };
     // Check Confrim Password
     $('#confirm_password').keyup(function() {
-        var pass = $('#password').val();
+        var pass = $('#password-input').val();
         var cpass = $('#confirm_password').val();
         if (cpass == "") {
 
@@ -123,50 +123,7 @@
         }
     });
 
-    // ระดับ password
-    $(document).ready(function() {
-        $('#password').keyup(function() {
-            $('#strengthMessage').html(checkStrength($('#password').val()))
-        })
-
-        function checkStrength(password) {
-            var strength = 0
-            if (password.length < 6) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Short')
-                $(':input[type="submit"]').prop('disabled', true);
-                return 'Too short'
-            }
-            if (password.length > 7) strength += 1
-            // If password contains both lower and uppercase characters, increase strength value.  
-            if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
-            // If it has numbers and characters, increase strength value.  
-            if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
-            // If it has one special character, increase strength value.  
-            if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-            // If it has two special characters, increase strength value.  
-            if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-            // Calculated strength value, we can return messages  
-            // If value is less than 2  
-
-            if (strength < 2) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Weak')
-                $(':input[type="submit"]').prop('disabled', false);
-                return 'Weak'
-            } else if (strength == 2) {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Good')
-                $(':input[type="submit"]').prop('disabled', false);
-                return 'Good'
-            } else {
-                $('#strengthMessage').removeClass()
-                $('#strengthMessage').addClass('Strong')
-                $(':input[type="submit"]').prop('disabled', false);
-                return 'Strong'
-            }
-        }
-    });
+    
 </script>
 
 </html>
@@ -184,7 +141,8 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = $_POST['password-input
+    '];
     /// password
     $sql = new Setpwd();
 

@@ -32,7 +32,7 @@
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" style="color: white;">
-                    <i class="fas fa-bell"></i>
+                    <i class="far fa-bell"></i>
                     <span class="badge badge-primary navbar-badge">15</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -59,7 +59,7 @@
            
             <li class=" nav-item ">
                 <a class="nav-link " href="../../pages/login/logout">
-                    <i class="fas fa-unlock-alt mr-2"></i>
+                <i  class="far fa-unlock-alt mr-2"></i>
                 </a>
             </li>
         </ul>

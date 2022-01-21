@@ -12,17 +12,17 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
         <ul class="nav nav-pills nav-fill ">
             <li class="nav-item ">
                 <a class="nav-link flex-sm-fill " role="button" style="color: white;" href="../main/user_index">
-                    <i class="fas fa-home" style="font-size:30px"></i>
+                    <i class="far  fa-home" style="font-size:30px"></i>
                 </a>
             </li>
             <li class=" nav-item ">
                 <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_listmenu">
-                    <i class="fas fa-bars" style="font-size:30px"></i>
+                    <i class="far fa-bars" style="font-size:30px"></i>
                 </a>
             </li>
             <li class=" nav-item ">
                 <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_setting">
-                    <i class="fas fa-user-cog" style="font-size:30px"></i>
+                    <i class="far fa-user-cog" style="font-size:30px"></i>
                 </a>
             </li>
             <?php
@@ -31,7 +31,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
             } else { ?>
                 <li class=" nav-item ">
                     <a class="nav-link flex-sm-fill " role="button" style="color: white; " onclick="window.history.go(-1);">
-                        <i class="fas fa-arrow-circle-left" style="font-size:30px"></i>
+                        <i class="far fa-arrow-circle-left" style="font-size:30px"></i>
                     </a>
                 </li>
             <?php
