@@ -25,20 +25,7 @@ $result2 = mysqli_fetch_object($farm);
     ?>
     <link rel="stylesheet" href="./_password.css">
 </head>
-<style>
-    .main-footer {
-        padding: 0 0 0 0;
-        width: 100%;
-    }
 
-    .far {
-        color: white;
-    }
-
-    .far:hover {
-        color: saddlebrown;
-    }
-</style>
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
     <div class="wrapper">
@@ -137,11 +124,16 @@ $result2 = mysqli_fetch_object($farm);
                                                                                                                                                         }
                                                                                                                                                         ?>>
                                         </div>
-
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer text-end">
-                                        <button type="submit" id="submit_farm" name="submit_farm" class="btn btn-success">ยืนยัน</button>
+                                        <button type="submit" id="submit_farm" name="submit_farm" class="btn btn-success" <?php
+                                                                                                                            if (empty($result2)) {
+                                                                                                                                echo "disabled";
+                                                                                                                            } else {
+                                                                                                                                echo "";
+                                                                                                                            } ?>>ยันยืน</button>
+
                                     </div>
                                 </form>
                             </div>
@@ -173,16 +165,25 @@ $result2 = mysqli_fetch_object($farm);
                                                         </div>
                                                     </div>
                                                     <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
-                                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                                    <small class="form-text text-muted mt-2 " id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
                                                     <small>
-                                                        <div class="password-strength__bar-block progress mb-4 rounded-2" style="height:15px;">
-                                                            <div class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
+                                                            <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </small>
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control" id="confrim_passnew" name="confrim_passnew" placeholder="ยืนยันรหัสผ่านใหม่" maxlength="20">
+                                                    <div class="input-group">
+                                                        <input class=" form-control" type="password" id="confrim_passnew" name="confrim_passnew" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button" onclick="myFunction()">
+                                                                <span data-visible="hidden">
+                                                                    <i id="eyeshow" name="eyeshow" class="fas fa-eye-slash"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
@@ -226,9 +227,11 @@ $result2 = mysqli_fetch_object($farm);
         });
     };
     // Check Confrim Password
-    $('#confrim_passnew').keyup(function() {
+    $('#confrim_passnew,#password-input,#bar').keyup(function() {
         var pass = $('#password-input').val();
         var cpass = $('#confrim_passnew').val();
+        let value = document.getElementById("bar").getAttribute("class"); //?  get class มาเก็บไว้ใน value
+
         if (cpass == "") {
             $('#confrim_passnew').attr({
                 class: 'form-control '
@@ -244,10 +247,29 @@ $result2 = mysqli_fetch_object($farm);
             $('#confrim_passnew').attr({
                 class: 'form-control  is-valid'
             });
-            $('#submit_pass').prop('disabled', false);
-
+            if (value == 'password-strength__bar progress-bar bg-danger') { //todo: check value กับ class ที่เอามาตรวจสอบ
+                $('#submit_pass').prop('disabled', true);
+            } else {
+                $('#submit_pass').prop('disabled', false);
+            }
         }
     });
+
+    function myFunction() {
+        var x = document.getElementById("confrim_passnew");
+
+        if (x.type === "password") {
+            x.type = "text";
+            $('#eyeshow').attr({
+                class: 'fas fa-eye'
+            });
+        } else {
+            x.type = "password";
+            $('#eyeshow').attr({
+                class: 'fas fa-eye-slash'
+            });
+        }
+    }
 </script>
 
 </html>
@@ -317,19 +339,19 @@ if (isset($_POST['submit_pass'])) {
     $pass_sha = $pwd->Setsha256($encode);
     $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
     $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
-    if( $updatepass){
+    if ($updatepass) {
         echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
     }
     // if (empty($pwdconfrim)) {
-       
+
     //     if ($updatepass) {
-           
+
     //     }
     // } else {
     //     echo warning("โปรดลองอีกครั้ง");
     // }
 
-   
+
 }
 
 

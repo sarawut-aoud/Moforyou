@@ -113,25 +113,25 @@ const setStrengthBarStyles = (bar, strengthValue) => {
   switch (strengthValue) {
     case 25:
       bar.classList.add('bg-danger');
-      bar.textContent = 'Weak';
+      bar.textContent = 'ค่อนข้างต่ํา';
       break;
 
     case 50:
       bar.classList.remove('bg-danger');
       bar.classList.add('bg-warning');
-      bar.textContent = 'Moderate';
+      bar.textContent = 'ปลอดภัยต่ำ';
       break;
 
     case 75:
       bar.classList.remove('bg-danger');
       bar.classList.add('bg-info');
-      bar.textContent = 'Strong';
+      bar.textContent = 'ปลอดภัยปานกลาง';
       break;
 
     case 100:
       bar.classList.remove('bg-danger');
       bar.classList.add('bg-success');
-      bar.textContent = 'Extra Strong';
+      bar.textContent = 'ปลอดภัยมาก';
       break;
 
     default:

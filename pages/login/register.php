@@ -17,13 +17,15 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header card-head ">
-                            <h3 class="h1 text-center text-white my-4">MoForYou</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
-                            <form method="POST">
+                    <form method="POST" class="password-strength ">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header card-head ">
+                                <h3 class="h1 text-center text-white my-4">MoForYou</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="login-box-msg">สมัครเพื่อเข้าใช้งาน</p>
+
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -52,34 +54,62 @@
                                     <input class="form-control py-4" id="username" name="username" type="text" autocomplete="off" placeholder="Enter Username" onblur="checkusername(this.value)" required>
                                     <span class="text-center " id="usernameavailable"></span>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row ">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Password</label>
-                                            <input class="form-control py-4" id="password" name="password-input" type="password-input" autocomplete="off"placeholder="Enter password" required maxlength="20">
-                                            <div id="strengthMessage"></div>
+                                            <div class="input-group">
+                                                <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" />
+                                                <div class="input-group-append">
+                                                    <button class="password-strength__visibility btn btn-outline-secondary" type="button">
+                                                        <span class="password-strength__visibility-icon" data-visible="hidden">
+                                                            <i class="fas fa-eye-slash"></i>
+                                                        </span><span class="password-strength__visibility-icon js-hidden" data-visible="visible">
+                                                            <i class="fas fa-eye"></i></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Confirm Password</label>
-                                            <input class="form-control py-4" id="confirm_password" name="confirm_password" autocomplete="off" type="password" placeholder="Confirm password" required maxlength="20">
-                                            <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
+                                            <div class="input-group">
+                                                <input class="password-strength__input form-control py-4" type="password" id="confirm_password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="myFunction()">
+                                                        <span  data-visible="hidden">
+                                                            <i id="eyeshow" name="eyeshow"class="fas fa-eye-slash"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0">
-                                    <button type="submit" id="submit" name="submit" class="btn login100-form-btn btn-block">สมัคร</button>
+                                <div class="col-md-12">
+                                    <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
+                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                    <small>
+                                        <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
+                                            <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </small>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <div class="small"><a href="login">ฉันเป็นสมาชิกอยู่แล้ว</a></div>
-                        </div>
-                    </div>
-                    <!-- /card -->
+                                <div class="form-group mt-4 mb-0">
+                                    <button type="submit" id="submit" name="submit" class="password-strength__submit btn login100-form-btn btn-block">สมัคร</button>
+                                </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="small"><a href="login">ฉันเป็นสมาชิกอยู่แล้ว</a></div>
                 </div>
             </div>
+            <!-- /card -->
+        </div>
+        </div>
         </div>
     </main>
 </body>
@@ -87,6 +117,21 @@
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
 <script type="text/javascript" src="../../dist/js/id_card.js"></script>
 <script>
+    function myFunction() {
+        var x = document.getElementById("confirm_password");
+      
+        if (x.type === "password") {
+            x.type = "text";
+            $('#eyeshow').attr({
+                class: 'fas fa-eye'
+            });
+        } else {
+            x.type = "password";
+            $('#eyeshow').attr({
+                class: 'fas fa-eye-slash'
+            });
+        }
+    }
     // Check Username
     function checkusername(val) {
         $.ajax({
@@ -100,7 +145,7 @@
         });
     };
     // Check Confrim Password
-    $('#confirm_password').keyup(function() {
+    $('#confirm_password,#password-input').keyup(function() {
         var pass = $('#password-input').val();
         var cpass = $('#confirm_password').val();
         if (cpass == "") {
@@ -108,22 +153,21 @@
             $('#confirm_password').attr({
                 class: 'form-control py-4'
             });
-            $('#submit').prop('disabled', false);
+            
         } else if (pass != cpass) {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-invalid'
 
             });
-            $('#submit').prop('disabled', true);
+          
         } else {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-valid'
             });
-            $('#submit').prop('disabled', false);
+            
         }
     });
-
-    
+   
 </script>
 
 </html>
@@ -133,7 +177,7 @@ require '../../connect/func_pass.php';
 require '../../connect/alert.php';
 
 if (isset($_POST['submit'])) {
-   
+
     /// data
     $userdata = new registra();
     $card = preg_replace('/[-]/i', '', $_POST['card']);
@@ -141,15 +185,14 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $username = $_POST['username'];
-    $password = $_POST['password-input
-    '];
+    $password = $_POST['password-input'];
     /// password
     $sql = new Setpwd();
 
     $encode = $sql->encode($password); // เข้ารหัส pass
     $pass_sha = $sql->Setsha256($encode); //เอา pass+user เข้า hmac 
     $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
- 
+
 
     $sql = $userdata->register($card, $fname, $email, $phone, $username, $pwd_hashed);
 

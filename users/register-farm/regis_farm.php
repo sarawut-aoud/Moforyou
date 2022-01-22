@@ -1,7 +1,19 @@
 <?php
 require '../../connect/session_ckeck.php';
+require_once '../../connect/functions.php';
 // api
 require  '../../connect/api_map.php';
+$sql = new farm();
+$id = $_SESSION['id'];
+$fcheck = $sql->checkregisfarm($id);
+
+    // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+$result = mysqli_num_rows($fcheck);
+//ถ้าไม่มีส่งไปหน้าลงทะเบียน
+if (!empty($result)) {
+   echo "<script>window.location='../main/_setting';</script>";
+} else {
+
 
 
 ?>
@@ -41,7 +53,8 @@ require  '../../connect/api_map.php';
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form>
+                                    <form method="POST">
+                                        
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="farmname">ชื่อฟาร์ม</label>
@@ -52,11 +65,11 @@ require  '../../connect/api_map.php';
                                                 <textarea type="text" class="form-control" id="address" name="address" placeholder="ที่อยู่"></textarea>
                                             </div>
                                             <div class="row">
-
+                                                
                                                 <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="province">จังหวัด</label>
-                                                        <select class="form-control select2" id="provinces">
+                                                        <select class="form-control select2" id="provinces" name="provinces">
                                                             <option selected="selected">-กรุณาเลือกจังหวัด-</option>
                                                             <?php foreach ($map as $values_prov) { ?>
                                                                 <option value="<?php echo $values_prov->id; ?>"><?php echo $values_prov->name_th; ?></option>
@@ -68,21 +81,19 @@ require  '../../connect/api_map.php';
                                                 <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="amphures">อำเภอ</label>
-                                                        <select class="form-control select2" id="amphures" disabled>
+                                                        <select class="form-control select2" id="amphures" name="amphures" disabled>
                                                             <!-- <option selected="selected">อำเภอ</option> -->
-
                                                         </select>
                                                     </div>
                                                 </div>
-                                                 <div class="col-xl-4 col-md-12 col-sm-12">
+                                                <div class="col-xl-4 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="district">ตำบล</label>
                                                         <select class="form-control select2" id="districts" name="districts" disabled>
-                                                           
-
+                                                            <!-- <option selected="selected">อำเภอ</option> -->
                                                         </select>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </div>
 
 
@@ -117,13 +128,21 @@ require  '../../connect/api_map.php';
 
 </html>
 <?php
-    require_once '../connect/functions.php';
-    require_once '../connect/alert.php';
 
-if(isset($_POST['submit'])){
+require_once '../../connect/alert.php';
+
+if (isset($_POST['submit'])) {
+    $sql = new farm();
+
     $farmame = trim($_POST['farmname']);
-    $address = $_POST['address'];
+    $address = rtrim($_POST['address']);
     $tombon_id = $_POST['districts'];
-    //
+    $farmmer_id = $_SESSION['id'];
+    $query  = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
+    
+    if( $query){
+        echo success_1('เพิ่ม','../main/_setting');
+    }
+}
 }
 ?>

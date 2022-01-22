@@ -84,14 +84,10 @@ class farmer extends Database
 class farm extends Database
 {
     // Resgistration Farm
-    public function registerfarm()
+    public function registerfarm($farmname,$address,$district,$farmmer_id)
     {
-        $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm
-        ()
-        VALUES
-        ()
-        
-        ");
+        $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm(farmname,address,district_id,farmmer_id)
+        VALUES('$farmname','$address','$district','$farmmer_id')");
         return $regfarm;
     }
     // Check Resgistration Farm

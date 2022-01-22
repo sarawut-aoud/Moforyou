@@ -102,12 +102,15 @@ if (isset($_POST['username'])) {
             if (mysqli_num_rows($result) == 1) {
                 $row = mysqli_fetch_array($result);
                 $encode = $sql->encode($password); // เข้ารหัส password
-                $pass_sha = $sql->Setsha256($encode); //เอา ชื่อ + pass เข้า hmac 
+                $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
                 if (password_verify($pass_sha, $row['password'])) { // เปรียบเทียบ password ที่รับค่า และ password from db
                     // Select data จาก Username or Email
                     session_start();
                     $_SESSION["id"] =  $row['id'];
                     $_SESSION["fullname"] = $row['fullname'];
+                    $_SESSION["National_ID"] = $row=['card'];
+                    $_SESSION["phone"] = $row=['phone'];
+                    $_SESSION["email"] = $row=['email'];
                     $_SESSION["user"] = $username;
                     echo success_1("Login Sucessful !", "../../users/main/user_index");
                     exit();
