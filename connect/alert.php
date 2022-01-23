@@ -1,4 +1,34 @@
 <?php
+function success_toast($msg, $redirect)
+{
+  return "<script>
+ 
+  toastr.options = {
+    'closeButton': true,
+    'newestOnTop': false,
+    'progressBar': true,
+    'positionClass': 'toast-top-right',
+    'preventDuplicates': false,
+    'onclick': null,
+    'showDuration': '300',
+    'hideDuration': '1000',
+    'timeOut': '5000',
+    'extendedTimeOut': '1000',
+    'showEasing': 'swing',
+    'hideEasing': 'linear',
+    'showMethod': 'fadeIn',
+    'hideMethod': 'fadeOut'
+  }
+ 
+  toastr.success('$msg', {
+    timeOut: 5000
+    // Redirect 
+    onHidden: function() {
+        window.location.href = '$redirect';
+    }});
+          </script>";
+}
+
 
 //Toast Alert
 function success_1($msg, $redirect)
@@ -33,7 +63,7 @@ function error_1($msg)
            })
      </script>";
 }
-function error_2($msg,$text)
+function error_2($msg, $text)
 {
   return "<script>
            const Toast = Swal.mixin({
@@ -49,7 +79,8 @@ function error_2($msg,$text)
            })
      </script>";
 }
-function warning($msg){
+function warning($msg)
+{
   return "<script>
   const Toast = Swal.mixin({
      toast: true,
@@ -106,9 +137,9 @@ function success_h3($msg, $redirect = '')
     </script>";
 }
 
-function error($msg, $redirect )
+function error($msg, $redirect)
 {
- 
+
   return "<script>
     Swal.fire({
         icon: 'warning',
