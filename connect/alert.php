@@ -1,36 +1,6 @@
 <?php
-function success_toast($msg, $redirect)
-{
-  return "<script>
- 
-  toastr.options = {
-    'closeButton': true,
-    'newestOnTop': false,
-    'progressBar': true,
-    'positionClass': 'toast-top-right',
-    'preventDuplicates': false,
-    'onclick': null,
-    'showDuration': '300',
-    'hideDuration': '1000',
-    'timeOut': '5000',
-    'extendedTimeOut': '1000',
-    'showEasing': 'swing',
-    'hideEasing': 'linear',
-    'showMethod': 'fadeIn',
-    'hideMethod': 'fadeOut'
-  }
- 
-  toastr.success('$msg', {
-    timeOut: 5000
-    // Redirect 
-    onHidden: function() {
-        window.location.href = '$redirect';
-    }});
-          </script>";
-}
 
-
-//Toast Alert
+//Toast Alert Sweetalert
 function success_1($msg, $redirect)
 {
   return "<script>
@@ -156,26 +126,4 @@ function error($msg, $redirect)
     </script>";
 }
 
-function error_h3($msg, $redirect = '')
-{
-  $direction = '';
-  if (empty($redirect)) {
-    $direction = "window.history.back();";
-  } else {
-    $direction = "window.location = '$redirect'";
-  }
 
-  return "<script>
-    Swal.fire({
-        title: '<h3>$msg</h3>',
-        text: '',
-        type: 'error',
-        //showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        //cancelButtonColor: '#d33',
-        confirmButtonText: 'ตกลง'
-      }).then((result) => {
-        $direction
-      })
-    </script>";
-}
