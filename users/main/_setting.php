@@ -338,12 +338,14 @@ if (isset($_POST['submit_pass'])) {
     $encode = $pwd->encode($password_new);
     $pass_sha = $pwd->Setsha256($encode);
     $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
+    
+    
     $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
     if ($updatepass) {
         echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
     }
     // if (empty($pwdconfrim)) {
-
+        
     //     if ($updatepass) {
 
     //     }

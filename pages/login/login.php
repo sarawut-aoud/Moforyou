@@ -78,6 +78,7 @@ ob_start();
 <?php
 
 require '../../connect/alert.php';
+require_once '../../connect/toastr';
 require '../../connect/func_pass.php';
 ob_start();
 
@@ -112,7 +113,7 @@ if (isset($_POST['username'])) {
                     $_SESSION["phone"] = $row=['phone'];
                     $_SESSION["email"] = $row=['email'];
                     $_SESSION["user"] = $username;
-                    echo success_1("Login Sucessful !", "../../users/main/user_index");
+                     echo success_toast("Login Sucessful !", $_SESSION["fullname"] ,"../../users/main/user_index");
                     exit();
                 } else {
                     echo error_2("รหัสผ่านผิด โปรดลองอีกครั้ง", '');
