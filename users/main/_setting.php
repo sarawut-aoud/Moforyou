@@ -47,7 +47,7 @@ $result2 = mysqli_fetch_object($farm);
             <!-- Main content -->
             <div class="content">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mb-5">
                         <div class="col-lg-6">
                             <div class="card card-info">
                                 <div class="card-header">
@@ -65,11 +65,17 @@ $result2 = mysqli_fetch_object($farm);
                                                 <img src="<?php echo "../../dist/img/user_upload/$result->picture"; ?>" class="rounded w-100">
                                             <?php
                                             } else { ?>
-                                                <img src="../../dist/img/user-01.jpg" class="rounded card-img-top  w-25" alt="image">
+
+                                                <img id="imgControl1" src="../../dist/img/user-01.jpg" class="rounded card-img-top  w-25" alt="image">
+
+                                                <div id="imgControl" class="d-none">
+                                                    <img id="imgUpload" class="rounded mx-auto d-block h-50 w-50">
+                                                </div>
+
                                             <?php } ?>
                                         </div>
                                         <div class="form-group d-flex justify-content-center">
-                                            <input type="file" class="form-control form-control-sm mt-2 col-6 " id="file" name="file" accept="image/*;capture=camera">
+                                            <input type="file" class="form-control form-control-sm mt-2 col-6 " id="file" name="file" accept="image/*;capture=camera" onchange="readURL(this)">
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
@@ -93,6 +99,7 @@ $result2 = mysqli_fetch_object($farm);
 
                                     <div class="card-footer text-end">
                                         <button type="submit" id="submit_farmer" name="submit_farmer" class="btn btn-info">ยืนยัน</button>
+                                        <button type="reset" onclick="reset()" class="btn btn-secondary">reset</button>
                                     </div>
                                 </form>
                             </div>
@@ -138,8 +145,8 @@ $result2 = mysqli_fetch_object($farm);
                                 </form>
                             </div>
                             <div class="row">
-                                <div class="col">
-                                    <div class="card card-warning">
+                                <div class="col mb-3">
+                                    <div class="card card-warning mb-5">
                                         <div class="card-header">
                                             <h3 class="card-title">แก้ไขรหัสผ่าน</h3>
                                         </div>
@@ -165,7 +172,9 @@ $result2 = mysqli_fetch_object($farm);
                                                         </div>
                                                     </div>
                                                     <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
-                                                    <small class="form-text text-muted mt-2 " id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                                    <p>
+                                                        <small class="form-text text-muted mt-2 " id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                                    </p>
                                                     <small>
                                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
                                                             <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -211,6 +220,22 @@ $result2 = mysqli_fetch_object($farm);
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
 <script src="../../dist/js/check_pwd_strong.js"></script>
 <script>
+
+    function readURL(input) {
+        if (input.files[0]) {
+            let reader = new FileReader();
+            document.querySelector('#imgControl').classList.replace("d-none", "d-block");
+            $('#imgControl1').attr({
+                class: 'd-none'
+            });
+            reader.onload = function(e) {
+                let element = document.querySelector('#imgUpload');
+                element.setAttribute("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    }
     // Check Password
     function checkpass(val) {
         $.ajax({
@@ -276,7 +301,8 @@ $result2 = mysqli_fetch_object($farm);
 <?php
 
 require_once '../../connect/resize.php';
-require_once '../../connect/alert.php';
+// require_once '../../connect/alert.php';
+require_once '../../connect/toastr.php';
 require_once '../../connect/func_pass.php';
 
 //todo: แก้ไขข้อมูลส่วนตัว
@@ -284,6 +310,7 @@ if (isset($_POST['submit_farmer'])) {
     $id = $_SESSION['id'];
     $fname = $_POST['fname'];
     $email = $_POST['email'];
+    $picture = $_FILES['file']['tmp_name'];
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $sql = new farmer();
 
@@ -297,22 +324,26 @@ if (isset($_POST['submit_farmer'])) {
         return $targetLayer;
     }
 
-    //todo: check ว่ามีรูปภาพหรือไม่
-    if (!empty($picture)) {
-        $sourceProperties = getimagesize($picture);
-        $fileNewName = $time;
-        $folderPath = "../../dist/img/user_img/";
-        $ext = $_FILES['file']['name'];
-        $imageType = $sourceProperties[2];
-
-        require_once '../../connect/resize.php';
-        echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
-        copy($specpic, "../../dist/img/user_upload/" . $ext);
-        $sql = $sql->updatefarmmer_pic($id, $fname, $phone, $email, $ext);
-        echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
+    if (empty($fname) && empty($email) && empty($phone)) {
+        echo warning_toast('โปรดระบุข้อมูลส่วนตัวให้ครบ');
     } else {
-        $query = $sql->updatefarmmer($id, $fname, $phone, $email);
-        echo success_1("แก้ไขข้อมูลสำเร็จ", "./_setting");
+        //todo: check ว่ามีรูปภาพหรือไม่
+        if (!empty($picture)) {
+            $sourceProperties = getimagesize($picture);
+            $fileNewName = $time;
+            $folderPath = "../../dist/img/user_img/";
+            $ext = $_FILES['file']['name'];
+            $imageType = $sourceProperties[2];
+
+            require_once '../../connect/resize.php';
+            echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+            copy($picture, "../../dist/img/user_upload/" . $ext);
+            $sql = $sql->updatefarmmer_pic($id, $fname, $phone, $email, $ext);
+            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting");
+        } else {
+            $query = $sql->updatefarmmer($id, $fname, $phone, $email);
+            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting");
+        }
     }
 }
 //todo แก้ไข้ฟาร์ม
@@ -320,11 +351,12 @@ if (isset($_POST['submit_farm'])) {
     $id = $_SESSION['id'];
     $farmname = trim($_POST['farmname']);
     $sql = new farm();
-    $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
-    if ($query) {
-        echo success('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting');
+
+    if (!empty($farmname)) {
+        $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
+        echo success_toasts('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting');
     } else {
-        echo warning("โปรดลองอีกครั้ง");
+        echo warning_toast("โปรดลองอีกครั้ง");
     }
 }
 // todo: แก้ไข้ password
@@ -338,22 +370,13 @@ if (isset($_POST['submit_pass'])) {
     $encode = $pwd->encode($password_new);
     $pass_sha = $pwd->Setsha256($encode);
     $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
-    
-    
-    $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
-    if ($updatepass) {
-        echo success_1("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
+
+    if (empty($password_new) && empty($pwdconfrim)) {
+        echo warning_toast('โปรดกรอกรหัสผ่าน');
+    } else {
+        $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
+        echo success_toasts("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
     }
-    // if (empty($pwdconfrim)) {
-        
-    //     if ($updatepass) {
-
-    //     }
-    // } else {
-    //     echo warning("โปรดลองอีกครั้ง");
-    // }
-
-
 }
 
 

@@ -77,8 +77,7 @@ ob_start();
 </html>
 <?php
 
-require '../../connect/alert.php';
-require_once '../../connect/toastr';
+require_once '../../connect/toastr.php';
 require '../../connect/func_pass.php';
 ob_start();
 
@@ -116,11 +115,11 @@ if (isset($_POST['username'])) {
                      echo success_toast("Login Sucessful !", $_SESSION["fullname"] ,"../../users/main/user_index");
                     exit();
                 } else {
-                    echo error_2("รหัสผ่านผิด โปรดลองอีกครั้ง", '');
+                    echo warning_toast("รหัสผ่านผิด โปรดลองอีกครั้ง");
                     exit();
                 }
             } else {
-                echo error_1("ฃื่อเข้าใช้งานผิด โปรดลองอีกครั้ง");
+                echo warning_toast("ฃื่อเข้าใช้งานผิด โปรดลองอีกครั้ง");
                 exit();
             }
         } else {
@@ -129,15 +128,15 @@ if (isset($_POST['username'])) {
                 $_SESSION["id"] = $username;
                 $_SESSION["user"] = $username;
                 $_SESSION["fullname"] = "Sarawut Aoudkla";
-                echo success_1("Login Sucessful !", "../../admin/main/admin_index");
+                echo success_toast("Login Sucessful !", $_SESSION["fullname"], "../../admin/main/admin_index");
                 exit();
             } else {
-                echo error_1("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
+                echo warning_toast("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");
                 exit();
             }
         }
     } else {
-        echo warning("โปรดกรอกข้อมูลเข้าใช้งาน");
+        echo warning_toast("โปรดกรอกข้อมูลเข้าใช้งาน");
         exit();
     }
 }

@@ -127,21 +127,20 @@ if (!empty($result)) {
     <script>
         $(document).ready(function() {
             $('#districts').change(function() {
-                
+
                 if ($(this).val() === '') {
                     $('#submit').prop('disabled', true);
-                }else{
+                } else {
                     $('#submit').prop('disabled', false);
                 }
 
             });
         });
-       
     </script>
 
     </html>
 <?php
-
+    require_once '../../connect/toastr.php';
     require_once '../../connect/alert.php';
 
     if (isset($_POST['submit'])) {
@@ -151,10 +150,13 @@ if (!empty($result)) {
         $address = rtrim($_POST['address']);
         $tombon_id = $_POST['districts'];
         $farmmer_id = $_SESSION['id'];
-        $query  = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
 
-        if ($query) {
-            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย', '../main/_setting');
+
+        if (!empty($farmame) && !empty($address) && !empty($tombon_id)) {
+            $query  = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
+            echo success_toasts('บันทึกข้อมูลฟาร์มเรียบร้อย','../main/_setting');
+        } else {
+            warning_toast('โปรดกรอกข้อมูลให้ครบ');
         }
     }
 }

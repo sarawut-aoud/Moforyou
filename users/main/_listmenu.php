@@ -40,7 +40,7 @@ if (empty($result)) {
                 <div class="content-header">
                     <div class="container">
                         <!-- Manage -->
-                        <div class="row  ">
+                        <div class="row">
                             <div class="col">
                                 <div class="card ">
                                     <div class="card-body">
@@ -79,7 +79,7 @@ if (empty($result)) {
                         <!-- ./row -->
 
                         <!-- Report -->
-                        <div class="row  ">
+                        <div class="row  mb-5">
                             <div class="col">
                                 <div class="card ">
                                     <div class="card-body">

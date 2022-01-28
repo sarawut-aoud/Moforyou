@@ -22,8 +22,8 @@
         //cancelButtonColor: '#d33',
         confirmButtonText: 'ตกลง'
       }).then((result) => {
-        window.location = '../register-farm/regis_farm'
+        window.location = '../register-farm/regis_farm';
       })
-    </script>;
+    </script>
    </body>
    </html>
