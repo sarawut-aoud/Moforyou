@@ -304,7 +304,7 @@ require_once '../../connect/resize.php';
 // require_once '../../connect/alert.php';
 require_once '../../connect/toastr.php';
 require_once '../../connect/func_pass.php';
-
+// upload ไม่ได้
 //todo: แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
     $id = $_SESSION['id'];
