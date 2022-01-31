@@ -61,27 +61,27 @@ if (empty($result)) {
                 <div class="content">
                     <div class="container">
                         <div class="row mb-5">
-                            <div class="col-lg-6">
+                            <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header card-outline card-info">
                                         <h2 class="text-center m-0">ยินดีตอนรับ</h2>
                                     </div>
                                     <div class="card-body ">
                                         <div class="justify-content-between">
-                                        <p class="card-text ">
-                                        คุณ :  <?php Echo $_SESSION['fullname'];?>
-                                       
-                                        </p>
-                                        <p>
-                                        ฟาร์ม : 
-                                        </p>
+                                            <p class="card-text ">
+                                                คุณ : <?php echo $_SESSION['fullname']; ?>
+
+                                            </p>
+                                            <p>
+                                                ฟาร์ม :
+                                            </p>
                                         </div>
-                                       
 
                                     </div>
 
                                 </div>
-
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
                                         <h5 class="card-title">Card title</h5>

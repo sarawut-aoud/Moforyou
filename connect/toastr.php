@@ -90,10 +90,7 @@
          '',
          {
            timeOut: 1000,
-           fadeOut: 1000,
-           onHidden: function () {
-               window.location.reload();
-             }
+           fadeOut: 1000
          }
        );
                  </script>";
