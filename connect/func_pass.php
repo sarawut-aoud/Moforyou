@@ -23,18 +23,6 @@ class Setpwd {
         return $hash256;
     }
 
-    // $name = Setvaliable("tar");
-    // echo $name;
-    // $pass = hash256('1234',$name);
-    // echo $pass;
-
-    // $pwd_hashed = password_hash($pass, PASSWORD_ARGON2I);
-
-
-    // if (password_verify($pass,$pwd_hashed)){
-    //   echo "password match";
-    // }else {
-    //   echo "password no match";
-    // }
+    
 
 }
