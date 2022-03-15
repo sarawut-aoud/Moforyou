@@ -127,16 +127,15 @@ if (!empty($result)) {
     <script>
         $(document).ready(function() {
             $('#districts').change(function() {
-                
+
                 if ($(this).val() === '') {
                     $('#submit').prop('disabled', true);
-                }else{
+                } else {
                     $('#submit').prop('disabled', false);
                 }
 
             });
         });
-       
     </script>
 
     </html>
@@ -151,7 +150,6 @@ if (!empty($result)) {
         $address = rtrim($_POST['address']);
         $tombon_id = $_POST['districts'];
         $farmmer_id = $_SESSION['id'];
-        $query  = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
 
         if ($query) {
             echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย','', '../main/_setting');

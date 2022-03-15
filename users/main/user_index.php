@@ -6,14 +6,14 @@ $id = $_SESSION['id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
 
-    // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+// เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
 $result = mysqli_num_rows($fcheck);
 //ถ้าไม่มีส่งไปหน้าลงทะเบียน
 if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-    
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -31,11 +31,11 @@ if (empty($result)) {
             width: 100%;
         }
 
-        .fas {
+        .far {
             color: white;
         }
 
-        .fas:hover {
+        .far:hover {
             color: saddlebrown;
         }
     </style>
@@ -60,29 +60,34 @@ if (empty($result)) {
                 <!-- Main content -->
                 <div class="content">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6">
+                        <div class="row mb-5">
+                            <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-
-                                        <p class="card-text">
-                                            Some quick example text to build on the card title and make up the bulk of the card's
-                                            content.
-                                        </p>
-
-                                        <a href="#" class="card-link">Card link</a>
-                                        <a href="#" class="card-link">Another link</a>
+                                    <div class="card-header card-outline card-info">
+                                        <h2 class="text-center m-0">ยินดีตอนรับ</h2>
                                     </div>
-                                </div>
+                                    <div class="card-body ">
+                                        <div class="justify-content-between">
+                                            <p class="card-text ">
+                                                คุณ : <?php echo $_SESSION['fullname']; ?>
 
+                                            </p>
+                                            <p>
+                                                ฟาร์ม :
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
                                         <h5 class="card-title">Card title</h5>
 
                                         <p class="card-text">
-                                           <?php  echo $_SESSION['fullname']; ?>
-                                        
+
                                         </p>
                                         <a href="#" class="card-link">Card link</a>
                                         <a href="#" class="card-link">Another link</a>
@@ -103,7 +108,7 @@ if (empty($result)) {
                                     </div>
                                 </div>
 
-                                <div class="card card-primary card-outline">
+                                <div class="card card-primary card-outline ">
                                     <div class="card-header">
                                         <h5 class="card-title m-0">Featured</h5>
                                     </div>
