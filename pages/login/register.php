@@ -80,8 +80,8 @@
                                                 <input class="password-strength__input form-control py-4" type="password" id="confirm_password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="myFunction()">
-                                                        <span  data-visible="hidden">
-                                                            <i id="eyeshow" name="eyeshow"class="fas fa-eye-slash"></i>
+                                                        <span data-visible="hidden">
+                                                            <i id="eyeshow" name="eyeshow" class="fas fa-eye-slash"></i>
                                                         </span>
                                                     </button>
                                                 </div>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
-                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 6 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
                                     <small>
                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
                                             <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -119,7 +119,7 @@
 <script>
     function myFunction() {
         var x = document.getElementById("confirm_password");
-      
+
         if (x.type === "password") {
             x.type = "text";
             $('#eyeshow').attr({
@@ -144,30 +144,30 @@
             }
         });
     };
+
     // Check Confrim Password
     $('#confirm_password,#password-input').keyup(function() {
         var pass = $('#password-input').val();
         var cpass = $('#confirm_password').val();
+
         if (cpass == "") {
 
             $('#confirm_password').attr({
                 class: 'form-control py-4'
             });
-            
+
         } else if (pass != cpass) {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-invalid'
-
             });
-          
+
         } else {
             $('#confirm_password').attr({
                 class: 'form-control py-4 is-valid'
             });
-            
+
         }
     });
-   
 </script>
 
 </html>
@@ -186,6 +186,7 @@ if (isset($_POST['submit'])) {
     $phone = preg_replace('/[-]/i', '', $_POST['phone']);
     $username = $_POST['username'];
     $password = $_POST['password-input'];
+    $con_password = $_POST['confirm_password'];
     /// password
     $sql = new Setpwd();
 
@@ -193,15 +194,18 @@ if (isset($_POST['submit'])) {
     $pass_sha = $sql->Setsha256($encode); //เอา pass+user เข้า hmac 
     $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
 
-
-    $sql = $userdata->register($card, $fname, $email, $phone, $username, $pwd_hashed);
-
-    if ($sql) {
-        echo success_1("Successful!!", "./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
-
+    if ($con_password != $password) {
+         echo warning("ยืนยัน Password ไม่ถูกต้อง");
     } else {
-        echo "<script>alert('Something went wrong! Please try again.');</>";
-        echo "<script>window.location.href='./register'</script>";
+        $sql = $userdata->register($card, $fname, $email, $phone, $username, $pwd_hashed);
+
+        if ($sql) {
+            echo success_1("Successful!!", "./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
+
+        } else {
+            echo "<script>alert('Something went wrong! Please try again.');</>";
+            echo "<script>window.location.href='./register'</script>";
+        }
     }
 }
 ?>

@@ -69,7 +69,7 @@
                                                 <th>Platform(s)</th>
                                                 <th>Engine version</th>
                                                 <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,7 +81,7 @@
                                                 <td>Win 95+</td>
                                                 <td> 4</td>
                                                 <td>X</td>
-                                                <td>X</td>
+                                               
                                             </tr>
                                         </tbody>
                                         <tfoot>
@@ -91,7 +91,7 @@
                                                 <th>Platform(s)</th>
                                                 <th>Engine version</th>
                                                 <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
+                                               
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -117,24 +117,7 @@
     <!-- ./wrapper -->
 
 </body>
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
+<script src="../../dist/js/datatableprint.js"></script>
+
 
 </html>

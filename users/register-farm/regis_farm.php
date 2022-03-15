@@ -142,7 +142,7 @@ if (!empty($result)) {
     </html>
 <?php
 
-    require_once '../../connect/alert.php';
+    require_once '../../connect/toastr.php';
 
     if (isset($_POST['submit'])) {
         $sql = new farm();
@@ -154,7 +154,7 @@ if (!empty($result)) {
         $query  = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
 
         if ($query) {
-            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย', '../main/_setting');
+            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย','', '../main/_setting');
         }
     }
 }

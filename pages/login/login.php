@@ -78,7 +78,7 @@ ob_start();
 <?php
 
 require '../../connect/alert.php';
-require_once '../../connect/toastr';
+ require_once '../../connect/toastr.php';
 require '../../connect/func_pass.php';
 ob_start();
 

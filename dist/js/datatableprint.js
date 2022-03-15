@@ -11,7 +11,7 @@ $(document).ready(function () {
     responsive: true,
     lengthChange: false,
     autoWidth: false,
-    dom: "Bfrtip",
+    dom :'Btrip',
     buttons: {
       dom: {
         button: {
