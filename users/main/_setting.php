@@ -23,7 +23,7 @@ $result2 = mysqli_fetch_object($farm);
     <?php require '../../build/script.php';
 
     ?>
-   
+
     <link rel="stylesheet" href="./_password.css">
 </head>
 
@@ -77,40 +77,9 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group d-flex justify-content-center">
                                             <input type="file" class="form-control form-control-sm mt-2 col-6 " id="file" name="file" accept="image/*;capture=camera" onchange="readURL(this)">
-                                            <button type="button" class="btn btn-primary modalTrigger" data-toggle="modal" data-target="#exampleModal">
-                                                Launch modal
-                                            </button>
+                                           
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="indicator"></div>
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="media mb-3">
-                                                                
-                                                                <div class="media-body">
-                                                                    <textarea class="autosize" placeholder="add..." rows="1" id="note" data-emoji="true"></textarea>
-                                                                    <div class="position-relative">
-                                                                        <input type="file" class="d-none" accept="audio/*|video/*|video/x-m4v|video/webm|video/x-ms-wmv|video/x-msvideo|video/3gpp|video/flv|video/x-flv|video/mp4|video/quicktime|video/mpeg|video/ogv|.ts|.mkv|image/*|image/heic|image/heif" onchange="previewFiles()" id="inputUp" multiple>
-                                                                        <a class="mediaUp mr-4"><i class="material-icons mr-2" data-tippy="add (Video, Audio, Photo)" onclick="trgger('inputUp')">perm_media</i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row col-md-12 ml-auto mr-auto preview"></div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                                                            <span class="btn btn-info btn-sm" disabled>Save changes</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
@@ -126,7 +95,7 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">บัตรประชาชน</label>
-                                            <input type="tel" class="form-control" disabled value="<?php echo $result->card; ?>">
+                                            <input type="tel" class="form-control" disabled value="<?php echo substr($result->card,0,7)."******"; ?>">
                                         </div>
 
                                     </div>
@@ -205,9 +174,13 @@ $result2 = mysqli_fetch_object($farm);
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
+                                                    <small class="password-strength__error text-danger js-hidden">This
+                                                        symbol is not allowed!</small>
                                                     <p>
-                                                        <small class="form-text text-muted mt-2 " id="passwordHelp">Add 9 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                                        <small class="form-text text-muted mt-2 " id="passwordHelp">Add
+                                                            9 charachters or more, lowercase letters, uppercase letters,
+                                                            numbers and symbols to make the password really
+                                                            strong!</small>
                                                     </p>
                                                     <small>
                                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
@@ -250,16 +223,16 @@ $result2 = mysqli_fetch_object($farm);
                 <?php require '../sub/footer.php'; ?>
             </div>
             <!-- ./wrapper -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>    
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-            <script src="../../plugins/modal_img/autosize.min.js"></script>    
-            <script src="../../plugins/modal_img/index.all.min.js"></script>   
+            <script src="../../plugins/modal_img/autosize.min.js"></script>
+            <script src="../../plugins/modal_img/index.all.min.js"></script>
             <script src="../../plugins/modal_img/iziToast.min.js"></script>
-            <script src="../../plugins/modal_img/perfect-scrollbar.min.js"></script>   
-            <script src="../../plugins/modal_img/popper.min.js"></script>  
+            <script src="../../plugins/modal_img/perfect-scrollbar.min.js"></script>
+            <script src="../../plugins/modal_img/popper.min.js"></script>
 
-            <script src="../../dist/js/modal_img.js"></script>    
+            <script src="../../dist/js/modal_img.js"></script>
             <script src="../../dist/js/phone.js"></script>
             <script src="../../dist/js/check_pwd_strong.js"></script>
             <script>
@@ -300,7 +273,8 @@ $result2 = mysqli_fetch_object($farm);
                 $('#confrim_passnew,#password-input,#bar').keyup(function() {
                     var pass = $('#password-input').val();
                     var cpass = $('#confrim_passnew').val();
-                    let value = document.getElementById("bar").getAttribute("class"); //?  get class มาเก็บไว้ใน value
+                    let value = document.getElementById("bar").getAttribute(
+                        "class"); //?  get class มาเก็บไว้ใน value
 
                     if (cpass == "") {
                         $('#confrim_passnew').attr({
@@ -317,7 +291,8 @@ $result2 = mysqli_fetch_object($farm);
                         $('#confrim_passnew').attr({
                             class: 'form-control  is-valid'
                         });
-                        if (value == 'password-strength__bar progress-bar bg-danger') { //todo: check value กับ class ที่เอามาตรวจสอบ
+                        if (value ==
+                            'password-strength__bar progress-bar bg-danger') { //todo: check value กับ class ที่เอามาตรวจสอบ
                             $('#submit_pass').prop('disabled', true);
                         } else {
                             $('#submit_pass').prop('disabled', false);

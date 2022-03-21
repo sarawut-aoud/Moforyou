@@ -1,6 +1,9 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
+
+$sql = new farmer();
+$query = $sql->select_allfarmer('');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,42 +75,37 @@ require '../../connect/functions.php';
                                                 <th>#</th>
                                                 <th>ชื่อเจ้าของฟาร์ม</th>
                                                 <th>เบอร์โทร</th>
+                                                <th>อีเมล</th>
+                                                <th>บัตรประชาชน</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>0979-90900</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                            <?php while ($row = $query->fetch_object()) { ?>
+                                                <tr>
+                                                    <td style="width: 10%;"><?php echo $row->id; ?></td>
+                                                    <td><?php echo $row->fullname; ?></td>
+                                                    <td><?php echo $row->phone; ?></td>
+                                                    <td><?php echo $row->email; ?></td>
+                                                    <td><?php echo substr($row->card, 0, 7) . "******"; ?></td>
+                                                    <td>
+                                                        <center>
+                                                            <!-- <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $_SESSION["id"] ?>"> -->
+                                                            <a class="btn btn-info edit_data btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-trash-alt" title="ลบข้อมูล"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
 
-                                                        </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                                </tr>
+                                            <?php  } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ชื่อเจ้าของฟาร์ม</th>
-                                                <th>เบอร์โทร</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -122,6 +120,7 @@ require '../../connect/functions.php';
                 <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
+            <?php require_once '../modal_reserveAll.php'; ?>
         </div>
         <!-- /.content-wrapper -->
         <?php require '../sub/fooster.php'; ?>
@@ -131,5 +130,77 @@ require '../../connect/functions.php';
 
 </body>
 <script src="../../dist/js/datatable.js"></script>
+<script>
+    //edit
+    // . = class
+    // # = id 
+    $(document).on('click', '.btnEdits', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('id');
+        var txt_head = 'Edit Farmer'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../update-form/_farmer.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                id: id,
+                function: 'editfarmer',
+            },
+            success: function(rs) {
+
+                $("#modalEdit").modal("show");
+                $("#modaltextcenter").html(txt_head)
+                $("#modalfullname").val(rs.fullname);
+                $("#modalphone").val(rs.phone);
+                $("#modalemail").val(rs.email);
+
+                var personid = rs.person_id;
+
+                $("#modalpersonid").val(personid.substr(0, 7) + "******");
+
+            }
+        })
+
+    });
+    // delete
+    $(document).on('click', '.btnDels', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('id');
+
+        Swal.fire({
+            title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก",
+        }).then((btn) => {
+            if (btn.isConfirmed) {
+                $.ajax({
+                    dataType: 'JSON',
+                    type: "get",
+                    url: "../update-form/_farmer.php",
+                    data: {
+                        id: id,
+                        function: 'delsfarmer',
+                    },
+                    success: function(result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: result.message,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    },
+                });
+            }
+        })
+    });
+</script>
 
 </html>

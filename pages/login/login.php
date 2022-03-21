@@ -108,11 +108,12 @@ if (isset($_POST['username'])) {
                     // Select data จาก Username or Email
                     session_start();
                     $_SESSION["id"] =  $row['id'];
+                    $_SESSION["user"] = $username;
                     $_SESSION["fullname"] = $row['fullname'];
-                    $_SESSION["National_ID"] = $row=['card'];
+                    $_SESSION["person_id"] = $row=['card'];
                     $_SESSION["phone"] = $row=['phone'];
                     $_SESSION["email"] = $row=['email'];
-                    $_SESSION["user"] = $username;
+                    
                      echo success_toast("Login Sucessful !", $_SESSION["fullname"] ,"../../users/main/user_index");
                     exit();
                 } else {

@@ -1,5 +1,5 @@
 <?php
-require_once 'database.php';
+ require_once 'database.php';
 
 //  สมัคร user
 class registra extends Database
@@ -49,6 +49,7 @@ class registra extends Database
 // Farmer
 class farmer extends Database
 {
+    //! login //
     // Check Pass
     public function passavailable($id)
     {
@@ -61,6 +62,23 @@ class farmer extends Database
         $sel_farmer = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
         return $sel_farmer;
     }
+    //! login //
+    //todo Admin manage//
+    public function select_allfarmer($id){
+        if($id == ''){
+            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer  ");
+        }else{
+            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
+        }
+        return $data;
+    }
+    public function dels_farmer($id){
+        $data = mysqli_query($this->dbcon,"DELETE FROM tbl_farmer WHERE id = '$id' ");
+        return $data;
+    }
+    //todo Admin manage//
+
+    //* Farmmer Setting //
     // Update Farmer No picture
     public function updatefarmmer($id, $fname, $phone, $email)
     {
@@ -79,6 +97,8 @@ class farmer extends Database
         $up_pass = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET password = '$password'  WHERE id ='$id' ");
         return $up_pass;
     }
+    //* Farmmer Setting //
+
 }
 // ฟาร์ม
 class farm extends Database

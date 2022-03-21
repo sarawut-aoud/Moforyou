@@ -5,7 +5,7 @@ session_destroy();
 
 echo "<script>
 	window.setTimeout(function() {
-		window.location = '../views/index.php';
+		window.location = '../login/login';
 	 }, 1000);
 </script>";
 ?>
