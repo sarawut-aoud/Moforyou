@@ -128,7 +128,12 @@ class farm extends Database
     //Select
     public function selectfarm($id)
     {
-        $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
+        if($id == ''){
+            $sel_farm = mysqli_query($this->dbcon, "SELECT id,farmname,address,district_id FROM tbl_farm  ");
+        }else{
+            $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
+        }
+       
         return $sel_farm;
     }
 }

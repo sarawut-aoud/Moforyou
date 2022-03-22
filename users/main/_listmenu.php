@@ -88,29 +88,30 @@ if (empty($result)) {
                                         <!-- list Manage -->
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="../report/rep-house" role="button">โรงเรือน</a>
+                                                <a class="btn btn-lg bt_list-1 " href="../report/rep-house" role="button">โรงเรือน</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list" role="button" aria-selected="false">โคเนื้อ</a>
+                                                <a class="btn btn-lg bt_list-1 " href="../report/req-farm" role="button">ฟาร์ม</a>
                                             </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-1 " href="../report/req-herd" role="button">ฝูงโค</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2" href="../report/req-cow" role="button" >โคเนื้อ</a>
+                                            </li>
+                                            
                                             <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list" href="#tab-specise" role="button">สายพันธุ์โคเนื้อ</a>
+                                                <a class="btn btn-lg bt_list-2" href="../report/req-specise" role="button">สายพันธุ์โคเนื้อ</a>
+                                            </li>
+                                          
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2" href="../report/req-breed" role="button">ผสมพันธุ์</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                                <a class="btn btn-lg bt_list " href="../report/req-disease" role="button">โรค/อาการป่วย</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                            </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                            </li>
-
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
-                                            </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list " href="#tab-farm" role="button">ฟาร์ม</a>
+                                                <a class="btn btn-lg bt_list " href="#" role="button">การเจริญเติบโต</a>
                                             </li>
                                         </ul>
 

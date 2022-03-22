@@ -77,13 +77,13 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group d-flex justify-content-center">
                                             <input type="file" class="form-control form-control-sm mt-2 col-6 " id="file" name="file" accept="image/*;capture=camera" onchange="readURL(this)">
-                                           
+
                                             <!-- Modal -->
-                                            
+
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">ชื่อ-นามสกุล</label>
-                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname . $id; ?>">
+                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ-นามสกุล" value="<?php echo $result->fullname  ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -95,7 +95,7 @@ $result2 = mysqli_fetch_object($farm);
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">บัตรประชาชน</label>
-                                            <input type="tel" class="form-control" disabled value="<?php echo substr($result->card,0,7)."******"; ?>">
+                                            <input type="tel" class="form-control" disabled value="<?php echo substr($result->card, 0, 7) . "******"; ?>">
                                         </div>
 
                                     </div>
@@ -328,6 +328,8 @@ require_once '../../connect/func_pass.php';
 // upload ไม่ได้
 //todo: แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
+   
+
     $id = $_SESSION['id'];
     $fname = $_POST['fname'];
     $email = $_POST['email'];
@@ -350,6 +352,7 @@ if (isset($_POST['submit_farmer'])) {
     } else {
         //todo: check ว่ามีรูปภาพหรือไม่
         if (!empty($picture)) {
+            $time = date('Ymdhis');
             $sourceProperties = getimagesize($picture);
             $fileNewName = $time;
             $folderPath = "../../dist/img/user_img/";
@@ -358,7 +361,10 @@ if (isset($_POST['submit_farmer'])) {
 
             require_once '../../connect/resize.php';
             echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+          
+
             copy($picture, "../../dist/img/user_upload/" . $ext);
+
             $sql = $sql->updatefarmmer_pic($id, $fname, $phone, $email, $ext);
             echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting");
         } else {

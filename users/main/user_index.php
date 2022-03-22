@@ -5,7 +5,8 @@ require_once '../../connect/functions.php';
 $id = $_SESSION['id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
-
+$selectdata = $sql->selectfarm($id);
+$result_data = $selectdata->fetch_object();
 // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
 $result = mysqli_num_rows($fcheck);
 //ถ้าไม่มีส่งไปหน้าลงทะเบียน
@@ -73,7 +74,7 @@ if (empty($result)) {
 
                                             </p>
                                             <p>
-                                                ฟาร์ม :
+                                                ฟาร์ม : <?php echo $result_data->farmname; ?>
                                             </p>
                                         </div>
 
@@ -84,13 +85,21 @@ if (empty($result)) {
                             <div class="col-md-6">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="card-title mb-4">
+                                                โคได้กันครั้งล่าสุด
+                                            </h5>
+                                            <h5 class="card-title mb-4">
+                                                วันที่ xx-xx-xxx
+                                            </h5>
+                                        </div>
                                         <p class="card-text">
-
+                                            ตัวผู้ : สีทอง <a href="#" class="card-link">ดูรายละเอียด</a>
                                         </p>
-                                        <a href="#" class="card-link">Card link</a>
-                                        <a href="#" class="card-link">Another link</a>
+                                        <p class="card-text">
+                                            ตัวเมีย : สีแหบ <a href="#" class="card-link"> ดูรายละเอียด</a>
+                                        </p>
+
                                     </div>
                                 </div><!-- /.card -->
                             </div>
