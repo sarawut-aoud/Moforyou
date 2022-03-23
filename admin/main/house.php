@@ -206,8 +206,7 @@ $query = $sql->selecthouse('');
                     }).then((result) => {
                         $("#modalEdithouse").modal("hide");
                         location.reload();
-                        // $('#frmModalEdit')[0].reset();
-                        // $('#title').focus();
+                       
                     })
                 }
 
