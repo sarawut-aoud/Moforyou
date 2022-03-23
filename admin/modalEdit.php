@@ -1,4 +1,3 @@
-
 <!-- Modal Edit -->
 <form action="" method="POST" id="frmModalEdit">
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -29,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="form-group row">
                         <div class="input-group">
                             <label class="col-md-2 col-form-label">อีเมล :</label>
@@ -50,23 +49,19 @@
                     <!--//? /.html data -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
-                    <button type="submit" id="btnsave" name="btnsave" class="col-md-4 btn btn-warning mt-2 ">ยืนยันการแก้ไข</button>
+                    <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
+                    <button type="submit" title="บันทึกข้อมูล" class="col-md-4 btn btn-warning mt-2 btnsave">ยืนยันการแก้ไข</button>
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" value="" id="modal_ev_id" name="ev_id"/>
-    <input type="hidden" value="" id="modal_eventid" name="eventid"/>
-    <input type="hidden" value="" id="modal_status" name="evstatus"/>
-    <!-- <input type="hidden" value="" id="modal_ro_id" name="ro_id"/>
-    <input type="hidden" value="" id="modal_st_id" name="st_id"/> -->
+    <input type="hidden" value="" id="modal_fid" name="id" />
 </form>
 <!-- Modal Edit -->
 
 
 <!-- Modal Edit house-->
-<form action="" method="POST" id="frmModalEdit">
+<form action="" method="POST" id="frmModal">
     <div class="modal fade" id="modalEdithouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -89,16 +84,59 @@
                     <!--//? /.html data -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
-                    <button type="submit" id="btnsaveRoom" name="btnsave" class="col-md-4 btn btn-warning mt-2 ">ยืนยันการแก้ไข</button>
+                    <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
+                    <button type="submit" title="บันทึกข้อมูล" class="col-md-4 btn btn-warning mt-2 btnsave">ยืนยันการแก้ไข</button>
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" value="" id="modal_ev_id" name="ev_id"/>
-    <input type="hidden" value="" id="modal_eventid" name="eventid"/>
-    <input type="hidden" value="" id="modal_status" name="evstatus"/>
-    <!-- <input type="hidden" value="" id="modal_ro_id" name="ro_id"/>
-    <input type="hidden" value="" id="modal_st_id" name="st_id"/> -->
+    <input type="hidden" value="" id="modal_houseid" name="id" />
+
 </form>
 <!-- Modal Edit -->
+
+
+<!-- Modal Edit herd-->
+<form action="" method="POST" id="frmModal">
+    <div class="modal fade" id="modalEditherd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center text-white bg-info">
+                    <div class="text-center">
+                        <h1 id="modalherd"></h1>
+                    </div>
+                </div>
+                <div class="modal-body" id="modaldata">
+                    <!-- style="overflow-x: scroll;" -->
+                    <!--//? /.html data -->
+                    <div class="form-group row">
+                        <div class="input-group">
+                            <label class="col-md-2 col-form-label">ชื่อฝูง : </label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control " id="herdname" name="herdname" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="input-group">
+                            <label class="col-md-2 col-form-label">ชื่อฝูง : </label>
+                            <div class="col-md-10">
+                                <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" id="house_id">
+                                    <option value="">--เลือกโรงเรือน --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--//? /.html data -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
+                    <button type="submit" title="บันทึกข้อมูล" class="col-md-4 btn btn-warning mt-2 btnsave">ยืนยันการแก้ไข</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="" id="modal_houseid" name="id" />
+
+</form>
+<!-- Modal Edit herd-->

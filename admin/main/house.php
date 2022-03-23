@@ -3,7 +3,7 @@ require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
 $sql = new house();
 $query = $sql->selecthouse('');
-$row = $query->fetch_object();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,24 +80,25 @@ $row = $query->fetch_object();
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td><?php echo $row->id ;?></td>
-                                                <td><?php echo $row->house_name ;?></td>
-                                                <td style="width: 20%;">
-                                                    <center>
-                                                        <a class="btn btn-info btnEdits " title="แก้ไขข้อมูล" id="<?php echo $row->id ;?>">
-                                                            <i class="fas fa-pencil-alt"></i>
-
-                                                        </a>
-                                                        <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id ;?>">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                            <?php while ($row = $query->fetch_object()) { ?>
+                                                <tr>
+                                                    <td><?php echo $row->id; ?></td>
+                                                    <td><?php echo $row->house_name; ?></td>
+                                                    <td style="width: 20%;">
+                                                        <center>
+                                                            <a class="btn btn-info btnEdits " title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                       
+
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -140,17 +141,82 @@ $row = $query->fetch_object();
             url: '../process/_house.php', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
                 id: id,
-                function: 'edithouse',
+                function: 'showedithouse',
             },
             success: function(rs) {
 
                 $("#modalEdithouse").modal("show");
                 $("#modalhouse").html(txt_head)
                 $("#housename").val(rs.house_name);
+                $("#modal_houseid").val(rs.id);
             }
         })
 
     });
+    // modal //
+    $(document).on('click', '.btnsave', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $("#modal_houseid").val();
+        var hname = $("#housename").val();
+
+
+        var txt_head = 'Edit House'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_house.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                hname: hname,
+                id: id,
+                function: 'edithouse',
+            },
+            success: function(result) {
+                if (result.status != 200) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                            icon: 'warning',
+                            title: result.message
+
+                        })
+                        .then((result) => {
+                            $("#housename").focus();
+                            // $("#modalEdit").modal("hide");
+                            // location.reload();
+
+                        })
+                } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: result.message
+
+                    }).then((result) => {
+                        $("#modalEdithouse").modal("hide");
+                        location.reload();
+                        // $('#frmModalEdit')[0].reset();
+                        // $('#title').focus();
+                    })
+                }
+
+            }
+        })
+
+    });
+
+
     // delete
     $(document).on('click', '.btnDels', function(e) {
         e.preventDefault();
@@ -176,13 +242,29 @@ $row = $query->fetch_object();
                         function: 'delshouse',
                     },
                     success: function(result) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: result.message,
-                        }).then((result) => {
-                            location.reload();
-                        })
-                    },
+                        if (result.status == 400) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            })
+                            Toast.fire({
+                                icon: 'warning',
+                                title: result.message
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: result.message,
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+
+
+                    }
+
                 });
             }
         })

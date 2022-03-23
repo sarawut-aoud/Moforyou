@@ -1,6 +1,10 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
+
+$sql = new herd();
+$query = $sql->select_herd('');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,34 +82,27 @@ require '../../connect/functions.php';
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                            <?php while ($row = $query->fetch_object()) { ?>
+                                                <tr>
+                                                    <td><?php echo $row->id; ?></td>
+                                                    <td><?php echo $row->herd_name; ?></td>
+                                                    <td><?php echo $row->house_name; ?></td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-pencil-alt"></i>
 
-                                                        </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ฝูง</th>
-                                                <th>โรงเรือน</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -119,6 +116,7 @@ require '../../connect/functions.php';
                 </div>
                 <!-- /.container-fluid -->
             </section>
+            <?php require_once '../modalEdit.php'; ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -129,5 +127,145 @@ require '../../connect/functions.php';
 
 </body>
 <script src="../../dist/js/datatable.js"></script>
+<script>
+    //edit
+    // . = class
+    // # = id 
+    $(document).on('click', '.btnEdits', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('id');
+        var txt_head = 'Edit Herd'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_herd.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                id: id,
+                function: 'showeditherd',
+            },
+            success: function(rs) {
+              
+                $("#modalEditherd").modal("show");
+                $("#modaltextcenter").html(txt_head)
+                $("#herdname").val(rs.herd_name);
+                $("#modalphone").val(rs.phone);
+                $("#modalemail").val(rs.email);
+                $('#modal_fid').val(rs.id);
+    
+
+            }
+        })
+
+    });
+    // modal //
+    $(document).on('click', '.btnsave', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $("#modal_fid").val();
+        var fname = $("#modalfullname").val();
+        var email = $("#modalemail").val();
+        var phone = $("#modalphone").val();
+
+        var txt_head = 'Edit Farmer'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_herd.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                fname: fname,
+                email: email,
+                phone: phone,
+                id: id,
+                function: 'editherd',
+            },
+            success: function(result) {
+                if (result.status != 200) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                            icon: 'warning',
+                            title: result.message
+
+                        })
+                        .then((result) => {
+                            $("#modalEdit").modal("hide");
+                            location.reload();
+
+                        })
+                } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: result.message
+
+                    }).then((result) => {
+                        $("#modalEditherd").modal("hide");
+                        location.reload();
+                        // $('#frmModalEdit')[0].reset();
+                        // $('#title').focus();
+                    })
+                }
+
+            }
+        })
+
+    });
+
+    // delete
+    $(document).on('click', '.btnDels', function(e) {
+        e.preventDefault();
+
+        
+        var id = $(this).attr('id');
+
+        Swal.fire({
+            title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก",
+        }).then((btn) => {
+            if (btn.isConfirmed) {
+                $.ajax({
+                    dataType: 'JSON',
+                    type: "get",
+                    url: "../process/_herd.php",
+                    data: {
+                        id: id,
+                       
+                        function: 'delsherd',
+                    },
+                    success: function(result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: result.message,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    },
+                });
+            }
+        })
+
+
+
+    });
+</script>
 
 </html>

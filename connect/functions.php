@@ -67,11 +67,16 @@ class farmer extends Database
     public function select_allfarmer($id)
     {
         if ($id == '') {
-            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer  ");
+            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer ORDER BY id ASC  ");
         } else {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
         }
         return $data;
+    }
+    public function update_farmer($id, $fname, $phone, $email)
+    {
+        $update = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET  fullname = '$fname' , phone = '$phone' , email = '$email' WHERE id = '$id'");
+        return $update;
     }
     public function dels_farmer($id)
     {
@@ -165,7 +170,7 @@ class house extends Database
         return $add_house;
     }
     // Update
-    public function updatehouse($hname, $id)
+    public function update_house($hname, $id)
     {
         $up_house = mysqli_query($this->dbcon, "UPDATE tbl_house SET 
         house_name = '$hname' 
@@ -176,18 +181,18 @@ class house extends Database
     public function delhouse($id)
     {
         $del_house = mysqli_query($this->dbcon, "DELETE FROM tbl_house WHERE id='$id'");
-        return $del_house;
+
+        return  $del_house;
     }
     // Select all
     public function selecthouse($id)
     {
-        if(empty($id)){
-            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house ");
-
-        }else{
+        if (empty($id)) {
+            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house  ORDER BY id ASC ");
+        } else {
             $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house  WHERE id='$id'");
         }
-      
+
         return $sel_house;
     }
 }
@@ -196,8 +201,40 @@ class herd extends Database
 {
     // Insert 
     // Update
+    public function update_herd($hname, $hid, $id)
+    {
+        $update = mysqli_query($this->dbcon, "UPDATE tbl_herd SET herd_name = '$hname' , house_id = '$hid' WHERE id ='$id' ");
+        return $update;
+    }
     // Delete
+    public function delete_herd($id)
+    {
+        $delete = mysqli_query($this->dbcon, "DELETE FROM tbl_herd WHERE id='$id'");
+        return $delete;
+    }
     // Select
+    public function sel_herdDel($id)
+    {
+        $del = mysqli_query($this->dbcon, "SELECT count(house_id) AS rowhid FROM tbl_herd WHERE house_id='$id'");
+        return $del;
+    }
+    public function select_herd($id)
+    {
+        if (empty($id)) {
+            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id AS hid
+            FROM tbl_herd AS herd 
+            INNER JOIN tbl_house AS house 
+            ON (herd.house_id = house.id) ORDER BY herd.id ASC ");
+        } else {
+            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
+            FROM tbl_herd AS herd 
+            INNER JOIN tbl_house AS house 
+            ON (herd.house_id = house.id) 
+            WHERE herd.id = '$id' 
+            ORDER BY herd.id ASC ");
+        }
+        return $select;
+    }
 }
 class specise extends Database
 {

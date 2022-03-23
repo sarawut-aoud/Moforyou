@@ -147,7 +147,7 @@ $query = $sql->select_allfarmer('');
             url: '../process/_farmer.php', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
                 id: id,
-                function: 'editfarmer',
+                function: 'showeditfarmer',
             },
             success: function(rs) {
                 function UnicodeDecodeB64(str) {
@@ -158,8 +158,8 @@ $query = $sql->select_allfarmer('');
                 $("#modalfullname").val(rs.fullname);
                 $("#modalphone").val(rs.phone);
                 $("#modalemail").val(rs.email);
-               
-                var personid =  UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
+                $('#modal_fid').val(rs.id);
+                var personid = UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
 
                 $("#modalpersonid").val((personid.toString()).substr(0, 7) + "******");
 
@@ -167,6 +167,71 @@ $query = $sql->select_allfarmer('');
         })
 
     });
+    // modal //
+    $(document).on('click', '.btnsave', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $("#modal_fid").val();
+        var fname = $("#modalfullname").val();
+        var email = $("#modalemail").val();
+        var phone = $("#modalphone").val();
+
+        var txt_head = 'Edit Farmer'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_farmer.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                fname: fname,
+                email: email,
+                phone: phone,
+                id: id,
+                function: 'editfarmer',
+            },
+            success: function(result) {
+                if (result.status != 200) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                            icon: 'warning',
+                            title: result.message
+
+                        })
+                        .then((result) => {
+                            $("#modalEdit").modal("hide");
+                            location.reload();
+
+                        })
+                } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: result.message
+
+                    }).then((result) => {
+                        $("#modalEdit").modal("hide");
+                        location.reload();
+                        // $('#frmModalEdit')[0].reset();
+                        // $('#title').focus();
+                    })
+                }
+
+            }
+        })
+
+    });
+
     // delete
     $(document).on('click', '.btnDels', function(e) {
         e.preventDefault();
@@ -202,6 +267,9 @@ $query = $sql->select_allfarmer('');
                 });
             }
         })
+
+
+
     });
 </script>
 
