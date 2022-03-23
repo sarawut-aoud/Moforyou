@@ -93,7 +93,7 @@ $query = $sql->select_allfarmer('');
                                                     <td>
                                                         <center>
                                                             <!-- <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $_SESSION["id"] ?>"> -->
-                                                            <a class="btn btn-info edit_data btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
+                                                            <a class="btn btn-info  btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
                                                             <a class="btn btn-danger btnDels" id="<?php echo $row->id; ?>">
@@ -120,7 +120,7 @@ $query = $sql->select_allfarmer('');
                 <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
-            <?php require_once '../modal_reserveAll.php'; ?>
+            <?php require_once '../modalEdit.php'; ?>
         </div>
         <!-- /.content-wrapper -->
         <?php require '../sub/fooster.php'; ?>
@@ -144,22 +144,24 @@ $query = $sql->select_allfarmer('');
         $.ajax({
             type: 'get', //post put get delete
             dataType: "json",
-            url: '../update-form/_farmer.php', //ทำงานที่ไฟล์อะไร
+            url: '../process/_farmer.php', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
                 id: id,
                 function: 'editfarmer',
             },
             success: function(rs) {
-
+                function UnicodeDecodeB64(str) {
+                    return decodeURIComponent(atob(str));
+                };
                 $("#modalEdit").modal("show");
                 $("#modaltextcenter").html(txt_head)
                 $("#modalfullname").val(rs.fullname);
                 $("#modalphone").val(rs.phone);
                 $("#modalemail").val(rs.email);
+               
+                var personid =  UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
 
-                var personid = rs.person_id;
-
-                $("#modalpersonid").val(personid.substr(0, 7) + "******");
+                $("#modalpersonid").val((personid.toString()).substr(0, 7) + "******");
 
             }
         })
@@ -184,7 +186,7 @@ $query = $sql->select_allfarmer('');
                 $.ajax({
                     dataType: 'JSON',
                     type: "get",
-                    url: "../update-form/_farmer.php",
+                    url: "../process/_farmer.php",
                     data: {
                         id: id,
                         function: 'delsfarmer',

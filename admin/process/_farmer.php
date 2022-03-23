@@ -9,11 +9,11 @@ if(isset($id) && $func == 'editfarmer'){
     $query = $sql->select_allfarmer($id);
     while ($row = $query->fetch_object()) {
         $userfarmer = array(
-            "id" => $row->id,
+            "id" => intval($row->id),
             "fullname" => $row->fullname,
             "email" => $row->email,
-            "phone" => $row->phone,
-            "person_id" => ($row->card),
+            "phone" => ($row->phone),
+            "person_id" =>   base64_encode(base64_encode(intval($row->card))),
         );
     }
  

@@ -97,16 +97,7 @@ require '../../connect/api_map.php';
                   ?>
                     </tbody>
                     <!-- /.body table -->
-                    <!-- foot table -->
-                    <tfoot>
-                      <tr>
-                        <th>id</th>
-                        <th>Name thai</th>
-                        <th>Name English</th>
-                        <th>Provinces</th>
-                      </tr>
-                    </tfoot>
-                    <!-- /.foot table -->
+                   
                   </table>
                   <!--  /.table -->
                 </div>
@@ -144,15 +135,7 @@ require '../../connect/api_map.php';
                     ?>
                     </tbody>
                     <!-- /.body table -->
-                    <!-- foot table -->
-                    <tfoot>
-                      <tr>
-                        <th>id</th>
-                        <th>Name thai</th>
-                        <th>Name English</th>
-                      </tr>
-                    </tfoot>
-                    <!-- /.foot table -->
+                   
                   </table>
                   <!-- /.table -->
                 </div>

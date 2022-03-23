@@ -1,5 +1,5 @@
 <?php
- require_once 'database.php';
+require_once 'database.php';
 
 //  สมัคร user
 class registra extends Database
@@ -64,16 +64,18 @@ class farmer extends Database
     }
     //! login //
     //todo Admin manage//
-    public function select_allfarmer($id){
-        if($id == ''){
+    public function select_allfarmer($id)
+    {
+        if ($id == '') {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer  ");
-        }else{
+        } else {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
         }
         return $data;
     }
-    public function dels_farmer($id){
-        $data = mysqli_query($this->dbcon,"DELETE FROM tbl_farmer WHERE id = '$id' ");
+    public function dels_farmer($id)
+    {
+        $data = mysqli_query($this->dbcon, "DELETE FROM tbl_farmer WHERE id = '$id' ");
         return $data;
     }
     //todo Admin manage//
@@ -104,7 +106,7 @@ class farmer extends Database
 class farm extends Database
 {
     // Resgistration Farm
-    public function registerfarm($farmname,$address,$district,$farmmer_id)
+    public function registerfarm($farmname, $address, $district, $farmmer_id)
     {
         $regfarm = mysqli_query($this->dbcon, "INSERT INTO tbl_farm(farmname,address,district_id,farmmer_id)
         VALUES('$farmname','$address','$district','$farmmer_id')");
@@ -128,12 +130,12 @@ class farm extends Database
     //Select
     public function selectfarm($id)
     {
-        if($id == ''){
-            $sel_farm = mysqli_query($this->dbcon, "SELECT id,farmname,address,district_id FROM tbl_farm  ");
-        }else{
+        if ($id == '') {
+            $sel_farm = mysqli_query($this->dbcon, "SELECT COUNT(id) AS datarow FROM tbl_farm  ");
+        } else {
             $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
         }
-       
+
         return $sel_farm;
     }
 }
@@ -177,9 +179,15 @@ class house extends Database
         return $del_house;
     }
     // Select all
-    public function selhouse($id)
+    public function selecthouse($id)
     {
-        $sel_house = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE id='$id'");
+        if(empty($id)){
+            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house ");
+
+        }else{
+            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house  WHERE id='$id'");
+        }
+      
         return $sel_house;
     }
 }
@@ -284,9 +292,14 @@ class cow extends Database
     // Delete
 
     // Select
-    public function selcow()
+    public function selectdatacow($id)
     {
-        $sel_cow = mysqli_query($this->dbcon, "SELECT * FROM tbl_cow ");
+        if ($id == 'count') {
+            $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
+        } else {
+            $sel_cow = mysqli_query($this->dbcon, "SELECT * FROM tbl_cow WHERE id = '$id' ");
+        }
+        return $sel_cow;
     }
 }
 // ผสมพันธุ์

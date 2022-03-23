@@ -112,42 +112,65 @@ require '../../connect/session_ckeck.php';
 
   <script>
     $(document).ready(function(e) {
-
+      // นับจำนวนผู้ใช้
       $.ajax({
         type: 'get', //post put get delete
-
-        url: '../update-form/_index.php', //ทำงานที่ไฟล์อะไร
+        dataType: 'json',
+        url: '../process/_index.php', //ทำงานที่ไฟล์อะไร
         data: { // ส่งค่าอะไรไปบ้าง
           id: '',
           function: 'showdatauser',
         },
-        success: function(ressult) {
+        success: function(result) {
           var datauser = 0;
-          for (i = 0; i <= ressult.lenght; i++) {
+          for (i = 0; i < result.length; i++) {
             datauser++;
           }
           $('#userdata').html(datauser + ' คน')
         }
       })
+      // นับจำนวนฟาร์ม
       $.ajax({
         type: 'get', //post put get delete
-
-        url: '../update-form/_index.php', //ทำงานที่ไฟล์อะไร
+        dataType: 'json',
+        url: '../process/_index.php', //ทำงานที่ไฟล์อะไร
         data: { // ส่งค่าอะไรไปบ้าง
           id: '',
           function: 'showdatafarm',
         },
-        success: function(results) {
-          var count = 0;
-          var row = results.row;
-          for (i = 0; i <= row.length ; i++) {
-            count++;
+        success: function(rs) {
+          var datafarm = 0;
+          for (i = 0; i < rs.length; i++) {
+            datafarm++;
           }
-            $('#farmdata').html(results.id + ' ฟาร์ม')
+          $('#farmdata').html(datafarm + ' ฟาร์ม')
 
         }
       })
+      // นับจำนวนโค
+      $.ajax({
+        type: 'get', //post put get delete
+        dataType: 'json',
+        url: '../process/_index.php', //ทำงานที่ไฟล์อะไร
+        data: { // ส่งค่าอะไรไปบ้าง
+          id: 'count',
+          function: 'showcowdata',
+        },
+        success: function(rs) {
+          var cowdata = 0;
+          for (i = 0; i < rs.length; i++) {
+          
+            cowdata++;
+          }
+          if(rs[0].datarow == 0){
+            $('#cowdata').html('0 ตัว')
+          }else{
+            $('#cowdata').html(cowdata+' ตัว')
+          }
+         
 
+        }
+      })
     });
   </script>
 </body>

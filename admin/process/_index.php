@@ -2,6 +2,7 @@
 require_once '../../connect/functions.php';
 $sql_farmer = new farmer();
 $sql_farm = new farm();
+$sql_cow = new cow();
 $id = $_GET['id'];
 //  $id ='7';
 $func = $_GET['function'];
@@ -25,22 +26,23 @@ if (isset($id) && $func == 'showdatauser') {
 
 if (isset($id) && $func == 'showdatafarm') {
     $query = $sql_farm->selectfarm('');
-    $i = 0;
-
-    while ($row = $query->fetch_row()) {
-
-        $data[$i] = array(
-            "row" => $i,
-            "id" => $row['0'],
-            "farmname" => $row['1'],
-            "address" => $row['2'],
-            "amphure" => $row['3'],
-
-
+    while ($row = $query->fetch_object()) {
+        $data = array(
+            "datarow" => intval($row->datarow),
         );
-        $i++;
     }
 
+    echo json_encode([$data]);
+}
 
-    echo json_encode($data);
+
+if (isset($id) && $func == 'showcowdata') {
+    $query = $sql_cow->selectdatacow($id);
+    while ($row = $query->fetch_object()) {
+        $data = array(
+            "datarow" => intval($row->datacow),
+        );
+    }
+
+    echo json_encode([$data]);
 }

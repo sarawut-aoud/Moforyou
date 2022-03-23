@@ -1,6 +1,9 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
+$sql = new house();
+$query = $sql->selecthouse('');
+$row = $query->fetch_object();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,15 +81,15 @@ require '../../connect/functions.php';
                                         <!-- body table -->
                                         <tbody>
                                             <tr>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
+                                                <td><?php echo $row->id ;?></td>
+                                                <td><?php echo $row->house_name ;?></td>
+                                                <td style="width: 20%;">
                                                     <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
+                                                        <a class="btn btn-info btnEdits " title="แก้ไขข้อมูล" id="<?php echo $row->id ;?>">
                                                             <i class="fas fa-pencil-alt"></i>
 
                                                         </a>
-                                                        <a class="btn btn-danger">
+                                                        <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id ;?>">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </center>
@@ -94,15 +97,7 @@ require '../../connect/functions.php';
                                             </tr>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>โรงเรือน</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+                                       
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -117,6 +112,8 @@ require '../../connect/functions.php';
                 <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
+            <?php require_once '../modalEdit.php'; ?>
+
         </div>
         <!-- /.content-wrapper -->
         <?php require '../sub/fooster.php'; ?>
@@ -126,5 +123,70 @@ require '../../connect/functions.php';
 
 </body>
 <script src="../../dist/js/datatable.js"></script>
+<script>
+    //edit
+    // . = class
+    // # = id 
+    $(document).on('click', '.btnEdits', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('id');
+        var txt_head = 'Edit House'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_house.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                id: id,
+                function: 'edithouse',
+            },
+            success: function(rs) {
+
+                $("#modalEdithouse").modal("show");
+                $("#modalhouse").html(txt_head)
+                $("#housename").val(rs.house_name);
+            }
+        })
+
+    });
+    // delete
+    $(document).on('click', '.btnDels', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('id');
+
+        Swal.fire({
+            title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก",
+        }).then((btn) => {
+            if (btn.isConfirmed) {
+                $.ajax({
+                    dataType: 'JSON',
+                    type: "get",
+                    url: "../process/_house.php",
+                    data: {
+                        id: id,
+                        function: 'delshouse',
+                    },
+                    success: function(result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: result.message,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    },
+                });
+            }
+        })
+    });
+</script>
 
 </html>
