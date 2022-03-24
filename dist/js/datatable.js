@@ -1,10 +1,11 @@
 $(document).ready(function () {
   $("#example1")
     .DataTable({
+      // "searching": true,
       responsive: true,
       lengthChange: false,
       autoWidth: false,
-      dom: "Btrip",
+      // dom: "Btrip",
       buttons: {
         dom: {
           button: {
@@ -35,7 +36,7 @@ $(document).ready(function () {
     responsive: true,
     lengthChange: false,
     autoWidth: false,
-    dom: "Btrip",
+    // dom: "Btrip",
     buttons: {
       dom: {
         button: {

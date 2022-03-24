@@ -32,7 +32,7 @@ if (isset($id) && $func == 'showdatafarm') {
         );
     }
 
-    echo json_encode([$data]);
+    echo json_encode($data);
 }
 
 

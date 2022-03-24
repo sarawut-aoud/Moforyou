@@ -135,7 +135,13 @@ class farm extends Database
     //Select
     public function selectfarm($id)
     {
-        if ($id == '') {
+        if($id == 'admin'){
+            $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
+            FROM tbl_farm  AS f
+            INNER JOIN tbl_farmer AS fm 
+            ON (f.farmmer_id = fm.id)");
+        }
+        else if ($id == '') {
             $sel_farm = mysqli_query($this->dbcon, "SELECT COUNT(id) AS datarow FROM tbl_farm  ");
         } else {
             $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");

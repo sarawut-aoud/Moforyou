@@ -139,11 +139,8 @@ require '../../connect/session_ckeck.php';
           function: 'showdatafarm',
         },
         success: function(rs) {
-          var datafarm = 0;
-          for (i = 0; i < rs.length; i++) {
-            datafarm++;
-          }
-          $('#farmdata').html(datafarm + ' ฟาร์ม')
+  
+          $('#farmdata').html(rs.datarow + ' ฟาร์ม')
 
         }
       })

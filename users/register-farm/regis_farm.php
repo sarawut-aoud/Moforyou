@@ -151,8 +151,11 @@ if (!empty($result)) {
         $tombon_id = $_POST['districts'];
         $farmmer_id = $_SESSION['id'];
 
-        if ($query) {
-            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย','', '../main/_setting');
+        if (empty($farmame) || empty($address) || empty($farmmer_id)) {
+            echo warning_toast('กรุณากรอกข้อมูลให้ครบ');
+        } else {
+            $query = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
+            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย', '', '../main/_setting');
         }
     }
 }

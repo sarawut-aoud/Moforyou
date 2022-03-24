@@ -1,6 +1,8 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
+$sql = new farm();
+$query = $sql->selectfarm('admin');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,16 +15,6 @@ require '../../connect/functions.php';
     include '../../build/script.php';
     ?>
 </head>
-
-<style>
-    .card-one {
-        background: rgb(63, 202, 251);
-        background: -moz-linear-gradient(90deg, rgba(63, 202, 251, 1) 65%, rgba(159, 70, 255, 1) 100%);
-        background: -webkit-linear-gradient(90deg, rgba(63, 202, 251, 1) 65%, rgba(159, 70, 255, 1) 100%);
-        background: linear-gradient(90deg, rgba(63, 202, 251, 1) 65%, rgba(159, 70, 255, 1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3fcafb", endColorstr="#9f46ff", GradientType=1);
-    }
-</style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -67,7 +59,7 @@ require '../../connect/functions.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header card-outline card-blue">
+                                <div class="card-header card-outline card-blue ">
                                     <h3 class="text-center">ฟาร์ม</h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -76,6 +68,7 @@ require '../../connect/functions.php';
                                     <table id="example1" class="table table-bordered table-striped table-hover">
                                         <!-- head table -->
                                         <thead>
+
                                             <tr>
                                                 <th>#</th>
                                                 <th>ฟาร์ม</th>
@@ -88,40 +81,37 @@ require '../../connect/functions.php';
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                            <?php while ($row = $query->fetch_object()) {
 
-                                                        </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $row->id ?></td>
+                                                    <td><?php echo $row->farmname ?></td>
+                                                    <td><?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+                                                        $tombon = json_decode($get_tombon);
+                                                        foreach ($tombon as $value) {
+                                                            if ($row->district_id == $value->id) { //? check id amphur
+                                                                echo  $value->name_th;
+                                                            }
+                                                        }; ?></td>
+                                                    <td><?php echo $row->farmname ?></td>
+                                                    <td><?php echo $row->fullname ?></td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info edit_data" title="แก้ไขข้อมูล" id="<?php echo $row->id ?>">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger" title="ลบข้อมูล" id="<?php echo $row->id ?>">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ฟาร์ม</th>
-                                                <th>อำเภอ</th>
-                                                <th>จังหวัด</th>
-                                                <th>เจ้าของฟาร์ม</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+                                     
+                                        
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -145,5 +135,6 @@ require '../../connect/functions.php';
 
 </body>
 <script src="../../dist/js/datatable.js"></script>
+<script></script>
 
 </html>
