@@ -4,6 +4,7 @@ require '../../connect/functions.php';
 
 $sql = new farmer();
 $query = $sql->select_allfarmer('');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

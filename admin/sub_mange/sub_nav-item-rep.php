@@ -7,5 +7,7 @@
                 echo "menu-open";
               } else if ($cut[3] == 'report' and $cut[4] == 'rep_breed_farm') {
                 echo "menu-open";
-              } 
-              ; ?>
+              }    else if ($cut[3] == 'report' and $cut[4] == 'rep_farms') {
+                echo "menu-open";
+              }
+              ;

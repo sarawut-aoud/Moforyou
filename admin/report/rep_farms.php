@@ -1,12 +1,3 @@
-<?php
-require_once '../../connect/session_ckeck.php';
-require '../../connect/functions.php';
-
-
-$sql = new farmer();
-$query = $sql->select_allfarmer('');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,36 +64,25 @@ $query = $sql->select_allfarmer('');
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>ชื่อเจ้าของฟาร์ม</th>
-                                                <th>เบอร์โทร</th>
-                                                <th>อีเมล</th>
-                                                <th>บัตรประชาชน</th>
-                                                <th>ดูรายละเอียด</th>
+                                                <th>Rendering engine</th>
+                                                <th>Browser</th>
+                                                <th>Platform(s)</th>
+                                                <th>Engine version</th>
+                                                <th>CSS grade</th>
                                                
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()){?>
                                             <tr>
-                                                <td style="width: 10%;"><?php echo $row->id; ?></td>
-                                                <td><?php echo $row->fullname; ?></td>
-                                                <td><?php echo $row->phone; ?></td>
-                                                <td><?php echo $row->email; ?></td>
-                                                <td><?php echo substr($row->card,0,7)."*******"; ?></td>
-                                                <td>
-                                                    <center>
-                                                        
-                                                        <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                    </center>
+                                                <td>Trident</td>
+                                                <td>Internet
+                                                    Explorer 4.0
                                                 </td>
-                                               
+                                                <td>Win 95+</td>
+                                                <td> 4</td>
+                                                <td>X</td>
                                                
                                             </tr>
-                                            <?php   } ?>
                                         </tbody>
                                        
                                     </table>
@@ -120,7 +100,6 @@ $query = $sql->select_allfarmer('');
                 <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
-            <?php require_once '../modalDetail.php'; ?>
         </div>
         <!-- /.content-wrapper -->
         <?php require '../sub/fooster.php'; ?>
@@ -130,38 +109,6 @@ $query = $sql->select_allfarmer('');
 
 </body>
 <script src="../../dist/js/datatableprint.js"></script>
-<script>
-    $(document).on('click','.btnDetail', function(e){
-        e.preventDefault();
-
-        var id = $(this).attr('id');
-        var txt_head = 'Detail Farmer'
-
-        $.ajax({
-            type: 'get',
-            dataType: "json",
-            url: '../process/_detailfarmer',
-            data:{
-                id: id,
-                function: 'showdetailfarmer',
-            },
-            success: function(rs) {
-                function UnicodeDecodeB64(str){
-                    return decodeURIComponent(atob(str));
-                };
-                $("#modalDetail").modal("show");
-                $("#modaltextcenter").html(txt_head)
-                $("#modalfullname").html(rs.fullname)
-                $("#modalphone").html(rs.phone)
-                $("#modalemail").html(rs.email)
-                var personid = UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
-
-                $("#modalpersonid").html((personid).substr(0,7)+"*******");
-
-            }
-        })
-    })
-</script>
 
 
 </html>
