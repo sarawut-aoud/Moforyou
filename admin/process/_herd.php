@@ -17,11 +17,24 @@ if (isset($id) && $func == 'showeditherd') {
 
     echo json_encode($data);
 }
+if ($func == '') {
+    $sql2 = new house();
+    $query = $sql2->selecthouse('');
+$i = 0 ;
+    while ($row = $query->fetch_object()) {
+        $userfarmer[$i] = array(
+            "id" => intval($row->id),
+            "house_name" => $row->house_name,
+        );
+        $i++;
+    }
 
+    echo json_encode($userfarmer);
+}
 
-if (isset($id) && $func == 'editherd') {
+if (isset($id) && $func == 'modaleditherd') {
     $hname = $_GET['hname'];
-    $hid = $_GET['hid'];
+    $hid = $_GET['IDHouse'];
     if (empty($id) || empty($hname) || empty($hid)) {
         $msg = array(
             "status" => 0,
@@ -41,7 +54,6 @@ if (isset($id) && $func == 'editherd') {
 
 if (isset($id) && $func == 'delsherd') {
 
-    $querydata = $sql->delete_herd($hid);
 
     $query = $sql->delete_herd($id);
     $msg = array(
@@ -49,5 +61,5 @@ if (isset($id) && $func == 'delsherd') {
         "message" => 'ลบข้อมูลแล้ว',
     );
 
-    echo json_encode([$msg]);
+    echo json_encode($msg);
 }

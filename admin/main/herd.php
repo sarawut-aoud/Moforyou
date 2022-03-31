@@ -147,15 +147,46 @@ $query = $sql->select_herd('');
                 function: 'showeditherd',
             },
             success: function(rs) {
-              
+               
+                        var house_id = rs.house_id;
+
+                    
+                
+
                 $("#modalEditherd").modal("show");
                 $("#modaltextcenter").html(txt_head)
                 $("#herdname").val(rs.herd_name);
-                $("#modalphone").val(rs.phone);
-                $("#modalemail").val(rs.email);
-                $('#modal_fid').val(rs.id);
-    
+            
+                $('#modal_herdid').val(rs.id);
 
+                $.ajax({
+                    type: 'get',
+                    dataType: "json",
+                    url: '../process/_herd.php',
+                    data: {
+                        function: '',
+                        id: '',
+                    },
+                    success: function(rs) {
+                        var fact = '';
+                        console.log(house_id)
+                        for (i in rs) {
+                            if (rs[i].id == house_id) {
+                                fact += '<option selected value="' + rs[i].id + '" selected >' + rs[i]
+                                    .house_name +
+                                    '</option>'
+                            } else {
+                                fact += '<option value="' + rs[i].id + '">' + rs[i]
+                                    .house_name +
+                                    '</option>';
+                            }
+
+                        }
+                        $("#house_id").html(fact);  
+                    }
+                    
+                })
+                
             }
         })
 
@@ -165,23 +196,22 @@ $query = $sql->select_herd('');
         // $(document).on('click', '.btnEdits', function(e) {
         e.preventDefault();
 
-        var id = $("#modal_fid").val();
-        var fname = $("#modalfullname").val();
-        var email = $("#modalemail").val();
-        var phone = $("#modalphone").val();
+        var id = $("#modal_herdid").val();
+        var fname = $("#herdname").val();
+        var IDHouse = $("#house_id").val();
+     
 
-        var txt_head = 'Edit Farmer'
+        var txt_head = 'Edit Herd'
 
         $.ajax({
             type: 'get', //post put get delete
             dataType: "json",
             url: '../process/_herd.php', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
-                fname: fname,
-                email: email,
-                phone: phone,
+                hname: fname,
+               IDHouse: IDHouse,
                 id: id,
-                function: 'editherd',
+                function: 'modaleditherd',
             },
             success: function(result) {
                 if (result.status != 200) {
@@ -229,7 +259,7 @@ $query = $sql->select_herd('');
     $(document).on('click', '.btnDels', function(e) {
         e.preventDefault();
 
-        
+
         var id = $(this).attr('id');
 
         Swal.fire({
@@ -248,7 +278,7 @@ $query = $sql->select_herd('');
                     url: "../process/_herd.php",
                     data: {
                         id: id,
-                       
+
                         function: 'delsherd',
                     },
                     success: function(result) {

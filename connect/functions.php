@@ -1,4 +1,5 @@
 <?php
+
 require_once 'database.php';
 
 //  สมัคร user
@@ -144,10 +145,18 @@ class farm extends Database
         else if ($id == '') {
             $sel_farm = mysqli_query($this->dbcon, "SELECT COUNT(id) AS datarow FROM tbl_farm  ");
         } else {
-            $sel_farm = mysqli_query($this->dbcon, "SELECT farmname FROM tbl_farm WHERE farmmer_id='$id' ");
+            $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
+            FROM tbl_farm  AS f
+            INNER JOIN tbl_farmer AS fm 
+            ON (f.farmmer_id = fm.id)");
         }
 
         return $sel_farm;
+    }
+    public function delsfarm($id){
+        $del_farm = mysqli_query($this->dbcon, "DELETE FROM tbl_farm WHERE id='$id'");
+
+        return $del_farm;
     }
 }
 // โรงเรือน
@@ -160,7 +169,7 @@ class house extends Database
         return $sel_houseFid;
     }
     // Insert  
-    public function addhouse($hname, $farm_id)
+    public function inserthouse($hname, $farm_id)
     {
         $add_house = mysqli_query($this->dbcon, "INSERT INTO tbl_house
         (

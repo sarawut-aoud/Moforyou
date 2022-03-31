@@ -44,10 +44,10 @@ if (empty($result)) {
                         <div class="container">
                             <!-- Manage -->
                             <div class="row justify-content-center">
-                            <div class="col-md-4">
-                                    <button class="btn btn-info col-3 btn-lg float-start"" ><i class="fas fa-qrcode"></i></button>
-                                </div>   
-                            <div class="col-md-8">
+                                <div class="col-md-4">
+                                    <button class="btn btn-info col-3 btn-lg float-start"" ><i class=" fas fa-qrcode"></i></button>
+                                </div>
+                                <div class="col-md-8">
                                     <!-- general form elements -->
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -114,10 +114,10 @@ if (empty($result)) {
                                                         <td style="width: 20%;"><?php echo $rs->id; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
                                                         <td style="width:30%;" class="text-center">
-                                                            <a class="btn btn-info" href="../update-form/_house?id=<?php echo $rs->id; ?>">
+                                                            <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
                                                                 <i class="far fa-pen-alt"></i>
                                                             </a>
-                                                            <a class="btn btn-danger" onclick="del(<?php echo $rs->id; ?>)">
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $rs->id; ?>">
                                                                 <i class="far fa-trash"></i>
                                                             </a>
                                                         </td>
@@ -154,44 +154,175 @@ if (empty($result)) {
         </div>
 
         <!-- ./wrapper -->
+        <script src="../../dist/js/datatable.js"></script>
+        <script>
+            //edit
+            // . = class
+            // # = id 
+            $(document).on('click', '.submit', function(e) {
+                e.preventDefault();
+                var house_id = $('#HouseName').val();
+                var id = '<?php echo $_SESSION['id'];?>';
+                $.ajax({
+                    type: 'post',
+                    dataType: "json",
+                    url: '../process/inserthouse.php',
+                    data: {
+                        id:id,
+                        housename: house_id,
+
+                    },
+                    success: function(result) {
+
+                    }
+                });
+                
+
+            });
+            $(document).on('click', '.btnEdits', function(e) {
+                // $(document).on('click', '.btnEdits', function(e) {
+                e.preventDefault();
+
+                var id = $(this).attr('id');
+                var txt_head = 'Edit farm'
+
+
+                $.ajax({
+                    type: 'get', //post put get delete
+                    dataType: "json",
+                    url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
+                    data: { // ส่งค่าอะไรไปบ้าง
+                        id: id,
+                        function: 'showeditFarm',
+                    },
+                    success: function(rs) {
+                        for (i in rs) {
+                            if (rs[i].id == id) {
+                                var farmname = rs[i].farmname;
+                                var farmername = rs[i].farmername;
+                            }
+                        }
+                        $("#modalEditFarm").modal("show");
+                        $("#modaltextcenter").html(txt_head)
+                        $("#farmname").val(farmname);
+                        $("#name").val(farmername);
+
+                        $('#modal_herdid').val(rs.id);
+
+
+
+                    }
+                })
+
+            });
+            // modal //
+            $(document).on('click', '.btnsave', function(e) {
+                // $(document).on('click', '.btnEdits', function(e) {
+                e.preventDefault();
+
+                var id = $("#modal_herdid").val();
+                var fname = $("#herdname").val();
+                var IDHouse = $("#house_id").val();
+
+
+                var txt_head = 'Edit Herd'
+
+                $.ajax({
+                    type: 'get', //post put get delete
+                    dataType: "json",
+                    url: '', //ทำงานที่ไฟล์อะไร
+                    data: { // ส่งค่าอะไรไปบ้าง
+                        hname: fname,
+                        IDHouse: IDHouse,
+                        id: id,
+                        function: 'modaleditherd',
+                    },
+                    success: function(result) {
+                        if (result.status != 200) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            })
+                            Toast.fire({
+                                    icon: 'warning',
+                                    title: result.message
+
+                                })
+                                .then((result) => {
+                                    $("#modalEdit").modal("hide");
+                                    location.reload();
+
+                                })
+                        } else {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            })
+                            Toast.fire({
+                                icon: 'success',
+                                title: result.message
+
+                            }).then((result) => {
+                                $("#modalEditherd").modal("hide");
+                                location.reload();
+                                // $('#frmModalEdit')[0].reset();
+                                // $('#title').focus();
+                            })
+                        }
+
+                    }
+                })
+
+            });
+
+            // delete
+            $(document).on('click', '.btnDels', function(e) {
+                e.preventDefault();
+
+
+                var id = $(this).attr('id');
+
+                Swal.fire({
+                    title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                }).then((btn) => {
+                    if (btn.isConfirmed) {
+                        $.ajax({
+                            dataType: 'JSON',
+                            type: "get",
+                            url: "../process/_farm.php",
+                            data: {
+                                id: id,
+
+                                function: 'delsfarm',
+                            },
+                            success: function(result) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: result.message,
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            },
+                        });
+                    }
+                })
+
+
+
+            });
+        </script>
     </body>
-    <script src="../../dist/js/datatable.js">
-    </script>
-    <script>
-        function del(id) {
-            Swal.fire({
-                title: 'คุณแน่ใจ ?',
-                text: "ต้องการลบข้อมูลนี้ใช่หรือไม่ ",
-                icon: 'warning',
-                showCancelButton: true,
-                CancelButtonText: 'ยกเลิก',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ตกลง'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = "../delete-form/del_house?del=" + id;
-                }
-            })
-        };
-    </script>
+
 
     </html>
-<?php
-}
-require '../../connect/alert.php';
-$sql = new house();
-if (isset($_POST['submit'])) {
-    $hname = $_POST['hname'];
-    $farmid = $_SESSION['id'];
-    $sql = $sql->addhouse($hname, $farmid);
-
-    if ($sql) {
-        echo success_1("Successful!!", "./_tabhouse.php"); // "แสดงอะไร","ส่งไปหน้าไหน"
-
-    } else {
-        echo "<script>alert('Something went wrong! Please try again.');</script>";
-        echo "<script>window.location.href='./register'</script>";
-    }
-}
-?>
+<?php } ?>

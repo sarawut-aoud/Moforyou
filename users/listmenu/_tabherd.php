@@ -55,14 +55,14 @@ require_once '../../connect/functions.php';
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อโรงเรือน">
+                                                <input type="text" class="form-control" id="HouseName" placeholder="ชื่อโรงเรือน">
                                             </div>
 
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer text-end">
-                                            <button type="submit"  id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
+                                            <button type="submit"  id="submit" name="submit" class="btn btn-primary submit">เพิ่ม</button>
                                         </div>
                                     </form>
                                 </div>
@@ -143,15 +143,7 @@ require_once '../../connect/functions.php';
 
     <!-- ./wrapper -->
 </body>
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
+<script src="../../dist/js/datatable.js">
 </script>
 
 </html>

@@ -98,10 +98,10 @@ $query = $sql->selectfarm('admin');
                                                     <td><?php echo $row->fullname ?></td>
                                                     <td>
                                                         <center>
-                                                            <a class="btn btn-info edit_data" title="แก้ไขข้อมูล" id="<?php echo $row->id ?>">
+                                                            <a class="btn btn-info btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id ?>">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
-                                                            <a class="btn btn-danger" title="ลบข้อมูล" id="<?php echo $row->id ?>">
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id ?>">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
                                                         </center>
@@ -125,6 +125,7 @@ $query = $sql->selectfarm('admin');
                 </div>
                 <!-- /.container-fluid -->
             </section>
+            
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -132,9 +133,154 @@ $query = $sql->selectfarm('admin');
 
     </div>
     <!-- ./wrapper -->
-
+    <?php require_once '../modalEdit.php'; ?>
 </body>
 <script src="../../dist/js/datatable.js"></script>
 <script></script>
+<script>
+    //edit
+    // . = class
+    // # = id 
+    $(document).on('click', '.btnEdits', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
 
+        var id = $(this).attr('id');
+        var txt_head = 'Edit farm'
+        
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                id: id,
+                function: 'showeditFarm',
+            },
+            success: function(rs) {
+            for (i in rs){
+                if (rs [i].id==id){
+                    var farmname = rs[i].farmname;
+                    var farmername = rs[i].farmername;
+                }
+            }
+                $("#modalEditFarm").modal("show");
+                $("#modaltextcenter").html(txt_head)
+                $("#farmname").val(farmname);
+                $("#name").val(farmername);
+            
+                $('#modal_herdid').val(rs.id);
+
+                
+                
+            }
+        })
+
+    });
+    // modal //
+    $(document).on('click', '.btnsave', function(e) {
+        // $(document).on('click', '.btnEdits', function(e) {
+        e.preventDefault();
+
+        var id = $("#modal_herdid").val();
+        var fname = $("#herdname").val();
+        var IDHouse = $("#house_id").val();
+     
+
+        var txt_head = 'Edit Herd'
+
+        $.ajax({
+            type: 'get', //post put get delete
+            dataType: "json",
+            url: '', //ทำงานที่ไฟล์อะไร
+            data: { // ส่งค่าอะไรไปบ้าง
+                hname: fname,
+               IDHouse: IDHouse,
+                id: id,
+                function: 'modaleditherd',
+            },
+            success: function(result) {
+                if (result.status != 200) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                            icon: 'warning',
+                            title: result.message
+
+                        })
+                        .then((result) => {
+                            $("#modalEdit").modal("hide");
+                            location.reload();
+
+                        })
+                } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: result.message
+
+                    }).then((result) => {
+                        $("#modalEditherd").modal("hide");
+                        location.reload();
+                        // $('#frmModalEdit')[0].reset();
+                        // $('#title').focus();
+                    })
+                }
+
+            }
+        })
+
+    });
+
+    // delete
+    $(document).on('click', '.btnDels', function(e) {
+        e.preventDefault();
+
+
+        var id = $(this).attr('id');
+
+        Swal.fire({
+            title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก",
+        }).then((btn) => {
+            if (btn.isConfirmed) {
+                $.ajax({
+                    dataType: 'JSON',
+                    type: "get",
+                    url: "../process/_farm.php",
+                    data: {
+                        id: id,
+
+                        function: 'delsfarm',
+                    },
+                    success: function(result) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: result.message,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    },
+                });
+            }
+        })
+
+
+
+    });
+</script>
 </html>

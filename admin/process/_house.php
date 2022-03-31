@@ -6,6 +6,8 @@ $sql_herd = new herd();
 $id = $_GET['id'];
 $func = $_GET['function'];
 
+
+
 if (isset($id) && $func == 'showedithouse') {
     $query = $sql->selecthouse($id);
     while ($row = $query->fetch_object()) {
