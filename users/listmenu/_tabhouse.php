@@ -13,316 +13,214 @@ $result = mysqli_num_rows($fcheck);
 if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
-    // ถ้ามีแสดง tag นี้
-
+}
+// ถ้ามีแสดง tag นี้
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MoForYou</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MoForYou</title>
 
-        <?php require '../../build/script.php'; ?>
-        <link rel="stylesheet" href="../main/_listmenu.css">
-    </head>
+    <?php require '../../build/script.php'; ?>
+    <link rel="stylesheet" href="../main/_listmenu.css">
+</head>
 
 
-    <body class="hold-transition sidebar-collapse layout-top-nav">
-        <div class="wrapper">
+<body class="hold-transition sidebar-collapse layout-top-nav">
+    <div class="wrapper">
 
-            <!-- Navbar -->
-            <?php require '../sub/navbar.php'; ?>
-            <!-- /.navbar -->
+        <!-- Navbar -->
+        <?php require '../sub/navbar.php'; ?>
+        <!-- /.navbar -->
 
-            <!-- Content Wrapper. Contains page content -->
-            <section class="content">
-                <div class="content-wrapper">
-                    <!-- Content Header (Page header) -->
-                    <div class="content-header">
-                        <div class="container">
-                            <!-- Manage -->
-                            <div class="row justify-content-center">
-                                <div class="col-md-4">
-                                    <button class="btn btn-info col-3 btn-lg float-start"" ><i class=" fas fa-qrcode"></i></button>
-                                </div>
-                                <div class="col-md-8">
-                                    <!-- general form elements -->
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">เพิ่มข้อมูลโรงเรือน</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form method="post">
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                                    <input type="text" class="form-control" id="hname" name="hname" placeholder="ชื่อโรงเรือน">
-                                                </div>
-
-                                            </div>
-                                            <!-- /.card-body -->
-
-                                            <div class="card-footer text-end">
-                                                <button type="submit" id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- /.card -->
-
-                                </div>
-                                <!-- ./col -->
+        <!-- Content Wrapper. Contains page content -->
+        <section class="content">
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container">
+                        <!-- Manage -->
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <button class="btn btn-info col-3 btn-lg float-start"" ><i class=" fas fa-qrcode"></i></button>
                             </div>
-                            <!-- ./row -->
-
-                        </div><!-- /.container-fluid -->
-                    </div>
-                    <!-- /.content-header -->
-
-                    <div class="container ">
-                        <div class="row mb-5">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรงเรือน</h3>
+                            <div class="col-md-8">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">เพิ่มข้อมูลโรงเรือน</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <!-- table -->
-                                        <table id="example1" class="table table-bordered table-striped table-hover">
-                                            <!-- head table -->
-                                            <thead>
+                                    <!-- form start -->
+                                    <form method="post">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
+                                                <input type="text" class="form-control" id="hname" name="hname" placeholder="ชื่อโรงเรือน">
+                                            </div>
 
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>ชื่อโรงเรือน</th>
-                                                    <th>แก้ไข / ลบข้อมูล</th>
-                                                </tr>
+                                        </div>
+                                        <!-- /.card-body -->
 
-                                            </thead>
-                                            <!-- /.head table -->
-                                            <!-- body table -->
-                                            <tbody>
-                                                <?php
-                                                $datahouse = new house();
-                                                $row = $datahouse->gethouseFarmid($id);
-                                                while ($rs = mysqli_fetch_object($row)) {
-                                                ?>
-                                                    <tr>
-                                                        <td style="width: 20%;"><?php echo $rs->id; ?></td>
-                                                        <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
-                                                        <td style="width:30%;" class="text-center">
-                                                            <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
-                                                                <i class="far fa-pen-alt"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $rs->id; ?>">
-                                                                <i class="far fa-trash"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                            <!-- /.body table -->
-                                            <!-- foot table -->
-                                            <tfoot>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>ชื่อโรงเรือน</th>
-                                                    <th>แก้ไข / ลบข้อมูล</th>
-                                                </tr>
-                                            </tfoot>
-                                            <!-- /.foot table -->
-                                        </table>
-                                        <!-- /.table -->
-                                    </div>
-                                    <!-- /.card-body -->
+                                        <div class="card-footer text-end">
+                                            <button type="submit" id="submit" name="submit" class="btn btn-primary submit">เพิ่ม</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <!-- /.card -->
-                            </div>
-                        </div>
 
+                            </div>
+                            <!-- ./col -->
+                        </div>
+                        <!-- ./row -->
+
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <div class="container ">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-outline card-blue">
+                                    <h3 class=" text-center">โรงเรือน</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <!-- table -->
+                                    <table id="example1" class="table table-bordered table-striped table-hover">
+                                        <!-- head table -->
+                                        <thead>
+
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ชื่อโรงเรือน</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
+                                            </tr>
+
+                                        </thead>
+                                        <!-- /.head table -->
+                                        <!-- body table -->
+                                        <tbody>
+                                            <?php
+                                            $datahouse = new house();
+                                            $row = $datahouse->gethouseFarmid($id);
+                                            while ($rs = $row->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td style="width: 20%;"><?php echo $rs->id; ?></td>
+                                                    <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                    <td style="width:30%;" class="text-center">
+                                                        <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-pen-alt"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                        <!-- /.body table -->
+                                        <!-- foot table -->
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ชื่อโรงเรือน</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
+                                            </tr>
+                                        </tfoot>
+                                        <!-- /.foot table -->
+                                    </table>
+                                    <!-- /.table -->
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
                     </div>
 
-
                 </div>
-                <!-- /.content-wrapper -->
-            </section>
-            <!-- Main Footer -->
-            <?php require '../sub/footer.php'; ?>
-        </div>
 
-        <!-- ./wrapper -->
-        <script src="../../dist/js/datatable.js"></script>
-        <script>
-            //edit
-            // . = class
-            // # = id 
+
+            </div>
+            <!-- /.content-wrapper -->
+        </section>
+        <!-- Main Footer -->
+        <?php require '../sub/footer.php'; ?>
+    </div>
+
+    <!-- ./wrapper -->
+    <script src="../../dist/js/datatable.js"></script>
+    <script>
+        $(document).ready(function() {
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
-                var house_id = $('#HouseName').val();
-                var id = '<?php echo $_SESSION['id'];?>';
+
+                toastr.options = {
+                    'closeButton': false,
+                    'debug': false,
+                    'newestOnTop': false,
+                    'progressBar': false,
+                    'positionClass': 'toast-top-right',
+                    'preventDuplicates': false,
+                    'onclick': null,
+                    'showDuration': '300',
+                    'hideDuration': '1000',
+                    'timeOut': '5000',
+                    'extendedTimeOut': '1000',
+                    'showEasing': 'swing',
+                    'hideEasing': 'linear',
+                    'showMethod': 'fadeIn',
+                    'hideMethod': 'fadeOut'
+                }
+                var housename = $('#hname').val();
+                var id = "<?php echo $_SESSION['id']; ?>";
+
                 $.ajax({
                     type: 'post',
-                    dataType: "json",
+                    dataType: 'json',
                     url: '../process/inserthouse.php',
                     data: {
-                        id:id,
-                        housename: house_id,
-
+                        function: 'insert',
+                        id: id,
+                        housename: housename,
                     },
                     success: function(result) {
+                        if (result.status == 200) {
 
-                    }
-                });
-                
-
-            });
-            $(document).on('click', '.btnEdits', function(e) {
-                // $(document).on('click', '.btnEdits', function(e) {
-                e.preventDefault();
-
-                var id = $(this).attr('id');
-                var txt_head = 'Edit farm'
-
-
-                $.ajax({
-                    type: 'get', //post put get delete
-                    dataType: "json",
-                    url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
-                    data: { // ส่งค่าอะไรไปบ้าง
-                        id: id,
-                        function: 'showeditFarm',
-                    },
-                    success: function(rs) {
-                        for (i in rs) {
-                            if (rs[i].id == id) {
-                                var farmname = rs[i].farmname;
-                                var farmername = rs[i].farmername;
-                            }
-                        }
-                        $("#modalEditFarm").modal("show");
-                        $("#modaltextcenter").html(txt_head)
-                        $("#farmname").val(farmname);
-                        $("#name").val(farmername);
-
-                        $('#modal_herdid').val(rs.id);
-
-
-
-                    }
-                })
-
-            });
-            // modal //
-            $(document).on('click', '.btnsave', function(e) {
-                // $(document).on('click', '.btnEdits', function(e) {
-                e.preventDefault();
-
-                var id = $("#modal_herdid").val();
-                var fname = $("#herdname").val();
-                var IDHouse = $("#house_id").val();
-
-
-                var txt_head = 'Edit Herd'
-
-                $.ajax({
-                    type: 'get', //post put get delete
-                    dataType: "json",
-                    url: '', //ทำงานที่ไฟล์อะไร
-                    data: { // ส่งค่าอะไรไปบ้าง
-                        hname: fname,
-                        IDHouse: IDHouse,
-                        id: id,
-                        function: 'modaleditherd',
-                    },
-                    success: function(result) {
-                        if (result.status != 200) {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 1500,
-                            })
-                            Toast.fire({
-                                    icon: 'warning',
-                                    title: result.message
-
-                                })
-                                .then((result) => {
-                                    $("#modalEdit").modal("hide");
-                                    location.reload();
-
-                                })
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
                         } else {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 1500,
-                            })
-                            Toast.fire({
-                                icon: 'success',
-                                title: result.message
 
-                            }).then((result) => {
-                                $("#modalEditherd").modal("hide");
-                                location.reload();
-                                // $('#frmModalEdit')[0].reset();
-                                // $('#title').focus();
-                            })
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
                         }
-
                     }
+
                 })
-
             });
+        })
+    </script>
+</body>
 
-            // delete
-            $(document).on('click', '.btnDels', function(e) {
-                e.preventDefault();
-
-
-                var id = $(this).attr('id');
-
-                Swal.fire({
-                    title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: "ยืนยัน",
-                    cancelButtonText: "ยกเลิก",
-                }).then((btn) => {
-                    if (btn.isConfirmed) {
-                        $.ajax({
-                            dataType: 'JSON',
-                            type: "get",
-                            url: "../process/_farm.php",
-                            data: {
-                                id: id,
-
-                                function: 'delsfarm',
-                            },
-                            success: function(result) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: result.message,
-                                }).then((result) => {
-                                    location.reload();
-                                })
-                            },
-                        });
-                    }
-                })
-
-
-
-            });
-        </script>
-    </body>
-
-
-    </html>
-<?php } ?>
+</html>
