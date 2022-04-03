@@ -203,9 +203,9 @@ class house extends Database
     public function selecthouse($id)
     {
         if (empty($id)) {
-            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house  ORDER BY id ASC ");
+            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name,farm_id FROM tbl_house  ORDER BY id ASC ");
         } else {
-            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name FROM tbl_house  WHERE id='$id'");
+            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name,farm_id FROM tbl_house  WHERE id='$id'");
         }
 
         return $sel_house;

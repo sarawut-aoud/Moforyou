@@ -44,7 +44,7 @@ if (empty($result)) {
                     <div class="container">
                         <!-- Manage -->
                         <div class="row justify-content-center">
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
                                 <button class="btn btn-info col-3 btn-lg float-start"" ><i class=" fas fa-qrcode"></i></button>
                             </div>
                             <div class="col-md-8">
@@ -64,7 +64,6 @@ if (empty($result)) {
 
                                         </div>
                                         <!-- /.card-body -->
-
                                         <div class="card-footer text-end">
                                             <button type="submit" id="submit" name="submit" class="btn btn-primary submit">เพิ่ม</button>
                                         </div>
@@ -142,11 +141,9 @@ if (empty($result)) {
                             <!-- /.card -->
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
+            <?php require_once './modalhouse.php'; ?>
             <!-- /.content-wrapper -->
         </section>
         <!-- Main Footer -->
@@ -157,33 +154,34 @@ if (empty($result)) {
     <script src="../../dist/js/datatable.js"></script>
     <script>
         $(document).ready(function() {
+
+            toastr.options = {
+                'closeButton': false,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
 
-                toastr.options = {
-                    'closeButton': false,
-                    'debug': false,
-                    'newestOnTop': false,
-                    'progressBar': false,
-                    'positionClass': 'toast-top-right',
-                    'preventDuplicates': false,
-                    'onclick': null,
-                    'showDuration': '300',
-                    'hideDuration': '1000',
-                    'timeOut': '5000',
-                    'extendedTimeOut': '1000',
-                    'showEasing': 'swing',
-                    'hideEasing': 'linear',
-                    'showMethod': 'fadeIn',
-                    'hideMethod': 'fadeOut'
-                }
                 var housename = $('#hname').val();
                 var id = "<?php echo $_SESSION['id']; ?>";
 
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: '../process/inserthouse.php',
+                    url: '../process/_house.php',
                     data: {
                         function: 'insert',
                         id: id,
@@ -191,7 +189,6 @@ if (empty($result)) {
                     },
                     success: function(result) {
                         if (result.status == 200) {
-
                             toastr.success(
                                 result.message,
                                 '', {
@@ -203,7 +200,6 @@ if (empty($result)) {
                                 }
                             );
                         } else {
-
                             toastr.warning(
                                 result.message,
                                 '', {
@@ -217,9 +213,114 @@ if (empty($result)) {
                         }
                     }
 
-                })
+                });
             });
-        })
+
+            $(document).on('click', '.btnEdit', function(e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+                var housename = $("#modalhouse").val();
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '../process/_house.php',
+                    data: {
+                        function: 'show',
+                        id: id,
+                    },
+                    success: function(result) {
+                        $("#modalEdit").modal('show');
+                        $("#modalhouse").val(result.housename);
+                        $("#modal_houseid").val(result.house_id);
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btnDels', function(e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '../process/_house.php',
+                    data: {
+                        function: 'del',
+                        id: id,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btnsave', function(e) {
+                e.preventDefault();
+                var id = $("#modal_houseid").val();
+                var housename = $("#modalhouse").val();
+
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '../process/_house.php',
+                    data: {
+                        function: 'edit',
+                        id: id,
+                        housename: housename,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                });
+
+            });
+        });
     </script>
 </body>
 
