@@ -1,150 +1,346 @@
 <?php
 require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
-  //เก็บ id จาก session
-  $id = $_SESSION['id'];
+//เก็บ id จาก session
+$id = $_SESSION['id'];
 
-  $sql = new farm();
-  $fcheck = $sql->checkregisfarm($id);
-  
-  // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
-  $result = mysqli_num_rows($fcheck);
-  //ถ้าไม่มีส่งไปหน้าลงทะเบียน
-  if (empty($result)) {
-      require_once '../alert/check_farm.php';
-  } else {
-      // ถ้ามีแสดง tag นี้
+$sql = new farm();
+$fcheck = $sql->checkregisfarm($id);
+
+// เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
+$result = mysqli_num_rows($fcheck);
+//ถ้าไม่มีส่งไปหน้าลงทะเบียน
+if (empty($result)) {
+    require_once '../alert/check_farm.php';
+} else {
+    // ถ้ามีแสดง tag นี้
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MoForYou</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MoForYou</title>
 
-    <?php require '../../build/script.php'; ?>
-    <link rel="stylesheet" href="../main/_listmenu.css">
-</head>
+        <?php require '../../build/script.php'; ?>
+        <link rel="stylesheet" href="../main/_listmenu.css">
+    </head>
 
 
-<body class="hold-transition sidebar-collapse layout-top-nav">
-    <div class="wrapper">
+    <body class="hold-transition sidebar-collapse layout-top-nav">
+        <div class="wrapper">
 
-        <!-- Navbar -->
-        <?php require '../sub/navbar.php'; ?>
-        <!-- /.navbar -->
+            <!-- Navbar -->
+            <?php require '../sub/navbar.php'; ?>
+            <!-- /.navbar -->
 
-        <!-- Content Wrapper. Contains page content -->
-        <section class="content">
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container">
-                        <!-- Manage -->
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <!-- general form elements -->
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">เพิ่มข้อมูลโรงเรือน</h3>
+            <!-- Content Wrapper. Contains page content -->
+            <section class="content">
+                <div class="content-wrapper mb-5">
+                    <!-- Content Header (Page header) -->
+                    <div class="content-header ">
+                        <div class="container">
+                            <!-- Manage -->
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <!-- general form elements -->
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">เพิ่มข้อมูลฝูงโค</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <form action="" method="" id="frm_herd">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="herdName">ชื่อฝูงโค</label>
+                                                    <input type="text" class="form-control" id="herdName" placeholder="ชื่อฝูงโค">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="house_id">โรงเรือน</label>
+                                                    <select class="form-control select2 select2-cyan" data-dropdown-css-class="select2-cyan" id="house_id" name="house_id" data-placeholder="เลือก">
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                            <div class="card-footer text-end">
+                                                <button type="submit" id="submit" name="submit" class="btn btn-primary submit">เพิ่มข้อมูล</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+
+                                </div>
+                                <!-- ./col -->
+                            </div>
+                            <!-- ./row -->
+
+                        </div><!-- /.container-fluid -->
+                    </div>
+                    <!-- /.content-header -->
+
+                    <div class="container mb-5">
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-outline card-blue">
+                                        <h3 class=" text-center">ฝูงโค</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <form>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                                <input type="text" class="form-control" id="HouseName" placeholder="ชื่อโรงเรือน">
-                                            </div>
+                                    <div class="card-body">
+                                        <!-- table -->
+                                        <table id="example1" class="table table-bordered table-striped table-hover">
+                                            <!-- head table -->
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>ชื่อฝูง</th>
+                                                    <th>โรงเรือน</th>
+                                                    <th>แก้ไข / ลบข้อมูล</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /.head table -->
+                                            <!-- body table -->
+                                            <tbody>
+                                                <?php
+                                                $datahouse = new herd();
+                                                $row = $datahouse->select_herd_farm($id);
+                                                while ($rs = $row->fetch_object()) {
+                                                ?>
+                                                    <tr>
+                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 20%;"><?php echo $rs->herd_name; ?></td>
+                                                        <td style="width: 20%;"><?php echo $rs->house_name; ?></td>
+                                                        <td style="width:30%;" class="text-center">
+                                                            <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-pen-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
 
-                                        </div>
-                                        <!-- /.card-body -->
+                                            </tbody>
+                                            <!-- /.body table -->
 
-                                        <div class="card-footer text-end">
-                                            <button type="submit"  id="submit" name="submit" class="btn btn-primary submit">เพิ่ม</button>
-                                        </div>
-                                    </form>
+                                        </table>
+                                        <!-- /.table -->
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
-
                             </div>
-                            <!-- ./col -->
                         </div>
-                        <!-- ./row -->
 
-                    </div><!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-outline card-blue">
-                                    <h3 class=" text-center">โรงเรือน</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <!-- table -->
-                                    <table id="example1" class="table table-bordered table-striped table-hover">
-                                        <!-- head table -->
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ชื่อโรงเรือน</th>
-                                                <th>แก้ไข / ลบข้อมูล</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- /.head table -->
-                                        <!-- body table -->
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 20%;">123</td>
-                                                <td style="width: 50%;">145</td>
-                                                <td style="width:30%;" class="text-center">
-                                                    <a class="btn btn-info" href="#">
-                                                        <i class="far fa-pen-alt"></i>
-                                                    </a>
-                                                    <a class="btn btn-danger" href="#">
-                                                        <i class="far fa-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ชื่อโรงเรือน</th>
-                                                <th>แก้ไข / ลบข้อมูล</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
-                                    </table>
-                                    <!-- /.table -->
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
                     </div>
 
+                    <?php require 'modalherd.php'; ?>
                 </div>
+                <!-- /.content-wrapper -->
+            </section>
+            <!-- Main Footer -->
+            <?php require '../sub/footer.php'; ?>
+        </div>
 
+        <!-- ./wrapper -->
 
-            </div>
-            <!-- /.content-wrapper -->
-        </section>
-        <!-- Main Footer -->
-        <?php require '../sub/footer.php'; ?>
-    </div>
+        <script src="../../dist/js/datatable.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    'closeButton': false,
+                    'debug': false,
+                    'newestOnTop': false,
+                    'progressBar': false,
+                    'positionClass': 'toast-top-right',
+                    'preventDuplicates': false,
+                    'onclick': null,
+                    'showDuration': '300',
+                    'hideDuration': '1000',
+                    'timeOut': '5000',
+                    'extendedTimeOut': '1000',
+                    'showEasing': 'swing',
+                    'hideEasing': 'linear',
+                    'showMethod': 'fadeIn',
+                    'hideMethod': 'fadeOut'
+                }
+                //from select house_id
+                var farm_id = '<?php echo $_SESSION['id']; ?>';
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '../process/_herd.php',
+                    data: {
+                        id: farm_id,
+                        function: "getdata",
+                    },
+                    success: function(result) {
+                        var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
+                        for (i in result) {
+                            data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
+                        }
+                        $('#house_id').html(data);
+                    }
+                });
 
-    <!-- ./wrapper -->
-</body>
-<script src="../../dist/js/datatable.js">
-</script>
+                // insert data
+                $(document).on('click', '.submit', function(e) {
+                    e.preventDefault();
 
-</html>
+                    var herdname = $('#herdName').val();
+                    var house_id = $('#house_id').val();
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '../process/_herd.php',
+                        data: {
+                            id: '-',
+                            herdname: herdname,
+                            house_id: house_id,
+                            function: "insert",
+                        },
+                        success: function(result) {
+                            if (result.status == 200) {
+                                toastr.success(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            } else {
+                                toastr.warning(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    });
+
+                });
+
+                // edit data 
+                $(document).on('click', '.btnEdit', function(e) {
+                    e.preventDefault();
+                    var text = 'แก้ไขข้อมูลฝูง';
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_herd.php',
+                        data: {
+                            id: id,
+                            function: "showdata",
+                        },
+                        success: function(results) {
+                            $("#modalEdit").modal('show');
+                            $("#modaltextcenter").html(text);
+                            $("#modalherd").val(results.herd_name);
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_herd.php',
+                                data: {
+                                    id: farm_id,
+                                    function: "getdata",
+                                },
+                                success: function(result) {
+                                    var data = '';
+                                    for (i in result) {
+                                        if (result[i].house_id == results.house_id) {
+                                            data = '<option value="' + result[i].house_id + '" selected>' + result[i].housename + '</option>';
+                                        }
+                                        data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
+                                    }
+                                    $('#modalhouse_id').html(data);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                //delete data
+
+                $(document).on('click', '.btnDels', function(e) {
+                    e.preventDefault();
+
+                    var id = $(this).attr('id');
+                    var _row = $(this).parent();
+                    Swal.fire({
+                        title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "ยืนยัน",
+                        cancelButtonText: "ยกเลิก",
+                    }).then((btn) => {
+                        if (btn.isConfirmed) {
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_herd.php',
+                                data: {
+                                    function: 'del',
+                                    id: id,
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    // location.reload();
+                                                    _row.closest('tr').remove();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            });
+                        }
+                    })
+
+                });
+                /// modal update 
+                $(document).on('click', '.btnDels', function(e) {
+                    e.preventDefault();
+                
+                
+                
+                
+                });
+
+            });
+        </script>
+    </body>
+
+    </html>
 <?php } ?>

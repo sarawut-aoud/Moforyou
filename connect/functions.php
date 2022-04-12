@@ -165,7 +165,12 @@ class house extends Database
     // Selcet id where Farm_id
     public function gethouseFarmid($id)
     {
-        $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        // if(empty($id)){
+        //     $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house ");
+        // }else{
+            $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        // }
+      
         return $sel_houseFid;
     }
     // Insert  
@@ -215,6 +220,10 @@ class house extends Database
 class herd extends Database
 {
     // Insert 
+    public function insert_herd($herdname,$house_id){
+        $insert = mysqli_query($this->dbcon,"INSERT INTO tbl_herd (herd_name,house_id) VALUES ('$herdname','$house_id')");
+        return $insert;
+    }
     // Update
     public function update_herd($hname, $hid, $id)
     {
@@ -236,18 +245,28 @@ class herd extends Database
     public function select_herd($id)
     {
         if (empty($id)) {
-            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id AS hid
+            $selectadmin = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id AS hid
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) ORDER BY herd.id ASC ");
         } else {
-            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
+            $selectadmin = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
             WHERE herd.id = '$id' 
             ORDER BY herd.id ASC ");
         }
+        return $selectadmin;
+    }
+    public function select_herd_farm($farmid)
+    {
+            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
+            FROM tbl_herd AS herd 
+            INNER JOIN tbl_house AS house 
+            ON (herd.house_id = house.id) 
+            WHERE house.farm_id = '$farmid' 
+            ORDER BY herd.id ASC ");
         return $select;
     }
 }
