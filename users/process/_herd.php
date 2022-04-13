@@ -1,5 +1,5 @@
 <?php
-// error_reporting(~E_NOTICE);
+ error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 
 
@@ -65,6 +65,30 @@ if (isset($func) && $func == 'showdata') {
     }
 }
 
+
+if (isset($func) && $func == 'edit') {
+    $id = $_POST['id'];
+    $herdname = $_POST['herd_name'];
+    $house_id = $_POST['house_id'];
+    if (empty($id) || empty($herdname) || empty($house_id)) {
+        $msg = array(
+            "error" => true,
+            "status" => 0,
+            "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
+        );
+        echo json_encode($msg);
+        http_response_code(404);
+    } else {
+        $query = $sql->update_herd($herdname, $house_id, $id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'แก้ไขข้อมูลสำเร็จ',
+        );
+
+        echo json_encode($msg);
+        http_response_code(200);
+    }
+}
 
 
 if (isset($func) && $func == 'del') {

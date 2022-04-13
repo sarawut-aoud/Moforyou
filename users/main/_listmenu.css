@@ -28,6 +28,7 @@
 .bt_regis.active {
   background: #ffa601;
 }
+
 .bt_list-1 {
   line-height: 1.5;
   color: #fff;
@@ -58,6 +59,7 @@
 .bt_list-1.active {
   background: rgb(207, 135, 0);
 }
+
 .bt_list-2 {
   line-height: 1.5;
   color: #fff;
@@ -88,6 +90,7 @@
 .bt_list-2.active {
   background: rgb(175, 102, 6);
 }
+
 .bt_list {
   line-height: 1.5;
   color: #fff;
@@ -135,10 +138,27 @@
 .card {
   border-radius: 15px;
 }
+
 .far {
   color: white;
 }
 
 .far:hover {
   color: saddlebrown;
+}
+
+.card-cow {
+  background: rgb(199, 122, 0);
+  background: linear-gradient(180deg, rgba(199, 122, 0, 1) 42%, rgba(255, 226, 122, 1) 100%);
+  color: #fff;
+}
+
+.btn-cow {
+  background-color: #c36800;
+  color: #fff;
+}
+
+.btn-cow:hover {
+  background-color: #eb8a1b;
+  color: #fff;
 }

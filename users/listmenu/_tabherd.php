@@ -237,6 +237,7 @@ if (empty($result)) {
                 // edit data 
                 $(document).on('click', '.btnEdit', function(e) {
                     e.preventDefault();
+                    var id = $(this).attr('id');
                     var text = 'แก้ไขข้อมูลฝูง';
                     $.ajax({
                         type: 'get',
@@ -250,6 +251,7 @@ if (empty($result)) {
                             $("#modalEdit").modal('show');
                             $("#modaltextcenter").html(text);
                             $("#modalherd").val(results.herd_name);
+                            $("#modal_herdid").val(results.herd_id);
                             $.ajax({
                                 type: 'get',
                                 dataType: 'json',
@@ -330,12 +332,50 @@ if (empty($result)) {
 
                 });
                 /// modal update 
-                $(document).on('click', '.btnDels', function(e) {
+                $(document).on('click', '.btnsave', function(e) {
                     e.preventDefault();
-                
-                
-                
-                
+                    var herd_name = $('#modalherd').val();
+                    var house_id = $('#modalhouse_id').val();
+                    var herd_id = $("#modal_herdid").val();
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '../process/_herd.php',
+                        data: {
+                            id: herd_id,
+                            herd_name: herd_name,
+                            house_id: house_id,
+                            function: "edit"
+                        },
+                        success: function(result) {
+                            if (result.status == 200) {
+                                toastr.success(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            $("#modalEdit").modal('hide');
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            } else {
+                                toastr.warning(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    })
+
+
                 });
 
             });

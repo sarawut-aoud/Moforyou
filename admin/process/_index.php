@@ -1,4 +1,5 @@
 <?php
+ error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 $sql_farmer = new farmer();
 $sql_farm = new farm();

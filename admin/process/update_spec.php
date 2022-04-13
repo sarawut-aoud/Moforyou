@@ -11,6 +11,7 @@
 
 <body>
   <?php
+   error_reporting(~E_NOTICE);
   require_once '../../connect/functions.php';
   require_once '../../connect/resize.php';
   require_once '../../connect/alert.php';

@@ -113,15 +113,7 @@ if (empty($result)) {
                                                 </tr>
                                             </tbody>
                                             <!-- /.body table -->
-                                            <!-- foot table -->
-                                            <tfoot>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>ชื่อโรงเรือน</th>
-                                                    <th>แก้ไข / ลบข้อมูล</th>
-                                                </tr>
-                                            </tfoot>
-                                            <!-- /.foot table -->
+                                          
                                         </table>
                                         <!-- /.table -->
                                     </div>
@@ -142,17 +134,7 @@ if (empty($result)) {
         </div>
 
         <!-- ./wrapper -->
+    <script src="../../dist/js/datatable.js"></script>
     </body>
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-
     </html>
 <?php } ?>
