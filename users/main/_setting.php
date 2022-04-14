@@ -223,7 +223,7 @@ $result2 = mysqli_fetch_object($farm);
                 <?php require '../sub/footer.php'; ?>
             </div>
             <!-- ./wrapper -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
             <script src="../../plugins/modal_img/autosize.min.js"></script>
@@ -232,7 +232,7 @@ $result2 = mysqli_fetch_object($farm);
             <script src="../../plugins/modal_img/perfect-scrollbar.min.js"></script>
             <script src="../../plugins/modal_img/popper.min.js"></script>
 
-            <script src="../../dist/js/modal_img.js"></script>
+            <script src="../../dist/js/modal_img.js"></script> -->
             <script src="../../dist/js/phone.js"></script>
             <script src="../../dist/js/check_pwd_strong.js"></script>
             <script>
@@ -328,7 +328,7 @@ require_once '../../connect/func_pass.php';
 // upload ไม่ได้
 //todo: แก้ไขข้อมูลส่วนตัว
 if (isset($_POST['submit_farmer'])) {
-   
+
 
     $id = $_SESSION['id'];
     $fname = $_POST['fname'];
@@ -347,7 +347,7 @@ if (isset($_POST['submit_farmer'])) {
         return $targetLayer;
     }
 
-    if (empty($fname) && empty($email) && empty($phone)) {
+    if (empty($fname) || empty($email) || empty($phone)) {
         echo warning_toast('โปรดระบุข้อมูลส่วนตัวให้ครบ');
     } else {
         //todo: check ว่ามีรูปภาพหรือไม่
@@ -361,7 +361,7 @@ if (isset($_POST['submit_farmer'])) {
 
             require_once '../../connect/resize.php';
             echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
-          
+
 
             copy($picture, "../../dist/img/user_upload/" . $ext);
 
@@ -379,11 +379,12 @@ if (isset($_POST['submit_farm'])) {
     $farmname = trim($_POST['farmname']);
     $sql = new farm();
 
-    if (!empty($farmname)) {
+    if (empty($farmname)) {
+        echo warning_toast("โปรดลองอีกครั้ง");
+    } else {
+
         $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
         echo success_toasts('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting');
-    } else {
-        echo warning_toast("โปรดลองอีกครั้ง");
     }
 }
 // todo: แก้ไข้ password
