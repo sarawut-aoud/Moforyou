@@ -309,8 +309,27 @@ if (empty($result)) {
     require_once '../../connect/resize.php';
     if (isset($_POST['submit_cow'])) {
 
-        if (empty($_POST['species_id']) || empty($_POST['house_id']) || empty($_POST['herd_id'])) {
-            echo warning_toast('กรุณาเลือกสายพันธ์ุ หรือ โรงเรือน หรือ ฝูง');
+        if (empty($_POST['species_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#species_id").focus();
+                    })
+                 </script>';
+            echo warning_toast('กรุณาเลือกสายพันธ์ุ ');
+        } else if (empty($_POST['house_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#house_id").focus();
+                    })
+                </script>';
+            echo warning_toast('กรุณาเลือกโรงเรือน ');
+        } else if (empty($_POST['herd_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#herd_id").focus();
+                    })
+                </script>';
+            echo warning_toast('กรุณาเลือกฝูง');
         } else {
             $namecow =  $_POST['namecow'];
             $cowdate =  $_POST['cowdate'];
@@ -334,7 +353,7 @@ if (empty($result)) {
                 return $targetLayer;
             }
 
-            if (empty($namecow) || empty($cowdate) || empty($species_id) || empty($weightcow) || empty($highcow) || empty($herd_id) || empty($house_id) || empty($gender)) {
+            if (empty($namecow) || empty($cowdate)  || empty($weightcow) || empty($highcow)  || empty($gender)) {
 
                 echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
             } else {

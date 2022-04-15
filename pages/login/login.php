@@ -78,7 +78,7 @@ ob_start();
 <?php
 
 require '../../connect/alert.php';
- require_once '../../connect/toastr.php';
+require_once '../../connect/toastr.php';
 require '../../connect/func_pass.php';
 ob_start();
 
@@ -98,23 +98,25 @@ if (isset($_POST['username'])) {
     if (!empty($username) && !empty($password)) {
         if ($username != "admin" && $password != "masterkey") {
             $sql = new Setpwd(); //password
-        
-            $result = $userdata->Getpwd($username_escape,$email_escape);
-            if (mysqli_num_rows($result) == 1) {
+
+            $result = $userdata->Getpwd($username_escape, $email_escape);
+            if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_array($result);
                 $encode = $sql->encode($password); // เข้ารหัส password
                 $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
                 if (password_verify($pass_sha, $row['password'])) { // เปรียบเทียบ password ที่รับค่า และ password from db
                     // Select data จาก Username or Email
-                    session_start();
-                    $_SESSION["id"] =  $row['id'];
-                    $_SESSION["user"] = $username;
-                    $_SESSION["fullname"] = $row['fullname'];
-                    $_SESSION["person_id"] = $row=['card'];
-                    $_SESSION["phone"] = $row=['phone'];
-                    $_SESSION["email"] = $row=['email'];
-                    
-                     echo success_toast("Login Sucessful !", $_SESSION["fullname"] ,"../../users/main/user_index");
+                    $results = $userdata->login($row['password'], $row['username'], $row['email']);
+                    $row_login = mysqli_fetch_array($results);
+                    $id =  $row_login["id"];
+                    $username =  $row_login["username"];
+                    $fullname =   $row_login['fullname'];
+                    $person_id =  $row_login['card'];
+                    $phone =  $row_login['phone'];
+                    $email =  strval($row_login['email']);
+                    require '../../connect/func_login.php';
+                    echo login($id, $username, $fullname, $person_id, $phone, $email);
+                    // echo success_toast("Login Sucessful !", "", "../../users/main/user_index");
                     exit();
                 } else {
                     echo warning_toast("รหัสผ่านผิด โปรดลองอีกครั้ง");

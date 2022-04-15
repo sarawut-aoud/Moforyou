@@ -142,7 +142,7 @@
          'showMethod': 'fadeIn',
          'hideMethod': 'fadeOut'
        }
-       toastr.success(
+       toastr.error(
          '$msg',
          '',
          {
