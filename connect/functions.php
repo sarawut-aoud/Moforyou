@@ -136,13 +136,12 @@ class farm extends Database
     //Select
     public function selectfarm($id)
     {
-        if($id == 'admin'){
+        if ($id == 'admin') {
             $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
             FROM tbl_farm  AS f
             INNER JOIN tbl_farmer AS fm 
             ON (f.farmmer_id = fm.id)");
-        }
-        else if ($id == '') {
+        } else if ($id == '') {
             $sel_farm = mysqli_query($this->dbcon, "SELECT COUNT(id) AS datarow FROM tbl_farm  ");
         } else {
             $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
@@ -153,7 +152,8 @@ class farm extends Database
 
         return $sel_farm;
     }
-    public function delsfarm($id){
+    public function delsfarm($id)
+    {
         $del_farm = mysqli_query($this->dbcon, "DELETE FROM tbl_farm WHERE id='$id'");
 
         return $del_farm;
@@ -168,9 +168,9 @@ class house extends Database
         // if(empty($id)){
         //     $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house ");
         // }else{
-            $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
         // }
-      
+
         return $sel_houseFid;
     }
     // Insert  
@@ -220,8 +220,9 @@ class house extends Database
 class herd extends Database
 {
     // Insert 
-    public function insert_herd($herdname,$house_id){
-        $insert = mysqli_query($this->dbcon,"INSERT INTO tbl_herd (herd_name,house_id) VALUES ('$herdname','$house_id')");
+    public function insert_herd($herdname, $house_id)
+    {
+        $insert = mysqli_query($this->dbcon, "INSERT INTO tbl_herd (herd_name,house_id) VALUES ('$herdname','$house_id')");
         return $insert;
     }
     // Update
@@ -261,7 +262,7 @@ class herd extends Database
     }
     public function select_herd_farm($farmid)
     {
-            $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
+        $select = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
@@ -352,10 +353,37 @@ class specise extends Database
 class cow extends Database
 {
     // Insert
-    public function addcow()
+    public function addcow($cow_name,$cow_date,$high,$weight,$cow_father,$cow_mother,$spec_id,$herd_id,$house_id,$picture)
     {
-        $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow()   
-        VALUES()");
+        if (empty($picture)) {
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id)   
+            VALUES(
+                '$cow_name',
+                '$cow_date',
+                '$high',
+                '$weight',
+                '$cow_father',
+                '$cow_mother',
+                '$spec_id',
+                '$herd_id',
+                '$house_id'
+            )");
+        } else {
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,cow_pic)   
+            VALUES(
+                '$cow_name',
+                '$cow_date',
+                '$high',
+                '$weight',
+                '$cow_father',
+                '$cow_mother',
+                '$spec_id',
+                '$herd_id',
+                '$house_id',
+                '$picture'
+            )");
+        }
+
         return $add_cow;
     }
     // Update

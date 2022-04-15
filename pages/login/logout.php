@@ -1,7 +1,13 @@
 <?php
 
 session_start();
-session_destroy();
+
+unset($_SESSION["id"]);
+unset($_SESSION["user"]);
+unset($_SESSION["fullname"]);
+unset($_SESSION["person_id"]);
+unset($_SESSION["phone"]);
+unset($_SESSION["email"]);
 
 echo "<script>
 	window.setTimeout(function() {

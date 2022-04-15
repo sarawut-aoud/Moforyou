@@ -114,9 +114,10 @@ if (isset($_POST['username'])) {
                     $person_id =  $row_login['card'];
                     $phone =  $row_login['phone'];
                     $email =  strval($row_login['email']);
+                    
                     require '../../connect/func_login.php';
                     echo login($id, $username, $fullname, $person_id, $phone, $email);
-                    // echo success_toast("Login Sucessful !", "", "../../users/main/user_index");
+
                     exit();
                 } else {
                     echo warning_toast("รหัสผ่านผิด โปรดลองอีกครั้ง");
