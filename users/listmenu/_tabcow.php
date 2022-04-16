@@ -4,6 +4,7 @@ require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
 //เก็บ id จาก session
 $id = $_SESSION['id'];
+$farmid = $_SESSION['farm_id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -103,7 +104,7 @@ if (empty($result)) {
                                                             </div>
                                                             <label class="col-form-label col-2" for="highcow">ส่วนสูง : </label>
                                                             <div class="col-md-4">
-                                                                <input type="number" class="form-control " id="highcow" name="highcow" placeholder="น้ำหนัก" require>
+                                                                <input type="number" class="form-control " id="highcow" name="highcow" placeholder="ส่วนสูง" require>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -191,24 +192,37 @@ if (empty($result)) {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>ชื่อโค</th>
+                                                    <th>ส่วนสูง</th>
+                                                    <th>น้ำหนัก</th>
+                                                    <th>เพศ</th>
                                                     <th>แก้ไข / ลบข้อมูล</th>
                                                 </tr>
                                             </thead>
                                             <!-- /.head table -->
                                             <!-- body table -->
                                             <tbody>
-                                                <tr>
-                                                    <td>123</td>
-                                                    <td>145</td>
-                                                    <td class="text-center">
-                                                        <a class="btn btn-info btnEdit" id="">
-                                                            <i class="far fa-pen-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger btnDels" id="">
-                                                            <i class="far fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                <?php
+                                                $datahouse = new cow();
+                                                $row = $datahouse->selectdatacowbyfarmer($farmid);
+                                                while ($rs = $row->fetch_object()) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $rs->cow_name; ?></td>
+                                                        <td><?php echo $rs->high; ?></td>
+                                                        <td><?php echo $rs->weight; ?></td>
+                                                        <td><?php echo $rs->gender; ?></td>
+
+                                                        <td class="text-center">
+                                                            <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-pen-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                             <!-- /.body table -->
 
@@ -222,7 +236,7 @@ if (empty($result)) {
                         </div>
 
                     </div>
-
+                    <?php require_once 'modalcow.php';?>
 
                 </div>
                 <!-- /.content-wrapper -->
@@ -238,7 +252,7 @@ if (empty($result)) {
         <script>
             $(document).ready(function() {
 
-                var farm_id = '<?php echo $_SESSION['id']; ?>';
+                var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
 
 
                 $.ajax({
@@ -296,7 +310,80 @@ if (empty($result)) {
                         });
                     }
                 });
+                $(document).on('click', '.btnEdit', function(e) {
+                    e.preventDefault();
+                    var id = $(this).attr('id');
+                    var txt ='แก้ไขข้อมูลโค';
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_cow.php',
+                        data: {
+                            function: 'showdata',
+                            id: id,
+                        },
+                        success: function(result) {
+                            $('#modalEdit').modal('show');
+                            $('#modaltextcenter').html(txt);
+                            
+                        }
+                    })
+                })
+                // delete
+                $(document).on('click', '.btnDels', function(e) {
+                    e.preventDefault();
 
+                    var id = $(this).attr('id');
+                    var _row = $(this).parent();
+                    Swal.fire({
+                        title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "ยืนยัน",
+                        cancelButtonText: "ยกเลิก",
+                    }).then((btn) => {
+                        if (btn.isConfirmed) {
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_cow.php',
+                                data: {
+                                    function: 'del',
+                                    id: id,
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    // location.reload();
+                                                    _row.closest('tr').remove();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            });
+                        }
+                    })
+
+                });
 
 
             });
@@ -308,6 +395,7 @@ if (empty($result)) {
     require_once '../../connect/toastr.php';
     require_once '../../connect/resize.php';
     if (isset($_POST['submit_cow'])) {
+        $sql = new cow();
 
         if (empty($_POST['species_id'])) {
             echo '<script>
@@ -331,6 +419,7 @@ if (empty($result)) {
                 </script>';
             echo warning_toast('กรุณาเลือกฝูง');
         } else {
+
             $namecow =  $_POST['namecow'];
             $cowdate =  $_POST['cowdate'];
             $species_id =  $_POST['species_id'];
@@ -342,7 +431,6 @@ if (empty($result)) {
             $herd_id =  $_POST['herd_id'];
             $gender =  $_POST['gender'];
             $picture = $_FILES['file']['tmp_name'];
-
             //? function ลดขนาดรูปภาพ
             function imageResize($imageResourceId, $width, $height)
             {
@@ -367,14 +455,14 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    // $sql = $sql->($id, $fname, $phone, $email, $ext); มีรูป 
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_setting");
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext);
+                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } else {
-                    // ไม่มีรูป
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_setting");
-                }
-            }
-        }
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '');
+                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
+                } // check picture
+            } // check Undendifind values
+        } // check select
     }
 }
 ?>

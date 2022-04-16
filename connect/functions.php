@@ -255,7 +255,7 @@ class herd extends Database
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
-            WHERE herd.id = '$id' 
+            WHERE house.id = '$id' 
             ORDER BY herd.id ASC ");
         }
         return $selectadmin;
@@ -353,23 +353,10 @@ class specise extends Database
 class cow extends Database
 {
     // Insert
-    public function addcow($cow_name,$cow_date,$high,$weight,$cow_father,$cow_mother,$spec_id,$herd_id,$house_id,$picture)
+    public function addcow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $picture)
     {
         if (empty($picture)) {
-            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id)   
-            VALUES(
-                '$cow_name',
-                '$cow_date',
-                '$high',
-                '$weight',
-                '$cow_father',
-                '$cow_mother',
-                '$spec_id',
-                '$herd_id',
-                '$house_id'
-            )");
-        } else {
-            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,cow_pic)   
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,gender)   
             VALUES(
                 '$cow_name',
                 '$cow_date',
@@ -380,6 +367,21 @@ class cow extends Database
                 '$spec_id',
                 '$herd_id',
                 '$house_id',
+                '$gender'
+            )");
+        } else {
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,gender,cow_pic)   
+            VALUES(
+                '$cow_name',
+                '$cow_date',
+                '$high',
+                '$weight',
+                '$cow_father',
+                '$cow_mother',
+                '$spec_id',
+                '$herd_id',
+                '$house_id',
+                '$gender',
                 '$picture'
             )");
         }
@@ -389,16 +391,35 @@ class cow extends Database
     // Update
 
     // Delete
-
+    public function delete_cow($id)
+    {
+        $del = mysqli_query($this->dbcon, "DELETE FROM tbl_cow WHERE id = '$id' ");
+        return $del;
+    }
     // Select
     public function selectdatacow($id)
     {
         if ($id == 'count') {
             $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
         } else {
-            $sel_cow = mysqli_query($this->dbcon, "SELECT * FROM tbl_cow WHERE id = '$id' ");
+            $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date,  IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
+       
+            FROM tbl_cow AS c 
+            INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
+            WHERE c.id = $id
+            ");
         }
         return $sel_cow;
+    }
+    public function selectdatacowbyfarmer($id)
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
+       
+       FROM tbl_cow AS c 
+       INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
+       WHERE ho.farm_id = $id
+       ");
+        return $sel;
     }
 }
 // ผสมพันธุ์

@@ -1,5 +1,5 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 
 
@@ -20,7 +20,12 @@ if ($func == "getdata") {
         );
         $i++;
     }
-    echo json_encode($data);
+    if ($data == null) {
+        echo json_encode(array());
+    } else {
+        echo json_encode($data);
+        http_response_code(200);
+    }
 }
 
 if ($func == 'insert') {

@@ -3,6 +3,7 @@ require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
 //เก็บ id จาก session
 $id = $_SESSION['id'];
+$farmid = $_SESSION['farm_id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -14,7 +15,8 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-
+   
+}
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -108,7 +110,7 @@ if (empty($result)) {
                                             <tbody>
                                                 <?php
                                                 $datahouse = new herd();
-                                                $row = $datahouse->select_herd_farm($id);
+                                                $row = $datahouse->select_herd_farm($farmid);
                                                 while ($rs = $row->fetch_object()) {
                                                 ?>
                                                     <tr>
@@ -383,4 +385,3 @@ if (empty($result)) {
     </body>
 
     </html>
-<?php } ?>

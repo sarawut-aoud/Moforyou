@@ -1,8 +1,8 @@
 <?php
-    //Toastr Alert
-    function success_toast($msg, $name,$redirect)
-    {
-      return "<script>
+//Toastr Alert
+function success_toast($msg, $name, $redirect)
+{
+  return "<script>
      toastr.options = {
       'closeButton': false,
       'debug': false,
@@ -32,9 +32,10 @@
       }
     );
               </script>";
-    }
-    function success_toasts($msg,$redirect){
-      return "<script>
+}
+function success_toasts($msg, $redirect)
+{
+  return "<script>
       toastr.options = {
        'closeButton': false,
        'debug': false,
@@ -64,10 +65,11 @@
        }
      );
                </script>";
-    }
+}
 
-    function warning_toast($msg){
-        return "<script>
+function warning_toast($msg)
+{
+  return "<script>
         toastr.options = {
           'closeButton': false,
           'debug': false,
@@ -86,13 +88,15 @@
           'hideMethod': 'fadeOut'
         }
        toastr.warning(
-         '$msg'
+        '$msg',
+       
       );
                 </script>";
-    }
+}
 
-    function info_toast($msg){
-        return "<script>
+function info_toast($msg)
+{
+  return "<script>
         toastr.options = {
          'closeButton': false,
          'debug': false,
@@ -122,9 +126,10 @@
          }
        );
                  </script>";
-    }
-    function error_toast($msg,$redirect){
-        return "<script>
+}
+function error_toast($msg, $redirect)
+{
+  return "<script>
         toastr.options = {
          'closeButton': false,
          'debug': false,
@@ -149,9 +154,9 @@
            timeOut: 1000,
            fadeOut: 1000,
            onHidden: function () {
-               window.location.replace('$redirect');
+            location.reload();
              }
          }
        );
                  </script>";
-    }
+}

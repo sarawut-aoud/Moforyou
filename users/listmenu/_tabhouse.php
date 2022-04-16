@@ -13,6 +13,10 @@ $result = mysqli_num_rows($fcheck);
 if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
+    while ($obj = $fcheck -> fetch_object()) {
+        $_SESSION['farm_id'] = $obj->id;
+      }
+    
 }
 // ถ้ามีแสดง tag นี้
 ?>
@@ -106,7 +110,8 @@ if (empty($result)) {
                                         <tbody>
                                             <?php
                                             $datahouse = new house();
-                                            $row = $datahouse->gethouseFarmid($id);
+                                            $farmid = $_SESSION['farm_id'];
+                                            $row = $datahouse->gethouseFarmid($farmid);
                                             while ($rs = $row->fetch_object()) {
                                             ?>
                                                 <tr>
@@ -176,7 +181,7 @@ if (empty($result)) {
                 e.preventDefault();
 
                 var housename = $('#hname').val();
-                var id = "<?php echo $_SESSION['id']; ?>";
+                var farmid = "<?php echo $_SESSION['farm_id']; ?>";
 
                 $.ajax({
                     type: 'post',
@@ -184,7 +189,7 @@ if (empty($result)) {
                     url: '../process/_house.php',
                     data: {
                         function: 'insert',
-                        id: id,
+                        id: farmid,
                         housename: housename,
                     },
                     success: function(result) {
@@ -220,6 +225,7 @@ if (empty($result)) {
                 e.preventDefault();
                 var id = $(this).attr('id');
                 var housename = $("#modalhouse").val();
+                var txt = 'แก้ไขข้อมูลโรงเรือน';
                 $.ajax({
                     type: 'get',
                     dataType: 'json',
@@ -230,8 +236,10 @@ if (empty($result)) {
                     },
                     success: function(result) {
                         $("#modalEdit").modal('show');
+                        $("#modaltextcenter").html(txt);
                         $("#modalhouse").val(result.housename);
                         $("#modal_houseid").val(result.house_id);
+                       
                     }
                 });
 
