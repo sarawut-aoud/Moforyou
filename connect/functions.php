@@ -399,10 +399,11 @@ class cow extends Database
     // Select
     public function selectdatacow($id)
     {
+        //IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
         if ($id == 'count') {
             $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
         } else {
-            $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date,  IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
+            $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date, c.cow_pic, c.gender as gender
        
             FROM tbl_cow AS c 
             INNER JOIN tbl_house as ho ON(c.house_id = ho.id)

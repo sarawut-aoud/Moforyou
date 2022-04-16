@@ -81,7 +81,7 @@ if (empty($result)) {
                                                             <div class="input-group">
                                                                 <label class="col-form-label col-4" for="cowdate">วันที่เกิด/รับเข้ามา </label>
                                                                 <div class="col-md">
-                                                                    <input type="date" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
+                                                                    <input type="datetime-local" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -325,6 +325,16 @@ if (empty($result)) {
                         success: function(result) {
                             $('#modalEdit').modal('show');
                             $('#modaltextcenter').html(txt);
+                            $('#modalnamecow').val(result.cowname);
+                        
+                            $('#modal_cowdate').val(result.cow_date);
+                            $('#modalweightcow').val(result.weight);
+                            $('#modalhighcow').val(result.high);
+                            $('#modalfathercow').val(result.cow_father);
+                            $('#modalmothercow').val(result.cow_mother);
+
+                            
+
                             
                         }
                     })

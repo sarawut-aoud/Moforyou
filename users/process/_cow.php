@@ -49,7 +49,6 @@ if ($func == "getdataherd") {
     }
     if ($data == null) {
         echo json_encode(array());
-       
     } else {
         echo json_encode($data);
         http_response_code(200);
@@ -69,6 +68,9 @@ if (isset($func) && $func == "showdata") {
         $query = $sqlcow->selectdatacow($id);
         // $i = 0;
         while ($row = $query->fetch_object()) {
+            $date = new DateTime($row->cow_date);
+
+            $cowdate = $date->format("Y-m-d");
             $data = array(
                 "cow_id" => intval($row->id),
                 "cowname" => $row->cow_name,
@@ -77,9 +79,11 @@ if (isset($func) && $func == "showdata") {
                 "spec_id" => intval($row->spec_id),
                 "house_id" => intval($row->house_id),
                 "herd_id" => intval($row->herd_id),
-                "cow_date" => ($row->cow_date),
+                "cow_date" => ($cowdate),
                 "cow_father" => ($row->cow_father),
                 "cow_mother" => ($row->cow_mother),
+                "cow_pic" => ($row->cow_pic),
+                "cow_gender" => intval($row->gender),
             );
             // $i++;
         }

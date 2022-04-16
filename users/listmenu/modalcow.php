@@ -33,9 +33,9 @@
                             </div>
                             <div class="form-group row">
                                 <div class="input-group">
-                                    <label class="col-form-label col-4" for="modalcowdate">วันที่เกิด/รับเข้ามา </label>
+                                    <label class="col-form-label col-4" for="modal_cowdate">วันที่เกิด/รับเข้ามา </label>
                                     <div class="col-md">
-                                        <input type="date" class="form-control" id="modalcowdate" name="modalcowdate" placeholder="00/00/0000">
+                                        <input type="date" class="form-control" id="modal_cowdate" name="modal_cowdate">
                                     </div>
                                 </div>
                             </div>
@@ -92,16 +92,16 @@
                                 <div class="d-flex col-form-label">
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-primary d-inline  ">
-                                            <input type="radio" id="radioPrimary1" name="gender" value="1" checked>
-                                            <label for="radioPrimary1" class="align-self-center">
+                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1"  >
+                                            <label for="modalradioPrimary1" class="align-self-center">
                                                 <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-pink d-inline ">
-                                            <input type="radio" id="radioPrimary2" name="gender" value="2">
-                                            <label for="radioPrimary2">
+                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2" >
+                                            <label for="modalradioPrimary2">
                                                 <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                             </label>
                                         </div>
