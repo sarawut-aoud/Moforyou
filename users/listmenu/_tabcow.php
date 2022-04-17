@@ -236,7 +236,7 @@ if (empty($result)) {
                         </div>
 
                     </div>
-                    <?php require_once 'modalcow.php';?>
+                    <?php require_once 'modalcow.php'; ?>
 
                 </div>
                 <!-- /.content-wrapper -->
@@ -313,7 +313,7 @@ if (empty($result)) {
                 $(document).on('click', '.btnEdit', function(e) {
                     e.preventDefault();
                     var id = $(this).attr('id');
-                    var txt ='แก้ไขข้อมูลโค';
+                    var txt = 'แก้ไขข้อมูลโค';
                     $.ajax({
                         type: 'get',
                         dataType: 'json',
@@ -326,16 +326,114 @@ if (empty($result)) {
                             $('#modalEdit').modal('show');
                             $('#modaltextcenter').html(txt);
                             $('#modalnamecow').val(result.cowname);
-                        
                             $('#modal_cowdate').val(result.cow_date);
                             $('#modalweightcow').val(result.weight);
                             $('#modalhighcow').val(result.high);
                             $('#modalfathercow').val(result.cow_father);
                             $('#modalmothercow').val(result.cow_mother);
 
-                            
+                            if (result.cow_gender == '1') {
+                                $('#modalradioPrimary1').prop('checked', true);
+                            } else if (result.cow_gender == '2') {
+                                $('#modalradioPrimary2').prop('checked', true);
+                            } else {
+                                $('#modalradioPrimary1').prop('checked', false);
+                                $('#modalradioPrimary2').prop('checked', false);
+                            }
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_cow.php',
+                                data: {
+                                    id: '',
+                                    function: "getdataspecies",
+                                },
+                                success: function(results) {
+                                    var data = '';
+                                    for (i in results) {
+                                        if (results[i].spec_id == result.spec_id) {
+                                            data += '<option value="' + results[i].spec_id + '" selected > ' + results[i].spec_name + ' </option>';
 
-                            
+                                        } else {
+                                            data += '<option value="' + results[i].spec_id + '" > ' + results[i].spec_name + '</option>';
+                                        }
+                                    }
+                                    $('#modalspecies_id').html(data);
+                                }
+                            });
+
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_cow.php',
+                                data: {
+                                    id: farm_id,
+                                    function: "getdatahouse",
+                                },
+                                success: function(results) {
+                                    var data = '';
+                                    for (i in results) {
+                                        if (results[i].house_id == result.house_id) {
+                                            data += '<option value="' + results[i].house_id + '" selected > ' + results[i].housename + '</option>';
+
+                                        } else {
+                                            data += '<option value="' + results[i].house_id + '" > ' + results[i].housename + '</option>';
+
+                                        }
+                                    }
+                                    $('#modalhouse_id').html(data);
+
+
+                                    var house_id = $('#modalhouse_id').val();
+                                    $.ajax({
+                                        type: 'get',
+                                        dataType: 'json',
+                                        url: '../process/_cow.php',
+                                        data: {
+                                            id: house_id,
+                                            function: "getdataherd",
+                                        },
+                                        success: function(results) {
+                                            var data = '';
+                                            for (i in results) {
+                                                if (results[i].herd_id == result.herd_id) {
+                                                    data += '<option value="' + results[i].herd_id + '"selected > ' + results[i].herdname + '</option>';
+
+                                                } else {
+                                                    data += '<option value="' + results[i].herd_id + '" > ' + results[i].herdname + '</option>';
+                                                }
+                                            }
+                                            $('#modalherd_id').html(data);
+
+                                        }
+                                    });
+
+
+                                    $('#modalhouse_id').change(function() {
+                                        var house_id = $('#modalhouse_id').val();
+                                        $.ajax({
+                                            type: 'get',
+                                            dataType: 'json',
+                                            url: '../process/_cow.php',
+                                            data: {
+                                                id: house_id,
+                                                function: "getdataherd",
+                                            },
+                                            success: function(result) {
+                                                var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
+                                                for (i in result) {
+                                                    data += '<option value="' + result[i].herd_id + '" > ' + result[i].herdname + '</option>';
+                                                }
+                                                $('#modalherd_id').html(data);
+
+                                            }
+                                        });
+
+                                    });
+                                }
+                            });
+
+
                         }
                     })
                 })
@@ -404,6 +502,7 @@ if (empty($result)) {
 <?php
     require_once '../../connect/toastr.php';
     require_once '../../connect/resize.php';
+    // insert
     if (isset($_POST['submit_cow'])) {
         $sql = new cow();
 
@@ -473,6 +572,73 @@ if (empty($result)) {
                 } // check picture
             } // check Undendifind values
         } // check select
-    }
+    } //isset submit_cow
+    // update
+    if (isset($_POST['btnsave'])) {
+        if (empty($_POST['modalspecies_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#modalspecies_id").focus();
+                    })
+                 </script>';
+            echo warning_toast('กรุณาเลือกสายพันธ์ุ ');
+        } else if (empty($_POST['modalhouse_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#modalhouse_id").focus();
+                    })
+                </script>';
+            echo warning_toast('กรุณาเลือกโรงเรือน ');
+        } else if (empty($_POST['modalherd_id'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#modalherd_id").focus();
+                    })
+                </script>';
+            echo warning_toast('กรุณาเลือกฝูง');
+        } else {
+            // $namecow =  $_POST['namecow'];
+            // $cowdate =  $_POST['cowdate'];
+            // $species_id =  $_POST['species_id'];
+            // $weightcow =  $_POST['weightcow'];
+            // $highcow =  $_POST['highcow'];
+            // $fathercow =  $_POST['fathercow'];
+            // $mothercow =  $_POST['mothercow'];
+            // $house_id =  $_POST['house_id'];
+            // $herd_id =  $_POST['herd_id'];
+            // $gender =  $_POST['gender'];
+            // $picture = $_FILES['file']['tmp_name'];
+            //? function ลดขนาดรูปภาพ
+            function imageResize($imageResourceId, $width, $height)
+            {
+                $targetWidth = $width < 1280 ? $width : 1280;
+                $targetHeight = ($height / $width) * $targetWidth;
+                $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
+                imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+                return $targetLayer;
+            }
+            if (empty($namecow) || empty($cowdate)  || empty($weightcow) || empty($highcow)  || empty($gender)) {
+
+                echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
+            } else {
+                if (!empty($picture)) {
+                    $time = date('Ymdhis');
+                    $sourceProperties = getimagesize($picture);
+                    $fileNewName = $time;
+                    $folderPath = "../../dist/img/cow_img/";
+                    $ext = $_FILES['file']['name'];
+                    $imageType = $sourceProperties[2];
+                    echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+                    copy($picture, "../../dist/img/cow_upload/" . $ext);
+
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext);
+                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
+                } else {
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '');
+                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
+                } // check picture
+            } // check Undendifind values
+        } // check select spec_id / house_id / herd_id
+    } // isset btnsave
 }
 ?>

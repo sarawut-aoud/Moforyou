@@ -92,7 +92,7 @@
                                 <div class="d-flex col-form-label">
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-primary d-inline  ">
-                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1"  >
+                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1"   >
                                             <label for="modalradioPrimary1" class="align-self-center">
                                                 <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
                                             </label>
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-pink d-inline ">
-                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2" >
+                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2"  >
                                             <label for="modalradioPrimary2">
                                                 <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                             </label>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
-                    <button type="submit" title="บันทึกข้อมูล" class="col-md-4 btn btn-cow mt-2 btnsave">ยืนยันการแก้ไข</button>
+                    <button type="submit" title="บันทึกข้อมูล" id="btnsave" name="btnsave" class="col-md-4 btn btn-cow mt-2 btnsave">ยืนยันการแก้ไข</button>
                 </div>
             </div>
         </div>
