@@ -1,8 +1,9 @@
 <?php
 require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
-    //เก็บ id จาก session
+//เก็บ id จาก session
 $id = $_SESSION['id'];
+$farmid = $_SESSION['farm_id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -14,56 +15,82 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
+}
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MoForYou</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MoForYou</title>
 
-        <?php require '../../build/script.php'; ?>
-        <link rel="stylesheet" href="../main/_listmenu.css">
-    </head>
+    <?php require '../../build/script.php'; ?>
+    <link rel="stylesheet" href="../main/_listmenu.css">
+</head>
 
 
-    <body class="hold-transition sidebar-collapse layout-top-nav">
-        <div class="wrapper">
+<body class="hold-transition sidebar-collapse layout-top-nav">
+    <div class="wrapper">
 
-            <!-- Navbar -->
-            <?php require '../sub/navbar.php'; ?>
-            <!-- /.navbar -->
+        <!-- Navbar -->
+        <?php require '../sub/navbar.php'; ?>
+        <!-- /.navbar -->
 
-            <!-- Content Wrapper. Contains page content -->
-            <section class="content">
-                <div class="content-wrapper">
-                    <!-- Content Header (Page header) -->
-                    <div class="content-header">
-                        <div class="container">
-                            <!-- Manage -->
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                    <!-- general form elements -->
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">เพิ่มข้อมูลโรงเรือน</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form>
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="ชื่อโรงเรือน">
+        <!-- Content Wrapper. Contains page content -->
+        <section class="content">
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container">
+                        <!-- Manage -->
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header card-cow"">
+                                        <h3 class=" text-center ">ผสมพันธุ์</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form method=" POST" id="frm_breed">
+                                        <div class=" card-body">
+                                            <div class="form-group row">
+                                                <div class="d-flex align-items-center ">
+                                                    <label class=" col-form-label" for="cow_id_male">
+                                                        <img class="img-circle elevation-2  " src="../../dist/img/icon/male.png" alt="ตัวผุ้">
+                                                    </label>
+                                                    <div class="col-md">
+                                                        <select class="form-control select2" id="cow_id_male" data-placeholder="เลือกโคตัวผู้"></select>
+                                                    </div>
                                                 </div>
-
                                             </div>
-                                            <!-- /.card-body -->
-
-                                            <div class="card-footer text-end">
-                                                <button type="submit" id="submit" name="submit" class="btn btn-primary">เพิ่ม</button>
+                                            <div class="form-group row">
+                                                <div class="d-flex align-items-center ">
+                                                    <label class=" col-form-label" for="cow_id_female">
+                                                        <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
+                                                    </label>
+                                                    <div class="col-md">
+                                                        <select class="form-control select2 " id="cow_id_female" data-placeholder="เลือกโคตัวเมีย"></select>
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <div class=" input-group justify-content-center">
+                                                    <label class=" col-form-label" for="cow_id_female">
+                                                        <span><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout" style="color:red;">00-00-0000</span></span>
+                                                    </label>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer text-end">
+                                            <button type="reset" class="btn btn-secondary reset">ยกเลิก</button>
+                                            <button type="submit" id="submit" name="submit" class="btn btn-primary submit">ยืนยันการผสมพันธุ์</button>
+                                        </div>
                                         </form>
                                     </div>
                                     <!-- /.card -->
@@ -113,7 +140,7 @@ if (empty($result)) {
                                                 </tr>
                                             </tbody>
                                             <!-- /.body table -->
-                                          
+
                                         </table>
                                         <!-- /.table -->
                                     </div>
@@ -128,13 +155,13 @@ if (empty($result)) {
 
                 </div>
                 <!-- /.content-wrapper -->
-            </section>
-            <!-- Main Footer -->
-            <?php require '../sub/footer.php'; ?>
-        </div>
+        </section>
+        <!-- Main Footer -->
+        <?php require '../sub/footer.php'; ?>
+    </div>
 
-        <!-- ./wrapper -->
+    <!-- ./wrapper -->
     <script src="../../dist/js/datatable.js"></script>
-    </body>
-    </html>
-<?php } ?>
+</body>
+
+</html>

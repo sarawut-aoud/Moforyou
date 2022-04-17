@@ -389,7 +389,40 @@ class cow extends Database
         return $add_cow;
     }
     // Update
-
+    public function update_cow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $picture, $cowid)
+    {
+        if (empty($picture)) {
+            $update = mysqli_query($this->dbcon, "UPDATE tbl_cow 
+            SET cow_name = '$cow_name' ,
+                cow_date = '$cow_date' ,
+                high = '$high' ,
+                weight='$weight',
+                cow_father='$cow_father',
+                cow_mother='$cow_mother',
+                spec_id='$spec_id',
+                herd_id='$herd_id',
+                house_id='$house_id',
+                gender='$gender'
+            WHERE id = '$cowid'
+                ");
+        } else {
+            $update = mysqli_query($this->dbcon, "UPDATE tbl_cow  
+            SET cow_name = '$cow_name' ,
+                cow_date = '$cow_date' ,
+                high = '$high' ,
+                weight='$weight',
+                cow_father='$cow_father',
+                cow_mother='$cow_mother',
+                spec_id='$spec_id',
+                herd_id='$herd_id',
+                house_id='$house_id',
+                gender='$gender',
+                cow_pic='$picture' 
+            WHERE id = '$cowid'
+                ");
+        }
+        return $update;
+    }
     // Delete
     public function delete_cow($id)
     {

@@ -331,6 +331,7 @@ if (empty($result)) {
                             $('#modalhighcow').val(result.high);
                             $('#modalfathercow').val(result.cow_father);
                             $('#modalmothercow').val(result.cow_mother);
+                            $('#modal_cowid').val(result.cow_id);
 
                             if (result.cow_gender == '1') {
                                 $('#modalradioPrimary1').prop('checked', true);
@@ -597,17 +598,18 @@ if (empty($result)) {
                 </script>';
             echo warning_toast('กรุณาเลือกฝูง');
         } else {
-            // $namecow =  $_POST['namecow'];
-            // $cowdate =  $_POST['cowdate'];
-            // $species_id =  $_POST['species_id'];
-            // $weightcow =  $_POST['weightcow'];
-            // $highcow =  $_POST['highcow'];
-            // $fathercow =  $_POST['fathercow'];
-            // $mothercow =  $_POST['mothercow'];
-            // $house_id =  $_POST['house_id'];
-            // $herd_id =  $_POST['herd_id'];
-            // $gender =  $_POST['gender'];
-            // $picture = $_FILES['file']['tmp_name'];
+            $idcow = $_POST['modal_cowid'];
+            $namecow =  $_POST['modalnamecow'];
+            $cowdate =  $_POST['modal_cowdate'];
+            $species_id =  $_POST['modalspecies_id'];
+            $weightcow =  $_POST['modalweightcow'];
+            $highcow =  $_POST['modalhighcow'];
+            $fathercow =  $_POST['modalfathercow'];
+            $mothercow =  $_POST['modalmothercow'];
+            $house_id =  $_POST['modalhouse_id'];
+            $herd_id =  $_POST['modalherd_id'];
+            $gender =  $_POST['gender'];
+            $picture = $_FILES['file']['tmp_name'];
             //? function ลดขนาดรูปภาพ
             function imageResize($imageResourceId, $width, $height)
             {
@@ -631,11 +633,11 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext);
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
+                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext,$idcow);
+                    echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
                 } else {
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '');
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
+                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '', $idcow);
+                    echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
                 } // check picture
             } // check Undendifind values
         } // check select spec_id / house_id / herd_id
