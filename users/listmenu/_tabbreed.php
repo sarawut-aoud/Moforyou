@@ -79,9 +79,9 @@ if (empty($result)) {
                                             <div class="form-group row">
                                                 <div class=" input-group justify-content-center">
                                                     <label class=" col-form-label" for="cow_id_female">
-                                                        <span><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout" style="color:red;">00-00-0000</span></span>
+                                                        <span ><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout"></span></span>
                                                     </label>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@ if (empty($result)) {
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรงเรือน</h3>
+                                        <h3 class=" text-center">ผสมพันธุ์</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -119,7 +119,7 @@ if (empty($result)) {
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>ชื่อโรงเรือน</th>
+                                                    <th>ระหว่าง</th>
                                                     <th>แก้ไข / ลบข้อมูล</th>
                                                 </tr>
                                             </thead>
@@ -127,14 +127,14 @@ if (empty($result)) {
                                             <!-- body table -->
                                             <tbody>
                                                 <tr>
-                                                    <td style="width: 20%;">123</td>
-                                                    <td style="width: 50%;">145</td>
+                                                    <td style="width: 20%;"></td>
+                                                    <td style="width: 50%;"></td>
                                                     <td style="width:30%;" class="text-center">
-                                                        <a class="btn btn-info" href="#">
-                                                            <i class="far fa-pen-alt"></i>
+                                                        <a class="btn btn-info" id="">
+                                                            <i class="fa fa-pen-alt"></i>
                                                         </a>
-                                                        <a class="btn btn-danger" href="#">
-                                                            <i class="far fa-trash"></i>
+                                                        <a class="btn btn-danger" id="">
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -162,6 +162,12 @@ if (empty($result)) {
 
     <!-- ./wrapper -->
     <script src="../../dist/js/datatable.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#timeabout').html('00-00-0000').css('color','red');
+
+        });
+    </script>
 </body>
 
 </html>

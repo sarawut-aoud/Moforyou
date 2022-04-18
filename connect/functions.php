@@ -455,6 +455,20 @@ class cow extends Database
        ");
         return $sel;
     }
+    public function datecow()
+    {
+        $func = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(DATE_ADD(cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date 
+        FROM tbl_cow");
+        return $func;
+    }
+    public function selectcow_forbreed($farm_id)
+    {
+
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+        WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.weight <= '270' ");
+        return $sel;
+    }
 }
 // ผสมพันธุ์
 class breed extends Database
