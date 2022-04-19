@@ -455,19 +455,30 @@ class cow extends Database
        ");
         return $sel;
     }
-    public function datecow()
-    {
-        $func = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(DATE_ADD(cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date 
-        FROM tbl_cow");
-        return $func;
-    }
-    public function selectcow_forbreed($farm_id)
-    {
+    // public function datecow()
+    // {
 
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
-        INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-        WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.weight <= '270' ");
-        return $sel;
+    //     return $func;
+    // }
+    public function selectcow_forbreed_female($farm_id)
+    {
+        $datenow = date('Y-m-d');
+
+        $func = mysqli_query($this->dbcon, "SELECT id,DATE_FORMAT(DATE_ADD(cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date 
+        FROM tbl_cow WHERE gender = '2' ");
+        $row = mysqli_num_rows($func);
+        $results = mysqli_fetch_object($func);
+        for ($i = 0; $i < $row; $i++) {
+            $datecow = $results->cow_date;
+            $cowid =  $results->id;
+
+            if ($datecow ==  $datenow) {
+                $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+                INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+                WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.id = $cowid  AND c.weight <= '270' ");
+            }
+        }
+        return  $sel;
     }
 }
 // ผสมพันธุ์
