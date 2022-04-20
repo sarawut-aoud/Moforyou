@@ -61,7 +61,7 @@ if (empty($result)) {
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/male.png" alt="ตัวผุ้">
                                                     </label>
                                                     <div class="col-md">
-                                                        <select class="form-control select2" id="cow_id_male" data-placeholder="เลือกโคตัวผู้"></select>
+                                                        <select class="form-control select2" id="cow_id_male" data-placeholder="เลือกพ่อโค"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@ if (empty($result)) {
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                                     </label>
                                                     <div class="col-md">
-                                                        <select class="form-control select2 " id="cow_id_female" data-placeholder="เลือกโคตัวเมีย"></select>
+                                                        <select class="form-control select2 " id="cow_id_female" data-placeholder="เลือกแม่โค"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@ if (empty($result)) {
                                             <div class="form-group row">
                                                 <div class=" input-group justify-content-center">
                                                     <label class=" col-form-label" for="cow_id_female">
-                                                        <span ><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout"></span></span>
+                                                        <span><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout"></span></span>
                                                     </label>
 
                                                 </div>
@@ -161,13 +161,81 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-    <script src="../../dist/js/datatable.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#timeabout').html('00-00-0000').css('color','red');
+            var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
 
-        });
+            $('#timeabout').html('00-00-0000').css('color', 'red');
+
+
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_breed.php',
+                data: {
+                    function: "showfemale",
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    var data = '<option value="" selected disabled>--เลือกแม่โค--</option>';
+                    for (i in result) {
+                        data += '<option value="' + result[i].id + '" > ' + result[i].cow_name + '</option>';
+                    }
+                    $('#cow_id_female').html(data);
+                }
+            })
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_breed.php',
+                data: {
+                    function: "showmale",
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
+                    for (i in result) {
+                        data += '<option value="' + result[i].id + '" > ' + result[i].cow_name + '</option>';
+                    }
+                    $('#cow_id_male').html(data);
+                }
+            })
+            
+           
+
+            // var femal = $('#cow_id_female').val();
+            
+            if (male && female) {
+
+
+                function toThaiDateString(date) {
+                    let monthNames = [
+                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                    ];
+
+                    let year = date.getFullYear() + 543;
+                    let month = monthNames[date.getMonth()];
+                    let numOfDay = date.getDate();
+
+                    let hour = date.getHours().toString().padStart(2, "0");
+                    let minutes = date.getMinutes().toString().padStart(2, "0");
+                    let second = date.getSeconds().toString().padStart(2, "0");
+
+                    return `${numOfDay} ${month} ${year} `; //+
+                    // `${hour}:${minutes}:${second} น.`;
+                }
+                let date1 = new Date();
+                $('#timeabout').html(toThaiDateString(date1)).css('color', 'red');
+
+
+
+            }
+        })
     </script>
+    <script src="../../dist/js/datatable.js"></script>
 </body>
 
 </html>

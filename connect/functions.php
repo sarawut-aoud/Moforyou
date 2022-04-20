@@ -455,29 +455,27 @@ class cow extends Database
        ");
         return $sel;
     }
-    // public function datecow()
-    // {
-
-    //     return $func;
-    // }
-    public function selectcow_forbreed_female($farm_id)
+    public function datecow($farm_id)
     {
-        $datenow = date('Y-m-d');
+        $func = mysqli_query($this->dbcon, "SELECT c.id,DATE_FORMAT(DATE_ADD(c.cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date_add , DATE_FORMAT(c.cow_date,'%Y-%m-%d') as cow_date 
+        FROM tbl_cow AS c 
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+        WHERE ho.farm_id = $farm_id AND gender = '2' ");
+        return $func;
+    }
+    public function selectcow_forbreed_male($farm_id)
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+        WHERE ho.farm_id = $farm_id AND c.gender = '1' ");
+        return  $sel;
+    }
+    public function selectcow_forbreed_female($farm_id, $cowid)
+    {
 
-        $func = mysqli_query($this->dbcon, "SELECT id,DATE_FORMAT(DATE_ADD(cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date 
-        FROM tbl_cow WHERE gender = '2' ");
-        $row = mysqli_num_rows($func);
-        $results = mysqli_fetch_object($func);
-        for ($i = 0; $i < $row; $i++) {
-            $datecow = $results->cow_date;
-            $cowid =  $results->id;
-
-            if ($datecow ==  $datenow) {
-                $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
                 INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-                WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.id = $cowid  AND c.weight <= '270' ");
-            }
-        }
+                WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
         return  $sel;
     }
 }
