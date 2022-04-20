@@ -483,12 +483,45 @@ class cow extends Database
 class breed extends Database
 {
     // Insert
+    public function insertbreed($datestart, $datenext, $farm_id, $female, $male)
+    {
 
+        $insert = mysqli_query($this->dbcon, "INSERT INTO tbl_breed(breed_date,breed_date_next,farm_id,cow_id_male,cow_id_female)
+            VALUES
+            (
+                '$datestart',
+                '$datenext',
+                '$farm_id',
+                '$male',
+                '$female'
+            )
+            ");
+
+        return $insert;
+    }
     // Update
 
     // Delete
 
     // Select
+    public function select_breed($farm_id)
+    {
+        if (empty($farm_id)) {
+            $breed = mysqli_query($this->dbcon, "SELECT  
+            FROM tbl_breed AS be
+            INNER JOIN tbl_cow  as cm on(b.cow_id_male=cm.id ) 
+            INNER JOIN tbl_cow  as cf on(b.cow_id_female=cf.id )
+           ");
+        } else {
+            $breed = mysqli_query($this->dbcon, "SELECT  
+            FROM tbl_breed AS be
+            INNER JOIN tbl_cow  as cm on(b.cow_id_male=cm.id ) 
+            INNER JOIN tbl_cow  as cf on(b.cow_id_female=cf.id )
+            WHERE be.farm_id = $farm_id 
+            ");
+        }
+        return $breed;
+    }
 }
 // Food
 class food extends Database

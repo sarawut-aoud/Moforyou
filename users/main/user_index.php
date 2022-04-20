@@ -13,7 +13,10 @@ $result = mysqli_num_rows($fcheck);
 if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
-    // ถ้ามีแสดง tag นี้
+    while ($obj = $fcheck->fetch_object()) {
+        $_SESSION['farm_id'] = $obj->id;
+    }
+
 
 ?>
     <!DOCTYPE html>

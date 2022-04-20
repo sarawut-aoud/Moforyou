@@ -78,12 +78,22 @@ if (empty($result)) {
 
                                             <div class="form-group row">
                                                 <div class=" input-group justify-content-center">
-                                                    <label class=" col-form-label" for="cow_id_female">
+                                                    <label class=" col-form-label">
                                                         <span><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="timeabout"></span></span>
                                                     </label>
 
                                                 </div>
                                             </div>
+                                            <div id="shownotification" class="d-none">
+                                                <div class="form-group row">
+                                                    <div class=" input-group justify-content-center">
+                                                        <label class=" col-form-label ">
+                                                            <span id="notification" style="font-size:18px;"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <!-- /.card-body -->
 
@@ -167,7 +177,24 @@ if (empty($result)) {
             var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
 
             $('#timeabout').html('00-00-0000').css('color', 'red');
-
+            
+            toastr.options = {
+                'closeButton': false,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
 
             $.ajax({
                 type: "get",
@@ -180,7 +207,7 @@ if (empty($result)) {
                 success: function(result) {
                     var data = '<option value="" selected disabled>--เลือกแม่โค--</option>';
                     for (i in result) {
-                        data += '<option value="' + result[i].id + '" > ' + result[i].cow_name + '</option>';
+                        data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
                     }
                     $('#cow_id_female').html(data);
                 }
@@ -196,43 +223,87 @@ if (empty($result)) {
                 success: function(result) {
                     var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
                     for (i in result) {
-                        data += '<option value="' + result[i].id + '" > ' + result[i].cow_name + '</option>';
+                        data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
                     }
                     $('#cow_id_male').html(data);
                 }
             })
-            
-           
-
-            // var femal = $('#cow_id_female').val();
-            
-            if (male && female) {
 
 
-                function toThaiDateString(date) {
-                    let monthNames = [
-                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
-                        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
-                        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                    ];
+            $(document).on('click', '.submit', function(e) {
+                e.preventDefault();
+                var female = $('#cow_id_female').val();
+                var male = $('#cow_id_male').val();
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: '../process/_breed.php',
+                    data: {
+                        function: "insert",
+                        farm_id: farm_id,
+                        female: female,
+                        male: male,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                })
+            })
+            // show date + 282 day
+            $('#cow_id_female,#cow_id_male').change(function(e) {
+                var female = $('#cow_id_female').val();
 
-                    let year = date.getFullYear() + 543;
-                    let month = monthNames[date.getMonth()];
-                    let numOfDay = date.getDate();
+                var male = $('#cow_id_male').val();
 
-                    let hour = date.getHours().toString().padStart(2, "0");
-                    let minutes = date.getMinutes().toString().padStart(2, "0");
-                    let second = date.getSeconds().toString().padStart(2, "0");
+                if (male != undefined && female != undefined) {
+                    function toThaiDateString(date) {
+                        let monthNames = [
+                            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                            "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                            "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                        ];
 
-                    return `${numOfDay} ${month} ${year} `; //+
-                    // `${hour}:${minutes}:${second} น.`;
+                        let year = date.getFullYear() + 543;
+                        let month = monthNames[date.getMonth()];
+                        let numOfDay = date.getDate();
+
+                        let hour = date.getHours().toString().padStart(2, "0");
+                        let minutes = date.getMinutes().toString().padStart(2, "0");
+                        let second = date.getSeconds().toString().padStart(2, "0");
+
+                        return `${numOfDay} ${month} ${year} `; //+
+                        // `${hour}:${minutes}:${second} น.`;
+                    }
+                    const d = new Date();
+                    d.setDate(d.getDate() + 282);
+                    $('#timeabout').html(toThaiDateString(d)).css('color', 'red');
+
                 }
-                let date1 = new Date();
-                $('#timeabout').html(toThaiDateString(date1)).css('color', 'red');
+            });
 
 
-
-            }
         })
     </script>
     <script src="../../dist/js/datatable.js"></script>

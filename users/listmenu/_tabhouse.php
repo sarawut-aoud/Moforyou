@@ -13,10 +13,9 @@ $result = mysqli_num_rows($fcheck);
 if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
-    while ($obj = $fcheck -> fetch_object()) {
+    while ($obj = $fcheck->fetch_object()) {
         $_SESSION['farm_id'] = $obj->id;
-      }
-    
+    }
 }
 // ถ้ามีแสดง tag นี้
 ?>
@@ -156,7 +155,6 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-    <script src="../../dist/js/datatable.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -239,7 +237,7 @@ if (empty($result)) {
                         $("#modaltextcenter").html(txt);
                         $("#modalhouse").val(result.housename);
                         $("#modal_houseid").val(result.house_id);
-                       
+
                     }
                 });
 
@@ -342,6 +340,8 @@ if (empty($result)) {
             });
         });
     </script>
+    <script src="../../dist/js/datatable.js"></script>
+
 </body>
 
 </html>
