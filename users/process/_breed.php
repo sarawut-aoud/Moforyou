@@ -78,6 +78,33 @@ if (isset($func) && $func == 'insert') {
             "message" => 'บันทึกข้อมูลสำเร็จ',
         );
     }
+
     echo json_encode($msg);
     http_response_code(200);
+    
+}
+
+if (isset($func) && $func == 'showedit') {
+    $id = $_GET['id'];
+    $query = $sqlbreed->select_breed($id);
+    $i = 0;
+    while ($row = $query->fetch_object()) {
+        $cowmale = array(
+            "id" => intval($row->id),
+            "date"=>$row->breed_date,
+            "datenext" => $row->breednext,
+            "cowmale" => $row ->cowmale,
+            "cowfemale" => $row ->cowfemale
+            
+        );
+        $i++;
+    }
+    if (empty($cowmale)) {
+        echo json_encode(array());
+        http_response_code(200);
+    } else {
+        echo json_encode($cowmale);
+        http_response_code(200);
+    }
+    
 }

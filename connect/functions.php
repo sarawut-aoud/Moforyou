@@ -527,10 +527,19 @@ class breed extends Database
         }
         return $breed;
     }
+    public function select_breed ($id){
+        $selectbreed = mysqli_query($this ->dbcon,"SELECT be.id , be.breed_date AS breed_date , be.breed_date_next AS breednext ,
+        be.farm_id , be.cow_id_male AS cowmale ,be.cow_id_female AS cowfemale 
+        FROM tbl_breed AS be
+        WHERE be.id = $id
+        ");
+        return $selectbreed;
+    }
 }
 // Food
 class food extends Database
 {
+
 }
 // Disease
 class disease extends Database
