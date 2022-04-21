@@ -38,10 +38,10 @@ if (empty($result)) {
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                    <div class="container">
+                    <div class="container ">
                         <!-- Manage -->
-                        <div class="row">
-                            <div class="col">
+                        <div class="row mt-5">
+                            <div class="col-md-12 ">
                                 <div class="card ">
                                     <div class="card-body">
                                         <!-- list Manage -->
@@ -64,6 +64,9 @@ if (empty($result)) {
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">โรค/อาการป่วย</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2 " href="#tab-farm" role="button">ให้อาหาร</a>
                                             </li>
                                         </ul>
 
@@ -90,22 +93,18 @@ if (empty($result)) {
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 " href="../report/rep-house" role="button">โรงเรือน</a>
                                             </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-1 " href="../report/req-farm" role="button">ฟาร์ม</a>
-                                            </li>
+                                            
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 " href="../report/req-herd" role="button">ฝูงโค</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2" href="../report/req-cow" role="button" >โคเนื้อ</a>
+                                                <a class="btn btn-lg bt_list-1" href="../report/req-cow" role="button" >โคเนื้อ</a>
                                             </li>
                                             
-                                            <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2" href="../report/req-specise" role="button">สายพันธุ์โคเนื้อ</a>
-                                            </li>
+                                          
                                           
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2" href="../report/req-breed" role="button">ผสมพันธุ์</a>
+                                                <a class="btn btn-lg bt_list" href="../report/req-breed" role="button">ผสมพันธุ์</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list " href="../report/req-disease" role="button">โรค/อาการป่วย</a>

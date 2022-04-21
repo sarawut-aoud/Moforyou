@@ -62,10 +62,10 @@ if (empty($result)) {
                 <!-- /.content-header -->
 
                 <!-- Main content -->
-                <div class="content">
-                    <div class="container">
-                        <div class="row mb-5">
-                            <div class="col-md-12">
+                <div class="content ">
+                    <div class="container ">
+                        <div class="row mb-5 ">
+                            <div class="col-md-12  col-sm-12">
                                 <div class="card">
                                     <div class="card-header card-outline card-info">
                                         <h2 class="text-center m-0">ยินดีตอนรับ</h2>
@@ -85,12 +85,15 @@ if (empty($result)) {
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6  col-sm-12 ">
                                 <div class="card card-primary card-outline">
+                                    <div class="card-header">
+                                        <h5 class="text-center m-0">ผสมพันธุ์ครั้งล่าสุด</h5>
+                                    </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
+
                                             <h5 class="card-title mb-4">
-                                                โคได้กันครั้งล่าสุด
                                             </h5>
                                             <h5 class="card-title mb-4">
                                                 วันที่ xx-xx-xxx
@@ -105,30 +108,45 @@ if (empty($result)) {
 
                                     </div>
                                 </div><!-- /.card -->
-                            </div>
-                            <!-- /.col-md-6 -->
-                            <div class="col-lg-6">
-                                <div class="card">
+                                <div class="card card-purple card-outline">
                                     <div class="card-header">
-                                        <h5 class="card-title m-0">Featured</h5>
+                                        <h5 class="text-center m-0">การรักษา</h5>
                                     </div>
                                     <div class="card-body">
+
                                         <h6 class="card-title">Special title treatment</h6>
 
                                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                         <a href="#" class="btn btn-primary">Go somewhere</a>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="card card-primary card-outline ">
+                            <!-- /.col-md-6 -->
+                            <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                                <div class="card card-fuchsia card-outline">
                                     <div class="card-header">
-                                        <h5 class="card-title m-0">Featured</h5>
+                                        <h5 class=" m-0 text-center">โคภายในฟาร์ม</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="card-title">ทั้งหมด : ตัว</h6>
+                                        </div>
+                                        <p class="card-text">พ่อโค : ตัว</p>
+                                        <p class="card-text">แม่โค : ตัว</p>
+                                        <a href="../report/req-cow.php" class="btn btn-primary">ดูรายละเอียด</a>
+                                    </div>
+                                </div>
+
+                                <div class="card card-success card-outline ">
+                                    <div class="card-header">
+                                        <h5 class="text-center m-0">การเจริญเติบโต</h5>
                                     </div>
                                     <div class="card-body">
                                         <h6 class="card-title">Special title treatment</h6>
 
                                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-primary">ดูรายละเอียด</a>
                                     </div>
                                 </div>
                             </div>

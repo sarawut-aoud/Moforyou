@@ -447,11 +447,12 @@ class cow extends Database
     }
     public function selectdatacowbyfarmer($id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
-       
-       FROM tbl_cow AS c 
-       INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
-       WHERE ho.farm_id = $id
+        $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
+        sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date
+        FROM tbl_cow AS c 
+        INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
+        INNER JOIN tbl_species as sp ON(c.spec_id = sp.id)
+        WHERE ho.farm_id = $id
        ");
         return $sel;
     }

@@ -10,18 +10,7 @@
         </button>
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-            <!-- Left navbar links -->
-            <!-- SEARCH FORM -->
-            <!-- <form class="form-inline ml-0 ml-md-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fad fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form> -->
+           
         </div>
 
         <!-- Right navbar links -->
@@ -41,7 +30,7 @@
                         <span class="float-right text-muted text-sm">2 days</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <!-- <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> -->
                 </div>
             </li>
            

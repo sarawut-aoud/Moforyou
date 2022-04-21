@@ -3,7 +3,7 @@ require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
 //เก็บ id จาก session
 $id = $_SESSION['id'];
-
+$farm_id =$_SESSION['farm_id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
 
@@ -14,8 +14,7 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-$rs = mysqli_fetch_object($fcheck);
-
+}
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -63,7 +62,7 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- head table -->
                                                 <thead>
 
-                                                    <tr>
+                                                    <tr align="center">
                                                         <th>#</th>
                                                         <th>ชื่อโรงเรือน</th>
 
@@ -75,26 +74,18 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <tbody>
                                                     <?php
                                                     $datahouse = new house();
-                                                    $row = $datahouse->selhouse($rs->id);
+                                                    $row = $datahouse->gethouseFarmid($farm_id);
                                                     while ($rs = mysqli_fetch_object($row)) {
                                                     ?>
                                                         <tr>
-                                                            <td style="width: 20%;"><?php echo $rs->id; ?></td>
+                                                            <td style="width: 10%;"><?php echo $rs->id; ?></td>
                                                             <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
                                                             <!--  -->
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
                                                 <!-- /.body table -->
-                                                <!-- foot table -->
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>ชื่อโรงเรือน</th>
-
-                                                    </tr>
-                                                </tfoot>
-                                                <!-- /.foot table -->
+                                               
                                             </table>
                                             <!-- /.table -->
                                         </div>
@@ -114,12 +105,8 @@ $rs = mysqli_fetch_object($fcheck);
         </div>
 
         <!-- ./wrapper -->
+        <script src="../../dist/js/datatableprint.js"></script>
     </body>
-    <script src="../../dist/js/datatableprint.js">
-    </script>
+    
 
     </html>
-<?php
-}
-
-?>

@@ -3,6 +3,7 @@ require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
 //เก็บ id จาก session
 $id = $_SESSION['id'];
+$farmid = $_SESSION['farm_id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -14,7 +15,7 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-$rs = mysqli_fetch_object($fcheck);
+
 
 ?>
     <!DOCTYPE html>
@@ -45,7 +46,7 @@ $rs = mysqli_fetch_object($fcheck);
                     <div class="content-header">
                         <div class="container">
                             <div class="row mb-4 mt-4 justify-content-beetween ">
-                              
+
                                 <div class="col-md-12">
                                     <button class="btn btn-info col-3 btn-lg float-end""  onclick=" window.history.go(-1);"><i class="fas fa-arrow-alt-left"></i></button>
                                 </div>
@@ -54,7 +55,7 @@ $rs = mysqli_fetch_object($fcheck);
                                 <div class="col-md-12">
                                     <div class="card  ">
                                         <div class="card-header card-outline card-blue">
-                                            <h3 class=" text-center">โรงเรือน</h3>
+                                            <h3 class=" text-center">ผสมพันธุ์</h3>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
@@ -63,9 +64,11 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- head table -->
                                                 <thead>
 
-                                                    <tr>
+                                                    <tr align="center">
                                                         <th>#</th>
-                                                        <th>ชื่อโรงเรือน</th>
+                                                        <th>ระหว่าง</th>
+                                                        <th>วันที่ / เวลา</th>
+                                                        <th>ประมาณวันที่คลอด</th>
 
                                                     </tr>
 
@@ -74,27 +77,34 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- body table -->
                                                 <tbody>
                                                     <?php
-                                                    $datahouse = new house();
-                                                    $row = $datahouse->selhouse($rs->id);
+                                                    $data = new breed();
+                                                    $row = $data->select_breed_all($farmid);
                                                     while ($rs = mysqli_fetch_object($row)) {
+                                                        function DateThai($strDate)
+                                                        {
+                                                            $strYear = date("Y", strtotime($strDate)) + 543;
+                                                            $strMonth = date("n", strtotime($strDate));
+                                                            $strDay = date("j", strtotime($strDate));
+                                                            $strHour = date("H", strtotime($strDate));
+                                                            $strMinute = date("i", strtotime($strDate));
+                                                            $strSeconds = date("s", strtotime($strDate));
+                                                            $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                            $strMonthThai = $strMonthCut[$strMonth];
+                                                            return "$strDay $strMonthThai $strYear ";
+                                                        }
+                                                       
                                                     ?>
-                                                        <tr>
-                                                            <td style="width: 20%;"><?php echo $rs->id; ?></td>
-                                                            <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                        <tr align="center">
+                                                            <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                            <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
+                                                            <td><?php echo $rs->breed_date; ?></td>
+                                                            <td><?php echo DateThai($rs->breednext); ?></td>
                                                             <!--  -->
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
                                                 <!-- /.body table -->
-                                                <!-- foot table -->
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>ชื่อโรงเรือน</th>
 
-                                                    </tr>
-                                                </tfoot>
-                                                <!-- /.foot table -->
                                             </table>
                                             <!-- /.table -->
                                         </div>

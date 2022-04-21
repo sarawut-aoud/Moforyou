@@ -147,10 +147,10 @@ if (empty($result)) {
                                                         <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
                                                         <td><?php echo $rs->breed_date; ?></td>
                                                         <td class="text-center">
-                                                            <a class="btn btn-info" id="<?php echo $rs->id; ?>">
+                                                            <a class="btn btn-info " id="<?php echo $rs->id; ?>">
                                                                 <i class="fa fa-pen-alt"></i>
                                                             </a>
-                                                            <a class="btn btn-danger" id="<?php echo $rs->id; ?>">
+                                                            <a class="btn btn-danger " id="<?php echo $rs->id; ?>">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </td>

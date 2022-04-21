@@ -14,8 +14,8 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-$rs = mysqli_fetch_object($fcheck);
 
+}
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -74,8 +74,8 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- body table -->
                                                 <tbody>
                                                     <?php
-                                                    $datahouse = new house();
-                                                    $row = $datahouse->selhouse($rs->id);
+                                                    $data = new farm();
+                                                    $row = $data->selectfarm($id);
                                                     while ($rs = mysqli_fetch_object($row)) {
                                                     ?>
                                                         <tr>
@@ -119,7 +119,3 @@ $rs = mysqli_fetch_object($fcheck);
     </script>
 
     </html>
-<?php
-}
-
-?>

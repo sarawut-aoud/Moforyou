@@ -3,6 +3,7 @@ require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
 //เก็บ id จาก session
 $id = $_SESSION['id'];
+$farmid = $_SESSION['farm_id'];
 
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -14,7 +15,7 @@ if (empty($result)) {
     require_once '../alert/check_farm.php';
 } else {
     // ถ้ามีแสดง tag นี้
-$rs = mysqli_fetch_object($fcheck);
+}
 
 ?>
     <!DOCTYPE html>
@@ -54,7 +55,7 @@ $rs = mysqli_fetch_object($fcheck);
                                 <div class="col-md-12">
                                     <div class="card  ">
                                         <div class="card-header card-outline card-blue">
-                                            <h3 class=" text-center">โรงเรือน</h3>
+                                            <h3 class=" text-center">ฝูงโค</h3>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
@@ -63,9 +64,10 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- head table -->
                                                 <thead>
 
-                                                    <tr>
+                                                    <tr align="center">
                                                         <th>#</th>
                                                         <th>ชื่อโรงเรือน</th>
+                                                        <th>ชื่อฝูง</th>
 
                                                     </tr>
 
@@ -74,27 +76,19 @@ $rs = mysqli_fetch_object($fcheck);
                                                 <!-- body table -->
                                                 <tbody>
                                                     <?php
-                                                    $datahouse = new house();
-                                                    $row = $datahouse->selhouse($rs->id);
+                                                    $data = new herd();
+                                                    $row = $data->select_herd_farm($farmid);
                                                     while ($rs = mysqli_fetch_object($row)) {
                                                     ?>
                                                         <tr>
                                                             <td style="width: 20%;"><?php echo $rs->id; ?></td>
                                                             <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                            <td style="width: 50%;"><?php echo $rs->herd_name; ?></td>
                                                             <!--  -->
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
-                                                <!-- /.body table -->
-                                                <!-- foot table -->
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>ชื่อโรงเรือน</th>
-
-                                                    </tr>
-                                                </tfoot>
-                                                <!-- /.foot table -->
+                                                <!-- /.body table -->                     
                                             </table>
                                             <!-- /.table -->
                                         </div>
@@ -119,7 +113,3 @@ $rs = mysqli_fetch_object($fcheck);
     </script>
 
     </html>
-<?php
-}
-
-?>
