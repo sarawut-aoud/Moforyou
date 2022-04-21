@@ -33,22 +33,22 @@ if (empty($result)) {
 
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
-    <div class="wrapper">
+    <div class=" wrapper">
 
         <!-- Navbar -->
         <?php require '../sub/navbar.php'; ?>
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
-        <section class="content">
-            <div class="content-wrapper">
+        <section class=" content">
+            <div class="bgimg content-wrapper">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container">
                         <!-- Manage -->
                         <div class="row justify-content-center">
                             <div class="col-md-4 mb-3">
-                                <button class="btn btn-info col-3 btn-lg float-start"" ><i class=" fas fa-qrcode"></i></button>
+                                <button class="btn btn-info  btn-lg float-start"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
                             </div>
                             <div class="col-md-8">
                                 <!-- general form elements -->
