@@ -36,7 +36,7 @@ $result2 = mysqli_fetch_object($farm);
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="bgimg content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container">

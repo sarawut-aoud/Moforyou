@@ -16,7 +16,9 @@ require '../../connect/session_ckeck.php';
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="../../dist/img/loading.gif" alt="RELOAD">
+    </div>
 
     <?php
     // Navbar Admin
@@ -139,7 +141,7 @@ require '../../connect/session_ckeck.php';
           function: 'showdatafarm',
         },
         success: function(rs) {
-  
+
           $('#farmdata').html(rs.datarow + ' ฟาร์ม')
 
         }
@@ -156,15 +158,15 @@ require '../../connect/session_ckeck.php';
         success: function(rs) {
           var cowdata = 0;
           for (i = 0; i < rs.length; i++) {
-          
+
             cowdata++;
           }
-          if(rs[0].datarow == 0){
+          if (rs[0].datarow == 0) {
             $('#cowdata').html('0 ตัว')
-          }else{
-            $('#cowdata').html(cowdata+' ตัว')
+          } else {
+            $('#cowdata').html(cowdata + ' ตัว')
           }
-         
+
 
         }
       })

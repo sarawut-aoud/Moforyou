@@ -18,6 +18,9 @@ $query = $sql->selectfarm('admin');
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../dist/img/loading.gif" alt="RELOAD" >
+        </div>
         <?php
         // Navbar Admin
         require '../sub/navbar.php';
@@ -110,8 +113,8 @@ $query = $sql->selectfarm('admin');
                                             <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                     
-                                        
+
+
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -125,7 +128,7 @@ $query = $sql->selectfarm('admin');
                 </div>
                 <!-- /.container-fluid -->
             </section>
-            
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -147,7 +150,7 @@ $query = $sql->selectfarm('admin');
 
         var id = $(this).attr('id');
         var txt_head = 'Edit farm'
-        
+
 
         $.ajax({
             type: 'get', //post put get delete
@@ -158,21 +161,21 @@ $query = $sql->selectfarm('admin');
                 function: 'showeditFarm',
             },
             success: function(rs) {
-            for (i in rs){
-                if (rs [i].id==id){
-                    var farmname = rs[i].farmname;
-                    var farmername = rs[i].farmername;
+                for (i in rs) {
+                    if (rs[i].id == id) {
+                        var farmname = rs[i].farmname;
+                        var farmername = rs[i].farmername;
+                    }
                 }
-            }
                 $("#modalEditFarm").modal("show");
                 $("#modaltextcenter").html(txt_head)
                 $("#farmname").val(farmname);
                 $("#name").val(farmername);
-            
+
                 $('#modal_herdid').val(rs.id);
 
-                
-                
+
+
             }
         })
 
@@ -185,7 +188,7 @@ $query = $sql->selectfarm('admin');
         var id = $("#modal_herdid").val();
         var fname = $("#herdname").val();
         var IDHouse = $("#house_id").val();
-     
+
 
         var txt_head = 'Edit Herd'
 
@@ -195,7 +198,7 @@ $query = $sql->selectfarm('admin');
             url: '', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
                 hname: fname,
-               IDHouse: IDHouse,
+                IDHouse: IDHouse,
                 id: id,
                 function: 'modaleditherd',
             },
@@ -283,4 +286,5 @@ $query = $sql->selectfarm('admin');
 
     });
 </script>
+
 </html>

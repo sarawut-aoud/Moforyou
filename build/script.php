@@ -105,7 +105,7 @@
     min-height: 100%;
     background-position: center;
     background-size: cover;
-
+    opacity: 1.2;
   }
 </style>
 

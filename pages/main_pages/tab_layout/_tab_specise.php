@@ -9,7 +9,8 @@
         while ($row = mysqli_fetch_object($result)) {
 
         ?>
-            <div class="col">
+            <div class="card-deck">
+                
                 <div class="card text-center ">
                     <div class="text-center">
                         <?php
