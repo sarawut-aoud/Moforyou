@@ -340,6 +340,8 @@ if (empty($result)) {
                         var idcowmale = rs.cowmale;
                         var idcowfemale = rs.cowfemale;
                         $('#modalEdit').modal('show');
+                        $('#modaltextcenter').html(txt);
+                        $('#modal_tabbreed_id').val(id);
                         $.ajax({
                             type: "get",
                             dataType: 'json',
@@ -393,6 +395,107 @@ if (empty($result)) {
 
                 })
             })
+
+            $(document).on('click', '.btn_del', function(e) {
+                    e.preventDefault();
+
+                    var id = $(this).attr('id');
+                    var _row = $(this).parent();
+                    Swal.fire({
+                        title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "ยืนยัน",
+                        cancelButtonText: "ยกเลิก",
+                    }).then((btn) => {
+                        if (btn.isConfirmed) {
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_breed.php',
+                                data: {
+                                    function: 'delete',
+                                    id: id,
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    // location.reload();
+                                                    _row.closest('tr').remove();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            });
+                        }
+                    })
+
+                });
+
+                $(document).on('click', '.btnsave', function(e) {
+                    e.preventDefault();
+                    var update_id = $('#modal_tabbreed_id').val();
+                    var cowmale = $('#modal_cow_id_male').val();
+                    var cowfemale = $("#modal_cow_id_female").val();
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '../process/_breed.php',
+                        data: {
+                            update_id: update_id,
+                            cowmale: cowmale,
+                            cowfemale: cowfemale,
+                            function: "edit"
+                        },
+                        success: function(result) {
+                            if (result.status == 200) {
+                                toastr.success(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            $("#modalEdit").modal('hide');
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            } else {
+                                toastr.warning(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            location.reload();
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    })
+
+
+                });
 
         })
     </script>

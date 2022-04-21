@@ -535,6 +535,23 @@ class breed extends Database
         ");
         return $selectbreed;
     }
+    public function delete_breed ($id){
+        $deletebreed = mysqli_query($this->dbcon,"DELETE FROM tbl_breed WHERE id ='$id'");
+    return $deletebreed;
+    }
+    public function update_breed ($id, $cowidmale, $cowidfemale)
+    {
+        $updatecow = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
+        cow_id_male = '$cowidmale' ,
+        cow_id_female ='$cowidfemale'
+        
+        
+        WHERE id = '$id'
+        ");
+        return $updatecow;
+    }
+        
+    
 }
 // Food
 class food extends Database
