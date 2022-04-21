@@ -504,19 +504,23 @@ class breed extends Database
     // Delete
 
     // Select
-    public function select_breed($farm_id)
+    public function select_breed_all($farm_id)
     {
         if (empty($farm_id)) {
-            $breed = mysqli_query($this->dbcon, "SELECT  
+            $breed = mysqli_query($this->dbcon, "SELECT  be.id , be.breed_date , be.breed_date_next AS breednext , 
+            be.farm_id , be.cow_id_male As cowmale ,be.cow_id_female AS cowfemale ,
+            cm.cow_name AS namemale,cf.cow_name AS namefemale
             FROM tbl_breed AS be
-            INNER JOIN tbl_cow  as cm on(b.cow_id_male=cm.id ) 
-            INNER JOIN tbl_cow  as cf on(b.cow_id_female=cf.id )
+            INNER JOIN tbl_cow  as cm on(be.cow_id_male=cm.id ) 
+            INNER JOIN tbl_cow  as cf on(be.cow_id_female=cf.id )
            ");
         } else {
-            $breed = mysqli_query($this->dbcon, "SELECT  
+            $breed = mysqli_query($this->dbcon, "SELECT be.id , be.breed_date , be.breed_date_next AS breednext , 
+            be.farm_id , be.cow_id_male As cowmale ,be.cow_id_female AS cowfemale ,
+            cm.cow_name AS namemale,cf.cow_name AS namefemale  
             FROM tbl_breed AS be
-            INNER JOIN tbl_cow  as cm on(b.cow_id_male=cm.id ) 
-            INNER JOIN tbl_cow  as cf on(b.cow_id_female=cf.id )
+            INNER JOIN tbl_cow  as cm on(be.cow_id_male=cm.id ) 
+            INNER JOIN tbl_cow  as cf on(be.cow_id_female=cf.id )
             WHERE be.farm_id = $farm_id 
             ");
         }

@@ -114,7 +114,7 @@ if (empty($result)) {
                     </div>
                     <!-- /.content-header -->
 
-                    <div class="container">
+                    <div class="container mb-5">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
@@ -130,24 +130,32 @@ if (empty($result)) {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>ระหว่าง</th>
+                                                    <th>วันที่/เวลา</th>
                                                     <th>แก้ไข / ลบข้อมูล</th>
                                                 </tr>
                                             </thead>
                                             <!-- /.head table -->
                                             <!-- body table -->
                                             <tbody>
-                                                <tr>
-                                                    <td style="width: 20%;"></td>
-                                                    <td style="width: 50%;"></td>
-                                                    <td style="width:30%;" class="text-center">
-                                                        <a class="btn btn-info" id="">
-                                                            <i class="fa fa-pen-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger" id="">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                <?php
+                                                $data = new breed();
+                                                $row = $data->select_breed_all($farmid);
+                                                while ($rs = $row->fetch_object()) {
+                                                ?>
+                                                    <tr>
+                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
+                                                        <td><?php echo $rs->breed_date; ?></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-info" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-pen-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                             <!-- /.body table -->
 
@@ -177,7 +185,7 @@ if (empty($result)) {
             var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
 
             $('#timeabout').html('00-00-0000').css('color', 'red');
-            
+
             toastr.options = {
                 'closeButton': false,
                 'debug': false,
@@ -263,7 +271,7 @@ if (empty($result)) {
                                     timeOut: 1000,
                                     fadeOut: 1000,
                                     onHidden: function() {
-                                        location.reload();
+                                        $('#cow_id_male').focus();
                                     }
                                 }
                             );
