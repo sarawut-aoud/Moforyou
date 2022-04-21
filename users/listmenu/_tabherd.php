@@ -40,7 +40,7 @@ if (empty($result)) {
 
             <!-- Content Wrapper. Contains page content -->
             <section class="content">
-                <div class="content-wrapper mb-5">
+                <div class="bgimg content-wrapper mb-5">
                     <!-- Content Header (Page header) -->
                     <div class="content-header ">
                         <div class="container">
