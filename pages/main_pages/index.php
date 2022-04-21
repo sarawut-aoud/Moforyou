@@ -12,20 +12,20 @@ require '../../connect/functions.php'
     <?php require '../../build/script.php'; ?>
     <link rel="stylesheet" href="./_main_page.css">
 
-<body class="hold-transition sidebar-collapse layout-top-nav">
-    <div class="wrapper mb-5">
+<body class=" hold-transition sidebar-collapse layout-top-nav">
+    <div class=" wrapper mb-5">
         <!-- Navbar -->
         <?php require './navbar.php'; ?>
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper mt-5">
+        <div class="bgimg content-wrapper mt-5">
 
             <!-- Content Header (Page header) -->
-            <section class="content-header ">
-                <div class="container-fluid mt-2">
+            <section class=" content-header ">
+                <div class=" container-fluid mt-2">
 
-                    <div class="row justify-content-center">
+                    <div class=" row justify-content-center">
                         <div class="col">
                             <ul class="nav nav-pills " id="custom-content-below-tab" role="tablist">
                                 <li class="nav-item  col-md-4 col-sm-12 mt-2">
@@ -45,7 +45,7 @@ require '../../connect/functions.php'
             </section>
             <!-- /.content-header -->
             <!-- Main Tab -->
-            <div class="tab-content mt-3" id="custom-content-below-tabContent">
+            <div class=" tab-content mt-3" id="custom-content-below-tabContent">
                 <!-- row card -->
                 <!-- <div class="row row-cols-1 row-cols-md-3 g-4"> -->
                 <!-- tab-1 -->

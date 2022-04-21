@@ -86,9 +86,9 @@
 <script src="../../dist/js/pages/dashboard.js"></script>
 
 <script>
-    $(function() {
-        $('.select2').select2()
-    })
+  $(function() {
+    $('.select2').select2()
+  })
 </script>
 <!-- Font All pages -->
 <style>
@@ -98,6 +98,14 @@
     font-size: 18px;
     margin: 0;
     padding: 0;
+  }
+
+  .bgimg {
+    background-image: url('../../dist/img/background.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+
   }
 </style>
 
