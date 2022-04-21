@@ -147,20 +147,13 @@ if (empty($result)) {
                                                         <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
                                                         <td><?php echo $rs->breed_date; ?></td>
                                                         <td class="text-center">
-<<<<<<< HEAD
-                                                            <a class="btn btn-info " id="<?php echo $rs->id; ?>">
-                                                                <i class="fa fa-pen-alt"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger " id="<?php echo $rs->id; ?>">
-=======
-                                                            <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
-
-                                                                <i class="fa fa-pen-alt"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btn_del" id="<?php echo $rs->id; ?>">
->>>>>>> 385574715c56c1aa6579503c9cda276ca366b657
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
+                                                        
+                                                                <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
+                                                                    <i class="fa fa-pen-alt"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger btn_del" id="<?php echo $rs->id; ?>">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -192,215 +185,216 @@ if (empty($result)) {
 
     <script>
         $(document).ready(function() {
-                    var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
+            var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
 
-                    $('#timeabout').html('00-00-0000').css('color', 'red');
-                    $('#modal_timeabout').html('00-00-0000').css('color', 'red');
+            $('#timeabout').html('00-00-0000').css('color', 'red');
+            $('#modal_timeabout').html('00-00-0000').css('color', 'red');
 
 
-                    toastr.options = {
-                        'closeButton': false,
-                        'debug': false,
-                        'newestOnTop': false,
-                        'progressBar': false,
-                        'positionClass': 'toast-top-right',
-                        'preventDuplicates': false,
-                        'onclick': null,
-                        'showDuration': '300',
-                        'hideDuration': '1000',
-                        'timeOut': '5000',
-                        'extendedTimeOut': '1000',
-                        'showEasing': 'swing',
-                        'hideEasing': 'linear',
-                        'showMethod': 'fadeIn',
-                        'hideMethod': 'fadeOut'
+            toastr.options = {
+                'closeButton': false,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
+
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_breed.php',
+                data: {
+                    function: "showfemale",
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    var data = '<option value="" selected disabled>--เลือกแม่โค--</option>';
+                    for (i in result) {
+                        data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
                     }
+                    $('#cow_id_female').html(data);
+                    //$('#modal_cow_id_female').html(data);
 
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: '../process/_breed.php',
-                        data: {
-                            function: "showfemale",
-                            farm_id: farm_id,
-                        },
-                        success: function(result) {
-                            var data = '<option value="" selected disabled>--เลือกแม่โค--</option>';
-                            for (i in result) {
-                                data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-                            }
-                            $('#cow_id_female').html(data);
-                            //$('#modal_cow_id_female').html(data);
+                }
+            })
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_breed.php',
+                data: {
+                    function: "showmale",
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
+                    for (i in result) {
+                        data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
+                    }
+                    $('#cow_id_male').html(data);
+                    // $('#modal_cow_id_male').html(data);
 
+                }
+            })
+
+
+            $(document).on('click', '.submit', function(e) {
+                e.preventDefault();
+                var female = $('#cow_id_female').val();
+                var male = $('#cow_id_male').val();
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: '../process/_breed.php',
+                    data: {
+                        function: "insert",
+                        farm_id: farm_id,
+                        female: female,
+                        male: male,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        $('#cow_id_male').focus();
+                                    }
+                                }
+                            );
                         }
-                    })
-                    $.ajax({
-                        type: "get",
-                        dataType: 'json',
-                        url: '../process/_breed.php',
-                        data: {
-                            function: "showmale",
-                            farm_id: farm_id,
-                        },
-                        success: function(result) {
-                            var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
-                            for (i in result) {
-                                data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-                            }
-                            $('#cow_id_male').html(data);
-                            // $('#modal_cow_id_male').html(data);
+                    }
+                })
+            })
+            // show date + 282 day
+            $('#cow_id_female,#cow_id_male').change(function(e) {
+                var female = $('#cow_id_female').val();
 
-                        }
-                    })
+                var male = $('#cow_id_male').val();
 
+                if (male != undefined && female != undefined) {
+                    function toThaiDateString(date) {
+                        let monthNames = [
+                            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                            "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                            "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                        ];
 
-                    $(document).on('click', '.submit', function(e) {
-                        e.preventDefault();
-                        var female = $('#cow_id_female').val();
-                        var male = $('#cow_id_male').val();
+                        let year = date.getFullYear() + 543;
+                        let month = monthNames[date.getMonth()];
+                        let numOfDay = date.getDate();
+
+                        let hour = date.getHours().toString().padStart(2, "0");
+                        let minutes = date.getMinutes().toString().padStart(2, "0");
+                        let second = date.getSeconds().toString().padStart(2, "0");
+
+                        return `${numOfDay} ${month} ${year} `; //+
+                        // `${hour}:${minutes}:${second} น.`;
+                    }
+                    const d = new Date();
+                    d.setDate(d.getDate() + 282);
+                    $('#timeabout').html(toThaiDateString(d)).css('color', 'red');
+
+                }
+            });
+
+            $(document).on('click', '.btn_edit', function(e) {
+                e.preventDefault();
+
+                var txt = 'แก้ไขการผสมพันธุ์';
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: '../process/_breed.php',
+                    data: {
+                        function: "showedit",
+                        id: id,
+
+                    },
+                    success: function(rs) {
+                        var id = rs.id;
+                        var idcowmale = rs.cowmale;
+                        var idcowfemale = rs.cowfemale;
+                        $('#modalEdit').modal('show');
                         $.ajax({
-                            type: "post",
+                            type: "get",
                             dataType: 'json',
                             url: '../process/_breed.php',
                             data: {
-                                function: "insert",
+                                function: "showfemale",
                                 farm_id: farm_id,
-                                female: female,
-                                male: male,
                             },
                             success: function(result) {
-                                if (result.status == 200) {
-                                    toastr.success(
-                                        result.message,
-                                        '', {
-                                            timeOut: 1000,
-                                            fadeOut: 1000,
-                                            onHidden: function() {
-                                                location.reload();
-                                            }
-                                        }
-                                    );
-                                } else {
-                                    toastr.warning(
-                                        result.message,
-                                        '', {
-                                            timeOut: 1000,
-                                            fadeOut: 1000,
-                                            onHidden: function() {
-                                                $('#cow_id_male').focus();
-                                            }
-                                        }
-                                    );
+                                var data = '';
+                                for (i in result) {
+                                    if (result[i].cow_id == idcowfemale) {
+                                        data += '<option value="' + result[i].cow_id + '" selected> ' + result[i].cow_name + '</option>';
+
+                                    } else {
+                                        data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
+
+                                    }
                                 }
+                                //$('#cow_id_female').html(data);
+                                $('#modal_cow_id_female').html(data);
+
                             }
                         })
-                    })
-                    // show date + 282 day
-                    $('#cow_id_female,#cow_id_male').change(function(e) {
-                        var female = $('#cow_id_female').val();
-
-                        var male = $('#cow_id_male').val();
-
-                        if (male != undefined && female != undefined) {
-                            function toThaiDateString(date) {
-                                let monthNames = [
-                                    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
-                                    "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
-                                    "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                                ];
-
-                                let year = date.getFullYear() + 543;
-                                let month = monthNames[date.getMonth()];
-                                let numOfDay = date.getDate();
-
-                                let hour = date.getHours().toString().padStart(2, "0");
-                                let minutes = date.getMinutes().toString().padStart(2, "0");
-                                let second = date.getSeconds().toString().padStart(2, "0");
-
-                                return `${numOfDay} ${month} ${year} `; //+
-                                // `${hour}:${minutes}:${second} น.`;
-                            }
-                            const d = new Date();
-                            d.setDate(d.getDate() + 282);
-                            $('#timeabout').html(toThaiDateString(d)).css('color', 'red');
-
-                        }
-                    });
-                    $(document).on('click', '.btn_edit', function(e) {
-                        e.preventDefault();
-
-                        var txt = 'แก้ไขการผสมพันธุ์';
-                        var id = $(this).attr('id');
-
-                         $.ajax({
-                             type: "get",
-                             dataType: 'json',
-                             url: '../process/_breed.php',
-                             data: {
-                                function: "showedit",
-                                id: id,
-
+                        $.ajax({
+                            type: "get",
+                            dataType: 'json',
+                            url: '../process/_breed.php',
+                            data: {
+                                function: "showmale",
+                                farm_id: farm_id,
                             },
-                            success: function(rs) {
-                                var id = rs.id;
-                                var idcowmale = rs.cowmale;
-                                var idcowfemale = rs.cowfemale;
-                                $('#modalEdit').modal('show');
-                                $.ajax({
-                                    type: "get",
-                                    dataType: 'json',
-                                    url: '../process/_breed.php',
-                                    data: {
-                                        function: "showfemale",
-                                        farm_id: farm_id,
-                                    },
-                                    success: function(result) {
-                                        var data = '';
-                                        for (i in result) {
-                                            if (result[i].cow_id == idcowfemale){
-                                                data += '<option value="' + result[i].cow_id + '" selected> ' + result[i].cow_name + '</option>';
-                                                
-                                            }else{
-                                                data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-                                                
-                                            }
-                                        }
-                                        //$('#cow_id_female').html(data);
-                                        $('#modal_cow_id_female').html(data);
+                            success: function(result) {
+                                var data = '';
+                                for (i in result) {
+                                    if (result[i].cow_id == idcowmale) {
+                                        data += '<option value="' + result[i].cow_id + '" selected> ' + result[i].cow_name + '</option>';
+
+                                    } else {
+                                        data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
 
                                     }
-                                })
-                                $.ajax({
-                                    type: "get",
-                                    dataType: 'json',
-                                    url: '../process/_breed.php',
-                                    data: {
-                                        function: "showmale",
-                                        farm_id: farm_id,
-                                    },
-                                    success: function(result) {
-                                        var data = '';
-                                        for (i in result) {
-                                            if (result[i].cow_id == idcowmale){
-                                                data += '<option value="' + result[i].cow_id + '" selected> ' + result[i].cow_name + '</option>';
-                                                
-                                            }else{
-                                                data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-                                                
-                                            }
-                                        }
-                                        //$('#cow_id_male').html(data);
-                                        $('#modal_cow_id_male').html(data);
+                                }
+                                //$('#cow_id_male').html(data);
+                                $('#modal_cow_id_male').html(data);
 
-                                    }
-                              
-                                })
-                             }
+                            }
 
-                            })
                         })
+                    }
 
-                    })
+                })
+            })
+
+        })
     </script>
     <script src="../../dist/js/datatable.js"></script>
 </body>
