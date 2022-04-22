@@ -45,7 +45,7 @@ if (empty($result)) {
                                 <div class="card shadow">
                                     <div class="card-body">
                                         <!-- list Manage -->
-                                        <h2 class=" col-md-12 col-sm-12 text-center">รายการเมนู</h2>
+                                        <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-list-alt"></i> รายการเมนู</h2>
                                         <hr class="mt-2 mb-2">
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                             <li class="nav-item col-md-4 col-sm-12 mt-2">
@@ -66,8 +66,12 @@ if (empty($result)) {
                                                 <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">โรค/อาการป่วย</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">ให้อาหาร</a>
+                                                <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">อาหารโคเนื้อ</a>
                                             </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ให้อาหาร</a>
+                                            </li>
+
                                         </ul>
 
 
@@ -82,38 +86,40 @@ if (empty($result)) {
                         <!-- ./row -->
 
                         <!-- Report -->
-                        <div class="row  mb-5">
+                        <div class="row  ">
                             <div class="col">
                                 <div class="card shadow">
                                     <div class="card-body">
-                                        <h2 class=" col-md-12 col-sm-12 text-center">รายงานข้อมูล</h2>
+                                        <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-file-chart-pie"></i> รายงานข้อมูล</h2>
                                         <hr class="mt-2 mb-2">
                                         <!-- list Manage -->
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 shadow" href="../report/rep-house" role="button">โรงเรือน</a>
                                             </li>
-                                            
+
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 shadow" href="../report/req-herd" role="button">ฝูงโค</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-1 shadow" href="../report/req-cow" role="button" >โคเนื้อ</a>
-                                            </li>
-                                            
-                                          
-                                          
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../report/req-breed" role="button">ผสมพันธุ์</a>
+                                                <a class="btn btn-lg bt_list-1 shadow" href="../report/req-cow" role="button">โคเนื้อ</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../report/req-disease" role="button">โรค/อาการป่วย</a>
+                                                <a class="btn btn-lg bt_list-2 shadow" href="../report/req-breed" role="button">ผสมพันธุ์</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="#" role="button">การเจริญเติบโต</a>
+                                                <a class="btn btn-lg bt_list-2 shadow" href="../report/req-disease" role="button">โรค/อาการป่วย</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list-2 shadow" href="#" role="button">การเจริญเติบโต</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list shadow" href="#" role="button">ประวัติการให้อาหาร</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ประวัติการรักษา</a>
                                             </li>
                                         </ul>
-
                                         <!--/. list Manage -->
                                     </div>
                                     <!-- ./card-body -->
@@ -121,7 +127,28 @@ if (empty($result)) {
                                 <!-- ./card -->
                             </div>
                             <!-- ./col -->
+                        </div>
+                        <div class="row  mb-5">
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-book-medical"></i> สัตวแพทย์</h2>
+                                        <hr class="mt-2 mb-2">
+                                        <!-- list Manage -->
+                                        <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
+                                            <li class="nav-item  col-md-6 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_doc-1 shadow" href="../doctor/_tabdoctor" role="button">เพิ่มข้อมูลติดต่อสัตวแพทย์/รายชื่อสัตวแพทย์ฟาร์ม</a>
+                                            </li>
 
+
+                                        </ul>
+                                        <!--/. list Manage -->
+                                    </div>
+                                    <!-- ./card-body -->
+                                </div>
+                                <!-- ./card -->
+                            </div>
+                            <!-- ./col -->
                         </div>
                         <!-- ./row -->
                     </div><!-- /.container-fluid -->
