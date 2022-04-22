@@ -1,8 +1,7 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
-$sql = new house();
-$query = $sql->selecthouse('');
+
 
 ?>
 <!DOCTYPE html>
@@ -74,16 +73,21 @@ $query = $sql->selecthouse('');
                                             <tr>
                                                 <th>#</th>
                                                 <th>โรงเรือน</th>
+                                                <th>ฟาร์ม</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()) { ?>
+                                            <?php
+                                            $sql = new house();
+                                            $query = $sql->selecthouse('');
+                                            while ($row = $query->fetch_object()) { ?>
                                                 <tr>
                                                     <td><?php echo $row->id; ?></td>
                                                     <td><?php echo $row->house_name; ?></td>
+                                                    <td><?php echo $row->farmname; ?></td>
                                                     <td style="width: 20%;">
                                                         <center>
                                                             <a class="btn btn-info btnEdits " title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
@@ -206,7 +210,7 @@ $query = $sql->selecthouse('');
                     }).then((result) => {
                         $("#modalEdithouse").modal("hide");
                         location.reload();
-                       
+
                     })
                 }
 

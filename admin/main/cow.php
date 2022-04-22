@@ -75,49 +75,42 @@ require '../../connect/functions.php';
                                             <tr>
                                                 <th>#</th>
                                                 <th>ชื่อโค</th>
-                                                <th>สายพันธุ์</th>
-                                                <th>ฝูง</th>
-                                                <th>โรงเรือน</th>
-                                                <th>Edit&Delete</th>
+                                                <th>ส่วนสูง</th>
+                                                <th>น้ำหนัก</th>
+                                                <th>เพศ</th>
+                                                <th>ฟาร์ม</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                            <?php
+                                            $datahouse = new cow();
+                                            $row = $datahouse->selectdatacowbyfarmer('');
+                                            while ($rs = $row->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $rs->id; ?></td>
+                                                    <td><?php echo $rs->cow_name; ?></td>
+                                                    <td><?php echo $rs->high; ?></td>
+                                                    <td><?php echo $rs->weight; ?></td>
+                                                    <td><?php echo $rs->gender; ?></td>
+                                                    <td><?php echo $rs->farmname; ?></td>
 
+                                                    <td class="text-center">
+                                                        <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-pen-alt"></i>
                                                         </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
+                                                        <a class="btn btn-danger btnDels" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ชื่อโค</th>
-                                                <th>สายพันธุ์</th>
-                                                <th>ฝูง</th>
-                                                <th>โรงเรือน</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+
                                     </table>
                                     <!-- /.table -->
                                 </div>

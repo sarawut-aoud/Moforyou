@@ -66,7 +66,10 @@ if (empty($result)) {
                                                 <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">โรค/อาการป่วย</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">อาหารโคเนื้อ</a>
+                                                <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">การรักษา</a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">อาหารโคเนื้อ</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ให้อาหาร</a>

@@ -2,8 +2,7 @@
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
 
-$sql = new herd();
-$query = $sql->select_herd('');
+
 
 ?>
 <!DOCTYPE html>
@@ -76,17 +75,22 @@ $query = $sql->select_herd('');
                                                 <th>#</th>
                                                 <th>ฝูง</th>
                                                 <th>โรงเรือน</th>
+                                                <th>ฟาร์ม</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()) { ?>
+                                            <?php
+                                            $sql = new herd();
+                                            $query = $sql->select_herd('');
+                                            while ($row = $query->fetch_object()) { ?>
                                                 <tr>
                                                     <td><?php echo $row->id; ?></td>
                                                     <td><?php echo $row->herd_name; ?></td>
                                                     <td><?php echo $row->house_name; ?></td>
+                                                    <td><?php echo $row->farmname; ?></td>
                                                     <td>
                                                         <center>
                                                             <a class="btn btn-info btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id; ?>">
@@ -147,16 +151,16 @@ $query = $sql->select_herd('');
                 function: 'showeditherd',
             },
             success: function(rs) {
-               
-                        var house_id = rs.house_id;
 
-                    
-                
+                var house_id = rs.house_id;
+
+
+
 
                 $("#modalEditherd").modal("show");
                 $("#modaltextcenter").html(txt_head)
                 $("#herdname").val(rs.herd_name);
-            
+
                 $('#modal_herdid').val(rs.id);
 
                 $.ajax({
@@ -182,11 +186,11 @@ $query = $sql->select_herd('');
                             }
 
                         }
-                        $("#house_id").html(fact);  
+                        $("#house_id").html(fact);
                     }
-                    
+
                 })
-                
+
             }
         })
 
@@ -199,7 +203,7 @@ $query = $sql->select_herd('');
         var id = $("#modal_herdid").val();
         var fname = $("#herdname").val();
         var IDHouse = $("#house_id").val();
-     
+
 
         var txt_head = 'Edit Herd'
 
@@ -209,7 +213,7 @@ $query = $sql->select_herd('');
             url: '../process/_herd.php', //ทำงานที่ไฟล์อะไร
             data: { // ส่งค่าอะไรไปบ้าง
                 hname: fname,
-               IDHouse: IDHouse,
+                IDHouse: IDHouse,
                 id: id,
                 function: 'modaleditherd',
             },

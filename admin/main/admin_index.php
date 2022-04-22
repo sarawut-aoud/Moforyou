@@ -157,14 +157,14 @@ require '../../connect/session_ckeck.php';
         },
         success: function(rs) {
           var cowdata = 0;
-          for (i = 0; i < rs.length; i++) {
+          // for (i = 0; i < rs.length; i++) {
 
-            cowdata++;
-          }
-          if (rs[0].datarow == 0) {
+          //   cowdata++;
+          // }
+          if (rs.datarow == 0) {
             $('#cowdata').html('0 ตัว')
           } else {
-            $('#cowdata').html(cowdata + ' ตัว')
+            $('#cowdata').html(rs.datarow + ' ตัว')
           }
 
 

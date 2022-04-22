@@ -208,7 +208,11 @@ class house extends Database
     public function selecthouse($id)
     {
         if (empty($id)) {
-            $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name,farm_id FROM tbl_house  ORDER BY id ASC ");
+            $sel_house = mysqli_query($this->dbcon, "SELECT ho.id,ho.house_name,ho.farm_id,f.farmname 
+            FROM tbl_house  as ho 
+            INNER JOIN tbl_farm As f ON (ho.farm_id = f.id)
+            
+            ORDER BY id ASC ");
         } else {
             $sel_house = mysqli_query($this->dbcon, "SELECT id,house_name,farm_id FROM tbl_house  WHERE id='$id'");
         }
@@ -246,10 +250,13 @@ class herd extends Database
     public function select_herd($id)
     {
         if (empty($id)) {
-            $selectadmin = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id AS hid
+            $selectadmin = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id AS hid ,f.farmname
             FROM tbl_herd AS herd 
-            INNER JOIN tbl_house AS house 
-            ON (herd.house_id = house.id) ORDER BY herd.id ASC ");
+            INNER JOIN tbl_house AS house  
+            ON (herd.house_id = house.id) 
+            INNER JOIN tbl_farm AS f ON(house.farm_id = f.id)  
+            
+            ORDER BY herd.id ASC ");
         } else {
             $selectadmin = mysqli_query($this->dbcon, "SELECT herd.id AS id ,herd.herd_name,house.house_name,house.id  AS hid
             FROM tbl_herd AS herd 
@@ -447,13 +454,25 @@ class cow extends Database
     }
     public function selectdatacowbyfarmer($id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
-        sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date
-        FROM tbl_cow AS c 
-        INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
-        INNER JOIN tbl_species as sp ON(c.spec_id = sp.id)
-        WHERE ho.farm_id = $id
-       ");
+        if(empty($id)){
+            $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
+            sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date ,f.farmname
+            FROM tbl_cow AS c 
+            INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
+            INNER JOIN tbl_species as sp ON(c.spec_id = sp.id)
+            INNER JOIN tbl_farm as f ON(ho.farm_id = f.id)
+            
+           ");
+        }else{
+            $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
+            sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date
+            FROM tbl_cow AS c 
+            INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
+            INNER JOIN tbl_species as sp ON(c.spec_id = sp.id)
+            WHERE ho.farm_id = $id
+           ");
+        }
+      
         return $sel;
     }
     public function datecow($farm_id)

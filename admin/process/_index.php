@@ -45,5 +45,5 @@ if (isset($id) && $func == 'showcowdata') {
         );
     }
 
-    echo json_encode([$data]);
+    echo json_encode($data);
 }

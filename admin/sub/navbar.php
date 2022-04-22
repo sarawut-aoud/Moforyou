@@ -14,7 +14,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
           <!-- Navbar Search -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
               <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                   <i class="fas fa-search"></i>
               </a>
@@ -33,7 +33,7 @@
                       </div>
                   </form>
               </div>
-          </li>
+          </li> -->
 
           <!-- Notifications Dropdown Menu -->
           <li class="nav-item dropdown">
@@ -59,7 +59,6 @@
                       <span class="float-right text-muted text-sm">2 days</span>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
               </div>
           </li>
           <li class="nav-item">

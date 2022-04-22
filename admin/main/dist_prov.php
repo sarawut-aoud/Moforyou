@@ -21,6 +21,9 @@ require '../../connect/api_map.php';
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
+  <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../dist/img/loading.gif" alt="RELOAD" >
+        </div>
     <?php
     // Navbar Admin
     require '../sub/navbar.php';
