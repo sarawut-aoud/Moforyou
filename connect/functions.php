@@ -442,9 +442,9 @@ class cow extends Database
         //IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
         if ($id == 'count') {
             $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
-        } else {
+        } else  {
             $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date, c.cow_pic, c.gender as gender
-       
+    
             FROM tbl_cow AS c 
             INNER JOIN tbl_house as ho ON(c.house_id = ho.id)
             WHERE c.id = $id
@@ -475,6 +475,7 @@ class cow extends Database
 
         return $sel;
     }
+    
     public function datecow($farm_id)
     {
         $func = mysqli_query($this->dbcon, "SELECT c.id,DATE_FORMAT(DATE_ADD(c.cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date_add , DATE_FORMAT(c.cow_date,'%Y-%m-%d') as cow_date 
@@ -519,9 +520,7 @@ class breed extends Database
 
         return $insert;
     }
-    // Update
 
-    // Delete
 
     // Select
     public function select_breed_all($farm_id)
@@ -555,11 +554,14 @@ class breed extends Database
         ");
         return $selectbreed;
     }
+    // Delete
     public function delete_breed($id)
     {
         $deletebreed = mysqli_query($this->dbcon, "DELETE FROM tbl_breed WHERE id ='$id'");
         return $deletebreed;
     }
+    // Update
+
     public function update_breed($id, $cowidmale, $cowidfemale)
     {
         $updatecow = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
@@ -572,7 +574,7 @@ class breed extends Database
         return $updatecow;
     }
 }
-// Food
+
 class doctor extends Database
 {
     public function insert_doc($name, $phone, $farm_id)
@@ -622,6 +624,34 @@ class food extends Database
 // Disease
 class disease extends Database
 {
+    // admin by insert
+    public function insert_disease($detail)
+    {
+        $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_disease(detail) VALUES ('$detail') ");
+        return $ins;
+    }
+    // update by admin
+    public function update_disease($detail, $id)
+    {
+        $upd = mysqli_query($this->dbcon, "UPDATE  tbl_disease SET detail = '$detail' WHERE id = '$id' ");
+        return $upd;
+    }
+    // delete by admin
+    public function delete_disease($id)
+    {
+        $del = mysqli_query($this->dbcon, "DELETE FROM tbl_disease WHERE id = '$id' ");
+        return $del;
+    }
+    // select by admin
+    public function select_disease($id)
+    {
+        if (empty($id)) {
+            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease ");
+        } else {
+            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease  WHERE id = '$id' ");
+        }
+        return $sel;
+    }
 }
 // All Report
 class report extends Database

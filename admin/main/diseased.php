@@ -62,31 +62,36 @@ require '../../connect/functions.php';
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-5">
-                            <div class="card card-primary shadow">
-                                <div class="card-header  ">
-                                    <h3 class="text-center">เพิ่มข้อมูลโรคหรืออาการป่วย</h3>
-                                </div>
-                                <div class="card-body ">
-                                    <div class="from-group row">
-                                        <div class="input-group">
-                                            <label class="col-from-label" for="name">
-                                                ชื่อโรคหรืออาการป่วยโค :
-                                            </label>
-                                            <div class="col-md">
-                                                <input type="text" class=" form-control" id="name" placeholder="ชื่อโรคหรืออาการป่วย" title="ชื่อโรคหรืออาการป่วย" required>
+                            <form id="frm_data">
+                                <div class="card card-primary shadow">
+                                    <div class="card-header  ">
+                                        <h3 class="text-center">เพิ่มข้อมูลโรคหรืออาการป่วย</h3>
+                                    </div>
+                                    <div class="card-body ">
+
+
+
+                                        <div class="from-group row">
+                                            <div class="input-group">
+                                                <label class="col-from-label" for="name">
+                                                    ชื่อโรคหรืออาการป่วยโค :
+                                                </label>
+                                                <div class="col-md">
+                                                    <input type="text" class=" form-control" onkeypress="not_number(event)" id="name" placeholder="ชื่อโรคหรืออาการป่วย" title="ชื่อโรคหรืออาการป่วย" required>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer text-end">
+                                        <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
+                                        <button type="submit" id="btn" title="ตกลง" class="btn btn-primary submit">ยืนยันการเพิ่มข้อมูล</button>
+                                    </div>
                                 </div>
-                                <div class="card-footer text-end">
-                                    <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
-                                    <button type="submit" id="btn" class="btn btn-primary submit">ยืนยันการเพิ่มข้อมูล</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="col-7">
 
-                            <div class="card card-warning">
+                            <div class="card card-warning shadow">
                                 <div class="card-header ">
                                     <h3 class="text-center">โรคและอาการป่วย</h3>
                                 </div>
@@ -98,29 +103,33 @@ require '../../connect/functions.php';
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>โรค/ป่วย</th>
+                                                <th>โรค/อาการป่วย</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
+                                            <?php
+                                            $sql = new disease();
+                                            $query = $sql->select_disease('');
+                                            while ($rs = $query->fetch_object()) { ?>
+                                                <tr>
+                                                    <td><?php echo $rs->id; ?></td>
+                                                    <td><?php echo $rs->detail; ?></td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
+                                                                <i class="fas fa-pencil-alt"></i>
 
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info btnEdit" id="">
-                                                            <i class="fas fa-pencil-alt"></i>
-
-                                                        </a>
-                                                        <a class="btn btn-danger btnDels" id="">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                                            </a>
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $rs->id; ?>">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
                                     </table>
@@ -144,7 +153,199 @@ require '../../connect/functions.php';
     </div>
     <!-- ./wrapper -->
     <script src="../../dist/js/datatable.js"></script>
+    <script src="../../dist/js/numlock.js"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                'closeButton': false,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
+            $(document).on('click', '.reset', function(e) {
+                e.preventDefault();
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการเพิ่มข้อมูล');
+                $('#btn').addClass('btn btn-primary submit');
+                $('#frm_data')[0].reset();
 
+            })
+            // insert
+            $(document).on('click', '.submit', function(e) {
+                e.preventDefault();
+                var detail = $('#name').val();
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: "../process/_disease.php",
+                    data: {
+                        function: 'insert',
+                        detail: detail,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                })
+            })
+            // update
+            $(document).on('click', '.btnEdit', function(e) {
+                e.preventDefault();
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการแก้ไข');
+                $('#btn').addClass('btn btn-warning btnsave');
+
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: '../process/_disease.php',
+                    data: {
+                        function: "showdata",
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#name').val(result.detail);
+                        var id = result.id;
+
+                        /// update ข้อมูล
+                        $(document).on('click', '.btnsave', function(e) {
+                            e.preventDefault();
+                            var detail = $('#name').val();
+
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                url: '../process/_disease.php',
+                                data: {
+                                    function: "update",
+                                    id: id,
+                                    detail: detail,
+
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            }) // end ajax update
+
+
+                        })
+                    }
+                }) // end ajax showdata
+
+            })
+            //delete
+            $(document).on('click', '.btnDels', function(e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+                var _row = $(this).parent();
+
+                Swal.fire({
+                    title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                }).then((btn) => {
+                    if (btn.isConfirmed) {
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_disease.php',
+                            data: {
+                                function: 'delete',
+                                id: id,
+                            },
+                            success: function(result) {
+                                if (result.status == 200) {
+                                    toastr.success(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                // location.reload();
+                                                _row.closest('tr').remove();
+                                            }
+                                        }
+                                    );
+                                } else {
+                                    toastr.warning(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        });
+                    }
+                })
+
+            })
+        })
+    </script>
 </body>
 
 </html>

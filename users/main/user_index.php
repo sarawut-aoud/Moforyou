@@ -87,29 +87,55 @@ if (empty($result)) {
 
                                 </div>
                             </div>
-                            <div class="col-md-6  col-sm-12 ">
-                                <div class="card card-primary card-outline">
-                                    <div class="card-header">
-                                        <h5 class="text-center m-0"><i class="fa fa-venus-mars"></i> ผสมพันธุ์ครั้งล่าสุด</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-
-                                            <h5 class="card-title mb-4">
-                                            </h5>
-                                            <h5 class="card-title mb-4">
-                                                วันที่ xx-xx-xxx
-                                            </h5>
+                            <!-- <div class="row"> -->
+                            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                                <!-- small box -->
+                                <div class="small-box bg-gradient-pink">
+                                    <div class="inner">
+                                        <h3 id="farmdata"> ผสมพันธุ์ครั้งล่าสุด</h3>
+                                        <div class="d-flex justify-content-start">
+                                            วันที่ xx-xx-xxx
                                         </div>
-                                        <p class="card-text">
-                                            ตัวผู้ : สีทอง <a href="#" class="card-link">ดูรายละเอียด</a>
-                                        </p>
-                                        <p class="card-text">
-                                            ตัวเมีย : สีแหบ <a href="#" class="card-link"> ดูรายละเอียด</a>
-                                        </p>
-
+                                        <div class="d-flex  mt-4">
+                                            <p class="card-text mr-5 ml-4">
+                                                ตัวผู้ : สีทอง
+                                            </p>
+                                            <p class="card-text  ml-5">
+                                                ตัวเมีย : สีแหบ
+                                            </p>
+                                        </div>
                                     </div>
-                                </div><!-- /.card -->
+                                    <div class="icon">
+                                        <i class="fas fa-venus-mars"></i>
+                                    </div>
+
+                                    <a href="#" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                                <!-- small box -->
+                                <div class="small-box bg-gradient-olive">
+                                    <div class="inner">
+                                        <h3 id="cowdata"><span style="font-size: 28px;">โคภายในฟาร์ม </span>4</h3>
+                                        <div class="d-flex justify-content-start">
+                                            จำนวนโคเนื้อทั้งหมด
+                                        </div>
+                                        <div class="d-flex ml-5 mt-4">
+                                            <p class="card-text ml-4">พ่อโค : 5 ตัว</p>
+                                            <p class="card-text ml-4">แม่โค : 5 ตัว</p>
+                                        </div>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fad fa-cow"></i>
+                                    </div>
+                                    <a href="../report/req-cow.php" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+
+                            <div class="col-md-6  col-sm-12 ">
+                                
                                 <div class="card card-purple card-outline">
                                     <div class="card-header">
                                         <h5 class="text-center m-0"><i class="fa fa-briefcase-medical"></i> ประวัติการรักษาครั้งล่าสุด</h5>
@@ -128,23 +154,6 @@ if (empty($result)) {
 
                             <!-- /.col-md-6 -->
                             <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
-                                <div class="card card-fuchsia card-outline">
-                                    <div class="card-header">
-                                        <h5 class=" m-0 text-center"><i class="fa fa-cow"></i> โคภายในฟาร์ม</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="card-title">ทั้งหมด : 20 ตัว</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-around mt-4">
-                                            <p class="card-text">พ่อโค : 5 ตัว</p>
-                                            <p class="card-text">แม่โค : 5 ตัว</p>
-                                        </div>
-
-
-                                        <a href="../report/req-cow.php" class="btn btn-primary"> <i class="fas fa-search"></i> ดูรายละเอียด</a>
-                                    </div>
-                                </div>
 
                                 <div class="card card-success card-outline ">
                                     <div class="card-header">
