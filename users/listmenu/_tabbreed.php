@@ -44,7 +44,7 @@ if (empty($result)) {
                 <div class="content-header">
                     <div class="container">
                         <!-- Manage -->
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center ">
                             <div class="col-md-8">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
@@ -114,9 +114,9 @@ if (empty($result)) {
                     </div>
                     <!-- /.content-header -->
 
-                    <div class="container mb-5">
+                    <div class="container ">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-5">
                                 <div class="card">
                                     <div class="card-header card-outline card-blue">
                                         <h3 class=" text-center">ผสมพันธุ์</h3>

@@ -43,7 +43,7 @@ if (empty($result)) {
             <div class="bgimg content-wrapper mb-5">
                 <!-- Content Header (Page header) -->
                 <div class="content-header ">
-                    <div class="container ">
+                    <div class="container col-10">
                         <!-- Manage -->
                         <div class="row justify-content-around">
                             <div class="col-lg-5 col-md-12">
@@ -54,7 +54,7 @@ if (empty($result)) {
                                     <!-- /.card-header -->
                                     <!-- --------------------Information -------------------------------------- -->
                                     <!-- form start -->
-                                    <form method="POST" enctype="multipart/form-data">
+                                    <form method="POST" id="frm_data">
                                         <div class="card-body">
                                             <center>
                                                 <figure class="figure">
@@ -66,18 +66,18 @@ if (empty($result)) {
 
                                             <div class="form-group row ">
                                                 <div class=" input-group">
-                                                    <label class=" col-form-label" for="phone">ชื่อสัตวแพทย์</label>
+                                                    <label class=" col-form-label" for="docname">ชื่อสัตวแพทย์ : </label>
                                                     <div class="col-md">
-                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="123-456-7890" value="">
+                                                        <input type="text" class="form-control" onkeypress="not_number(event)" name="docname" id="docname" placeholder="ชื่อ - นามสกุล" required="required" title="ชื่อ - นามสกุล">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row ">
                                                 <div class=" input-group">
-                                                    <label class=" col-form-label" for="phone">เบอร์โทรศัพท์</label>
+                                                    <label class=" col-form-label" for="phone">เบอร์โทรศัพท์ :</label>
                                                     <div class="col-md">
-                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="123-456-7890" value="">
+                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="เบอร์โทร">
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,8 +87,8 @@ if (empty($result)) {
                                         <!-- /.card-body -->
 
                                         <div class="card-footer text-end">
-                                            <button type="reset" class="btn  btn-secondary">ยกเลิก</button>
-                                            <button type="submit" id="submit_farmer" name="submit_farmer" class="btn btn-info">ยืนยันการเพิ่มข้อมูล</button>
+                                            <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
+                                            <button type="submit" id="btn" class="btn btn-info submit">ยืนยันการเพิ่มข้อมูล</button>
                                         </div>
                                     </form>
                                 </div>
@@ -112,10 +112,8 @@ if (empty($result)) {
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>ชื่อโค</th>
-                                                            <th>ส่วนสูง</th>
-                                                            <th>น้ำหนัก</th>
-                                                            <th>เพศ</th>
+                                                            <th>ชื่อสัตวแพทย์</th>
+                                                            <th>เบอร์โทรติดต่อ</th>
                                                             <th>แก้ไข / ลบข้อมูล</th>
                                                         </tr>
                                                     </thead>
@@ -123,16 +121,14 @@ if (empty($result)) {
                                                     <!-- body table -->
                                                     <tbody>
                                                         <?php
-                                                        $datahouse = new cow();
-                                                        $row = $datahouse->selectdatacowbyfarmer($farmid);
+                                                        $data = new doctor();
+                                                        $row = $data->select_docbyfarm($farmid);
                                                         while ($rs = $row->fetch_object()) {
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
-                                                                <td><?php echo $rs->cow_name; ?></td>
-                                                                <td><?php echo $rs->high; ?></td>
-                                                                <td><?php echo $rs->weight; ?></td>
-                                                                <td><?php echo $rs->gender; ?></td>
+                                                                <td><?php echo $rs->name; ?></td>
+                                                                <td><?php echo $rs->phone; ?></td>
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -174,10 +170,19 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-
+    <script src="../../dist/js/phone.js"></script>
     <script src="../../dist/js/datatable.js"></script>
+
     <script>
         $(document).ready(function() {
+            $(document).on('click', '.reset', function(e) {
+                e.preventDefault();
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการเพิ่มข้อมูล');
+                $('#btn').addClass('btn btn-info submit');
+                $('#frm_data')[0].reset();
+
+            })
             toastr.options = {
                 'closeButton': false,
                 'debug': false,
@@ -195,40 +200,22 @@ if (empty($result)) {
                 'showMethod': 'fadeIn',
                 'hideMethod': 'fadeOut'
             }
-            //from select house_id
-            var farm_id = '<?php echo $_SESSION['id']; ?>';
-            $.ajax({
-                type: 'get',
-                dataType: 'json',
-                url: '../process/_herd.php',
-                data: {
-                    id: farm_id,
-                    function: "getdata",
-                },
-                success: function(result) {
-                    var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
-                    for (i in result) {
-                        data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
-                    }
-                    $('#house_id').html(data);
-                }
-            });
 
-            // insert data
+            var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
+
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
-
-                var herdname = $('#herdName').val();
-                var house_id = $('#house_id').val();
+                var name = $('#docname').val();
+                var phone = $('#phone').val();
                 $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: '../process/_herd.php',
+                    type: "post",
+                    dataType: "json",
+                    url: '../process/_doctor.php',
                     data: {
-                        id: '-',
-                        herdname: herdname,
-                        house_id: house_id,
                         function: "insert",
+                        docname: name,
+                        phone: phone,
+                        farm_id: farm_id,
                     },
                     success: function(result) {
                         if (result.status == 200) {
@@ -255,57 +242,87 @@ if (empty($result)) {
                             );
                         }
                     }
-                });
-
+                })
             });
+            // update
 
-            // edit data 
             $(document).on('click', '.btnEdit', function(e) {
                 e.preventDefault();
-                var id = $(this).attr('id');
-                var text = 'แก้ไขข้อมูลฝูง';
-                $.ajax({
-                    type: 'get',
-                    dataType: 'json',
-                    url: '../process/_herd.php',
-                    data: {
-                        id: id,
-                        function: "showdata",
-                    },
-                    success: function(results) {
-                        $("#modalEdit").modal('show');
-                        $("#modaltextcenter").html(text);
-                        $("#modalherd").val(results.herd_name);
-                        $("#modal_herdid").val(results.herd_id);
-                        $.ajax({
-                            type: 'get',
-                            dataType: 'json',
-                            url: '../process/_herd.php',
-                            data: {
-                                id: farm_id,
-                                function: "getdata",
-                            },
-                            success: function(result) {
-                                var data = '';
-                                for (i in result) {
-                                    if (result[i].house_id == results.house_id) {
-                                        data = '<option value="' + result[i].house_id + '" selected>' + result[i].housename + '</option>';
-                                    }
-                                    data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
-                                }
-                                $('#modalhouse_id').html(data);
-                            }
-                        });
-                    }
-                });
-            });
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการแก้ไข');
+                $('#btn').addClass('btn btn-warning btnsave');
 
-            //delete data
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: '../process/_doctor.php',
+                    data: {
+                        function: "showdata",
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#docname').val(result.name);
+                        $('#phone').val(result.phone);
+
+                        var docid = result.id;
+
+
+                        /// update ข้อมูล
+                        $(document).on('click', '.btnsave', function(e) {
+                            e.preventDefault();
+                            var name = $('#docname').val();
+                            var phone = $('#phone').val();
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                url: '../process/_doctor.php',
+                                data: {
+                                    function: "update",
+                                    docname: name,
+                                    phone: phone,
+                                    docid: docid,
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            })
+
+
+                        })
+                    }
+                })
+
+            })
+            // delete data
 
             $(document).on('click', '.btnDels', function(e) {
                 e.preventDefault();
-
                 var id = $(this).attr('id');
+             
                 var _row = $(this).parent();
                 Swal.fire({
                     title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
@@ -320,9 +337,9 @@ if (empty($result)) {
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
-                            url: '../process/_herd.php',
+                            url: '../process/_doctor.php',
                             data: {
-                                function: 'del',
+                                function: 'delete',
                                 id: id,
                             },
                             success: function(result) {
@@ -355,56 +372,11 @@ if (empty($result)) {
                     }
                 })
 
-            });
-            /// modal update 
-            $(document).on('click', '.btnsave', function(e) {
-                e.preventDefault();
-                var herd_name = $('#modalherd').val();
-                var house_id = $('#modalhouse_id').val();
-                var herd_id = $("#modal_herdid").val();
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: '../process/_herd.php',
-                    data: {
-                        id: herd_id,
-                        herd_name: herd_name,
-                        house_id: house_id,
-                        function: "edit"
-                    },
-                    success: function(result) {
-                        if (result.status == 200) {
-                            toastr.success(
-                                result.message,
-                                '', {
-                                    timeOut: 1000,
-                                    fadeOut: 1000,
-                                    onHidden: function() {
-                                        $("#modalEdit").modal('hide');
-                                        location.reload();
-                                    }
-                                }
-                            );
-                        } else {
-                            toastr.warning(
-                                result.message,
-                                '', {
-                                    timeOut: 1000,
-                                    fadeOut: 1000,
-                                    onHidden: function() {
-                                        location.reload();
-                                    }
-                                }
-                            );
-                        }
-                    }
-                })
-
-
-            });
-
-        });
+            })
+        })
     </script>
+    <script src="../../dist/js/numlock.js"></script>
+
 </body>
 
 </html>

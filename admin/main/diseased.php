@@ -61,10 +61,33 @@ require '../../connect/functions.php';
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-5">
+                            <div class="card card-primary shadow">
+                                <div class="card-header  ">
+                                    <h3 class="text-center">เพิ่มข้อมูลโรคหรืออาการป่วย</h3>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="from-group row">
+                                        <div class="input-group">
+                                            <label class="col-from-label" for="name">
+                                                ชื่อโรคหรืออาการป่วยโค :
+                                            </label>
+                                            <div class="col-md">
+                                                <input type="text" class=" form-control" id="name" placeholder="ชื่อโรคหรืออาการป่วย" title="ชื่อโรคหรืออาการป่วย" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-end">
+                                    <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
+                                    <button type="submit" id="btn" class="btn btn-primary submit">ยืนยันการเพิ่มข้อมูล</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
 
-                            <div class="card">
-                                <div class="card-header card-outline card-blue">
+                            <div class="card card-warning">
+                                <div class="card-header ">
                                     <h3 class="text-center">โรคและอาการป่วย</h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -76,7 +99,6 @@ require '../../connect/functions.php';
                                             <tr>
                                                 <th>#</th>
                                                 <th>โรค/ป่วย</th>
-                                                <th>ชื่อโค</th>
                                                 <th>Edit&Delete</th>
                                             </tr>
                                         </thead>
@@ -86,14 +108,14 @@ require '../../connect/functions.php';
                                             <tr>
                                                 <td>Win 95+</td>
                                                 <td> 4</td>
-                                                <td>X</td>
+
                                                 <td>
                                                     <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
+                                                        <a class="btn btn-info btnEdit" id="">
                                                             <i class="fas fa-pencil-alt"></i>
 
                                                         </a>
-                                                        <a class="btn btn-danger">
+                                                        <a class="btn btn-danger btnDels" id="">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </center>
@@ -101,16 +123,6 @@ require '../../connect/functions.php';
                                             </tr>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>โรค/ป่วย</th>
-                                                <th>ชื่อโค</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -131,8 +143,8 @@ require '../../connect/functions.php';
 
     </div>
     <!-- ./wrapper -->
+    <script src="../../dist/js/datatable.js"></script>
 
 </body>
-<script src="../../dist/js/datatable.js"></script>
 
 </html>

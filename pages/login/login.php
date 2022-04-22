@@ -86,8 +86,8 @@ if (isset($_POST['username'])) {
 
     // data
     $userdata = new registra();
-    $username = $_POST['username'];
-    $email = $_POST['username'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['username']);
     $password = $_POST['password'];
 
     // หลีกเลี่ยง SQL Injection

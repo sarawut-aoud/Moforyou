@@ -454,7 +454,7 @@ class cow extends Database
     }
     public function selectdatacowbyfarmer($id)
     {
-        if(empty($id)){
+        if (empty($id)) {
             $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
             sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date ,f.farmname
             FROM tbl_cow AS c 
@@ -463,7 +463,7 @@ class cow extends Database
             INNER JOIN tbl_farm as f ON(ho.farm_id = f.id)
             
            ");
-        }else{
+        } else {
             $sel = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender ,
             sp.spec_name ,DATE_FORMAT(c.cow_date,'%Y-%m-%d') as date
             FROM tbl_cow AS c 
@@ -472,7 +472,7 @@ class cow extends Database
             WHERE ho.farm_id = $id
            ");
         }
-      
+
         return $sel;
     }
     public function datecow($farm_id)
@@ -546,19 +546,21 @@ class breed extends Database
         }
         return $breed;
     }
-    public function select_breed ($id){
-        $selectbreed = mysqli_query($this ->dbcon,"SELECT be.id , be.breed_date AS breed_date , be.breed_date_next AS breednext ,
+    public function select_breed($id)
+    {
+        $selectbreed = mysqli_query($this->dbcon, "SELECT be.id , be.breed_date AS breed_date , be.breed_date_next AS breednext ,
         be.farm_id , be.cow_id_male AS cowmale ,be.cow_id_female AS cowfemale 
         FROM tbl_breed AS be
         WHERE be.id = $id
         ");
         return $selectbreed;
     }
-    public function delete_breed ($id){
-        $deletebreed = mysqli_query($this->dbcon,"DELETE FROM tbl_breed WHERE id ='$id'");
-    return $deletebreed;
+    public function delete_breed($id)
+    {
+        $deletebreed = mysqli_query($this->dbcon, "DELETE FROM tbl_breed WHERE id ='$id'");
+        return $deletebreed;
     }
-    public function update_breed ($id, $cowidmale, $cowidfemale)
+    public function update_breed($id, $cowidmale, $cowidfemale)
     {
         $updatecow = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
         cow_id_male = '$cowidmale' ,
@@ -569,13 +571,53 @@ class breed extends Database
         ");
         return $updatecow;
     }
-        
-    
+}
+// Food
+class doctor extends Database
+{
+    public function insert_doc($name, $phone, $farm_id)
+    {
+        $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_doctor(name,phone,farm_id)
+        VALUES('$name','$phone','$farm_id')
+        ");
+        return $ins;
+    }
+    public function update_doc($name, $phone, $docid)
+    {
+        $upd = mysqli_query($this->dbcon, "UPDATE tbl_doctor 
+        SET name = '$name',
+            phone = '$phone'
+        WHERE id = '$docid'
+        ");
+        return $upd;
+    }
+    public function delete_doc($docid)
+    {
+        $d = mysqli_query($this->dbcon, "DELETE FROM tbl_doctor WHERE id = '$docid' ");
+
+        return $d;
+    }
+    public function select_doc($docid)
+    {
+        if (empty($docid)) {
+            $s = mysqli_query($this->dbcon, "SELECT id,name,phone,farm_id FROM tbl_doctor ");
+        } else {
+            $s = mysqli_query($this->dbcon, "SELECT id,name,phone,farm_id FROM tbl_doctor WHERE id = '$docid' ");
+        }
+
+        return $s;
+    }
+    public function select_docbyfarm($farm_id)
+    {
+
+        $s = mysqli_query($this->dbcon, "SELECT id,name,phone,farm_id FROM tbl_doctor WHERE farm_id = '$farm_id'");
+
+        return $s;
+    }
 }
 // Food
 class food extends Database
 {
-
 }
 // Disease
 class disease extends Database
