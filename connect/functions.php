@@ -732,7 +732,6 @@ class heal extends Database
             INNER JOIN tbl_farm AS f ON(h.farm_id = f.id) 
             INNER JOIN tbl_cow AS c ON(h.cowid = c.id) 
             INNER JOIN tbl_disease AS d ON(h.diseaseid = d.id) 
-          
             WHERE h.farm_id = '$farmid' ");
         return $sel;
     }

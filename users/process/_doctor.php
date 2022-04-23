@@ -13,7 +13,7 @@ if (isset($func) && $func == 'insert') {
     $farm_id = $_POST['farm_id'];
     if (empty($name) || empty($phone) || empty($farm_id)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
-    } else {
+    } else  {
         $query = $sql->insert_doc($name, $phone, $farm_id);
         $msg = array(
             "status" => 200,
