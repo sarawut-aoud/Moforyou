@@ -54,7 +54,7 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card  ">
-                                    <div class="card-header card-outline card-blue">
+                                    <div class="card-header card-cow">
                                         <h3 class=" text-center">โคเนื้อ</h3>
                                     </div>
                                     <!-- /.card-header -->

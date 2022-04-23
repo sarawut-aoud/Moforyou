@@ -43,7 +43,7 @@ if (empty($result)) {
             <div class="bgimg content-wrapper mb-5">
                 <!-- Content Header (Page header) -->
                 <div class="content-header ">
-                    <div class="container col-10">
+                    <div class="container col-11">
                         <!-- Manage -->
                         <div class="row ">
                             <div class="col-lg-4 col-md-12">
@@ -184,21 +184,38 @@ if (empty($result)) {
                                                                 while ($rsdoc = $row->fetch_object()) {
                                                                     if ($rsdoc->id == $rs->doctor_id) {
                                                                         $doctor = $rsdoc->name;
-                                                                    }else{
+                                                                    } else {
                                                                         $doctor = '';
                                                                     }
                                                                 }
                                                             } else {
                                                                 $doctor = '';
                                                             }
+                                                            function DateThai($strDate)
+                                                            {
+                                                                $strYear = date("Y", strtotime($strDate)) + 543;
+                                                                $strMonth = date("n", strtotime($strDate));
+                                                                $strDay = date("j", strtotime($strDate));
+                                                                $strHour = date("H", strtotime($strDate));
+                                                                $strMinute = date("i", strtotime($strDate));
+                                                                $strSeconds = date("s", strtotime($strDate));
+                                                                $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                                $strMonthThai = $strMonthCut[$strMonth];
+                                                                if ($strHour == '00' && $strMinute == '00') {
+                                                                    return "$strDay $strMonthThai $strYear   ";
+                                                                } else {
+                                                                    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                                }
+                                                            }
+
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
                                                                 <td><?php echo $rs->cow_name; ?></td>
                                                                 <td><?php echo  $dis; ?></td>
-                                                                <td><?php echo $rs->datestart; ?></td>
-                                                                <td><?php echo $rs->healstart; ?></td>
-                                                                <td><?php echo $rs->healend; ?></td>
+                                                                <td><?php echo DateThai($rs->datestart); ?></td>
+                                                                <td><?php echo DateThai($rs->healstart); ?></td>
+                                                                <td><?php echo DateThai($rs->healend); ?></td>
                                                                 <td><?php echo  $doctor; ?></td>
 
                                                                 <td class="text-center">
@@ -444,7 +461,7 @@ if (empty($result)) {
                             },
                             success: function(results) {
                                 var data = '';
-                                
+
                                 for (i in results) {
                                     if (results[i].id == result.doc_id) {
                                         data += '<option value="' + results[i].id + '" selected >' + results[i].name + '</option>'

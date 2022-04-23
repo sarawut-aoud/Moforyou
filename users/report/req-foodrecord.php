@@ -53,9 +53,9 @@ if (empty($result)) {
                         </div>
                         <div class="row  mb-5">
                             <div class="col-md-12">
-                                <div class="card card-info ">
+                                <div class="card card-warning ">
                                     <div class="card-header ">
-                                        <h3 class=" text-center">โรค / อาการป่วย</h3>
+                                        <h3 class=" text-center">ประวัติการให้อาหาร</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -63,14 +63,16 @@ if (empty($result)) {
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
                                             <thead>
-
                                                 <tr>
                                                     <th>#</th>
                                                     <th>ชื่อโค</th>
-                                                    <th>โรคหรืออาการป่วย</th>
-                                                    <th>เริ่มแสดงอาการวันที่</th>
-                                                </tr>
+                                                    <th>โรค / อาการป่วย</th>
 
+                                                    <th>วันที่เริ่มรักษา</th>
+                                                    <th>วันที่สิ้นสุดการรักษา</th>
+                                                    <th>รักษากับสัตวแพยท์</th>
+
+                                                </tr>
                                             </thead>
                                             <!-- /.head table -->
                                             <!-- body table -->
@@ -78,13 +80,26 @@ if (empty($result)) {
                                                 <?php
                                                 $data = new heal();
                                                 $row = $data->select_healbyfarm($farmid);
-                                                while ($rs = mysqli_fetch_object($row)) {
+                                                while ($rs = $row->fetch_object()) {
                                                     if ($rs->detail != NULL && $rs->healmore != NULL) {
                                                         $dis = $rs->detail . ' และ ' . $rs->healmore;
                                                     } else if ($rs->detail == NULL) {
                                                         $dis = $rs->healmore;
                                                     } else {
                                                         $dis = $rs->detail;
+                                                    }
+                                                    if ($rs->doctor_id != NULL) {
+                                                        $data = new doctor();
+                                                        $row = $data->select_docbyfarm($farmid);
+                                                        while ($rsdoc = $row->fetch_object()) {
+                                                            if ($rsdoc->id == $rs->doctor_id) {
+                                                                $doctor = $rsdoc->name;
+                                                            } else {
+                                                                $doctor = '';
+                                                            }
+                                                        }
+                                                    } else {
+                                                        $doctor = '';
                                                     }
                                                     function DateThai($strDate)
                                                     {
@@ -105,12 +120,15 @@ if (empty($result)) {
 
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
-                                                        <td style="width: 30%;"><?php echo $rs->cow_name; ?></td>
-                                                        <td><?php echo $dis; ?></td>
-                                                        <td style="width: 30%;"><?php echo DateThai($rs->datestart); ?></td>
+                                                        <td><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $rs->cow_name; ?></td>
+                                                        <td><?php echo  $dis; ?></td>
 
-                                                        <!--  -->
+                                                        <td><?php echo DateThai($rs->healstart); ?></td>
+                                                        <td><?php echo DateThai($rs->healend); ?></td>
+                                                        <td><?php echo  $doctor; ?></td>
+
+
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>

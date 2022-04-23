@@ -53,8 +53,8 @@ if (empty($result)) {
                             </div>
                             <div class="row  mb-5">
                                 <div class="col-md-12">
-                                    <div class="card  ">
-                                        <div class="card-header card-outline card-blue">
+                                    <div class="card card-pink ">
+                                        <div class="card-header ">
                                             <h3 class=" text-center">ผสมพันธุ์</h3>
                                         </div>
                                         <!-- /.card-header -->
@@ -90,14 +90,19 @@ if (empty($result)) {
                                                             $strSeconds = date("s", strtotime($strDate));
                                                             $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
                                                             $strMonthThai = $strMonthCut[$strMonth];
-                                                            return "$strDay $strMonthThai $strYear ";
+                                                            if($strHour =='00' && $strMinute =='00' ){
+                                                                return "$strDay $strMonthThai $strYear   ";
+                                                            }else{
+                                                                return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                            }
+                                                           
                                                         }
                                                        
                                                     ?>
                                                         <tr align="center">
                                                             <td style="width: 10%;"><?php echo $rs->id; ?></td>
                                                             <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
-                                                            <td><?php echo $rs->breed_date; ?></td>
+                                                            <td><?php echo DateThai($rs->breed_date); ?></td>
                                                             <td><?php echo DateThai($rs->breednext); ?></td>
                                                             <!--  -->
                                                         </tr>

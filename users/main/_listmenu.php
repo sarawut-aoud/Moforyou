@@ -69,7 +69,7 @@ if (empty($result)) {
                                                 <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabheal" role="button">โรค/อาการป่วย/การรักษา</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ให้อาหาร</a>
+                                                <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabgivefood" role="button">ให้อาหาร</a>
                                             </li>
 
                                         </ul>
@@ -111,10 +111,10 @@ if (empty($result)) {
                                                 <a class="btn btn-lg bt_list-2 shadow" href="../report/req-disease" role="button">โรค/อาการป่วย</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../report/req-heal.php" role="button">ประวัติการรักษา</a>
+                                                <a class="btn btn-lg bt_list shadow" href="../report/req-heal" role="button">ประวัติการรักษา</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="#" role="button">ประวัติการให้อาหาร</a>
+                                                <a class="btn btn-lg bt_list shadow" href="../report/req-foodrecord" role="button">ประวัติการให้อาหาร</a>
                                             </li>
 
                                         </ul>

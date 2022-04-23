@@ -111,6 +111,28 @@
     background-size: cover;
     opacity: 1.2;
   }
+  @keyframes blinker {
+    60% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.blink {
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 1);
+    animation-duration: 1.2s;
+}
 </style>
 
 <!-- function datatable  -->

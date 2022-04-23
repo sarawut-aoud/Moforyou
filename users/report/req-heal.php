@@ -53,8 +53,8 @@ if (empty($result)) {
                         </div>
                         <div class="row  mb-5">
                             <div class="col-md-12">
-                                <div class="card  ">
-                                    <div class="card-header card-outline card-blue">
+                                <div class="card card-success ">
+                                    <div class="card-header ">
                                         <h3 class=" text-center">ประวัติการรักษา</h3>
                                     </div>
                                     <!-- /.card-header -->
@@ -63,13 +63,16 @@ if (empty($result)) {
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
                                             <thead>
-
                                                 <tr>
                                                     <th>#</th>
                                                     <th>ชื่อโค</th>
-                                                    <th>โรคหรืออาการป่วย</th>
-                                                </tr>
+                                                    <th>โรค / อาการป่วย</th>
 
+                                                    <th>วันที่เริ่มรักษา</th>
+                                                    <th>วันที่สิ้นสุดการรักษา</th>
+                                                    <th>รักษากับสัตวแพยท์</th>
+
+                                                </tr>
                                             </thead>
                                             <!-- /.head table -->
                                             <!-- body table -->
@@ -77,7 +80,7 @@ if (empty($result)) {
                                                 <?php
                                                 $data = new heal();
                                                 $row = $data->select_healbyfarm($farmid);
-                                                while ($rs = mysqli_fetch_object($row)) {
+                                                while ($rs = $row->fetch_object()) {
                                                     if ($rs->detail != NULL && $rs->healmore != NULL) {
                                                         $dis = $rs->detail . ' และ ' . $rs->healmore;
                                                     } else if ($rs->detail == NULL) {
@@ -85,17 +88,52 @@ if (empty($result)) {
                                                     } else {
                                                         $dis = $rs->detail;
                                                     }
+                                                    if ($rs->doctor_id != NULL) {
+                                                        $data = new doctor();
+                                                        $row = $data->select_docbyfarm($farmid);
+                                                        while ($rsdoc = $row->fetch_object()) {
+                                                            if ($rsdoc->id == $rs->doctor_id) {
+                                                                $doctor = $rsdoc->name;
+                                                            } else {
+                                                                $doctor = '';
+                                                            }
+                                                        }
+                                                    } else {
+                                                        $doctor = '';
+                                                    }
+                                                    function DateThai($strDate)
+                                                    {
+                                                        $strYear = date("Y", strtotime($strDate)) + 543;
+                                                        $strMonth = date("n", strtotime($strDate));
+                                                        $strDay = date("j", strtotime($strDate));
+                                                        $strHour = date("H", strtotime($strDate));
+                                                        $strMinute = date("i", strtotime($strDate));
+                                                        $strSeconds = date("s", strtotime($strDate));
+                                                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                        $strMonthThai = $strMonthCut[$strMonth];
+                                                        if ($strHour == '00' && $strMinute == '00') {
+                                                            return "$strDay $strMonthThai $strYear   ";
+                                                        } else {
+                                                            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                        }
+                                                    }
+
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
-                                                        <td style="width: 30%;"><?php echo $rs->cow_name; ?></td>
-                                                        <td><?php echo $dis; ?></td>
-                                                        <!--  -->
+                                                        <td><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $rs->cow_name; ?></td>
+                                                        <td><?php echo  $dis; ?></td>
+
+                                                        <td><?php echo DateThai($rs->healstart); ?></td>
+                                                        <td><?php echo DateThai($rs->healend); ?></td>
+                                                        <td><?php echo  $doctor; ?></td>
+
+
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
                                             <!-- /.body table -->
-                                           
+
                                         </table>
                                         <!-- /.table -->
                                     </div>
