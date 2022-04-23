@@ -46,12 +46,12 @@ if (empty($result)) {
                     <div class="container col-10">
                         <!-- Manage -->
                         <div class="row ">
-                            <div class="col-lg-5 col-md-12">
+                            <div class="col-lg-4 col-md-12">
                                 <div class="card card-info shadow">
                                     <div class="card-header">
-                                        <h3 class="text-center"><i class="fa fa-shield-virus"></i> เพิ่มข้อมูลโรค/อาการป่วย</h3>
+                                        <h3 class="text-center"><i class="fa fa-plus-circle"></i> เพิ่มข้อมูลโรค/อาการป่วย</h3>
                                     </div>
-                                    <form method="POST" id="frm_data">
+                                    <form method="POST" id="frm_dis">
                                         <div class="card-body">
 
                                             <div class="form-group row ">
@@ -76,7 +76,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="disease_more">อื่นๆ :</label>
                                                     <div class="col-md">
-                                                        <input type="text" class="form-control " name="disease_more" id="disease_more" placeholder="โรคอาการป่วย(ถ้าไม่มีให้เลือก)" required="required" title="กรุณาระบุ"></ร>
+                                                        <input type="text" class="form-control " name="disease_more" id="disease_more" placeholder="ระบุโรคอาการป่วย(ถ้าไม่มีให้เลือก)" title="กรุณาระบุ"></ร>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,53 +84,60 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="disease_date">วันทีเริ่มแสดงอาการ :</label>
                                                     <div class="col-md">
-                                                        <input type="date" class="form-control " name="disease_date" id="disease_date" placeholder="โรคอาการป่วย(ถ้าไม่มีให้เลือก)" required="required" title="กรุณาระบุ"></ร>
+                                                        <input type="date" class="form-control " name="disease_date" id="disease_date" title="กรุณาระบุ" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h3 class="text-center col p-0 m-0"> <i class="fa fa-briefcase-medical"></i> การรักษา</h3>
+                                            <hr>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="docid">สัตวแพทย์ : </label>
+                                                    <div class="col-md">
+                                                        <select class="form-control select2" name="docid" id="docid" data-placeholder="เลือกสัตวแพทย์" required="required" title="กรุณาเลือก">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="healstart">วันที่เริ่มรักษา :</label>
+                                                    <div class="col-md">
+                                                        <input type="date" class="form-control" name="healstart" id="healstart" required title="ระบุวันที่เริ่มรักษา">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="healend">วันที่สิ้นสุดการรักษา :</label>
+                                                    <div class="col-md">
+                                                        <input type="date" class="form-control" name="healend" id="healend" required title="ระบุวันที่สิ้นสุดการรักษา">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="detail">รายละเอียดการรักษา :</label>
+                                                    <div class="col-md">
+                                                        <textarea type="text" class="form-control" name="detail" id="detail" placeholder="รายละเอียดการรักษา" title="รายละเอียดการรักษา"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer text-end">
-                                            <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
-                                            <button type="submit" id="btn" class="btn btn-info submit">ยืนยันการเพิ่มข้อมูล</button>
+                                            <button type="reset" class="btn  btn-secondary reset_dis">ยกเลิก</button>
+                                            <button type="submit" id="btn" class="btn btn-info submit_dis">ยืนยันการเพิ่มข้อมูล</button>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
-                                <div class="card card-green shadow">
-                                    <div class="card-header">
-                                        <h3 class="text-center"> <i class="fa fa-briefcase-medical"></i> การรักษา</h3>
-                                    </div>
-                                    <form method="POST" id="frm_data">
-                                        <div class="card-body">
-                                            <div class="form-group row ">
-                                                <div class=" input-group">
-                                                    <label class=" col-form-label" for="docname">ชื่อสัตวแพทย์ : </label>
-                                                    <div class="col-md">
-                                                        <input type="text" class="form-control" onkeypress="not_number(event)" name="docname" id="docname" placeholder="ชื่อ - นามสกุล" required="required" title="ชื่อ - นามสกุล">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row ">
-                                                <div class=" input-group">
-                                                    <label class=" col-form-label" for="phone">เบอร์โทรศัพท์ :</label>
-                                                    <div class="col-md">
-                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="เบอร์โทร">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer text-end">
-                                            <button type="reset" class="btn  btn-secondary reset">ยกเลิก</button>
-                                            <button type="submit" id="btn" class="btn btn-info submit">ยืนยันการเพิ่มข้อมูล</button>
-                                        </div>
-                                    </form>
-                                </div>
+                               
                             </div>
 
-                            <div class="col-lg-7 col-md-12">
+                            <div class="col-lg-8 col-md-12">
                                 <div class="card card-warning shadow">
                                     <div class="card-header ">
                                         <h3 class="text-center"><i class="fa fa-virus"></i> โรค อาการป่วย / การรักษา</h3>
@@ -148,8 +155,12 @@ if (empty($result)) {
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>ชื่อสัตวแพทย์</th>
-                                                            <th>เบอร์โทรติดต่อ</th>
+                                                            <th>ชื่อโค</th>
+                                                            <th>โรค / อาการป่วย</th>
+                                                            <th>วันทีเริ่มแสดงอาการ</th>
+                                                            <th>วันที่เริ่มรักษา</th>
+                                                            <th>วันที่สิ้นสุดการรักษา</th>
+                                                            <th>รักษากับสัตวแพยท์</th>
                                                             <th>แก้ไข / ลบข้อมูล</th>
                                                         </tr>
                                                     </thead>
@@ -163,8 +174,12 @@ if (empty($result)) {
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
-                                                                <td><?php echo $rs->name; ?></td>
-                                                                <td><?php echo $rs->phone; ?></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -207,22 +222,36 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-    <script src="../../dist/js/phone.js"></script>
+    <!-- <script src="../../dist/js/phone.js"></script> -->
     <script src="../../dist/js/datatable.js"></script>
-    <script src="../../dist/js/numlock.js"></script>
+    <!-- <script src="../../dist/js/numlock.js"></script> -->
     <script>
         $(document).ready(function() {
+
+            $(document).on('click', '.reset_dis', function(e) {
+                e.preventDefault();
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการเพิ่มข้อมูล');
+                $('#btn').addClass('btn btn-info submit_dis');
+                $('#frm_dis')[0].reset();
+                $('#cowid').val(0).trigger("change");
+                $('#disease').val(0).trigger("change");
+                $('#docid').val(0).trigger("change");
+
+
+            });
+           
 
             $.ajax({
                 type: 'get',
                 dataType: 'json',
-                url: '../process/_disease.php',
+                url: '../process/_heal.php',
                 data: {
                     function: 'showcow',
-                    farmid:'<?php echo $_SESSION['farm_id'];?>',
+                    farmid: '<?php echo $_SESSION['farm_id']; ?>',
                 },
                 success: function(result) {
-                    var data = '<option   selected disabled>---กรุณาเลือกโค--</option>';
+                    var data = '<option  value="" selected disabled>---กรุณาเลือกโค--</option>';
                     for (i in result) {
                         data += '<option value="' + result[i].id + '">' + result[i].cowname + '</option>'
                     }
@@ -232,7 +261,7 @@ if (empty($result)) {
             $.ajax({
                 type: 'get',
                 dataType: 'json',
-                url: '../process/_disease.php',
+                url: '../process/_heal.php',
                 data: {
                     function: 'showdisease',
                 },
@@ -243,6 +272,24 @@ if (empty($result)) {
                         data += '<option value="' + result[i].id + '">' + result[i].detail + '</option>'
                     }
                     $('#disease').html(data);
+                }
+            });
+
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                url: '../process/_heal.php',
+                data: {
+                    function: 'showdoctor',
+                    farmid: '<?php echo $_SESSION['farm_id']; ?>',
+                },
+                success: function(result) {
+                    var data = '<option  value="0" selected disabled>---กรุณาเลือกสัตวแพทย์--</option>';
+                    for (i in result) {
+                        //  data += '<option value="0">ไม่มีข้อมูลโรคหรืออาการป่วยที่ต้องการ</option>';
+                        data += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
+                    }
+                    $('#docid').html(data);
                 }
             });
         })

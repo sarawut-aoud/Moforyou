@@ -442,7 +442,7 @@ class cow extends Database
         //IF (c.gender = 1 ,'ตัวผู้','ตัวเมีย' ) as gender
         if ($id == 'count') {
             $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
-        } else  {
+        } else {
             $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date, c.cow_pic, c.gender as gender
     
             FROM tbl_cow AS c 
@@ -475,7 +475,7 @@ class cow extends Database
 
         return $sel;
     }
-    
+
     public function datecow($farm_id)
     {
         $func = mysqli_query($this->dbcon, "SELECT c.id,DATE_FORMAT(DATE_ADD(c.cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date_add , DATE_FORMAT(c.cow_date,'%Y-%m-%d') as cow_date 
@@ -644,6 +644,87 @@ class disease extends Database
     }
     // select by admin
     public function select_disease($id)
+    {
+        if (empty($id)) {
+            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease ");
+        } else {
+            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease  WHERE id = '$id' ");
+        }
+        return $sel;
+    }
+}
+class heal extends Database
+{
+    public function insert_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $farm_id)
+    {
+        if (empty($docid) && empty($healstart) && empty($healend) && empty($detail)) {
+            $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_heal(cowid,diseaseid,healmore,datestart,farm_id) 
+            VALUES (
+                '$cowid',
+                '$disid',
+                '$dismore',
+                '$datestart',
+                '$farm_id') ");
+        } else {
+            $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_heal(cowid,diseaseid,healmore,datestart,doctor_id,healstart,healend,detail,farm_id) 
+            VALUES (
+                '$cowid',
+                '$disid',
+                '$dismore',
+                '$datestart',
+                '$docid',
+                '$healstart',
+                '$healend',
+                '$detail',
+                '$farm_id') ");
+        }
+        return $ins;
+    }
+    public function update_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $id)
+    {
+        if (empty($docid) && empty($healstart) && empty($healend) && empty($detail)) {
+            $ins = mysqli_query($this->dbcon, "UPDATE tbl_heal 
+            SET(
+                cowid='$cowid',
+                diseaseid='$disid',
+                healmore='$dismore',
+                datestart='$datestart'
+                ) 
+            WHERE id = '$id' ");
+        } else {
+            $ins = mysqli_query($this->dbcon, "UPDATE tbl_heal 
+            SET(
+                cowid='$cowid',
+                diseaseid='$disid',
+                healmore='$dismore',
+                datestart='$datestart'
+                doctor_id='$docid',
+                healstart='$healstart',
+                healend='$healend',
+                deatil='$detail'
+                ) 
+            WHERE id = '$id'");
+        }
+        return $ins;
+    }
+    public function delete_heal($id)
+    {
+        $del = mysqli_query($this->dbcon, "DELETE FROM tbl_heal WHERE id = '$id' ");
+        return $del;
+    }
+    public function select_heal($id)
+    {
+        if (empty($id)) {
+            $sel = mysqli_query($this->dbcon, "SELECT h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farm_name 
+            FROM tbl_heal AS h 
+            INNER JOIN tbl_farm AS f ON(h.farm_id = f.id)
+           ");
+        } else {
+            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease  WHERE id = '$id' ");
+        }
+        return $sel;
+    }
+    public function select_healbyfarm($farmid)
     {
         if (empty($id)) {
             $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease ");

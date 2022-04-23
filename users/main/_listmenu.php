@@ -63,10 +63,10 @@ if (empty($result)) {
                                                 <a class="btn btn-lg bt_list-2 shadow" href="../listmenu/_tabbreed" role="button">ผสมพันธุ์</a>
                                             </li>
                                             <li class="nav-item  col-md-6 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2 shadow" href="#tab-farm" role="button">อาหารโคเนื้อ</a>
+                                                <a class="btn btn-lg bt_list-2 shadow" href="../listmenu/_tabfood" role="button">อาหารโคเนื้อ</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabdisease" role="button">โรค/อาการป่วย/การรักษา</a>
+                                                <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabheal" role="button">โรค/อาการป่วย/การรักษา</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ให้อาหาร</a>

@@ -152,6 +152,12 @@
   background: linear-gradient(180deg, rgba(199, 122, 0, 1) 42%, rgba(255, 226, 122, 1) 100%);
   color: #fff;
 }
+.card-food {
+ background: rgb(219,255,89);
+background: linear-gradient(0deg, rgba(219,255,89,1) 0%, rgba(76,255,67,1) 100%);
+
+
+}
 
 .btn-cow {
   background-color: #c36800;
