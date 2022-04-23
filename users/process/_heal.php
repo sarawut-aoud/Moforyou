@@ -60,7 +60,7 @@ if (isset($func) && $func == 'insert') {
     $healend = $_POST['healend'];
     $detail = $_POST['detail'];
     $farm_id = $_POST['farmid'];
-    if (empty($cowid) || empty($disid) || empty($dismore) || empty($datestart)) {
+    if (empty($cowid) || empty($disid) || empty($datestart)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
     } else {
         $query = $sql->insert_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $farm_id);
@@ -109,9 +109,14 @@ if (isset($func) && $func == 'update') {
     $healstart = $_POST['healstart'];
     $healend = $_POST['healend'];
     $detail = $_POST['detail'];
-    if (empty($id) || empty($cowid) || empty($disid) || empty($dismore) || empty($datestart)) {
+
+    if($datestart <= $healend ||  $datestart > $healstart ){
+        $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถแก้ไขได้");
+    }
+    else if (empty($id) || empty($cowid) || empty($disid)  || empty($datestart)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถแก้ไขได้");
     } else {
+         
         $query = $sql->update_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $id);
         $msg = array(
             "status" => 200,

@@ -48,7 +48,7 @@ if (empty($result)) {
                         <div class="row mb-4 mt-4 justify-content-beetween ">
 
                             <div class="col-md-12">
-                                <button class="btn btn-info col-3 btn-lg float-end""  onclick=" window.history.go(-1);"><i class="fas fa-arrow-alt-left"></i></button>
+                                <button class="btn btn-info col-3 btn-lg float-end""  onclick=" window.history.go(-1);"><i class="fa fa-arrow-alt-left"></i></button>
                             </div>
                         </div>
                         <div class="row  mb-5">

@@ -55,7 +55,7 @@ if (empty($result)) {
                             <div class="col-md-12">
                                 <div class="card  ">
                                     <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรค / อาการป่วย</h3>
+                                        <h3 class=" text-center">ประวัติการรักษา</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -68,7 +68,6 @@ if (empty($result)) {
                                                     <th>#</th>
                                                     <th>ชื่อโค</th>
                                                     <th>โรคหรืออาการป่วย</th>
-                                                    <th>เริ่มแสดงอาการวันที่</th>
                                                 </tr>
 
                                             </thead>
@@ -91,8 +90,6 @@ if (empty($result)) {
                                                         <td style="width: 10%;"><?php echo $rs->id; ?></td>
                                                         <td style="width: 30%;"><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $dis; ?></td>
-                                                        <td style="width: 30%;"><?php echo $rs->datestart; ?></td>
-
                                                         <!--  -->
                                                     </tr>
                                                 <?php } ?>

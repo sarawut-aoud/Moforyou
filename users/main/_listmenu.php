@@ -104,21 +104,19 @@ if (empty($result)) {
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-1 shadow" href="../report/req-cow" role="button">โคเนื้อ</a>
                                             </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                            <li class="nav-item  col-md-6 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-2 shadow" href="../report/req-breed" role="button">ผสมพันธุ์</a>
                                             </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                            <li class="nav-item  col-md-6 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list-2 shadow" href="../report/req-disease" role="button">โรค/อาการป่วย</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list-2 shadow" href="#" role="button">การเจริญเติบโต</a>
+                                                <a class="btn btn-lg bt_list shadow" href="../report/req-heal.php" role="button">ประวัติการรักษา</a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
                                                 <a class="btn btn-lg bt_list shadow" href="#" role="button">ประวัติการให้อาหาร</a>
                                             </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="#tab-farm" role="button">ประวัติการรักษา</a>
-                                            </li>
+
                                         </ul>
                                         <!--/. list Manage -->
                                     </div>

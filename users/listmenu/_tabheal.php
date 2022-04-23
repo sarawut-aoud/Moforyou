@@ -95,7 +95,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="docid">สัตวแพทย์ : </label>
                                                     <div class="col-md">
-                                                        <select class="form-control select2" name="docid" id="docid" data-placeholder="เลือกสัตวแพทย์" required="required" title="กรุณาเลือก">
+                                                        <select class="form-control select2" name="docid" id="docid" data-placeholder="เลือกสัตวแพทย์" title="กรุณาเลือก">
 
                                                         </select>
                                                     </div>
@@ -105,7 +105,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="healstart">วันที่เริ่มรักษา :</label>
                                                     <div class="col-md">
-                                                        <input type="date" class="form-control" name="healstart" id="healstart" required title="ระบุวันที่เริ่มรักษา">
+                                                        <input type="date" class="form-control" name="healstart" id="healstart" title="ระบุวันที่เริ่มรักษา">
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="healend">วันที่สิ้นสุดการรักษา :</label>
                                                     <div class="col-md">
-                                                        <input type="date" class="form-control" name="healend" id="healend" required title="ระบุวันที่สิ้นสุดการรักษา">
+                                                        <input type="date" class="form-control" name="healend" id="healend" title="ระบุวันที่สิ้นสุดการรักษา">
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,15 +171,35 @@ if (empty($result)) {
                                                         $data = new heal();
                                                         $row = $data->select_healbyfarm($farmid);
                                                         while ($rs = $row->fetch_object()) {
+                                                            if ($rs->detail != NULL && $rs->healmore != NULL) {
+                                                                $dis = $rs->detail . ' และ ' . $rs->healmore;
+                                                            } else if ($rs->detail == NULL) {
+                                                                $dis = $rs->healmore;
+                                                            } else {
+                                                                $dis = $rs->detail;
+                                                            }
+                                                            if ($rs->doctor_id != NULL) {
+                                                                $data = new doctor();
+                                                                $row = $data->select_docbyfarm($farmid);
+                                                                while ($rsdoc = $row->fetch_object()) {
+                                                                    if ($rsdoc->id == $rs->doctor_id) {
+                                                                        $doctor = $rsdoc->name;
+                                                                    }else{
+                                                                        $doctor = '';
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                $doctor = '';
+                                                            }
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
+                                                                <td><?php echo $rs->cow_name; ?></td>
+                                                                <td><?php echo  $dis; ?></td>
+                                                                <td><?php echo $rs->datestart; ?></td>
+                                                                <td><?php echo $rs->healstart; ?></td>
+                                                                <td><?php echo $rs->healend; ?></td>
+                                                                <td><?php echo  $doctor; ?></td>
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -382,13 +402,13 @@ if (empty($result)) {
                                 function: 'showcow',
                                 farmid: farmid,
                             },
-                            success: function(result) {
+                            success: function(results) {
                                 var data = '';
-                                for (i in result) {
-                                    if (result[i].id == result.cow_id) {
-                                        data += '<option value="' + result[i].id + '" selected >' + result[i].cowname + '</option>'
+                                for (i in results) {
+                                    if (results[i].id == result.cow_id) {
+                                        data += '<option value="' + results[i].id + '" selected >' + results[i].cowname + '</option>'
                                     } else {
-                                        data += '<option value="' + result[i].id + '">' + result[i].cowname + '</option>'
+                                        data += '<option value="' + results[i].id + '">' + results[i].cowname + '</option>'
                                     }
                                 }
                                 $('#cowid').html(data);
@@ -401,13 +421,13 @@ if (empty($result)) {
                             data: {
                                 function: 'showdisease',
                             },
-                            success: function(result) {
+                            success: function(results) {
                                 var data = '';
-                                for (i in result) {
-                                    if (result[i].id == result.dis_id) {
-                                        data += '<option value="' + result[i].id + '" selected >' + result[i].detail + '</option>'
+                                for (i in results) {
+                                    if (results[i].id == result.dis_id) {
+                                        data += '<option value="' + results[i].id + '" selected >' + results[i].detail + '</option>'
                                     } else {
-                                        data += '<option value="' + result[i].id + '">' + result[i].detail + '</option>'
+                                        data += '<option value="' + results[i].id + '">' + results[i].detail + '</option>'
                                     }
                                 }
                                 $('#disease').html(data);
@@ -422,13 +442,15 @@ if (empty($result)) {
                                 function: 'showdoctor',
                                 farmid: farmid,
                             },
-                            success: function(result) {
+                            success: function(results) {
                                 var data = '';
-                                for (i in result) {
-                                    if (result[i].id == result.doc_id) {
-                                        data += '<option value="' + result[i].id + '" selected >' + result[i].name + '</option>'
+                                
+                                for (i in results) {
+                                    if (results[i].id == result.doc_id) {
+                                        data += '<option value="' + results[i].id + '" selected >' + results[i].name + '</option>'
                                     } else {
-                                        data += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
+                                        data += '<option  value="0" selected disabled>---กรุณาเลือกสัตวแพทย์--</option>';
+                                        data += '<option value="' + results[i].id + '">' + results[i].name + '</option>'
                                     }
                                 }
                                 $('#docid').html(data);
@@ -463,29 +485,29 @@ if (empty($result)) {
                                     detail: detail,
                                 },
                                 success: function(result) {
-                                    if (result.status == 200) {
-                                        toastr.success(
-                                            result.message,
-                                            '', {
-                                                timeOut: 1000,
-                                                fadeOut: 1000,
-                                                onHidden: function() {
-                                                    location.reload();
-                                                }
-                                            }
-                                        );
-                                    } else {
-                                        toastr.warning(
-                                            result.message,
-                                            '', {
-                                                timeOut: 1000,
-                                                fadeOut: 1000,
-                                                onHidden: function() {
-                                                    location.reload();
-                                                }
-                                            }
-                                        );
-                                    }
+                                    // if (result.status == 200) {
+                                    //     toastr.success(
+                                    //         result.message,
+                                    //         '', {
+                                    //             timeOut: 1000,
+                                    //             fadeOut: 1000,
+                                    //             onHidden: function() {
+                                    //                 location.reload();
+                                    //             }
+                                    //         }
+                                    //     );
+                                    // } else {
+                                    //     toastr.warning(
+                                    //         result.message,
+                                    //         '', {
+                                    //             timeOut: 1000,
+                                    //             fadeOut: 1000,
+                                    //             onHidden: function() {
+                                    //                 location.reload();
+                                    //             }
+                                    //         }
+                                    //     );
+                                    // }
                                 } // end success update
                             }); // end ajax btnsave
                         }) // end btn save

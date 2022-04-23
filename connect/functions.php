@@ -682,30 +682,26 @@ class heal extends Database
     }
     public function update_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $id)
     {
-        if (empty($docid) && empty($healstart) && empty($healend) && empty($detail)) {
-            $ins = mysqli_query($this->dbcon, "UPDATE tbl_heal 
-            SET(
-                cowid='$cowid',
+        if (empty($docid) && empty($healstart) && empty($healend)) {
+            $upd = mysqli_query($this->dbcon, "UPDATE tbl_heal 
+            SET cowid='$cowid',
                 diseaseid='$disid',
                 healmore='$dismore',
-                datestart='$datestart'
-                ) 
+                datestart='$datestart'   
             WHERE id = '$id' ");
         } else {
-            $ins = mysqli_query($this->dbcon, "UPDATE tbl_heal 
-            SET(
-                cowid='$cowid',
+            $upd = mysqli_query($this->dbcon, "UPDATE tbl_heal 
+            SET cowid='$cowid',
                 diseaseid='$disid',
                 healmore='$dismore',
-                datestart='$datestart'
-                doctor_id='$docid',
-                healstart='$healstart',
-                healend='$healend',
-                deatil='$detail'
-                ) 
+                datestart='$datestart',
+                doctor_id= '$docid',
+                healstart= '$healstart',
+                healend= '$healend',
+                detail='$detail' 
             WHERE id = '$id'");
         }
-        return $ins;
+        return $upd;
     }
     public function delete_heal($id)
     {
@@ -730,9 +726,13 @@ class heal extends Database
     }
     public function select_healbyfarm($farmid)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT  h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farmname 
+        $sel = mysqli_query($this->dbcon, "SELECT  h.id,h.healmore,h.datestart,h.healstart,h.healend, h.detail, 
+            f.farmname ,c.cow_name, h.doctor_id ,d.detail
             FROM tbl_heal AS h 
             INNER JOIN tbl_farm AS f ON(h.farm_id = f.id) 
+            INNER JOIN tbl_cow AS c ON(h.cowid = c.id) 
+            INNER JOIN tbl_disease AS d ON(h.diseaseid = d.id) 
+          
             WHERE h.farm_id = '$farmid' ");
         return $sel;
     }
