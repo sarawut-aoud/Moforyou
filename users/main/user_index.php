@@ -231,10 +231,17 @@ if (empty($result)) {
             <!-- /.content-wrapper -->
             <!-- Main Footer -->
             <?php require '../sub/footer.php'; ?>
+            
         </div>
         <!-- ./wrapper -->
         <script>
-            $(document).ready(function() {
+            $(function() {
+
+                /*
+                 * BAR CHART
+                 * ---------
+                 */
+
                 var bar_data = {
                     data: [
                         [1, 10],
@@ -274,8 +281,65 @@ if (empty($result)) {
                     }
                 })
                 /* END BAR CHART */
+
+                /*
+                 * DONUT CHART
+                 * -----------
+                 */
+
+                var donutData = [{
+                        label: 'Series2',
+                        data: 30,
+                        color: '#ffc324'
+                    },
+                    {
+                        label: 'Series3',
+                        data: 20,
+                        color: '#ffda77'
+                    },
+                    {
+                        label: 'Series4',
+                        data: 50,
+                        color: '#ff7900'
+                    }
+                ]
+                $.plot('#donut-chart', donutData, {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 1,
+                            innerRadius: 0.5,
+                            label: {
+                                show: true,
+                                radius: 2 / 3,
+                                formatter: labelFormatter,
+                                threshold: 0.1
+                            }
+
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                })
+                /*
+                 * END DONUT CHART
+                 */
+
             })
+
+            /*
+             * Custom Label formatter
+             * ----------------------
+             */
+            function labelFormatter(label, series) {
+                return '<div style="font-size:16px; text-align:center; padding:4px; color: #fff; font-weight: 600;">' +
+                    label +
+                    '<br>' +
+                    Math.round(series.percent) + '%</div>'
+            }
         </script>
+
 </body>
 
 </html>

@@ -80,6 +80,11 @@
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- Input mask -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.3.0/imask.min.js"></script>
+<script src="../../plugins/flot/jquery.flot.js"></script>
+
+<script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
+
+<script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script>
 
 
 <!-- AdminLTE App -->
@@ -111,28 +116,29 @@
     background-size: cover;
     opacity: 1.2;
   }
+
   @keyframes blinker {
     60% {
-        opacity: 0;
+      opacity: 0;
     }
-}
+  }
 
-@-webkit-keyframes blinker {
+  @-webkit-keyframes blinker {
     from {
-        opacity: 1;
+      opacity: 1;
     }
 
     to {
-        opacity: 0;
+      opacity: 0;
     }
-}
+  }
 
-.blink {
+  .blink {
     animation-name: blinker;
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(0.5, 0, 1, 1);
     animation-duration: 1.2s;
-}
+  }
 </style>
 
 <!-- function datatable  -->
