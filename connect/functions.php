@@ -715,22 +715,25 @@ class heal extends Database
     public function select_heal($id)
     {
         if (empty($id)) {
-            $sel = mysqli_query($this->dbcon, "SELECT h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farm_name 
+            $sel = mysqli_query($this->dbcon, "SELECT h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farmname 
             FROM tbl_heal AS h 
             INNER JOIN tbl_farm AS f ON(h.farm_id = f.id)
            ");
         } else {
-            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease  WHERE id = '$id' ");
+            $sel = mysqli_query($this->dbcon, "SELECT h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farmname 
+            FROM tbl_heal AS h 
+            INNER JOIN tbl_farm AS f ON(h.farm_id = f.id)
+            WHERE h.id = '$id'
+             ");
         }
         return $sel;
     }
     public function select_healbyfarm($farmid)
     {
-        if (empty($id)) {
-            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease ");
-        } else {
-            $sel = mysqli_query($this->dbcon, "SELECT id,detail FROM tbl_disease  WHERE id = '$id' ");
-        }
+        $sel = mysqli_query($this->dbcon, "SELECT  h.id,h.cowid,h.diseaseid,h.healmore,h.datestart,h.doctor_id,h.healstart,h.healend, h.detail, f.farmname 
+            FROM tbl_heal AS h 
+            INNER JOIN tbl_farm AS f ON(h.farm_id = f.id) 
+            WHERE h.farm_id = '$farmid' ");
         return $sel;
     }
 }

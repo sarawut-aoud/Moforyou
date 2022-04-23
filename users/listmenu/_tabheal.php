@@ -134,13 +134,13 @@ if (empty($result)) {
                                     </form>
                                 </div>
                                 <!-- /.card -->
-                               
+
                             </div>
 
                             <div class="col-lg-8 col-md-12">
                                 <div class="card card-warning shadow">
                                     <div class="card-header ">
-                                        <h3 class="text-center"><i class="fa fa-virus"></i> โรค อาการป่วย / การรักษา</h3>
+                                        <h3 class="text-center"> โรค อาการป่วย / การรักษา</h3>
                                     </div>
                                     <!-- /.card-header -->
 
@@ -168,8 +168,8 @@ if (empty($result)) {
                                                     <!-- body table -->
                                                     <tbody>
                                                         <?php
-                                                        $data = new doctor();
-                                                        $row = $data->select_docbyfarm($farmid);
+                                                        $data = new heal();
+                                                        $row = $data->select_healbyfarm($farmid);
                                                         while ($rs = $row->fetch_object()) {
                                                         ?>
                                                             <tr>
@@ -227,7 +227,7 @@ if (empty($result)) {
     <!-- <script src="../../dist/js/numlock.js"></script> -->
     <script>
         $(document).ready(function() {
-
+            var farmid = '<?php echo $_SESSION['farm_id']; ?>';
             $(document).on('click', '.reset_dis', function(e) {
                 e.preventDefault();
                 $('#btn').removeClass();
@@ -240,7 +240,7 @@ if (empty($result)) {
 
 
             });
-           
+
 
             $.ajax({
                 type: 'get',
@@ -248,7 +248,7 @@ if (empty($result)) {
                 url: '../process/_heal.php',
                 data: {
                     function: 'showcow',
-                    farmid: '<?php echo $_SESSION['farm_id']; ?>',
+                    farmid: farmid,
                 },
                 success: function(result) {
                     var data = '<option  value="" selected disabled>---กรุณาเลือกโค--</option>';
@@ -281,7 +281,7 @@ if (empty($result)) {
                 url: '../process/_heal.php',
                 data: {
                     function: 'showdoctor',
-                    farmid: '<?php echo $_SESSION['farm_id']; ?>',
+                    farmid: farmid,
                 },
                 success: function(result) {
                     var data = '<option  value="0" selected disabled>---กรุณาเลือกสัตวแพทย์--</option>';
@@ -292,6 +292,262 @@ if (empty($result)) {
                     $('#docid').html(data);
                 }
             });
+
+            // insert
+            $(document).on('click', '.submit_dis', function(e) {
+                e.preventDefault();
+                var cowid = $('#cowid').val();
+                var dis_id = $('#disease').val();
+                var dismore = $('#disease_more').val();
+                var dis_date = $('#disease_date').val();
+                var doc_id = $('#docid').val();
+                var healstart = $('#healstart').val();
+                var healend = $('#healend').val();
+                var detail = $('#detail').val();
+
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: '../process/_heal.php',
+                    data: {
+                        function: 'insert',
+                        farmid: farmid,
+                        cowid: cowid,
+                        dis_id: dis_id,
+                        dismore: dismore,
+                        dis_date: dis_date,
+                        doc_id: doc_id,
+                        healstart: healstart,
+                        healend: healend,
+                        detail: detail,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                }) // end ajax
+
+            }); // end click submit
+            // update
+            $(document).on('click', '.btnEdit', function(e) {
+                e.preventDefault();
+                $('#btn').removeClass();
+                $('#btn').html('ยืนยันการแก้ไข');
+                $('#btn').addClass('btn btn-success btnsave');
+
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    type: 'get',
+                    dataType: "json",
+                    url: "../process/_heal.php",
+                    data: {
+                        function: 'showdata',
+                        id: id,
+                    },
+                    success: function(result) {
+
+                        var hid = result.id;
+                        $('#disease_more').val(result.healmore);
+                        $('#disease_date').val(result.datestart);
+                        $('#healstart').val(result.healstart);
+                        $('#healend').val(result.healend);
+                        $('#detail').val(result.detail);
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_heal.php',
+                            data: {
+                                function: 'showcow',
+                                farmid: farmid,
+                            },
+                            success: function(result) {
+                                var data = '';
+                                for (i in result) {
+                                    if (result[i].id == result.cow_id) {
+                                        data += '<option value="' + result[i].id + '" selected >' + result[i].cowname + '</option>'
+                                    } else {
+                                        data += '<option value="' + result[i].id + '">' + result[i].cowname + '</option>'
+                                    }
+                                }
+                                $('#cowid').html(data);
+                            }
+                        });
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_heal.php',
+                            data: {
+                                function: 'showdisease',
+                            },
+                            success: function(result) {
+                                var data = '';
+                                for (i in result) {
+                                    if (result[i].id == result.dis_id) {
+                                        data += '<option value="' + result[i].id + '" selected >' + result[i].detail + '</option>'
+                                    } else {
+                                        data += '<option value="' + result[i].id + '">' + result[i].detail + '</option>'
+                                    }
+                                }
+                                $('#disease').html(data);
+                            }
+                        });
+
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_heal.php',
+                            data: {
+                                function: 'showdoctor',
+                                farmid: farmid,
+                            },
+                            success: function(result) {
+                                var data = '';
+                                for (i in result) {
+                                    if (result[i].id == result.doc_id) {
+                                        data += '<option value="' + result[i].id + '" selected >' + result[i].name + '</option>'
+                                    } else {
+                                        data += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
+                                    }
+                                }
+                                $('#docid').html(data);
+                            }
+                        });
+
+                        $(document).on('click', '.btnsave', function(e) {
+                            e.preventDefault();
+                            var cowid = $('#cowid').val();
+                            var dis_id = $('#disease').val();
+                            var dismore = $('#disease_more').val();
+                            var dis_date = $('#disease_date').val();
+                            var doc_id = $('#docid').val();
+                            var healstart = $('#healstart').val();
+                            var healend = $('#healend').val();
+                            var detail = $('#detail').val();
+
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                url: '../process/_heal.php',
+                                data: {
+                                    function: 'update',
+                                    id: id,
+                                    cowid: cowid,
+                                    dis_id: dis_id,
+                                    dismore: dismore,
+                                    dis_date: dis_date,
+                                    doc_id: doc_id,
+                                    healstart: healstart,
+                                    healend: healend,
+                                    detail: detail,
+                                },
+                                success: function(result) {
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
+                                } // end success update
+                            }); // end ajax btnsave
+                        }) // end btn save
+
+                    } // end success
+                }) //end ajax
+            }); //end click edit
+
+            // delete
+            $(document).on('click', '.btnDel', function(e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+
+                var _row = $(this).parent();
+                Swal.fire({
+                    title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                }).then((btn) => {
+                    if (btn.isConfirmed) {
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_heal.php',
+                            data: {
+                                function: 'delete',
+                                id: id,
+                            },
+                            success: function(result) {
+                                if (result.status == 200) {
+                                    toastr.success(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                // location.reload();
+                                                _row.closest('tr').remove();
+                                            }
+                                        }
+                                    );
+                                } else {
+                                    toastr.warning(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        });
+                    }
+                })
+            }); // end btnDel
         })
     </script>
 </body>
