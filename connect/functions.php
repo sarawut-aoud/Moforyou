@@ -620,6 +620,43 @@ class doctor extends Database
 // Food
 class food extends Database
 {
+    public function insert_food($name,$farm_id)
+    {
+        $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_food(name,farm_id) VALUES ('$name','$farm_id') ");
+        return $ins;
+    }
+
+    public function update_food($name, $id)
+    {
+        $upd = mysqli_query($this->dbcon, "UPDATE  tbl_food SET name = '$name' WHERE id = '$id' ");
+        return $upd;
+    }
+
+    public function delete_food($id)
+    {
+        $del = mysqli_query($this->dbcon, "DELETE FROM tbl_food WHERE id = '$id' ");
+        return $del;
+    }
+
+    public function select_food($id)
+    {
+        if (empty($id)) {
+            $sel = mysqli_query($this->dbcon, "SELECT id,name FROM tbl_food ");
+        } else {
+            $sel = mysqli_query($this->dbcon, "SELECT id,name FROM tbl_food  WHERE id = '$id' ");
+        }
+        return $sel;
+    }
+
+    public function select_food2($farm_id)
+    {
+        if (empty($farm_id)) {
+            $sel = mysqli_query($this->dbcon, "SELECT id,name FROM tbl_food ");
+        } else {
+            $sel = mysqli_query($this->dbcon, "SELECT id,name FROM tbl_food  WHERE farm_id = '$farm_id' ");
+        }
+        return $sel;
+    }
 }
 // Disease
 class disease extends Database

@@ -101,14 +101,14 @@ if (empty($result)) {
                                                     <!-- body table -->
                                                     <tbody>
                                                         <?php
-                                                        $data = new doctor();
-                                                        $row = $data->select_docbyfarm($farmid);
+                                                        $data = new food();
+                                                        $row = $data->select_food2($farmid);
                                                         while ($rs = $row->fetch_object()) {
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
                                                                 <td><?php echo $rs->name; ?></td>
-                                                                <td><?php echo $rs->phone; ?></td>
+                                                                
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -187,16 +187,16 @@ if (empty($result)) {
             
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
-                var name = $('#docname').val();
-                var phone = $('#phone').val();
+                var name = $('#foodname').val();
+                
                 $.ajax({
                     type: "post",
                     dataType: "json",
-                    url: '../process/_doctor.php',
+                    url: '../process/_food.php',
                     data: {
                         function: "insert",
-                        docname: name,
-                        phone: phone,
+                        
+                        name: name,
                         farm_id: farm_id,
                     },
                     success: function(result) {
@@ -239,32 +239,32 @@ if (empty($result)) {
                 $.ajax({
                     type: "get",
                     dataType: "json",
-                    url: '../process/_doctor.php',
+                    url: '../process/_food.php',
                     data: {
-                        function: "showdata",
+                        function: "show",
                         id: id,
                     },
                     success: function(result) {
-                        $('#docname').val(result.name);
-                        $('#phone').val(result.phone);
+                        $('#foodname').val(result.name);
+                        
 
-                        var docid = result.id;
+                        var foodid = result.id;
 
 
                         /// update ข้อมูล
                         $(document).on('click', '.btnsave', function(e) {
                             e.preventDefault();
-                            var name = $('#docname').val();
-                            var phone = $('#phone').val();
+                            var name = $('#foodname').val();
+                            
                             $.ajax({
                                 type: "post",
                                 dataType: "json",
-                                url: '../process/_doctor.php',
+                                url: '../process/_food.php',
                                 data: {
-                                    function: "update",
-                                    docname: name,
-                                    phone: phone,
-                                    docid: docid,
+                                    function: "edit",
+                                    name: name,
+                                    
+                                    foodid: foodid,
                                 },
                                 success: function(result) {
                                     if (result.status == 200) {
@@ -319,10 +319,11 @@ if (empty($result)) {
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
-                            url: '../process/_doctor.php',
+                            url: '../process/_food.php',
                             data: {
                                 function: 'delete',
-                                id: id,
+                                //foodid ของหน้าprosess id อยู่ตรงหน้านี้ คือ var id
+                                foodid: id,
                             },
                             success: function(result) {
                                 if (result.status == 200) {
