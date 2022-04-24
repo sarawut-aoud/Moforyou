@@ -155,6 +155,7 @@ if (empty($result)) {
     <script src="../../dist/js/numlock.js"></script>
     <script>
         $(document).ready(function() {
+            // btn reset
             $(document).on('click', '.reset', function(e) {
                 e.preventDefault();
                 $('#btn').removeClass();
@@ -183,6 +184,7 @@ if (empty($result)) {
 
             var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
 
+            
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
                 var name = $('#docname').val();
