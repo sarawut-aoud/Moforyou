@@ -620,7 +620,7 @@ class doctor extends Database
 // Food
 class food extends Database
 {
-    public function insert_food($name,$farm_id)
+    public function insert_food($name, $farm_id)
     {
         $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_food(name,farm_id) VALUES ('$name','$farm_id') ");
         return $ins;
@@ -770,6 +770,74 @@ class heal extends Database
             INNER JOIN tbl_cow AS c ON(h.cowid = c.id) 
             INNER JOIN tbl_disease AS d ON(h.diseaseid = d.id) 
             WHERE h.farm_id = '$farmid' ");
+        return $sel;
+    }
+}
+class recordfood extends Database
+{
+    public function insert_record($date, $wei_food, $sumwei_food, $wei_cow, $cowid, $foodid, $farm_id)
+    {
+        $ins = mysqli_query($this->dbcon, "INSERT INTO tbl_foodrecord(date,weight_food,sumweight_food,weight_cow,cow_id,food_id,farm_id)
+        VALUES (
+            '$date',
+            '$wei_food',
+            '$sumwei_food',
+            '$wei_cow',
+            '$cowid',
+            '$foodid',
+            '$farm_id'
+        )
+        ");
+        return $ins;
+    }
+    public function update_record($date, $wei_food, $sumwei_food, $wei_cow, $cowid, $foodid, $id)
+    {
+        $upd = mysqli_query($this->dbcon, "UPDATE tbl_foodrecord 
+            SET date = '$date',
+                weight_food='$wei_food',
+                sumweight_food='$sumwei_food',
+                weight_cow='$wei_cow',
+                cow_id ='$cowid',
+                food_id='$foodid'
+            WHERE id= '$id'
+        ");
+        return $upd;
+    }
+    public function delete_record($id)
+    {
+        $del = mysqli_query($this->dbcon, "DELETE FROM tbl_foodrecord WHERE id = '$id'");
+        return $del;
+    }
+    public function select_sumrecordbyfarm($farm_id,$cow_id)
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT sumweight_food AS sumweight FROM tbl_foodrecord
+        WHERE farm_id = '$farm_id' AND cow_id = '$cow_id'
+        ORDER BY sumweight_food DESC
+        LIMIT 1;
+            
+        ");
+        return $sel;
+    }
+    public function select_recordbyfarm($farm_id)
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT fr.id,fr.date,fr.weight_food,fr.sumweight_food,fr.weight_cow,fr.cow_id,fr.food_id 
+           , c.cow_name , f.name as foodname
+            FROM tbl_foodrecord as fr
+            INNER JOIN tbl_cow AS c  ON(fr.cow_id = c.id)
+            INNER JOIN tbl_food AS f ON (fr.food_id = f.id)
+            WHERE fr.farm_id = '$farm_id'
+        ");
+        return $sel;
+    }
+    public function select_record($id)
+    {
+        $sel = mysqli_query($this->dbcon, "SELECT fr.id,fr.date,fr.weight_food,fr.sumweight_food,fr.weight_cow,fr.cow_id,fr.food_id 
+           , c.cow_name , f.name as foodname
+            FROM tbl_foodrecord as fr
+            INNER JOIN tbl_cow AS c  ON(fr.cow_id = c.id)
+            INNER JOIN tbl_food AS f ON (fr.food_id = f.id)
+            WHERE fr.id = '$id'
+        ");
         return $sel;
     }
 }
