@@ -808,7 +808,7 @@ class recordfood extends Database
         $del = mysqli_query($this->dbcon, "DELETE FROM tbl_foodrecord WHERE id = '$id'");
         return $del;
     }
-    public function select_sumrecordbyfarm($farm_id,$cow_id)
+    public function select_sumrecordbyfarm($farm_id, $cow_id)
     {
         $sel = mysqli_query($this->dbcon, "SELECT sumweight_food AS sumweight FROM tbl_foodrecord
         WHERE farm_id = '$farm_id' AND cow_id = '$cow_id'
@@ -817,6 +817,11 @@ class recordfood extends Database
             
         ");
         return $sel;
+    }
+    public function alterrecord()
+    {
+        $alter = mysqli_query($this->dbcon, "ALTER TABLE tbl_foodrecord AUTO_INCREMENT = 1");
+        return $alter;
     }
     public function select_recordbyfarm($farm_id)
     {

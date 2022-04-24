@@ -84,6 +84,36 @@ if (isset($func) && $func == 'showdata') {
     http_response_code(200);
 }
 if (isset($func) && $func == 'update') {
+    $foodid = $_POST['foodid'];
+    $wei_food = $_POST['foodweight'];
+    $wei_cow = $_POST['cow_weight'];
+    $cowid = $_POST['cowid'];
+    $date = $_POST['date'];
+    $farm_id = $_POST['farm_id'];
+    $racordid = $_POST['racordid'];
+    if (empty($foodid) || empty($wei_food) || empty($wei_cow) || empty($cowid) || empty($farm_id) || empty($date)) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'ไม่สามารถบันทึกข้อมูลได้',
+        );
+    } else {
+        $querysum = $sql->select_sumrecordbyfarm($farm_id, $cowid);
+        $sum = $querysum->fetch_object();
+        if ($sum->sumweight == null) {
+            $sumwei_food = 0 + $wei_food;
+        } else {
+            $sumwei_food = $sum->sumweight + $wei_food;
+        }
+        $query = $sql->delete_record($racordid);
+        $query = $sql->alterrecord();
+        $query = $sql->insert_record($date, $wei_food, $sumwei_food, $wei_cow, $cowid, $foodid, $farm_id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'บันทึกข้อมูลสำเร็จ',
+        );
+    }
+    echo json_encode($msg);
+    http_response_code(200);
 }
 if (isset($func) && $func == 'delete') {
     $id = $_GET['id'];

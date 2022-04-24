@@ -130,6 +130,7 @@ if (empty($result)) {
                                                             <th>รายการอาหาร</th>
                                                             <th>วันที่ให้อาหาร</th>
                                                             <th>น้ำหนักอาหาร</th>
+                                                            <th>น้ำหนักอาหาร(รวม)</th>
                                                             <th>แก้ไข / ลบข้อมูล</th>
                                                         </tr>
                                                     </thead>
@@ -163,6 +164,7 @@ if (empty($result)) {
                                                                 <td><?php echo $rs->foodname; ?></td>
                                                                 <td><?php echo DateThai($rs->date); ?></td>
                                                                 <td><?php echo $rs->weight_food; ?></td>
+                                                                <td><?php echo $rs->sumweight_food; ?></td>
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -412,7 +414,8 @@ if (empty($result)) {
                                     cowid: cowid,
                                     cow_weight: cow_weight,
                                     date: date,
-                                    foodid: foodid,
+                                    farm_id: farm_id,
+                                    racordid:racordid,
                                 },
                                 success: function(result) {
                                     if (result.status == 200) {
