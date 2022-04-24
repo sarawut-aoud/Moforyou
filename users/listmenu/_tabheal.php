@@ -113,7 +113,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="healend">วันที่สิ้นสุดการรักษา :</label>
                                                     <div class="col-md">
-                                                        <input type="date" class="form-control" name="healend" id="healend" title="ระบุวันที่สิ้นสุดการรักษา">
+                                                        <input type="date" class="form-control"  name="healend" id="healend" title="ระบุวันที่สิ้นสุดการรักษา">
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,9 +168,25 @@ if (empty($result)) {
                                                     <!-- body table -->
                                                     <tbody>
                                                         <?php
+                                                        function DateThai($strDate)
+                                                        {
+                                                            $strYear = date("Y", strtotime($strDate)) + 543;
+                                                            $strMonth = date("n", strtotime($strDate));
+                                                            $strDay = date("j", strtotime($strDate));
+                                                            $strHour = date("H", strtotime($strDate));
+                                                            $strMinute = date("i", strtotime($strDate));
+                                                            $strSeconds = date("s", strtotime($strDate));
+                                                            $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                            $strMonthThai = $strMonthCut[$strMonth];
+                                                            if ($strHour == '00' && $strMinute == '00') {
+                                                                return "$strDay $strMonthThai $strYear   ";
+                                                            } else {
+                                                                return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                            }
+                                                        }
                                                         $data = new heal();
-                                                        $row = $data->select_healbyfarm($farmid);
-                                                        while ($rs = $row->fetch_object()) {
+                                                        $query = $data->select_healbyfarm($farmid);
+                                                        while ($rs = $query->fetch_object()) {
                                                             if ($rs->detail != NULL && $rs->healmore != NULL) {
                                                                 $dis = $rs->detail . ' และ ' . $rs->healmore;
                                                             } else if ($rs->detail == NULL) {
@@ -179,9 +195,9 @@ if (empty($result)) {
                                                                 $dis = $rs->detail;
                                                             }
                                                             if ($rs->doctor_id != NULL) {
-                                                                $data = new doctor();
-                                                                $row = $data->select_docbyfarm($farmid);
-                                                                while ($rsdoc = $row->fetch_object()) {
+                                                                $data2 = new doctor();
+                                                                $query2 = $data2->select_docbyfarm($farmid);
+                                                                while ($rsdoc = $query2->fetch_object()) {
                                                                     if ($rsdoc->id == $rs->doctor_id) {
                                                                         $doctor = $rsdoc->name;
                                                                     } else {
@@ -191,21 +207,12 @@ if (empty($result)) {
                                                             } else {
                                                                 $doctor = '';
                                                             }
-                                                            function DateThai($strDate)
-                                                            {
-                                                                $strYear = date("Y", strtotime($strDate)) + 543;
-                                                                $strMonth = date("n", strtotime($strDate));
-                                                                $strDay = date("j", strtotime($strDate));
-                                                                $strHour = date("H", strtotime($strDate));
-                                                                $strMinute = date("i", strtotime($strDate));
-                                                                $strSeconds = date("s", strtotime($strDate));
-                                                                $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                                $strMonthThai = $strMonthCut[$strMonth];
-                                                                if ($strHour == '00' && $strMinute == '00') {
-                                                                    return "$strDay $strMonthThai $strYear   ";
-                                                                } else {
-                                                                    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                                }
+                                                            if($rs->healstart ==NULL && $rs->healend ==NULL){
+                                                                 $startheal='';
+                                                                 $endheal='';
+                                                            }else{
+                                                                $startheal=DateThai($rs->healstart);
+                                                                $endheal=DateThai($rs->healend);
                                                             }
 
                                                         ?>
@@ -214,8 +221,8 @@ if (empty($result)) {
                                                                 <td><?php echo $rs->cow_name; ?></td>
                                                                 <td><?php echo  $dis; ?></td>
                                                                 <td><?php echo DateThai($rs->datestart); ?></td>
-                                                                <td><?php echo DateThai($rs->healstart); ?></td>
-                                                                <td><?php echo DateThai($rs->healend); ?></td>
+                                                                <td><?php echo $startheal; ?></td>
+                                                                <td><?php echo $endheal; ?></td>
                                                                 <td><?php echo  $doctor; ?></td>
 
                                                                 <td class="text-center">
@@ -227,7 +234,8 @@ if (empty($result)) {
                                                                     </a>
                                                                 </td>
                                                             </tr>
-                                                        <?php } ?>
+                                                        <?php }
+                                                        ?>
                                                     </tbody>
                                                     <!-- /.body table -->
 
@@ -411,6 +419,7 @@ if (empty($result)) {
                         $('#healstart').val(result.healstart);
                         $('#healend').val(result.healend);
                         $('#detail').val(result.detail);
+                      
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
