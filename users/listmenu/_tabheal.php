@@ -113,7 +113,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="healend">วันที่สิ้นสุดการรักษา :</label>
                                                     <div class="col-md">
-                                                        <input type="date" class="form-control"  name="healend" id="healend" title="ระบุวันที่สิ้นสุดการรักษา">
+                                                        <input type="date" class="form-control" name="healend" disabled id="healend" min="" title="ระบุวันที่สิ้นสุดการรักษา">
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,12 +207,12 @@ if (empty($result)) {
                                                             } else {
                                                                 $doctor = '';
                                                             }
-                                                            if($rs->healstart ==NULL && $rs->healend ==NULL){
-                                                                 $startheal='';
-                                                                 $endheal='';
-                                                            }else{
-                                                                $startheal=DateThai($rs->healstart);
-                                                                $endheal=DateThai($rs->healend);
+                                                            if ($rs->healstart == NULL && $rs->healend == NULL) {
+                                                                $startheal = '';
+                                                                $endheal = '';
+                                                            } else {
+                                                                $startheal = DateThai($rs->healstart);
+                                                                $endheal = DateThai($rs->healend);
                                                             }
 
                                                         ?>
@@ -285,7 +285,14 @@ if (empty($result)) {
 
 
             });
+            $(document).on('click', '#healstart', function(e) {
 
+                $('#healend').attr('min', $("#healstart").val());
+                if ($("#healstart").val() != null) {
+                    $('#healend').prop('disabled', false)
+                }
+
+            })
 
             $.ajax({
                 type: 'get',
@@ -419,7 +426,7 @@ if (empty($result)) {
                         $('#healstart').val(result.healstart);
                         $('#healend').val(result.healend);
                         $('#detail').val(result.detail);
-                      
+
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
