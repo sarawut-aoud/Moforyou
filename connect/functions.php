@@ -11,7 +11,12 @@ class registra extends Database
         $checkuser = mysqli_query($this->dbcon, "SELECT username FROM tbl_farmer WHERE username = '$uname'  ");
         return $checkuser;
     }
-
+    // Check pass
+    public function checkemail($email)
+    {
+        $checkuser = mysqli_query($this->dbcon, "SELECT email FROM tbl_farmer WHERE email = '$email'  ");
+        return $checkuser;
+    }
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {

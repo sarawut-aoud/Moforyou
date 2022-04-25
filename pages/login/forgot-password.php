@@ -68,9 +68,12 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">คุณลืมรหัสผ่านใช่หรือไม่ ? กรอก E-mail เพื่อรับรหัสผ่านใหม่ได้ที่นี้ </p>
-                <form action="recover-password" method="post">
+                <form method="post">
+                    <span id="alertcheck"></span>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+
+                        <input type="email" class="form-control" placeholder="Email" id="email" autocomplete="off" required>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -79,15 +82,15 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn login100-form-btn btn-block">ขอรหัสผ่านใหม่</button>
+                            <button type="submit" class="btn login100-form-btn btn-block submit">ขอรหัสผ่านใหม่</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <div class="d-flex mt-3 mb-1 ">   
-                        <a href="login" class="me-auto p-2">เข้าสู่ระบบ</a>
-                        <a href="../login/login" class="p-2">ย้อนกลับ</a>
-                   
+                <div class="d-flex mt-3 mb-1 ">
+                    <a href="login" class="me-auto p-2">เข้าสู่ระบบ</a>
+                    <a href="../login/login" class="p-2">ย้อนกลับ</a>
+
                 </div>
             </div>
             <!-- /.login-card-body -->
@@ -95,6 +98,56 @@
     </div>
     <!-- /.login-box -->
 
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.submit', function(e) {
+                e.preventDefault();
+                var email = $('#email').val();
+                if (email != "") {
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '_recov-password.php',
+                        data: {
+                            function: "emailcheck",
+                            email: email,
+                        },
+                        success: function(result) {
+                            if (result.status == 200) {
+                                toastr.success(
+                                    result.message,
+                                    '', {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function() {
+                                            window.location = './recover-password';
+                                        }
+                                    }
+                                );
+                            } else {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'warning',
+                                    title: result.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            }
+                        }
+                    })
+                } else {
+                    $("#alertcheck").show(0).html("<div align='center' class='bg-red mb-2 rounded'>โปรดระบุ Email !</div>")
+                        .delay(2500).fadeOut('fast');
+                }
+
+            })
+
+
+        });
+    </script>
 </body>
 
 </html>

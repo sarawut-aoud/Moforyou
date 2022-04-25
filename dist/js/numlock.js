@@ -24,3 +24,4 @@ function number(e) {
     //     event.returnValue = false;
     // }
 }
+// onkeypress="ชื่อฟังก์ชั่น(event)"

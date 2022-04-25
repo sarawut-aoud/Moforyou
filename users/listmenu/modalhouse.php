@@ -17,8 +17,10 @@
                             <div class="col-md-10">
                                 <input type="text" class="form-control " id="modalhouse" name="modalhouse" />
                             </div>
+                            
                         </div>
                     </div>
+                     
                     <!--? /.Title Name -->
                 </div>
                 <div class="modal-footer">
