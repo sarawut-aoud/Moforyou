@@ -98,14 +98,14 @@ if (empty($result)) {
                                 <div class="inner">
                                     <h3 id="farmdata"> ผสมพันธุ์ครั้งล่าสุด</h3>
                                     <div class="d-flex justify-content-start">
-                                        วันที่ xx-xx-xxx
+                                        <p style="font-size: 18px;" id="datebreed"></p>
                                     </div>
                                     <div class="d-flex  mt-4">
                                         <p class="card-text mr-5 ml-4">
-                                            ตัวผู้ : สีทอง
+                                            ตัวผู้ : <span id="namemale"></span>
                                         </p>
                                         <p class="card-text  ml-5">
-                                            ตัวเมีย : สีแหบ
+                                            ตัวเมีย : <span id="namefemale"></span>
                                         </p>
                                     </div>
                                 </div>
@@ -121,13 +121,13 @@ if (empty($result)) {
                             <!-- small box -->
                             <div class="small-box bg-gradient-olive">
                                 <div class="inner">
-                                    <h3 id="cowdata"><span style="font-size: 28px;">โคภายในฟาร์ม </span>4</h3>
+                                    <h3>โคภายในฟาร์ม <span style="font-size: 28px;" id="cowdata"></span> ตัว </h3>
                                     <div class="d-flex justify-content-start">
-                                        จำนวนโคเนื้อทั้งหมด
+                                        <p style="font-size: 18px;">จำนวนโคเนื้อทั้งหมด</p>
                                     </div>
                                     <div class="d-flex ml-5 mt-4">
-                                        <p class="card-text ml-4">พ่อโค : 5 ตัว</p>
-                                        <p class="card-text ml-4">แม่โค : 5 ตัว</p>
+                                        <p class="card-text ml-4">พ่อโค : <span id="male"> </span> ตัว</p>
+                                        <p class="card-text ml-4">แม่โค : <span id="female"> </span> ตัว</p>
                                     </div>
                                 </div>
                                 <div class="icon">
@@ -147,11 +147,11 @@ if (empty($result)) {
                                 <div class="card-body">
 
                                     <div class="d-flex justify-content-end">
-                                        <h6 class="card-title">วันที่ : XX-XX-XXXX </h6>
+                                        <h6 class="card-title">วันที่ : <span id="dateheal"></span> </h6>
                                     </div>
-                                    <p class="card-text">โค : </p>
-                                    <p class="card-text">อาการป่วย / โรค :</p>
-                                    <p class="card-text">สัตวแพทย์ :</p>
+                                    <p class="card-text">โค : <span id="namecowheal"></span> </p>
+                                    <p class="card-text">อาการป่วย / โรค : <span id="heal"></span></p>
+                                    <p class="card-text">สัตวแพทย์ : <span id="doctorheal"></span></p>
                                     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
 
                                 </div>
@@ -167,10 +167,11 @@ if (empty($result)) {
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-end">
-                                        <h6 class="card-title">วันที่ : XX-XX-XXXX </h6>
+                                        <h6 class="card-title"> วันที่ : <span id="datefood"></span> </h6>
                                     </div>
-                                    <p class="card-text">ทั้งหมด ... ตัว</p>
-                                    <p class="card-text">น้ำหนักอาหารทั้งสิ้น : กิโลกรัม</p>
+                                    <hr>
+                                    <p class="card-text">ทั้งหมด <span id="cowfood"></span> ตัว</p>
+                                    <p class="card-text">น้ำหนักอาหารทั้งสิ้น <span id="weightfood"></span> กิโลกรัม</p>
                                     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
@@ -231,7 +232,7 @@ if (empty($result)) {
             <!-- /.content-wrapper -->
             <!-- Main Footer -->
             <?php require '../sub/footer.php'; ?>
-            
+
         </div>
         <!-- ./wrapper -->
         <script>
@@ -339,7 +340,119 @@ if (empty($result)) {
                     Math.round(series.percent) + '%</div>'
             }
         </script>
+        <script>
+            $(document).ready(function() {
 
+                cache_clear();
+
+                setInterval(function() {
+                    cache_clear()
+                }, 60000);
+            });
+
+            function cache_clear() {
+
+                var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: '../process/_index.php',
+                    data: {
+                        function: 'breed',
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+
+                        $('#datebreed').html(result.date2);
+                        $('#namemale').html(result.namemale2);
+                        $('#namefemale').html(result.namefemale2);
+                    }
+                });
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: '../process/_index.php',
+                    data: {
+                        function: 'cow',
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+                        $('#cowdata').html(result.cou_cow);
+                        $('#male').html(result.cou_male);
+                        $('#female').html(result.cou_female);
+                    }
+                });
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: '../process/_index.php',
+                    data: {
+                        function: 'food',
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+                        $('#datefood').html(result.date);
+                        // $('#cowfood').html(result.cow);
+                        $('#weightfood').html(result.weight_food);
+                        var date = result.date;
+                        $.ajax({
+                            type: "get",
+                            dataType: 'json',
+                            url: '../process/_index.php',
+                            data: {
+                                function: 'foodcow',
+                                date: date,
+                                farm_id: farm_id,
+                            },
+                            success: function(result) {
+
+                                $('#cowfood').html(result.cow);
+
+                            }
+                        });
+                    }
+                });
+                $.ajax({
+                    type: "get",
+                    dataType: 'json',
+                    url: '../process/_index.php',
+                    data: {
+                        function: 'heal',
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+                        $('#dateheal').html(result.date);
+                        $('#namecowheal').html(result.cow);
+
+                        $('#doctorheal').html(result.docname);
+
+
+                        var dis_id = result.dis;
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: '../process/_index.php',
+                            data: {
+                                function: 'showdisease',
+                            },
+                            success: function(results) {
+                                var data = '';
+                                for (i in results) {
+                                    if (results[i].id == dis_id) {
+                                        var detail = results[i].detail
+                                    }
+                                }
+                                if (dis_id != "") {
+                                    $('#heal').html(detail + "  " + result.heal);
+                                }
+
+                            }
+                        });
+                    }
+                });
+
+            }
+        </script>
 </body>
 
 </html>

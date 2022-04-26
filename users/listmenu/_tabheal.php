@@ -518,29 +518,29 @@ if (empty($result)) {
                                     detail: detail,
                                 },
                                 success: function(result) {
-                                    // if (result.status == 200) {
-                                    //     toastr.success(
-                                    //         result.message,
-                                    //         '', {
-                                    //             timeOut: 1000,
-                                    //             fadeOut: 1000,
-                                    //             onHidden: function() {
-                                    //                 location.reload();
-                                    //             }
-                                    //         }
-                                    //     );
-                                    // } else {
-                                    //     toastr.warning(
-                                    //         result.message,
-                                    //         '', {
-                                    //             timeOut: 1000,
-                                    //             fadeOut: 1000,
-                                    //             onHidden: function() {
-                                    //                 location.reload();
-                                    //             }
-                                    //         }
-                                    //     );
-                                    // }
+                                    if (result.status == 200) {
+                                        toastr.success(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    } else {
+                                        toastr.warning(
+                                            result.message,
+                                            '', {
+                                                timeOut: 1000,
+                                                fadeOut: 1000,
+                                                onHidden: function() {
+                                                    location.reload();
+                                                }
+                                            }
+                                        );
+                                    }
                                 } // end success update
                             }); // end ajax btnsave
                         }) // end btn save

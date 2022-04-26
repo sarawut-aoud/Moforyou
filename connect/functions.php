@@ -39,6 +39,12 @@ class registra extends Database
         $getpass = mysqli_query($this->dbcon, "SELECT username,email,password FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
         return $getpass;
     }
+    // recover password
+    public function recovepassword($email, $password)
+    {
+        $pass = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET password = '$password' WHERE email = '$email'");
+        return $pass;
+    }
 
     // test pagination 
     public function pagin()
@@ -852,7 +858,64 @@ class recordfood extends Database
     }
 }
 // All Report
-class report extends Database
+class reports extends Database
 {
-    // Select .. 
+    // user report breed
+    public function req_breed($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT b.breed_date 
+        ,cm.cow_name as male , cf.cow_name as female
+        FROM tbl_breed AS b
+        INNER JOIN tbl_cow AS cm ON (b.cow_id_male = cm.id)
+        INNER JOIN tbl_cow AS cf ON (b.cow_id_female = cf.id)
+        WHERE farm_id = '$farm_id' ORDER BY  b.breed_date DESC LIMIT 1 
+        ");
+        return $re;
+    }
+    public function req_countcow($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow 
+        FROM tbl_cow as c
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id )
+        WHERE ho.farm_id = '$farm_id'");
+        return $re;
+    }
+    public function req_countcowmale($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_male 
+        FROM tbl_cow  as c
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id )
+        WHERE ho.farm_id = '$farm_id' AND gender = '1'");
+        return $re;
+    }
+    public function req_countcowfemale($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_female 
+        FROM tbl_cow as c
+        INNER JOIN tbl_house as ho ON (c.house_id = ho.id )
+        WHERE ho.farm_id = '$farm_id' AND gender = '2'");
+        return $re;
+    }
+    public function req_givefood($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT date,weight_food  FROM tbl_foodrecord WHERE farm_id = '$farm_id' ORDER BY tbl_foodrecord.date DESC LIMIT 1");
+        return $re;
+    }
+    public function req_givefoodcow($farm_id, $date)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT count(id) AS cow FROM tbl_foodrecord WHERE farm_id = '$farm_id' AND date = '$date' ORDER BY tbl_foodrecord.date DESC");
+        return $re;
+    }
+    public function req_heal($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT  h.healmore,h.healstart,h.healend 
+         ,c.cow_name, doc.name as docname ,d.detail ,h.diseaseid as did
+        FROM tbl_heal AS h 
+        INNER JOIN tbl_farm AS f ON(h.farm_id = f.id) 
+        INNER JOIN tbl_cow AS c ON(h.cowid = c.id) 
+        INNER JOIN tbl_disease AS d ON(h.diseaseid = d.id) 
+        INNER JOIN tbl_doctor AS doc ON(h.doctor_id = doc.id) 
+        WHERE h.farm_id = '$farm_id' ");
+        return $re;
+    }
 }

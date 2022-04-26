@@ -121,7 +121,8 @@
                                         timeOut: 1000,
                                         fadeOut: 1000,
                                         onHidden: function() {
-                                            window.location = './recover-password';
+                                            
+                                            window.location = './recover-password?recov-email='+email+'';
                                         }
                                     }
                                 );
