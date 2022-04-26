@@ -47,9 +47,7 @@ if (empty($result)) {
                     <div class="container">
                         <!-- Manage -->
                         <div class="row justify-content-center">
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-info  btn-lg float-start"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
-                            </div>
+                           
                             <div class="col-md-8">
                                 <!-- general form elements -->
                                 <div class="card card-primary">

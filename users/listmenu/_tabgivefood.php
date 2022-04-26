@@ -43,9 +43,16 @@ if (empty($result)) {
             <div class="bgimg content-wrapper mb-5">
                 <!-- Content Header (Page header) -->
                 <div class="content-header ">
+
                     <div class="container col-10">
                         <!-- Manage -->
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-info  btn-lg float-start"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
+                            </div>
+                        </div>
                         <div class="row justify-content-around">
+
                             <div class="col-lg-5 col-md-12">
                                 <div class="card  shadow">
                                     <div class="card-header card-food">
@@ -258,6 +265,11 @@ if (empty($result)) {
                     $('#foodid').html(data);
                 }
             })
+            var datetoday = new Date();
+            var today = datetoday.toISOString("EN-AU", {
+                    timeZone: "Australia/Melbourne"
+                })
+                .slice(0, 10);  
             $.ajax({
                 type: "get",
                 dataType: "json",
@@ -269,6 +281,7 @@ if (empty($result)) {
                 success: function(result) {
                     var data = '<option value="" selected disabled >เลือกอาหาร</option>';
                     for (i in result) {
+
                         data += '<option value="' + result[i].id + '" >' + result[i].cowname + '</option>';
                     }
                     $('#cowid').html(data);
@@ -372,6 +385,7 @@ if (empty($result)) {
                                 $('#foodid').html(data);
                             }
                         })
+
                         $.ajax({
                             type: "get",
                             dataType: "json",
@@ -386,8 +400,9 @@ if (empty($result)) {
                                     if (results[i].id == result.cowid) {
                                         data += '<option value="' + results[i].id + '" selected >' + results[i].cowname + '</option>';
 
+
                                     } else {
-                                        data += '<option value="' + results[i].id + '" >' + results[i].cowname + '</option>';
+                                        data += '<option value="' + results[i].id + '"  >' + results[i].cowname + '</option>';
 
                                     }
                                 }
@@ -415,7 +430,7 @@ if (empty($result)) {
                                     cow_weight: cow_weight,
                                     date: date,
                                     farm_id: farm_id,
-                                    racordid:racordid,
+                                    racordid: racordid,
                                 },
                                 success: function(result) {
                                     if (result.status == 200) {

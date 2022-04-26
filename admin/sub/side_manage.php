@@ -107,14 +107,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
         <p>การผสมพันธุ์</p>
       </a>
     </li>
-    <li class="nav-item">
-      <a href="../main/food" class="nav-link <?php if ($cut[4] == 'food') {
-                                                echo "active";
-                                              }  ?>">
-        <i class="far fa-circle nav-icon"></i>
-        <p>การใช้อาหาร</p>
-      </a>
-    </li>
+    
     <li class="nav-item">
       <a href="../main/diseased" class="nav-link <?php if ($cut[4] == 'diseased') {
                                                     echo "active";
