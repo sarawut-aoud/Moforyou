@@ -1,6 +1,6 @@
 <?php
     require_once '../../connect/functions.php';
-    $sql = new registra();
+    $sql = new cow();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
 <body style="margin-top: 10px;">
     <?php
  
-    $perpage = 5;  // แสดงจำนวนในแต่ละหน้า
+    $perpage = 12;  // แสดงจำนวนในแต่ละหน้า
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {

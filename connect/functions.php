@@ -47,16 +47,7 @@ class registra extends Database
     }
 
     // test pagination 
-    public function pagin()
-    {
-        $pag = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer");
-        return $pag;
-    }
-    public function pagin_page($start, $perpage)
-    {
-        $page = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer limit {$start},{$perpage} ");
-        return $page;
-    }
+
 }
 // Farmer
 class farmer extends Database
@@ -168,6 +159,17 @@ class farm extends Database
         $del_farm = mysqli_query($this->dbcon, "DELETE FROM tbl_farm WHERE id='$id'");
 
         return $del_farm;
+    }
+
+    public function pagin()
+    {
+        $pag = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone FROM tbl_farm as f INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)");
+        return $pag;
+    }
+    public function pagin_page($start, $perpage)
+    {
+        $page = mysqli_query($this->dbcon, "SELECT f.id,f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone FROM tbl_farm as f INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) limit {$start},{$perpage} ");
+        return $page;
     }
 }
 // โรงเรือน
@@ -370,6 +372,27 @@ class specise extends Database
 }
 class cow extends Database
 {
+    public function pagin()
+    {
+        $pag = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.cow_date,c.high ,c.weight ,s.spec_name, if(c.gender =1,'พ่อโค','แม่โค') as gender ,c.cow_pic ,f.farmname
+        FROM tbl_cow AS c 
+        INNER JOIN tbl_species As s ON(c.spec_id = s.id) 
+        INNER JOIN tbl_house AS ho ON(c.house_id = ho.id)
+        INNER JOIN tbl_farm AS f ON (ho.farm_id = f.id)
+         ");
+        return $pag;
+    }
+    public function pagin_page($start, $perpage)
+    {
+        $page = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.high ,c.cow_date,c.weight ,s.spec_name, if(c.gender =1,'พ่อโค','แม่โค') as gender ,c.cow_pic ,f.farmname
+        FROM tbl_cow AS c 
+        INNER JOIN tbl_species As s ON(c.spec_id = s.id) 
+        INNER JOIN tbl_house AS ho ON(c.house_id = ho.id) 
+        INNER JOIN tbl_farm AS f ON (ho.farm_id = f.id)
+        limit {$start},{$perpage} ");
+        return $page;
+    }
+
     // Insert
     public function addcow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $picture)
     {

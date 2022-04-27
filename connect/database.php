@@ -16,13 +16,11 @@ class Database
             echo "Failed to connect to MySQL : " . mysqli_connect_error();
         }
     }
-    
+
     public function real_escape_string($valuse)
     {
         $real = mysqli_real_escape_string($this->dbcon, $valuse);
         return $real;
     }
-
    
-
 }
