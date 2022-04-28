@@ -5,15 +5,15 @@
         <div class="modal-content">
         <div class="modal-header justify-content-center  edit-head">
                     <div class="text-center">
-                        <h4 id="calendarmodal-title">  </h4>
+                        <h4 id="calendarmodal-title"> รายละเอียดข้อมูล </h4>
                     </div>
                 </div>
             <br>
             <div class="col-lg-9 ml-4">
                 <div class="form-group row">
-                    <b class="col-lg-6">สถานที่ประชุม :</b>
+                    <b class="col-lg-6">ชื่อโค :</b>
                     <div class="col-lg-6">
-                        <div id="calendarmodal-detail"></div>
+                        <div id="cow-name"></div>
                     </div>
                 </div>
                 <div class="form-group row">

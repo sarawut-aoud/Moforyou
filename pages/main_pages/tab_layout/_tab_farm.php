@@ -64,7 +64,7 @@
         <?php } ?>
 
     </div>
-    <div class="row justify-content-center fixed-bottom mt-auto  p-2">
+    <div class="row justify-content-center  mt-2">
 
         <?php
 
@@ -75,15 +75,15 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center  mb-5">
                 <li class="page-item">
-                    <a class="page-link" href="#tab-farm?page=1" aria-label="Previous">
+                    <a class="page-link" href="index_tab-farm?page=1" aria-label="Previous">
                         <span aria-hidden="true">Previous</span>
                     </a>
                 </li>
                 <?php for ($i = 1; $i <= $total_page; $i++) { ?>
-                    <li class="page-item"><a class="page-link" href="#tab-farm?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="index_tab-farm?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                 <?php } ?>
                 <li class="page-item">
-                    <a class="page-link" href="#tab-farm?page=<?php echo $total_page; ?>" aria-label="Next">
+                    <a class="page-link" href="index_tab-farm?page=<?php echo $total_page; ?>" aria-label="Next">
                         <span aria-hidden="true">Next</span>
                     </a>
                 </li>

@@ -293,7 +293,16 @@ class herd extends Database
 }
 class specise extends Database
 {
-
+    public function pagin()
+    {
+        $pag = mysqli_query($this->dbcon, "SELECT * FROM tbl_species ");
+        return $pag;
+    }
+    public function pagin_page($start, $perpage)
+    {
+        $page = mysqli_query($this->dbcon, "SELECT * FROM tbl_species limit {$start},{$perpage} ");
+        return $page;
+    }
     // Insert Picure
     public function addspec_pic($specname, $specdetail, $specpic)
     {
