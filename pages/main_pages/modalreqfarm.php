@@ -5,7 +5,7 @@
         <div class="modal-content">
         <div class="modal-header justify-content-center  edit-head">
                     <div class="text-center">
-                        <h4 id="calendarmodal-title">  </h4>
+                        <h4 id="calendarmodal-title">รายละเอียดข้อมูลฟาร์ม  </h4>
                     </div>
                 </div>
             <br>

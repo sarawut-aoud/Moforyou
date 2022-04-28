@@ -18,6 +18,10 @@
             background: rgba(209, 128, 0, 1);
             color: #fff;
         }
+
+        .font-big {
+            font-size: 18px;
+        }
     </style>
 
 <body class=" hold-transition sidebar-collapse layout-top-nav">

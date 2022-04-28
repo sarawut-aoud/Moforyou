@@ -1,6 +1,6 @@
 <div class="container ">
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 ">
+    <div class="row row-cols-1 row-cols-md-3 g-4  ">
 
         <?php
         require_once '../../connect/functions.php';
@@ -29,13 +29,15 @@
 
                         <p class="card-text ">โคเนื้อจำนวน : <span id="cowdata"></span></p>
                         <p class="card-text ">ที่อยู่: <?php echo $result['address']; ?></p>
-                        <p class="card-text ">อำเภอ: <?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
-                                                        $tombon = json_decode($get_tombon);
-                                                        foreach ($tombon as $value) {
-                                                            if ($result['district_id'] == $value->id) { //? check id amphur
-                                                                echo  $value->name_th;
-                                                            }
-                                                        }; ?></p>
+                        <p class="card-text ">อำเภอ:
+                            <?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+                            $tombon = json_decode($get_tombon);
+                            foreach ($tombon as $value) {
+                                if ($result['district_id'] == $value->id) { //? check id amphur
+                                    echo  $value->name_th;
+                                }
+                            }; ?>
+                        </p>
                         <p class="card-text ">ติดต่อ : <?php echo $result['phone'] . " หรือ " . $result['email']; ?></p>
                     </div>
                     <div class="card-footer text-center">

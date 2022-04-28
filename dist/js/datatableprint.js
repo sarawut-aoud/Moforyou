@@ -33,7 +33,7 @@ $(document).ready(function () {
             // กำหนด style หลัก
             doc.defaultStyle = {
               font: "THSarabun",
-              fontSize: 16,
+              fontSize: 18,
             }; // กำหนดความกว้างของ header แต่ละคอลัมน์หัวข้อ
             // doc.content[1].table.widths = [50, "auto", "*", "*"];
             // doc.styles.tableHeader.fontSize = 16; // กำหนดขนาด font ของ header

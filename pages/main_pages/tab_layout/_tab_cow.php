@@ -1,7 +1,7 @@
-<div class="container col-10 ">
+<div class="container col-9">
     <div class="d-flex align-content-between flex-wrap justify-content-center">
         <dic class="p-2 bd-highlight">
-            <div class="row row-cols-1 row-cols-md-4 g-4 ">
+            <div class="row row-cols-1 row-cols-md-3  g-4  ">
                 <?php
                 require_once '../../connect/functions.php';
                 $sql = new cow();
