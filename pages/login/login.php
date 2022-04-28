@@ -24,7 +24,7 @@ ob_start();
             </div>
 
             <div class="card-body">
-                <p class="login-box-msg">เยี่ยมชม <u><a style="font-size: 22px;" href="../main_pages/index">หน้าแรก <i class="fad fa-home"></i></a></u></p>
+                <p class="login-box-msg">เยี่ยมชม <u><a style="font-size: 22px;" href="../main_pages/index_tab-farm">หน้าแรก <i class="fad fa-home"></i></a></u></p>
                 <div class="col-12">
                     <!-- Form -->
                     <form method="post" id="loginForm">

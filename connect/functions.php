@@ -950,4 +950,37 @@ class reports extends Database
         WHERE h.farm_id = '$farm_id' ");
         return $re;
     }
+
+    public function req_indexfarm($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT f.farmname , fm.fullname ,fm.phone ,fm.email
+         FROM tbl_farm AS f
+         INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
+         WHERE f.id = '$farm_id'
+         ");
+        return  $re;
+    }
+    public function req_indexcow($cow_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT c.id,c.cow_name ,c.cow_date, c.high , c.weight ,IF(c.gender=1,'พ่อโค','แม่โค') AS gender,
+        s.spec_name ,fm.fullname ,f.farmname
+        FROM tbl_cow AS c
+        INNER JOIN tbl_species AS s ON(c.spec_id = s.id) 
+        INNER JOIN tbl_house AS h ON(c.house_id = h.id)
+        INNER JOIN tbl_farm AS f ON(h.farm_id = f.id)
+        INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
+        WHERE c.id = '$cow_id'
+        ");
+        return  $re;
+    }
+    public function req_indexheal($cow_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT d.detail,h.healmore,h.datestart,h.healstart,h.healend
+        FROM tbl_heal AS h 
+        INNER JOIN tbl_disease AS d ON(h.diseaseid = d.id)
+        INNER JOIN tbl_cow AS c ON(h.cowid = c.id) 
+        WHERE c.id = '$cow_id'
+        ");
+        return  $re;
+    }
 }

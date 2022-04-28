@@ -81,13 +81,36 @@
     <!-- ./wrapper -->
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.modalreqfarm', function() {
-                var id = $(this).attr('id');
-                $('#reqfarm').modal('show');
-            })
+
             $(document).on('click', '.modalreqcow', function() {
                 var id = $(this).attr('id');
-                $('#reqcow').modal('show');
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: './_reqindex.php',
+                    data: {
+                        function: "cow",
+                        cowid: id,
+                    },
+                    success: function(result) {
+                        $('#reqcow').modal('show');
+                        $('#farm-name').html(result.name);
+                        $('#farmer-name').html(result.farm_name);
+                        $('#cow-name').html(result.cow_name);
+                        $('#spec-name').html(result.spec_name);
+                        $('#gender').html(result.gender);
+                        $('#age').html(result.age);
+                        $('#weight').html(result.weight);
+                        $('#high').html(result.high);
+                        $('#dis-name').html(result.detail);
+                        $('#date-dis').html(result.datestart);
+                        $('#start-heal').html(result.healend);
+                        $('#end-heal').html(result.healend);
+
+
+                    }
+                })
+
             })
         })
     </script>

@@ -82,11 +82,26 @@
         $(document).ready(function() {
             $(document).on('click', '.modalreqfarm', function() {
                 var id = $(this).attr('id');
-                $('#reqfarm').modal('show');
-            })
-            $(document).on('click', '.modalreqcow', function() {
-                var id = $(this).attr('id');
-                $('#reqcow').modal('show');
+
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: './_reqindex.php',
+                    data: {
+                        function: "farm",
+                        farm_id: id,
+                    },
+                    success: function(result) {
+                        $('#reqfarm').modal('show');
+                        $('#farmname').html(result.farmname);
+                        $('#farmername').html('คุณ ' + result.fullname);
+                        $('#phone').html(result.phone);
+                        $('#cow').html(result.cow + ' ตัว');
+                        $('#email').html(result.email);
+
+                    }
+                })
+
             })
         })
     </script>
