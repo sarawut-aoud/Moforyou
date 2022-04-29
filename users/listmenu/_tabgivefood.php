@@ -56,7 +56,7 @@ if (empty($result)) {
                             <div class="col-lg-5 col-md-12">
                                 <div class="card  shadow">
                                     <div class="card-header card-food">
-                                        <h3 class="text-center"> <i class="fa fa-plus-circle"></i> เพิ่มการให้อาหาร</h3>
+                                        <h3 class="text-center"> <i class="fa fa-plus-circle"></i> เพิ่มการให้อาหาร (เลือก)</h3>
                                     </div>
 
                                     <form method="POST" id="frm_data">
@@ -90,7 +90,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="cow_weight">น้ำหนักโคก่อนให้อาหาร :</label>
                                                     <div class="col-md">
-                                                        <input type="number" class="form-control " name="cow_weight" id="cow_weight" onkeypress="number(event);" min="0" placeholder="น้ำหนักโคก่อนให้อาหาร" title="น้ำหนักโคก่อนให้อาหาร" required="required">
+                                                        <input type="number" class="form-control " name="cow_weight" id="cow_weight" min="0" placeholder="น้ำหนักโค" title="น้ำหนักโค" readonly>
 
                                                     </div>
                                                 </div>
@@ -113,8 +113,50 @@ if (empty($result)) {
                                         </div>
                                     </form>
                                 </div>
+                                <div class="card  shadow">
+                                    <div class="card-header card-food">
+                                        <h3 class="text-center"> <i class="fa fa-plus-circle"></i> เพิ่มการให้อาหาร (ทั้งหมด)</h3>
+                                    </div>
+
+                                    <form method="POST" id="frm_data2">
+                                        <div class="card-body ">
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="foodid2">รายการอาหาร: </label>
+                                                    <div class="col-md">
+                                                        <select class="form-control select2" name="foodid2" id="foodid2" data-placeholder="รายการอาหาร" required="required" title="รายการอาหาร"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="foodweight2">น้ำหนักอาหาร: (kg.)</label>
+                                                    <div class="col-md">
+                                                        <input type="number" class="form-control" onkeypress="number(event);" min="0" name="foodweight2" id="foodweight2" placeholder="น้ำหนักอาหาร" required="required" title="น้ำหนักอาหาร">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="date2">วันที่ให้อาหาร :</label>
+                                                    <div class="col-md">
+                                                        <input type="date" class="form-control " name="date2" id="date2" title="ระบุ" required="required">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer text-end">
+                                            <button type="reset" class="btn  btn-secondary reset2">ยกเลิก</button>
+                                            <button type="submit2" id="btn2" class="btn btn-info submit2">ยืนยันการเพิ่มข้อมูล</button>
+                                        </div>
+                                    </form>
+                                </div>
                                 <!-- /.card -->
                             </div>
+
                             <div class="col-lg-7 col-md-12">
                                 <div class="card ">
                                     <div class="card-header card-food">
@@ -195,6 +237,8 @@ if (empty($result)) {
                                 <!-- /.card -->
                             </div>
                             <!-- ./col -->
+
+
                         </div>
                         <!-- ./row -->
 
@@ -226,6 +270,14 @@ if (empty($result)) {
                 $('#frm_data')[0].reset();
                 $('#foodid').val(0).trigger("change");
                 $('#cowid').val(0).trigger("change");
+
+            })
+            $(document).on('click', '.reset2', function(e) {
+                e.preventDefault();
+               
+                $('#frm_data2')[0].reset();
+                $('#foodid2').val(0).trigger("change");
+              
 
             })
             toastr.options = {
@@ -263,13 +315,14 @@ if (empty($result)) {
                         data += '<option value="' + result[i].id + '" >' + result[i].name + '</option>';
                     }
                     $('#foodid').html(data);
+                    $('#foodid2').html(data);
                 }
             })
             var datetoday = new Date();
             var today = datetoday.toISOString("EN-AU", {
                     timeZone: "Australia/Melbourne"
                 })
-                .slice(0, 10);  
+                .slice(0, 10);
             $.ajax({
                 type: "get",
                 dataType: "json",
@@ -281,12 +334,32 @@ if (empty($result)) {
                 success: function(result) {
                     var data = '<option value="" selected disabled >เลือกอาหาร</option>';
                     for (i in result) {
-
+                        var weight = result[i].weight;
                         data += '<option value="' + result[i].id + '" >' + result[i].cowname + '</option>';
                     }
                     $('#cowid').html(data);
+                    $('#cowid').change(function(e) {
+                        var cowid = $('#cowid').val();
+                        $.ajax({
+                            type: "get",
+                            dataType: "json",
+                            url: "../process/_givefood.php",
+                            data: {
+                                function: "showcow",
+                                farm_id: farm_id,
+                            },
+                            success: function(results) {
+                                for (i in results) {
+                                    if (results[i].id == cowid) {
+                                        $('#cow_weight').val(results[i].weight);
+                                    }
+                                }
+                            }
+                        })
+                    })
                 }
             })
+
 
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
@@ -306,6 +379,51 @@ if (empty($result)) {
                         foodweight: foodweight,
                         cowid: cowid,
                         cow_weight: cow_weight,
+                        date: date,
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+                        if (result.status == 200) {
+                            toastr.success(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        } else {
+                            toastr.warning(
+                                result.message,
+                                '', {
+                                    timeOut: 1000,
+                                    fadeOut: 1000,
+                                    onHidden: function() {
+                                        location.reload();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                })
+            });
+            // insert all
+            $(document).on('click', '.submit2', function(e) {
+                e.preventDefault();
+                var foodid = $('#foodid2').val();
+                var foodweight = $('#foodweight2').val();  
+                var date = $('#date2').val();
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '../process/_givefood.php',
+                    data: {
+                        function: "insertall",
+                        foodid: foodid,
+                        foodweight: foodweight,
                         date: date,
                         farm_id: farm_id,
                     },

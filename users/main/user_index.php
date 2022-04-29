@@ -152,14 +152,14 @@ if (empty($result)) {
                                     <p class="card-text">โค : <span id="namecowheal"></span> </p>
                                     <p class="card-text">อาการป่วย / โรค : <span id="heal"></span></p>
                                     <p class="card-text">สัตวแพทย์ : <span id="doctorheal"></span></p>
-                                    <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
+                                    <a href="../report/req-heal" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
 
                                 </div>
                             </div>
                         </div>
 
                         <!-- /.col-md-6 -->
-                        <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                        <div class="col-lg-6 col-md-12 col-sm-12 ">
 
                             <div class="card card-success card-outline ">
                                 <div class="card-header">
@@ -172,7 +172,7 @@ if (empty($result)) {
                                     <hr>
                                     <p class="card-text">ทั้งหมด <span id="cowfood"></span> ตัว</p>
                                     <p class="card-text">น้ำหนักอาหารทั้งสิ้น <span id="weightfood"></span> กิโลกรัม</p>
-                                    <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
+                                    <a href="../report/req-foodrecord" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
 
@@ -183,7 +183,7 @@ if (empty($result)) {
 
                     <!-- /.container-fluid -->
                 </div>
-                <div class="container col-10 ">
+                <div class="container ">
                     <div class="row mb-5">
                         <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
                             <div class="card card-primary card-outline">

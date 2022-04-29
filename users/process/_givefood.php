@@ -29,6 +29,7 @@ if (isset($func) && $func == 'showcow') {
         $data[$i] = array(
             "id" => intval($row->id),
             "cowname" => $row->cow_name,
+            "weight" => $row->weight,
         );
         $i++;
     }
@@ -63,6 +64,39 @@ if (isset($func) && $func == 'insert') {
             "status" => 200,
             "message" => 'บันทึกข้อมูลสำเร็จ',
         );
+    }
+    echo json_encode($msg);
+    http_response_code(200);
+}
+if (isset($func) && $func == 'insertall') {
+    $foodid = $_POST['foodid'];
+    $wei_food = $_POST['foodweight'];
+    $date = $_POST['date'];
+    $farm_id = $_POST['farm_id'];
+
+    if (empty($foodid) || empty($wei_food) || empty($farm_id) || empty($date)) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'ไม่สามารถบันทึกข้อมูลได้',
+        );
+    } else {
+        $sqlcow = new cow();
+        $querycow = $sqlcow->selectdatacowbyfarmer($farm_id);
+        while ($rows = $querycow->fetch_object()) {
+            $querysum = $sql->select_sumrecordbyfarm($farm_id, $rows->id);
+            $sum = $querysum->fetch_object();
+            if ($sum->sumweight == null) {
+                $sumwei_food = 0 + $wei_food;
+            } else {
+                $sumwei_food = $sum->sumweight + $wei_food;
+            }
+
+            $query = $sql->insert_record($date, $wei_food, $sumwei_food, $rows->weight, $rows->id, $foodid, $farm_id);
+            $msg = array(
+                "status" => 200,
+                "message" => 'บันทึกข้อมูลสำเร็จ',
+            );
+        }
     }
     echo json_encode($msg);
     http_response_code(200);

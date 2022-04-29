@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md  fixed-top mb-4" style="background-color: rgba(207, 116, 27, 1);">
   <div class="container-fluid">
-    <a href="./index" class="navbar-brand">
+    <a href="./index_tab-farm" class="navbar-brand">
       <div class="txt-resp">
         <img src="../../dist/img/pic2.png" alt="Logo" class="brand-image img-circle elevation-3 " style="opacity: .8">
       </div>

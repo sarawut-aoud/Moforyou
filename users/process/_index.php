@@ -57,7 +57,7 @@ if (isset($func) && $func  == 'foodcow') {
 }
 if (isset($func) && $func  == 'heal') {
     $farm = $_GET['farm_id'];
-   
+
     $query  = $sql->req_heal($farm);
     $row = $query->fetch_object();
     $data = array(
@@ -85,3 +85,23 @@ if (isset($func) && $func == 'showdisease') {
     echo json_encode($data);
     http_response_code(200);
 }
+// $query = $sql->req_cow(3);
+// $sqlspec = new specise();
+// $i = 0;
+// while ($row = $query->fetch_object()) {
+//     $id[$i] = $row->id;
+//     $query_s = $sqlspec->selectid($id[$i]);
+//     $rows = $query_s->fetch_array();
+//     $rs[$i] = $rows['id'];
+//     if ($rs[$i] == $id[$i]) {
+//         echo $rows['spec_name'];
+//         $data = array(
+//             "s_name" => $rows->spec_name,
+
+//         );
+//     }
+
+//     $i++;
+// }
+
+// echo $count;
