@@ -99,14 +99,14 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
         <p>โคเนื้อ</p>
       </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a href="../main/breed" class="nav-link <?php if ($cut[4] == 'breed') {
                                                   echo "active";
                                                 }  ?>">
         <i class="far fa-circle nav-icon"></i>
         <p>การผสมพันธุ์</p>
       </a>
-    </li>
+    </li> -->
     
     <li class="nav-item">
       <a href="../main/diseased" class="nav-link <?php if ($cut[4] == 'diseased') {

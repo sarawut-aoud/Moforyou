@@ -36,12 +36,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>General Form</h1>
+                            <h1>Report ข้อมูลฟาร์ม</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../main/admin_index">Home</a></li>
-                                <li class="breadcrumb-item active">General Form</li>
+                                <li class="breadcrumb-item active">ข้อมูลฟาร์ม</li>
                             </ol>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
+                                    <h3 class="card-title">ข้อมูลฟาร์ม</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

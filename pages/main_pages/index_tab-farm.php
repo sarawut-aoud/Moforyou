@@ -27,6 +27,9 @@
 <body class=" hold-transition sidebar-collapse layout-top-nav">
 
     <div class=" wrapper mb-5">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="" src="../../dist/img/Preloader-1.gif" alt="RELOAD">
+        </div>
         <!-- Navbar -->
         <?php require './navbar.php'; ?>
         <!-- /.navbar -->

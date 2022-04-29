@@ -48,7 +48,7 @@ if (empty($result)) {
                         <!-- Manage -->
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <button class="btn btn-info  btn-lg float-start"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
+                                <button class="btn btn-info  btn-lg float-start btnqrcode"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
                             </div>
                         </div>
                         <div class="row justify-content-around">
@@ -248,6 +248,7 @@ if (empty($result)) {
 
 
 
+                <?php require_once 'modalQrcode.php'; ?>
 
             </div>
             <!-- /.content-wrapper -->
@@ -260,8 +261,33 @@ if (empty($result)) {
 
     <script src="../../dist/js/datatable.js"></script>
     <script src="../../dist/js/numlock.js"></script>
+
+    <script src="../../plugins/qrocde/qrcode.js"></script>
+
+    <script type="text/javascript">
+
+
+    </script>
     <script>
         $(document).ready(function() {
+            var url = '<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>';
+
+            new QRCode(document.getElementById("qrcode"), url);
+            $(document).on('click', '.btnqrcode', function(e) {
+                $('#modalqrcode').modal('show');
+                var qrcode = new QRCode("test", {
+                    text: url,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                qrcode.clear();
+            });
+
+
+
             $(document).on('click', '.reset', function(e) {
                 e.preventDefault();
                 $('#btn').removeClass();
@@ -274,10 +300,10 @@ if (empty($result)) {
             })
             $(document).on('click', '.reset2', function(e) {
                 e.preventDefault();
-               
+
                 $('#frm_data2')[0].reset();
                 $('#foodid2').val(0).trigger("change");
-              
+
 
             })
             toastr.options = {
@@ -310,9 +336,9 @@ if (empty($result)) {
                     farm_id: farm_id,
                 },
                 success: function(result) {
-                    var data = '<option value="" selected disabled >เลือกอาหาร</option>';
+                    var data = '<option value="" selected disabled>เลือกอาหาร</option>';
                     for (i in result) {
-                        data += '<option value="' + result[i].id + '" >' + result[i].name + '</option>';
+                        data += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
                     }
                     $('#foodid').html(data);
                     $('#foodid2').html(data);
@@ -332,10 +358,10 @@ if (empty($result)) {
                     farm_id: farm_id,
                 },
                 success: function(result) {
-                    var data = '<option value="" selected disabled >เลือกอาหาร</option>';
+                    var data = '<option value="" selected disabled>เลือกอาหาร</option>';
                     for (i in result) {
                         var weight = result[i].weight;
-                        data += '<option value="' + result[i].id + '" >' + result[i].cowname + '</option>';
+                        data += '<option value="' + result[i].id + '">' + result[i].cowname + '</option>';
                     }
                     $('#cowid').html(data);
                     $('#cowid').change(function(e) {
@@ -413,7 +439,7 @@ if (empty($result)) {
             $(document).on('click', '.submit2', function(e) {
                 e.preventDefault();
                 var foodid = $('#foodid2').val();
-                var foodweight = $('#foodweight2').val();  
+                var foodweight = $('#foodweight2').val();
                 var date = $('#date2').val();
 
                 $.ajax({
@@ -493,10 +519,10 @@ if (empty($result)) {
                                 var data = '';
                                 for (i in results) {
                                     if (results[i].id == result.foodid) {
-                                        data += '<option value="' + results[i].id + '"selected >' + results[i].name + '</option>';
+                                        data += '<option value="' + results[i].id + '" selected>' + results[i].name + '</option>';
 
                                     } else {
-                                        data += '<option value="' + results[i].id + '" >' + results[i].name + '</option>';
+                                        data += '<option value="' + results[i].id + '">' + results[i].name + '</option>';
 
                                     }
                                 }
@@ -516,11 +542,11 @@ if (empty($result)) {
                                 var data = '';
                                 for (i in results) {
                                     if (results[i].id == result.cowid) {
-                                        data += '<option value="' + results[i].id + '" selected >' + results[i].cowname + '</option>';
+                                        data += '<option value="' + results[i].id + '" selected>' + results[i].cowname + '</option>';
 
 
                                     } else {
-                                        data += '<option value="' + results[i].id + '"  >' + results[i].cowname + '</option>';
+                                        data += '<option value="' + results[i].id + '">' + results[i].cowname + '</option>';
 
                                     }
                                 }

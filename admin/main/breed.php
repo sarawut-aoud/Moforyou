@@ -73,52 +73,51 @@ require '../../connect/functions.php';
                                     <table id="example1" class="table table-bordered table-striped table-hover">
                                         <!-- head table -->
                                         <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <th>#</th>
-                                                <th>วันที่ผสมพันธุ์</th>
-                                                <th>พ่อพันธุ์</th>
-                                                <th>แม่พันธุ์</th>
-                                                <th>กำหนดคลอด</th>
-                                                <th>Edit&Delete</th>
+                                                <th>ระหว่าง</th>
+                                                <th>วันที่ / เวลา</th>
+                                                <th>ประมาณวันที่คลอด</th>
+
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>
-                                                    <center>
-                                                        <a class="btn btn-info edit_data" href="../modal/md_spec?id=<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                            <?php
+                                            $data = new breed();
+                                            $row = $data->select_breed_all('');
+                                            while ($rs = mysqli_fetch_object($row)) {
+                                                function DateThai($strDate)
+                                                {
+                                                    $strYear = date("Y", strtotime($strDate)) + 543;
+                                                    $strMonth = date("n", strtotime($strDate));
+                                                    $strDay = date("j", strtotime($strDate));
+                                                    $strHour = date("H", strtotime($strDate));
+                                                    $strMinute = date("i", strtotime($strDate));
+                                                    $strSeconds = date("s", strtotime($strDate));
+                                                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                    $strMonthThai = $strMonthCut[$strMonth];
+                                                    if ($strHour == '00' && $strMinute == '00') {
+                                                        return "$strDay $strMonthThai $strYear   ";
+                                                    } else {
+                                                        return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                    }
+                                                }
 
-                                                        </a>
-                                                        <a class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            </tr>
+                                            ?>
+                                                <tr align="center">
+                                                    <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                    <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
+                                                    <td><?php echo DateThai($rs->breed_date); ?></td>
+                                                    <td><?php echo DateThai($rs->breednext); ?></td>
+                                                    <!--  -->
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>วันที่ผสมพันธุ์</th>
-                                                <th>พ่อพันธุ์</th>
-                                                <th>แม่พันธุ์</th>
-                                                <th>กำหนดคลอด</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+
+
                                     </table>
                                     <!-- /.table -->
                                 </div>
