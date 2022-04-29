@@ -80,11 +80,7 @@
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- Input mask -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.3.0/imask.min.js"></script>
-<script src="../../plugins/flot/jquery.flot.js"></script>
 
-<script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
-
-<script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script>
 
 
 <!-- AdminLTE App -->

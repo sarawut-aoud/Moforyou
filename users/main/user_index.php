@@ -25,7 +25,6 @@ if (empty($result)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
-
     <?php require '../../build/script.php'; ?>
 </head>
 <style>
@@ -47,6 +46,7 @@ if (empty($result)) {
         background: linear-gradient(0deg, rgba(107, 255, 102, 1) 0%, rgba(255, 180, 11, 1) 100%);
 
     }
+
     .colorfont {
         color: white;
     }
@@ -217,7 +217,7 @@ if (empty($result)) {
                                 <div class="card-header">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        Donut Chart
+                                        โคแต่ละสายพันธุ์
                                     </h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -238,115 +238,47 @@ if (empty($result)) {
             </div>
             <!-- /.content-wrapper -->
             <!-- Main Footer -->
-            <?php require '../sub/footer.php'; ?>
+            <?php require '../sub/footer.php';
+            $sql = new reports();
+            $farm_id = $_SESSION['farm_id'];
+            $query = $sql->req_cow($farm_id);
+            ?>
 
         </div>
         <!-- ./wrapper -->
-        <script>
-            $(function() {
+        <!-- <script src="../../plugins/flot/jquery.flot.js"></script>
 
-                /*
-                 * BAR CHART
-                 * ---------
-                 */
+        <script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
 
-                var bar_data = {
-                    data: [
-                        [1, 10],
-                        [2, 8],
-                        [3, 4],
-                        [4, 13],
-                        [5, 17],
-                        [6, 9]
-                    ],
-                    bars: {
-                        show: true
+        <script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script> -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['spec_name', 'cow'],
+                    <?php
+                    while ($row =  $query->fetch_array()) {
+                        echo "['" . $row["spec_name"] . "', " . $row["cow"] . "],";
                     }
-                }
-                $.plot('#bar-chart', [bar_data], {
-                    grid: {
-                        borderWidth: 1,
-                        borderColor: '#f3f3f3',
-                        tickColor: '#f3f3f3'
-                    },
-                    series: {
-                        bars: {
-                            show: true,
-                            barWidth: 0.5,
-                            align: 'center',
-                        },
-                    },
-                    colors: ['#3c8dbc'],
-                    xaxis: {
-                        ticks: [
-                            [1, 'January'],
-                            [2, 'February'],
-                            [3, 'March'],
-                            [4, 'April'],
-                            [5, 'May'],
-                            [6, 'June']
-                        ]
-                    }
-                })
-                /* END BAR CHART */
-
-                /*
-                 * DONUT CHART
-                 * -----------
-                 */
-
-                var donutData = [{
-                        label: 'Series2',
-                        data: 30,
-                        color: '#ffc324'
-                    },
-                    {
-                        label: 'Series3',
-                        data: 20,
-                        color: '#ffda77'
-                    },
-                    {
-                        label: 'Series4',
-                        data: 50,
-                        color: '#ff7900'
-                    }
-                ]
-                $.plot('#donut-chart', donutData, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            innerRadius: 0.5,
-                            label: {
-                                show: true,
-                                radius: 2 / 3,
-                                formatter: labelFormatter,
-                                threshold: 0.1
-                            }
-
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                })
-                /*
-                 * END DONUT CHART
-                 */
-
-            })
-
-            /*
-             * Custom Label formatter
-             * ----------------------
-             */
-            function labelFormatter(label, series) {
-                return '<div style="font-size:16px; text-align:center; padding:4px; color: #fff; font-weight: 600;">' +
-                    label +
-                    '<br>' +
-                    Math.round(series.percent) + '%</div>'
+                    ?>
+                ]);
+                var options = {
+                    is3D: true,
+                    title: '',
+                    //is3D:true,  
+                    pieHole: 0.4,
+                    colors: ['#864313', '#c9641d', '#e68c4d', '#efb78f', '#f5d4bc'],
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('donut-chart'));
+                chart.draw(data, options);
             }
         </script>
+
         <script>
             $(document).ready(function() {
 

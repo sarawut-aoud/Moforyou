@@ -985,12 +985,11 @@ class reports extends Database
     }
     public function req_cow($farm_id)
     {
-        $re = mysqli_query($this->dbcon, "SELECT s.id, s.spec_name 
-        FROM tbl_cow as c 
-        INNER JOIN tbl_species as s ON (c.spec_id = s.id)  
-        INNER JOIN tbl_house as h ON (c.house_id = h.id)
-        INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
-        WHERE farm_id = '$farm_id'
+        $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
+        INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
+        INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
+        INNER JOIN tbl_farm as f ON(h.farm_id = f.id) 
+        WHERE h.farm_id = '$farm_id' GROUP BY s.spec_name;
        
         ");
         return  $re;
