@@ -47,6 +47,13 @@ if (empty($result)) {
         background: linear-gradient(0deg, rgba(107, 255, 102, 1) 0%, rgba(255, 180, 11, 1) 100%);
 
     }
+    .colorfont {
+        color: white;
+    }
+
+    .colorfont:hover {
+        color: saddlebrown;
+    }
 </style>
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
