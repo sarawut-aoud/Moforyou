@@ -86,6 +86,7 @@ $sql = new reports();
 //     http_response_code(200);
 // }
 $sqlcow = new cow();
+
 $query = $sqlcow->selectdatacowbyfarmer(3);
 $datenow = date_create(date('Y-m-d'));
 while ($row = $query->fetch_object()) {
@@ -96,34 +97,18 @@ while ($row = $query->fetch_object()) {
         $datediff = date_diff($datecow, $datenow);
         $diff = $datediff->format('%a');
         $diff2 = $datediff->format('%Y-%m-%d');
-
-        if ($diff == 30) {
-            $date_check =  date("Y-m-d", strtotime($date2 . "  -30 Day"));
-
-            $query3 =  $sql->req_recordfood(3, $row->id, $date_check);
+        // echo $rs->date. "<br>";
+        if ($diff >= 30) {
+            $date_check =  date("Y-m-d", strtotime($rs->date . "  -30 Day"));
+            echo $date_check. "<br>";
+            $query3 =  $sql->req_recordfood(3, $rs->id, $date_check);
             while ($rss = $query3->fetch_object()) {
-                $sum = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
-                $sum2 = $sum += $sum;
-                echo $sum."<br>";
+                echo $rss->id;
+                // $sum = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
+
+                // $sum2 = $sum += $sum;
+                // echo $sum . "<br>";
             }
         }
     }
 }
-$i = 0;
-// while ($row = $query->fetch_object()) {
-//     $id[$i] = $row->id;
-//     $query_s = $sqlspec->selectid($id[$i]);
-//     $rows = $query_s->fetch_array();
-//     $rs[$i] = $rows['id'];
-//     if ($rs[$i] == $id[$i]) {
-//         echo $rows['spec_name'];
-//         $data = array(
-//             "s_name" => $rows->spec_name,
-
-//         );
-//     }
-
-//     $i++;
-// }
-
-// echo $count;
