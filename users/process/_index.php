@@ -99,10 +99,12 @@ while ($row = $query->fetch_object()) {
 
         if ($diff == 30) {
             $date_check =  date("Y-m-d", strtotime($date2 . "  -30 Day"));
-            
+
             $query3 =  $sql->req_recordfood(3, $row->id, $date_check);
             while ($rss = $query3->fetch_object()) {
-               //คำนวนละ
+                $sum = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
+                $sum2 = $sum += $sum;
+                echo $sum."<br>";
             }
         }
     }
