@@ -994,15 +994,27 @@ class reports extends Database
         ");
         return  $re;
     }
-    public function req_spec($id)
+
+    public function req_recordfood($farm_id, $cowid, $date)
     {
-        $re = mysqli_query($this->dbcon, "SELECT s.id, s.spec_name 
-        FROM tbl_cow as c 
-        INNER JOIN tbl_species as s ON (c.spec_id = s.id)  
-        
-        WHERE s.id = '$id'
-       
-        ");
-        return  $re;
+        if (empty($date)) {
+            $re = mysqli_query($this->dbcon, "SELECT h.id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+            FROM tbl_foodrecord AS h 
+            INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
+            INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+             WHERE h.cow_id = '$cowid' AND h.farm_id = '$farm_id'
+             ORDER BY h.date DESC LIMIT 1
+            ");
+        } else {
+            $re = mysqli_query($this->dbcon, "SELECT  h.id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow,
+            c.cow_name 
+            FROM tbl_foodrecord AS h 
+            INNER JOIN tbl_cow AS c ON (h.cow_id= c.id)
+            INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+            WHERE h.cow_id = '$cowid' AND h.farm_id = '$farm_id' AND h.date = '$date'
+            ");
+        }
+        return $re;
     }
 }
+//SELECT;

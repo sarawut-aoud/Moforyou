@@ -197,7 +197,7 @@ if (empty($result)) {
                                 <div class="card-header">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        Bar Chart
+                                        น้ำหนักของโคในแต่ละเดือน (เปอร์เซ็นต์)
                                     </h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -251,6 +251,7 @@ if (empty($result)) {
         <script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
 
         <script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script> -->
+
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {
@@ -270,7 +271,6 @@ if (empty($result)) {
                 var options = {
                     is3D: true,
                     title: '',
-                    //is3D:true,  
                     pieHole: 0.4,
                     colors: ['#864313', '#c9641d', '#e68c4d', '#efb78f', '#f5d4bc'],
                 };
@@ -278,7 +278,43 @@ if (empty($result)) {
                 chart.draw(data, options);
             }
         </script>
+        <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+        <script type="text/javascript">
+            google.charts.load('current', {
+                'packages': ['bar']
+            });
+            google.charts.setOnLoadCallback(drawChart);
 
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Month', 'Sales', 'Expenses', 'Profit'],
+                    <?php
+                    $query = "select * from barchart";
+                    $res = mysqli_query($conn, $query);
+                    while ($data = mysqli_fetch_array($res)) {
+                        $year = $data['year'];
+                        $sale = $data['sale'];
+                        $expenses = $data['expenses'];
+                        $profit = $data['profit'];
+                    ?>['<?php echo $year; ?>', <?php echo $sale; ?>, <?php echo $expenses; ?>, <?php echo $profit; ?>],
+                    <?php
+                    }
+                    ?>
+                ]);
+
+                var options = {
+                    chart: {
+                        title: 'Company Performance',
+                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    },
+                    bars: 'vertical' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+        </script>
         <script>
             $(document).ready(function() {
 
