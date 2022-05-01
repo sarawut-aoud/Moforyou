@@ -51,7 +51,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
                                                           echo "active";
                                                         }  ?>">
         <i class="far fa-circle nav-icon"></i>
-        <p>ข้อมูลสายพันธุ์โคแต่ละฟาร์ม</p>
+        <p>ข้อมูลจำนวนสายพันธุ์โค</p>
       </a>
     </li>
     <li class="nav-item">

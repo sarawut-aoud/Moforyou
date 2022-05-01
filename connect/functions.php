@@ -571,10 +571,11 @@ class breed extends Database
         if (empty($farm_id)) {
             $breed = mysqli_query($this->dbcon, "SELECT  be.id , be.breed_date , be.breed_date_next AS breednext , 
             be.farm_id , be.cow_id_male As cowmale ,be.cow_id_female AS cowfemale ,
-            cm.cow_name AS namemale,cf.cow_name AS namefemale
+            cm.cow_name AS namemale,cf.cow_name AS namefemale ,f.farmname
             FROM tbl_breed AS be
             INNER JOIN tbl_cow  as cm on(be.cow_id_male=cm.id ) 
             INNER JOIN tbl_cow  as cf on(be.cow_id_female=cf.id )
+            INNER JOIN tbl_farm as f ON (be.farm_id = f.id)
            ");
         } else {
             $breed = mysqli_query($this->dbcon, "SELECT be.id , be.breed_date , be.breed_date_next AS breednext , 
@@ -985,13 +986,24 @@ class reports extends Database
     }
     public function req_cow($farm_id)
     {
-        $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
-        INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
-        INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
-        INNER JOIN tbl_farm as f ON(h.farm_id = f.id) 
-        WHERE h.farm_id = '$farm_id' GROUP BY s.spec_name;
+        if(empty($farm_id)){
+            $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
+            INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
+            INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
+            INNER JOIN tbl_farm as f ON(h.farm_id = f.id) 
+             GROUP BY s.spec_name;
+           
+            ");
+        }else{
+            $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
+            INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
+            INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
+            INNER JOIN tbl_farm as f ON(h.farm_id = f.id) 
+            WHERE h.farm_id = '$farm_id' GROUP BY s.spec_name;
+           
+            ");
+        }
        
-        ");
         return  $re;
     }
 

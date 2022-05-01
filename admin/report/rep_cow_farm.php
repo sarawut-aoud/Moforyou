@@ -64,36 +64,36 @@
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
+                                                <th>#</th>
+                                                <th>ฟาร์ม</th>
+
+                                                <th>ดูรายละเอียดจำนวนโค</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>X</td>
-                                            </tr>
+                                            <?php require '../../connect/functions.php';
+                                            $sql = new farm();
+                                            $query = $sql->selectfarm('admin');
+                                            while ($row = $query->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td style="width: 20%;"><?php echo $row->id; ?></td>
+                                                    <td><?php echo $row->farmname; ?></td>
+
+                                                    <td style="width: 20%;">
+                                                        <center>
+
+                                                            <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+
+                                                </tr>
+                                            <?php
+                                            } ?>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->

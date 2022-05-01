@@ -95,7 +95,7 @@ $query = $sql->select_allfarmer('');
                                                     <center>
                                                         
                                                         <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
-                                                            <i class="fas fa-pencil-alt"></i>
+                                                            <i class="fas fa-eye"></i>
                                                         </a>
                                                     </center>
                                                 </td>

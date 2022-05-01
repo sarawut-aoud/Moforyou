@@ -77,7 +77,7 @@ require '../../connect/session_ckeck.php';
                     <div class="card-header">
                       <h3 class="card-title">
                         <i class="far fa-chart-bar"></i>
-                        Bar Chart
+                        น้ำหนักของโคในแต่ละเดือน (เปอร์เซ็นต์)
                       </h3>
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -97,7 +97,7 @@ require '../../connect/session_ckeck.php';
                     <div class="card-header">
                       <h3 class="card-title">
                         <i class="far fa-chart-bar"></i>
-                        Donut Chart
+                        จำนวนสายพันธุ์ทั้งหมด
                       </h3>
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -124,7 +124,10 @@ require '../../connect/session_ckeck.php';
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <?php require '../sub/fooster.php'; ?>
+    <?php require '../sub/fooster.php';
+    require_once '../../connect/functions.php';
+    $sql = new reports();
+    $query = $sql->req_cow(''); ?>
 
   </div>
   <!-- ./wrapper -->
@@ -189,111 +192,32 @@ require '../../connect/session_ckeck.php';
       })
     });
   </script>
-      <script>
-            $(function() {
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
 
-                /*
-                 * BAR CHART
-                 * ---------
-                 */
-
-                var bar_data = {
-                    data: [
-                        [1, 10],
-                        [2, 8],
-                        [3, 4],
-                        [4, 13],
-                        [5, 17],
-                        [6, 9]
-                    ],
-                    bars: {
-                        show: true
-                    }
-                }
-                $.plot('#bar-chart', [bar_data], {
-                    grid: {
-                        borderWidth: 1,
-                        borderColor: '#f3f3f3',
-                        tickColor: '#f3f3f3'
-                    },
-                    series: {
-                        bars: {
-                            show: true,
-                            barWidth: 0.5,
-                            align: 'center',
-                        },
-                    },
-                    colors: ['#3c8dbc'],
-                    xaxis: {
-                        ticks: [
-                            [1, 'January'],
-                            [2, 'February'],
-                            [3, 'March'],
-                            [4, 'April'],
-                            [5, 'May'],
-                            [6, 'June']
-                        ]
-                    }
-                })
-                /* END BAR CHART */
-
-                /*
-                 * DONUT CHART
-                 * -----------
-                 */
-
-                var donutData = [{
-                        label: 'Series2',
-                        data: 30,
-                        color: '#ffc324'
-                    },
-                    {
-                        label: 'Series3',
-                        data: 20,
-                        color: '#ffda77'
-                    },
-                    {
-                        label: 'Series4',
-                        data: 50,
-                        color: '#ff7900'
-                    }
-                ]
-                $.plot('#donut-chart', donutData, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            innerRadius: 0.5,
-                            label: {
-                                show: true,
-                                radius: 2 / 3,
-                                formatter: labelFormatter,
-                                threshold: 0.1
-                            }
-
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                })
-                /*
-                 * END DONUT CHART
-                 */
-
-            })
-
-            /*
-             * Custom Label formatter
-             * ----------------------
-             */
-            function labelFormatter(label, series) {
-                return '<div style="font-size:16px; text-align:center; padding:4px; color: #fff; font-weight: 600;">' +
-                    label +
-                    '<br>' +
-                    Math.round(series.percent) + '%</div>'
-            }
-        </script>
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['spec_name', 'cow'],
+        <?php
+        while ($row =  $query->fetch_array()) {
+          echo "['" . $row["spec_name"] . "', " . $row["cow"] . "],";
+        }
+        ?>
+      ]);
+      var options = {
+        is3D: true,
+        title: '',
+        pieHole: 0.4,
+        colors: ['#864313', '#c9641d', '#e68c4d', '#efb78f', '#f5d4bc'],
+      };
+      var chart = new google.visualization.PieChart(document.getElementById('donut-chart'));
+      chart.draw(data, options);
+    }
+  </script>
 </body>
 
 </html>

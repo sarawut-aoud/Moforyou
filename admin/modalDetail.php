@@ -3,9 +3,9 @@
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header justify-content-center text-white edit-head">
+                <div class="modal-header justify-content-center text-white bg-info">
                     <div class="text-center">
-                        <h1 id = "modaltextcenter">  </h1>
+                        <h1 id="modaltextcenter"> </h1>
                     </div>
                 </div>
                 <div class="modal-body" id="modaldata">
@@ -21,7 +21,7 @@
                         <div class="input-group">
                             <label class="col-md-3 col-form-label ">เบอร์โทร :</label>
                             <span class="col-form-label col-md-4" id="modalphone"></span>
-                            
+
                         </div>
                     </div>
                     <div class="form-group row  mb-2">
@@ -32,21 +32,21 @@
                     </div>
                     <div class="form-group row  mb-2">
                         <div class="input-group">
-                            <label class="col-md-3 col-form-label ">เลขบัตรประชาชน :</label> 
+                            <label class="col-md-3 col-form-label ">เลขบัตรประชาชน :</label>
                             <span class="col-form-label col-md-5" id="modalpersonid"></span>
                         </div>
                     </div>
-                    
-                    
-                    
 
-                    
-                    
-                    
-                    
-                   
-                    
-                    
+
+
+
+
+
+
+
+
+
+
 
                     <!--//? /.html data -->
                 </div>

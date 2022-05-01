@@ -36,7 +36,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Report สายพันธุ์โคเนื้อแต่ละฟาร์ม</h1>
+                            <h1>Report จำนวนสายพันธุ์โคเนื้อ</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -64,36 +64,28 @@
                                     <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
+                                                <th>สายพันธุ์</th>
+                                                <th>จำนวน  (ตัว)</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                    Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                                <td>X</td>
-                                            </tr>
+                                            <?php require '../../connect/functions.php';
+                                            $sql = new reports();
+
+
+                                            $query1 = $sql->req_cow('');
+                                            while ($row = $query1->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $row->spec_name; ?></td>
+                                                    <td><?php echo $row->cow; ?></td>
+                                                </tr>
+                                            <?php
+
+                                            } ?>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                                <th>Edit&Delete</th>
-                                            </tr>
-                                        </tfoot>
+
                                     </table>
                                 </div>
                                 <!-- /.card-body -->

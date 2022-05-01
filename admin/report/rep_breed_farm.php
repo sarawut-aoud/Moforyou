@@ -74,7 +74,7 @@ require '../../connect/functions.php';
                                                 <th>ระหว่าง</th>
                                                 <th>วันที่ / เวลา</th>
                                                 <th>ประมาณวันที่คลอด</th>
-
+                                                <th>ฟาร์ม</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
@@ -107,6 +107,7 @@ require '../../connect/functions.php';
                                                     <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                     <td><?php echo DateThai($rs->breed_date); ?></td>
                                                     <td><?php echo DateThai($rs->breednext); ?></td>
+                                                    <td><?php echo ($rs->farmname); ?></td>
                                                     <!--  -->
                                                 </tr>
                                             <?php } ?>

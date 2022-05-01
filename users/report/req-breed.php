@@ -69,7 +69,7 @@ if (empty($result)) {
                                                         <th>ระหว่าง</th>
                                                         <th>วันที่ / เวลา</th>
                                                         <th>ประมาณวันที่คลอด</th>
-
+                                                        
                                                     </tr>
 
                                                 </thead>
@@ -90,20 +90,20 @@ if (empty($result)) {
                                                             $strSeconds = date("s", strtotime($strDate));
                                                             $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
                                                             $strMonthThai = $strMonthCut[$strMonth];
-                                                            if($strHour =='00' && $strMinute =='00' ){
+                                                            if ($strHour == '00' && $strMinute == '00') {
                                                                 return "$strDay $strMonthThai $strYear   ";
-                                                            }else{
+                                                            } else {
                                                                 return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
                                                             }
-                                                           
                                                         }
-                                                       
+
                                                     ?>
                                                         <tr align="center">
                                                             <td style="width: 10%;"><?php echo $rs->id; ?></td>
                                                             <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                             <td><?php echo DateThai($rs->breed_date); ?></td>
                                                             <td><?php echo DateThai($rs->breednext); ?></td>
+                                                           
                                                             <!--  -->
                                                         </tr>
                                                     <?php } ?>
