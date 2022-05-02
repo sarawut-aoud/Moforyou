@@ -218,6 +218,80 @@ require '../../connect/session_ckeck.php';
       chart.draw(data, options);
     }
   </script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Month', 'การเติบโต'],
+        <?php
+        function DateThai($strDate)
+        {
+          $strYear = date("Y", strtotime($strDate)) + 543;
+          $strMonth = date("n", strtotime($strDate));
+          $strDay = date("j", strtotime($strDate));
+          $strHour = date("H", strtotime($strDate));
+          $strMinute = date("i", strtotime($strDate));
+          $strSeconds = date("s", strtotime($strDate));
+          $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+          $strMonthThai = $strMonthCut[$strMonth];
+          if ($strHour == '00' && $strMinute == '00') {
+            return "$strDay $strMonthThai $strYear   ";
+          } else {
+            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+          }
+        }
+        require_once '../../connect/functions.php';
+
+        $sql = new reports();
+        $sqlcow = new cow();
+        $query = $sqlcow->selectdatacowbyfarmer('');
+        $year = date('Y');
+        $i = 0;
+        $x=1;
+        $total = 0;
+        while ($row = $query->fetch_object()) {
+          $query2 = $sql->req_recordfoodadmin('', $year);
+          while ($rs = $query2->fetch_object()) {
+            $date_check =  date("Y-m-d", strtotime($rs->date . " -30 Day"));
+            $a = $rs->weight_cow;
+            $b =  $rs->sumweight_food;
+
+            $query3 =  $sql->req_recordfoodadmin($date_check, '');
+
+            while ($rss = $query3->fetch_object()) {
+              $sum[$i] = 0;
+              $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
+              $total =  $total + $sum[$i];
+        ?>['<?php echo "รอบที่ ".$x++; ?>', <?php echo  $total; ?>],
+        <?php
+            }
+          }
+          $i++;
+        }
+        ?>
+      ]);
+
+      var options = {
+        chart: {
+          title: '',
+          subtitle: '',
+          width: 800,
+          height: 500,
+        },
+        bars: 'vertical' // Required for Material Bar Charts.
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('bar-chart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+  </script>
+
+
 </body>
 
 </html>

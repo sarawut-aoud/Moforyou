@@ -1032,5 +1032,26 @@ class reports extends Database
         }
         return $re;
     }
+    public function req_recordfoodadmin($date, $year)
+    {
+        if (empty($date) && isset($year)) {
+            $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+            FROM tbl_foodrecord AS h 
+            INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
+            INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+             WHERE YEAR(h.date) = '$year'
+            ORDER BY h.date DESC LIMIT 1
+            ");
+        } else if (empty($year) && isset($date)) {
+            $re = mysqli_query($this->dbcon, "SELECT  h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow,
+            c.cow_name 
+            FROM tbl_foodrecord AS h 
+            INNER JOIN tbl_cow AS c ON (h.cow_id= c.id)
+            INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+            WHERE  h.date = '$date'
+            ");
+        }
+        return $re;
+    }
 }
 //SELECT;
