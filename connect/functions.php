@@ -150,7 +150,7 @@ class farm extends Database
             FROM tbl_farm  AS f
             INNER JOIN tbl_farmer AS fm 
             ON (f.farmmer_id = fm.id)
-            WHERE f.id = '$id'
+            WHERE f.farmmer_id = '$id'
             ");
         }
 
@@ -608,12 +608,13 @@ class breed extends Database
     }
     // Update
 
-    public function update_breed($id, $cowidmale, $cowidfemale)
+    public function update_breed($id, $cowidmale, $cowidfemale, $datestart, $datenext)
     {
         $updatecow = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
         cow_id_male = '$cowidmale' ,
-        cow_id_female ='$cowidfemale'
-        
+        cow_id_female ='$cowidfemale',
+        breed_date = '$datestart',
+        breed_date_next='$datenext'
         
         WHERE id = '$id'
         ");

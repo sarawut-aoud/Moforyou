@@ -49,7 +49,7 @@ if (empty($result)) {
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header card-cow"">
-                                        <h3 class=" text-center "><i class="fa fa-venus-mars"></i> ผสมพันธุ์</h3>
+                                        <h3 class=" text-center "><i class=" fa fa-venus-mars"></i> ผสมพันธุ์</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
@@ -75,7 +75,14 @@ if (empty($result)) {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="form-group row">
+                                                <div class="input-group ">
+                                                    <label class="col-sm-3 col-form-label" for="date_breed">วันที่ผสมพันธุ์ : </label>
+                                                    <div class="col-md">
+                                                        <input type="date" class="form-control  " id="date_breed" required>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <div class=" input-group justify-content-center">
                                                     <label class=" col-form-label">
@@ -101,97 +108,100 @@ if (empty($result)) {
                                             <button type="reset" class="btn btn-secondary reset">ยกเลิก</button>
                                             <button type="submit" id="submit" name="submit" class="btn btn-primary submit">ยืนยันการผสมพันธุ์</button>
                                         </div>
-                                        </form>
-                                    </div>
-                                    <!-- /.card -->
-
-                                </div>
-                                <!-- ./col -->
-                            </div>
-                            <!-- ./row -->
-
-                        </div><!-- /.container-fluid -->
-                    </div>
-                    <!-- /.content-header -->
-
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12 mb-5">
-                                <div class="card">
-                                    <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">ผสมพันธุ์</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <!-- table -->
-                                        <table id="example1" class="table table-bordered table-striped table-hover">
-                                            <!-- head table -->
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>ระหว่าง</th>
-                                                    <th>วันที่/เวลา</th>
-                                                    <th>แก้ไข / ลบข้อมูล</th>
-                                                </tr>
-                                            </thead>
-                                            <!-- /.head table -->
-                                            <!-- body table -->
-                                            <tbody>
-                                                <?php
-                                                $data = new breed();
-                                                $row = $data->select_breed_all($farmid);
-                                                while ($rs = $row->fetch_object()) {
-                                                    function DateThai($strDate)
-                                                    {
-                                                        $strYear = date("Y", strtotime($strDate)) + 543;
-                                                        $strMonth = date("n", strtotime($strDate));
-                                                        $strDay = date("j", strtotime($strDate));
-                                                        $strHour = date("H", strtotime($strDate));
-                                                        $strMinute = date("i", strtotime($strDate));
-                                                        $strSeconds = date("s", strtotime($strDate));
-                                                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                        $strMonthThai = $strMonthCut[$strMonth];
-                                                        if ($strHour == '00' && $strMinute == '00') {
-                                                            return "$strDay $strMonthThai $strYear   ";
-                                                        } else {
-                                                            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                        }
-                                                    }
-                                                ?>
-                                                    <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
-                                                        <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
-                                                        <td><?php echo DateThai($rs->breed_date); ?></td>
-                                                        <td class="text-center">
-
-                                                            <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
-                                                                <i class="fa fa-pen-alt"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btn_del" id="<?php echo $rs->id; ?>">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                            <!-- /.body table -->
-
-                                        </table>
-                                        <!-- /.table -->
-                                    </div>
-                                    <!-- /.card-body -->
+                                    </form>
                                 </div>
                                 <!-- /.card -->
+
                             </div>
+                            <!-- ./col -->
                         </div>
+                        <!-- ./row -->
 
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-12 mb-5">
+                            <div class="card">
+                                <div class="card-header card-outline card-blue">
+                                    <h3 class=" text-center">ผสมพันธุ์</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <!-- table -->
+                                    <table id="example1" class="table table-bordered table-striped table-hover">
+                                        <!-- head table -->
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ระหว่าง</th>
+                                                <th>วันที่/เวลา</th>
+                                                <th>ประมาณวันที่</th>
+                                                <th>แก้ไข / ลบข้อมูล</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- /.head table -->
+                                        <!-- body table -->
+                                        <tbody>
+                                            <?php
+                                            function DateThai($strDate)
+                                            {
+                                                $strYear = date("Y", strtotime($strDate)) + 543;
+                                                $strMonth = date("n", strtotime($strDate));
+                                                $strDay = date("j", strtotime($strDate));
+                                                $strHour = date("H", strtotime($strDate));
+                                                $strMinute = date("i", strtotime($strDate));
+                                                $strSeconds = date("s", strtotime($strDate));
+                                                $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                $strMonthThai = $strMonthCut[$strMonth];
+                                                if ($strHour == '00' && $strMinute == '00') {
+                                                    return "$strDay $strMonthThai $strYear   ";
+                                                } else {
+                                                    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                }
+                                            }
+                                            $data = new breed();
+                                            $row = $data->select_breed_all($farmid);
+                                            while ($rs = $row->fetch_object()) {
+
+                                            ?>
+                                                <tr>
+                                                    <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                    <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
+                                                    <td><?php echo DateThai($rs->breed_date); ?></td>
+                                                    <td><?php echo DateThai($rs->breednext); ?></td>
+                                                    <td class="text-center">
+
+                                                        <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-pen-alt"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btn_del" id="<?php echo $rs->id; ?>">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                        <!-- /.body table -->
+
+                                    </table>
+                                    <!-- /.table -->
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
                     </div>
-                    <?php require_once "modaltabbreed.php"
-                    ?>
-
 
                 </div>
-                <!-- /.content-wrapper -->
+                <?php require_once "modaltabbreed.php"
+                ?>
+
+
+            </div>
+            <!-- /.content-wrapper -->
         </section>
         <!-- Main Footer -->
         <?php require '../sub/footer.php'; ?>
@@ -205,11 +215,11 @@ if (empty($result)) {
 
             $('#timeabout').html('00-00-0000').css('color', 'red');
             $('#modal_timeabout').html('00-00-0000').css('color', 'red');
-            
+
             $(document).on('click', '.reset', function(e) {
                 e.preventDefault();
-                $('#cow_id_male').val(0).trigger( "change" );
-                $('#cow_id_female').val(0).trigger( "change" );
+                $('#cow_id_male').val(0).trigger("change");
+                $('#cow_id_female').val(0).trigger("change");
                 $('#frm_breed')[0].reset();
                 $('#timeabout').html('00-00-0000').css('color', 'red');
             })
@@ -274,6 +284,7 @@ if (empty($result)) {
                 e.preventDefault();
                 var female = $('#cow_id_female').val();
                 var male = $('#cow_id_male').val();
+                var datebreed = $('#date_breed').val();
                 $.ajax({
                     type: "post",
                     dataType: 'json',
@@ -282,6 +293,7 @@ if (empty($result)) {
                         function: "insert",
                         farm_id: farm_id,
                         female: female,
+                        datebreed: datebreed,
                         male: male,
                     },
                     success: function(result) {
@@ -312,35 +324,32 @@ if (empty($result)) {
                 })
             })
             // show date + 282 day
-            $('#cow_id_female,#cow_id_male').change(function(e) {
-                var female = $('#cow_id_female').val();
+            $('#date_breed').change(function(e) {
+                var date = $('#date_breed').val();
 
-                var male = $('#cow_id_male').val();
+                function toThaiDateString(date) {
+                    let monthNames = [
+                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                    ];
 
-                if (male != undefined && female != undefined) {
-                    function toThaiDateString(date) {
-                        let monthNames = [
-                            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
-                            "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
-                            "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                        ];
+                    let year = date.getFullYear() + 543;
+                    let month = monthNames[date.getMonth()];
+                    let numOfDay = date.getDate();
 
-                        let year = date.getFullYear() + 543;
-                        let month = monthNames[date.getMonth()];
-                        let numOfDay = date.getDate();
+                    let hour = date.getHours().toString().padStart(2, "0");
+                    let minutes = date.getMinutes().toString().padStart(2, "0");
+                    let second = date.getSeconds().toString().padStart(2, "0");
 
-                        let hour = date.getHours().toString().padStart(2, "0");
-                        let minutes = date.getMinutes().toString().padStart(2, "0");
-                        let second = date.getSeconds().toString().padStart(2, "0");
-
-                        return `${numOfDay} ${month} ${year} `; //+
-                        // `${hour}:${minutes}:${second} น.`;
-                    }
-                    const d = new Date();
-                    d.setDate(d.getDate() + 282);
-                    $('#timeabout').html(toThaiDateString(d)).css('color', 'red');
-
+                    return `${numOfDay} ${month} ${year} `; //+
+                    // `${hour}:${minutes}:${second} น.`;
                 }
+                const d = new Date(date);
+                d.setDate(d.getDate() + 282);
+                $('#timeabout').html(toThaiDateString(d)).css('color', 'red');
+
+
             });
 
             $(document).on('click', '.btn_edit', function(e) {
@@ -365,6 +374,29 @@ if (empty($result)) {
                         $('#modalEdit').modal('show');
                         $('#modaltextcenter').html(txt);
                         $('#modal_tabbreed_id').val(id);
+                        $('#modaldate_breed').val(rs.date);
+
+                        function toThaiDateString(date) {
+                            let monthNames = [
+                                "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                                "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                                "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                            ];
+
+                            let year = date.getFullYear() + 543;
+                            let month = monthNames[date.getMonth()];
+                            let numOfDay = date.getDate();
+
+                            let hour = date.getHours().toString().padStart(2, "0");
+                            let minutes = date.getMinutes().toString().padStart(2, "0");
+                            let second = date.getSeconds().toString().padStart(2, "0");
+
+                            return `${numOfDay} ${month} ${year} `; //+
+                            // `${hour}:${minutes}:${second} น.`;
+                        }
+                        const d = new Date(rs.date);
+                        d.setDate(d.getDate() + 282);
+                        $('#modal_timeabout').html(toThaiDateString(d)).css('color', 'red');
                         $.ajax({
                             type: "get",
                             dataType: 'json',
@@ -414,6 +446,33 @@ if (empty($result)) {
                             }
 
                         })
+                        $('#modaldate_breed').change(function(e) {
+                            var date = $('#modaldate_breed').val();
+
+                            function toThaiDateString(date) {
+                                let monthNames = [
+                                    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                                    "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                                    "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                                ];
+
+                                let year = date.getFullYear() + 543;
+                                let month = monthNames[date.getMonth()];
+                                let numOfDay = date.getDate();
+
+                                let hour = date.getHours().toString().padStart(2, "0");
+                                let minutes = date.getMinutes().toString().padStart(2, "0");
+                                let second = date.getSeconds().toString().padStart(2, "0");
+
+                                return `${numOfDay} ${month} ${year} `; //+
+                                // `${hour}:${minutes}:${second} น.`;
+                            }
+                            const d = new Date(date);
+                            d.setDate(d.getDate() + 282);
+                            $('#modal_timeabout').html(toThaiDateString(d)).css('color', 'red');
+
+
+                        });
                     }
 
                 })
@@ -479,6 +538,7 @@ if (empty($result)) {
                 var update_id = $('#modal_tabbreed_id').val();
                 var cowmale = $('#modal_cow_id_male').val();
                 var cowfemale = $("#modal_cow_id_female").val();
+                var datebreed = $("#modaldate_breed").val();
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
@@ -487,6 +547,7 @@ if (empty($result)) {
                         update_id: update_id,
                         cowmale: cowmale,
                         cowfemale: cowfemale,
+                        datebreed: datebreed,
                         function: "edit"
                     },
                     success: function(result) {

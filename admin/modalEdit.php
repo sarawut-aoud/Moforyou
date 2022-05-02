@@ -164,7 +164,7 @@
                         <div class="input-group">
                             <label class="col-md-2 col-form-label">อำเภอ : </label>
                             <div class="col-md-10">
-                                <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" id="ampher_id">
+                                <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" id="modalampher_id">
                                     <!-- <option value="">--เลือกโรงเรือน --</option> -->
                                 </select>
                             </div>

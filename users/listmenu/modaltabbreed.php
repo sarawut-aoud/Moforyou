@@ -32,6 +32,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="input-group ">
+                            <label class="col-sm-3 col-form-label" for="modaldate_breed">วันที่ผสมพันธุ์ : </label>
+                            <div class="col-md">
+                                <input type="date" class="form-control  " id="modaldate_breed" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class=" input-group justify-content-center">
                             <label class=" col-form-label">
                                 <span><strong style="font-size: 24px;">ประมาณวันที่ </strong><span id="modal_timeabout"></span></span>

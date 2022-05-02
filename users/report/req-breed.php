@@ -69,7 +69,7 @@ if (empty($result)) {
                                                         <th>ระหว่าง</th>
                                                         <th>วันที่ / เวลา</th>
                                                         <th>ประมาณวันที่คลอด</th>
-                                                        
+
                                                     </tr>
 
                                                 </thead>
@@ -77,25 +77,26 @@ if (empty($result)) {
                                                 <!-- body table -->
                                                 <tbody>
                                                     <?php
+                                                    function DateThai($strDate)
+                                                    {
+                                                        $strYear = date("Y", strtotime($strDate)) + 543;
+                                                        $strMonth = date("n", strtotime($strDate));
+                                                        $strDay = date("j", strtotime($strDate));
+                                                        $strHour = date("H", strtotime($strDate));
+                                                        $strMinute = date("i", strtotime($strDate));
+                                                        $strSeconds = date("s", strtotime($strDate));
+                                                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                        $strMonthThai = $strMonthCut[$strMonth];
+                                                        if ($strHour == '00' && $strMinute == '00') {
+                                                            return "$strDay $strMonthThai $strYear   ";
+                                                        } else {
+                                                            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                        }
+                                                    }
                                                     $data = new breed();
                                                     $row = $data->select_breed_all($farmid);
                                                     while ($rs = mysqli_fetch_object($row)) {
-                                                        function DateThai($strDate)
-                                                        {
-                                                            $strYear = date("Y", strtotime($strDate)) + 543;
-                                                            $strMonth = date("n", strtotime($strDate));
-                                                            $strDay = date("j", strtotime($strDate));
-                                                            $strHour = date("H", strtotime($strDate));
-                                                            $strMinute = date("i", strtotime($strDate));
-                                                            $strSeconds = date("s", strtotime($strDate));
-                                                            $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                            $strMonthThai = $strMonthCut[$strMonth];
-                                                            if ($strHour == '00' && $strMinute == '00') {
-                                                                return "$strDay $strMonthThai $strYear   ";
-                                                            } else {
-                                                                return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                            }
-                                                        }
+
 
                                                     ?>
                                                         <tr align="center">
@@ -103,7 +104,7 @@ if (empty($result)) {
                                                             <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                             <td><?php echo DateThai($rs->breed_date); ?></td>
                                                             <td><?php echo DateThai($rs->breednext); ?></td>
-                                                           
+
                                                             <!--  -->
                                                         </tr>
                                                     <?php } ?>

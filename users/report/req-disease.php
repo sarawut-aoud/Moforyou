@@ -77,16 +77,7 @@ if (empty($result)) {
                                             <tbody>
                                                 <?php
                                                 $data = new heal();
-                                                $row = $data->select_healbyfarm($farmid);
-                                                while ($rs = mysqli_fetch_object($row)) {
-                                                    if ($rs->detail != NULL && $rs->healmore != NULL) {
-                                                        $dis = $rs->detail . ' และ ' . $rs->healmore;
-                                                    } else if ($rs->detail == NULL) {
-                                                        $dis = $rs->healmore;
-                                                    } else {
-                                                        $dis = $rs->detail;
-                                                    }
-                                                    function DateThai($strDate)
+                                                function DateThai($strDate)
                                                     {
                                                         $strYear = date("Y", strtotime($strDate)) + 543;
                                                         $strMonth = date("n", strtotime($strDate));
@@ -102,6 +93,16 @@ if (empty($result)) {
                                                             return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
                                                         }
                                                     }
+                                                $row = $data->select_healbyfarm($farmid);
+                                                while ($rs = mysqli_fetch_object($row)) {
+                                                    if ($rs->detail != NULL && $rs->healmore != NULL) {
+                                                        $dis = $rs->detail . ' และ ' . $rs->healmore;
+                                                    } else if ($rs->detail == NULL) {
+                                                        $dis = $rs->healmore;
+                                                    } else {
+                                                        $dis = $rs->detail;
+                                                    }
+                                                    
 
                                                 ?>
                                                     <tr>

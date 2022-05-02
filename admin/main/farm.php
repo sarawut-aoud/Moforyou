@@ -19,7 +19,7 @@ $query = $sql->selectfarm('admin');
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../../dist/img/loading.gif" alt="RELOAD" >
+            <img class="animation__shake" src="../../dist/img/loading.gif" alt="RELOAD">
         </div>
         <?php
         // Navbar Admin
@@ -165,15 +165,40 @@ $query = $sql->selectfarm('admin');
                     if (rs[i].id == id) {
                         var farmname = rs[i].farmname;
                         var farmername = rs[i].farmername;
+                        var district = rs[i].amphuer_id;
                     }
                 }
+                console.log(district);
                 $("#modalEditFarm").modal("show");
                 $("#modaltextcenter").html(txt_head)
                 $("#farmname").val(farmname);
                 $("#name").val(farmername);
-
                 $('#modal_herdid').val(rs.id);
 
+                $.ajax({
+                    type: 'get', //post put get delete
+                    dataType: "json",
+                    url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
+                    data: { // ส่งค่าอะไรไปบ้าง
+                        id: '',
+                        function: 'amphuer',
+                    },
+                    success: function(results) {
+                        var data = '';
+                        for (i in results) {
+
+                            if (results[i].amp_id == district) {
+                                data += '<option value="' + results[i].amp_id + '" selected >' + results[i].name_th + '</option>';
+                            } else {
+                                data += '<option value="' + results[i].amp_id + '">' + results[i].name_th + '</option>';
+
+                            }
+                        }
+                        $("#modalampher_id").html(data);
+
+                    }
+
+                })
 
 
             }

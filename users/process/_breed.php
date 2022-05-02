@@ -62,15 +62,16 @@ if (isset($func) && $func == 'showmale') {
 if (isset($func) && $func == 'insert') {
     $female = $_POST['female'];
     $male = $_POST['male'];
+    $date_bredd = $_POST['datebreed'];
 
-    if (empty($farm_id) || empty($female) || empty($male)) {
+    if (empty($farm_id) || empty($female) || empty($male) || empty($date_bredd)) {
         $msg = array(
             "status" => 0,
             "message" => 'ไม่สามารถบันทึกข้อมูลได้',
         );
     } else {
-        $datestart = date("Y-m-d H:i:s");
-        $date = date("Y-m-d"); //? วันที่ปัจจุบัน
+        $datestart = date($date_bredd);
+        $date = date($date_bredd); //? วันที่ปัจจุบัน
         $datenext = date('Y-m-d', strtotime($date . "+282 days")); //? วันที่เฉลี่ย ในการผสมพันธุ์
         $query = $sqlbreed->insertbreed($datestart, $datenext, $farm_id, $female, $male);
         $msg = array(
@@ -81,7 +82,6 @@ if (isset($func) && $func == 'insert') {
 
     echo json_encode($msg);
     http_response_code(200);
-    
 }
 
 if (isset($func) && $func == 'showedit') {
@@ -91,11 +91,11 @@ if (isset($func) && $func == 'showedit') {
     while ($row = $query->fetch_object()) {
         $cowmale = array(
             "id" => intval($row->id),
-            "date"=>$row->breed_date,
+            "date" => date('Y-m-d', strtotime($row->breed_date)),
             "datenext" => $row->breednext,
-            "cowmale" => $row ->cowmale,
-            "cowfemale" => $row ->cowfemale
-            
+            "cowmale" => $row->cowmale,
+            "cowfemale" => $row->cowfemale
+
         );
         $i++;
     }
@@ -106,11 +106,10 @@ if (isset($func) && $func == 'showedit') {
         echo json_encode($cowmale);
         http_response_code(200);
     }
-
 }
 if (isset($func) && $func == 'delete') {
     $id = $_GET['id'];
-    
+
 
     if (empty($id)) {
         $msg = array(
@@ -127,12 +126,12 @@ if (isset($func) && $func == 'delete') {
 
     echo json_encode($msg);
     http_response_code(200);
-    
 }
 if (isset($func) && $func == 'edit') {
     $id = $_POST['update_id'];
     $cowmale = $_POST['cowmale'];
     $cowfemale = $_POST['cowfemale'];
+    $date_bredd = $_POST['datebreed'];
     if (empty($id) || empty($cowmale) || empty($cowfemale)) {
         $msg = array(
             "error" => true,
@@ -142,7 +141,10 @@ if (isset($func) && $func == 'edit') {
         echo json_encode($msg);
         http_response_code(404);
     } else {
-        $query = $sqlbreed->update_breed($id,$cowmale, $cowfemale,);
+        $datestart = date($date_bredd);
+        $date = date($date_bredd); //? วันที่ปัจจุบัน
+        $datenext = date('Y-m-d', strtotime($date . "+282 days")); //? วันที่เฉลี่ย ในการผสมพันธุ์
+        $query = $sqlbreed->update_breed($id, $cowmale, $cowfemale, $datestart, $datenext);
         $msg = array(
             "status" => 200,
             "message" => 'แก้ไขข้อมูลสำเร็จ',

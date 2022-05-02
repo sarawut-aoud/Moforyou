@@ -279,7 +279,7 @@ if (empty($result)) {
             }
         </script>
         <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['bar']
             });
@@ -314,7 +314,7 @@ if (empty($result)) {
 
                 chart.draw(data, google.charts.Bar.convertOptions(options));
             }
-        </script>
+        </script> -->
         <script>
             $(document).ready(function() {
 
@@ -325,8 +325,27 @@ if (empty($result)) {
                 }, 60000);
             });
 
-            function cache_clear() {
 
+
+            function cache_clear() {
+                function toThaiDateString(date) {
+                    let monthNames = [
+                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                    ];
+
+                    let year = date.getFullYear() + 543;
+                    let month = monthNames[date.getMonth()];
+                    let numOfDay = date.getDate();
+
+                    let hour = date.getHours().toString().padStart(2, "0");
+                    let minutes = date.getMinutes().toString().padStart(2, "0");
+                    let second = date.getSeconds().toString().padStart(2, "0");
+
+                    return `${numOfDay} ${month} ${year} `; //+
+                    // `${hour}:${minutes}:${second} น.`;
+                }
                 var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
                 $.ajax({
                     type: "get",
@@ -337,8 +356,9 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-
-                        $('#datebreed').html(result.date2);
+                        var date1 = new Date(result.date2)
+                        var date = toThaiDateString(date1);
+                        $('#datebreed').html(date);
                         $('#namemale').html(result.namemale2);
                         $('#namefemale').html(result.namefemale2);
                     }
@@ -366,7 +386,9 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        $('#datefood').html(result.date);
+                        var date1 = new Date(result.date)
+                        var date = toThaiDateString(date1);
+                        $('#datefood').html(date);
                         // $('#cowfood').html(result.cow);
                         $('#weightfood').html(result.weight_food);
                         var date = result.date;
@@ -396,7 +418,9 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        $('#dateheal').html(result.date);
+                        var date1 = new Date(result.date)
+                        var date = toThaiDateString(date1);
+                        $('#dateheal').html(date);
                         $('#namecowheal').html(result.cow);
 
                         $('#doctorheal').html(result.docname);
