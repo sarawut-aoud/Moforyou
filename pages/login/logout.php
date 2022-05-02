@@ -8,6 +8,7 @@ unset($_SESSION["fullname"]);
 unset($_SESSION["person_id"]);
 unset($_SESSION["phone"]);
 unset($_SESSION["email"]);
+unset($_SESSION["farm_id"]);
 
 echo "<script>
 	window.setTimeout(function() {

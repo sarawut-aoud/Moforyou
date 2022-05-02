@@ -37,17 +37,6 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
                     <!--//? /.html data -->
                 </div>
                 <div class="modal-footer">
@@ -56,6 +45,42 @@
             </div>
         </div>
     </div>
-
 </form>
+<!-- Modal detail -->
+<!-- Modal detail -->
+<!-- <form action="" method="POST" id="modalRoomall"> -->
+<div class="modal fade" id="modalshowcow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center text-white bg-info">
+                <div class="text-center">
+                    <h1 id="modaltextcenter2"> </h1>
+                </div>
+            </div>
+            <div class="modal-body" id="modaldata">
+                <!-- style="overflow-x: scroll;" -->
+                <!--//? /.html data -->
+                <div class="form-group row  mb-2 ">
+                    <center style="font-size: 22px;">
+                        <label class="col-form-label ">ฟาร์ม :</label>
+                        <span class="col-form-label" id="modalfarm"></span>
+                    </center>
+                </div>
+                <div class="form-group row  mb-2">
+                    <div class="input-group">
+                        <label class="col-md-3 col-form-label ">จำนวนโคเนื้อ :</label>
+                        <span class="col-form-label " id="modalcow"></span>
+                    </div>
+                </div>
+
+
+                <!--//? /.html data -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </form> -->
 <!-- Modal detail -->

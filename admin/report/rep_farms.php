@@ -66,9 +66,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>ฟาร์ม</th>
-
-                                                <th>ดูรายละเอียดจำนวนโค</th>
-
+                                                <th>ที่อยู่</th>
+                                                <th>ชื่อเจ้าของฟาร์ม</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,18 +77,16 @@
                                             while ($row = $query->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td style="width: 20%;"><?php echo $row->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $row->id; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
-
-                                                    <td style="width: 20%;">
-                                                        <center>
-
-                                                            <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </center>
-                                                    </td>
-
+                                                    <td><?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+                                                        $tombon = json_decode($get_tombon);
+                                                        foreach ($tombon as $value) {
+                                                            if ($row->district_id == $value->id) { //? check id amphur
+                                                                echo  $value->name_th;
+                                                            }
+                                                        }; ?></td>
+                                                    <td><?php echo $row->fullname; ?></td>
                                                 </tr>
                                             <?php
                                             } ?>

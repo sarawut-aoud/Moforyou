@@ -149,7 +149,9 @@ class farm extends Database
             $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
             FROM tbl_farm  AS f
             INNER JOIN tbl_farmer AS fm 
-            ON (f.farmmer_id = fm.id)");
+            ON (f.farmmer_id = fm.id)
+            WHERE f.id = '$id'
+            ");
         }
 
         return $sel_farm;
@@ -907,9 +909,10 @@ class reports extends Database
     }
     public function req_countcow($farm_id)
     {
-        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow 
+        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname 
         FROM tbl_cow as c
         INNER JOIN tbl_house as ho ON (c.house_id = ho.id )
+        INNER JOIN tbl_farm as f ON (ho.farm_id  = f.id)
         WHERE ho.farm_id = '$farm_id'");
         return $re;
     }
@@ -986,7 +989,7 @@ class reports extends Database
     }
     public function req_cow($farm_id)
     {
-        if(empty($farm_id)){
+        if (empty($farm_id)) {
             $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
             INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
             INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
@@ -994,7 +997,7 @@ class reports extends Database
              GROUP BY s.spec_name;
            
             ");
-        }else{
+        } else {
             $re = mysqli_query($this->dbcon, "SELECT s.spec_name ,COUNT(*) as cow FROM tbl_cow
             INNER JOIN tbl_species as s ON(tbl_cow.spec_id = s.id ) 
             INNER JOIN tbl_house as h ON(tbl_cow.house_id = h.id)
@@ -1003,7 +1006,7 @@ class reports extends Database
            
             ");
         }
-       
+
         return  $re;
     }
 

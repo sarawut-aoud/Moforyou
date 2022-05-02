@@ -111,13 +111,38 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require '../sub/fooster.php'; ?>
+        <?php require '../modalDetail.php';
+        require '../sub/fooster.php'; ?>
 
     </div>
     <!-- ./wrapper -->
+    <script src="../../dist/js/datatableprint.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.btnDetail', function(e) {
+                e.preventDefault();
+                var txt = 'ดูรายละเอียดจำนวนโค';
+                var farm_id = $(this).attr('id');
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '../process/_req_cowfarm.php',
+                    data: {
+                        function: 'showcow',
+                        farm_id: farm_id,
+                    },
+                    success: function(result) {
+                        $("#modalshowcow").modal('show');
+                        $("#modaltextcenter2").html(txt);
+                        $("#modalfarm").html(result.farmname);
+                        $("#modalcow").html(result.cow + '  ตัว');
 
+                    }
+                })
+            })
+        });
+    </script>
 </body>
-<script src="../../dist/js/datatableprint.js"></script>
 
 
 </html>
