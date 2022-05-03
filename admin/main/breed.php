@@ -85,26 +85,26 @@ require '../../connect/functions.php';
                                         <!-- body table -->
                                         <tbody>
                                             <?php
+                                            function DateThai($strDate)
+                                            {
+                                                $strYear = date("Y", strtotime($strDate)) + 543;
+                                                $strMonth = date("n", strtotime($strDate));
+                                                $strDay = date("j", strtotime($strDate));
+                                                $strHour = date("H", strtotime($strDate));
+                                                $strMinute = date("i", strtotime($strDate));
+                                                $strSeconds = date("s", strtotime($strDate));
+                                                $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                $strMonthThai = $strMonthCut[$strMonth];
+                                                if ($strHour == '00' && $strMinute == '00') {
+                                                    return "$strDay $strMonthThai $strYear   ";
+                                                } else {
+                                                    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+                                                }
+                                            }
                                             $data = new breed();
                                             $row = $data->select_breed_all('');
-                                            while ($rs = mysqli_fetch_object($row)) {
-                                                function DateThai($strDate)
-                                                {
-                                                    $strYear = date("Y", strtotime($strDate)) + 543;
-                                                    $strMonth = date("n", strtotime($strDate));
-                                                    $strDay = date("j", strtotime($strDate));
-                                                    $strHour = date("H", strtotime($strDate));
-                                                    $strMinute = date("i", strtotime($strDate));
-                                                    $strSeconds = date("s", strtotime($strDate));
-                                                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                    $strMonthThai = $strMonthCut[$strMonth];
-                                                    if ($strHour == '00' && $strMinute == '00') {
-                                                        return "$strDay $strMonthThai $strYear   ";
-                                                    } else {
-                                                        return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                    }
-                                                }
 
+                                            while ($rs = mysqli_fetch_object($row)) {
                                             ?>
                                                 <tr align="center">
                                                     <td style="width: 10%;"><?php echo $rs->id; ?></td>
