@@ -134,5 +134,58 @@ require '../../connect/functions.php';
 
 </body>
 <script src="../../dist/js/datatable.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $(document).on('click', '.btnEdit', function(e) {
+            e.preventDefault();
+            var cowid = $(this).attr('id');
+        })
+        $(document).on('click', '.btnDels', function(e) {
+            e.preventDefault();
+            var cowid = $(this).attr('id');
+            Swal.fire({
+                title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "ยืนยัน",
+                cancelButtonText: "ยกเลิก",
+            }).then((btn) => {
+                if (btn.isConfirmed) {
+                    $.ajax({
+                        dataType: 'JSON',
+                        type: "get",
+                        url: "../process/_cow.php",
+                        data: {
+                            id: id,
+                            function: 'del',
+                        },
+                        success: function(result) {
+                            if (result.status == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: result.message,
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            }else{
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: result.message,
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            }
+
+                        },
+                    });
+                }
+            })
+        })
+
+    });
+</script>
 
 </html>

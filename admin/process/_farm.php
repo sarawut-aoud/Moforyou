@@ -4,15 +4,15 @@ require_once '../../connect/functions.php';
 @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
 $sql = new farm();
 
-$id = $_GET['id'];
-$func = $_GET['function'];
+
+$func = $_REQUEST['function'];
 
 
-if (isset($id) && $func == 'showeditFarm') {
-    $query = $sql->selectfarm($id);
+if (isset($func) && $func == 'showeditFarm') {
+    
     $i = 0;
-
-
+    $id = $_GET['id'];
+    $query = $sql->selectfarm($id);
     while ($row = $query->fetch_object()) {
         $tombon = json_decode($get_tombon);
         foreach ($tombon as $value) {
@@ -32,9 +32,13 @@ if (isset($id) && $func == 'showeditFarm') {
         );
         $i++;
     }
-
-    echo json_encode($userfarmer);
+    if ($userfarmer != null) {
+        echo json_encode($userfarmer);
+    } else {
+        echo json_encode(array());
+    }
 }
+
 if (isset($func) && $func == 'amphuer') {
     $tombon = json_decode($get_tombon);
     $i = 0;
@@ -68,7 +72,8 @@ if (isset($func) && $func == 'amphuer') {
 //     echo json_encode($msg);
 // }
 
-if (isset($id) && $func == 'delsfarm') {
+if (isset($func) && $func == 'delsfarm') {
+    $id = $_GET['id'];
     $query = $sql->delsfarm($id);
     $msg = array(
         "status" => 200,

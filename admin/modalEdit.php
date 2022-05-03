@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="input-group">
-                            <label class="col-md-2 col-form-label">ชื่อฝูง : </label>
+                            <label class="col-md-2 col-form-label">ชื่อโรงเรือน : </label>
                             <div class="col-md-10">
                                 <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" id="house_id">
                                     <!-- <option value="">--เลือกโรงเรือน --</option> -->
@@ -146,7 +146,7 @@
             <div class="modal-content">
                 <div class="modal-header justify-content-center text-white bg-info">
                     <div class="text-center">
-                        <h1 id="modalherd"></h1>
+                        <h1 id="modaltextcenterfarm"></h1>
                     </div>
                 </div>
                 <div class="modal-body" id="modaldata">
@@ -172,9 +172,9 @@
                     </div>
                     <div class="form-group row">
                         <div class="input-group">
-                            <label class="col-md-2 col-form-label">ชื่อเจ้าของฟาร์ม : </label>
+                            <label class="col-md-2 col-form-label">ชื่อเจ้าของฟาร์ม  </label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control " id="name" name="farmname" />
+                                <input type="text" class="form-control " id="name" name="farmname" readonly />
                             </div>
                         </div>
                     </div>

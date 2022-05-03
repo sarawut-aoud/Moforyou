@@ -1,12 +1,13 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 $sql = new herd();
 
-$id = $_GET['id'];
-$func = $_GET['function'];
 
-if (isset($id) && $func == 'showeditherd') {
+$func = $_REQUEST['function'];
+
+if (isset($func) && $func == 'showeditherd') {
+    $id = $_GET['id'];
     $query = $sql->select_herd($id);
     while ($row = $query->fetch_object()) {
         $data = array(
@@ -21,7 +22,7 @@ if (isset($id) && $func == 'showeditherd') {
 if ($func == '') {
     $sql2 = new house();
     $query = $sql2->selecthouse('');
-$i = 0 ;
+    $i = 0;
     while ($row = $query->fetch_object()) {
         $userfarmer[$i] = array(
             "id" => intval($row->id),
@@ -33,7 +34,8 @@ $i = 0 ;
     echo json_encode($userfarmer);
 }
 
-if (isset($id) && $func == 'modaleditherd') {
+if (isset($func) && $func == 'modaleditherd') {
+    $id = $_GET['id'];
     $hname = $_GET['hname'];
     $hid = $_GET['IDHouse'];
     if (empty($id) || empty($hname) || empty($hid)) {
@@ -53,7 +55,8 @@ if (isset($id) && $func == 'modaleditherd') {
 
 
 
-if (isset($id) && $func == 'delsherd') {
+if (isset($func) && $func == 'delsherd') {
+    $id = $_GET['id'];
 
 
     $query = $sql->delete_herd($id);

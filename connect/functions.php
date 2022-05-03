@@ -150,7 +150,7 @@ class farm extends Database
             FROM tbl_farm  AS f
             INNER JOIN tbl_farmer AS fm 
             ON (f.farmmer_id = fm.id)
-            WHERE f.farmmer_id = '$id'
+            WHERE f.id = '$id'
             ");
         }
 
@@ -277,7 +277,7 @@ class herd extends Database
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
-            WHERE house.id = '$id' 
+            WHERE herd.id = '$id' 
             ORDER BY herd.id ASC ");
         }
         return $selectadmin;

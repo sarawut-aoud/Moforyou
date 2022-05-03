@@ -1,8 +1,7 @@
 <?php
 require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
-$sql = new farm();
-$query = $sql->selectfarm('admin');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +83,10 @@ $query = $sql->selectfarm('admin');
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()) {
+                                            <?php
+                                            $sql = new farm();
+                                            $query = $sql->selectfarm('admin');
+                                            while ($row = $query->fetch_object()) {
 
                                             ?>
                                                 <tr>
@@ -139,177 +141,179 @@ $query = $sql->selectfarm('admin');
     <?php require_once '../modalEdit.php'; ?>
 </body>
 <script src="../../dist/js/datatable.js"></script>
-<script></script>
+
 <script>
-    //edit
-    // . = class
-    // # = id 
-    $(document).on('click', '.btnEdits', function(e) {
-        // $(document).on('click', '.btnEdits', function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
+        //edit
+        // . = class
+        // # = id 
+        $(document).on('click', '.btnEdits', function(e) {
+            // $(document).on('click', '.btnEdits', function(e) {
+            e.preventDefault();
 
-        var id = $(this).attr('id');
-        var txt_head = 'Edit farm'
+            var id = $(this).attr('id');
+            var txt_head = 'Edit farm';
 
 
-        $.ajax({
-            type: 'get', //post put get delete
-            dataType: "json",
-            url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
-            data: { // ส่งค่าอะไรไปบ้าง
-                id: id,
-                function: 'showeditFarm',
-            },
-            success: function(rs) {
-                for (i in rs) {
-                    if (rs[i].id == id) {
-                        var farmname = rs[i].farmname;
-                        var farmername = rs[i].farmername;
-                        var district = rs[i].amphuer_id;
-                    }
-                }
-                console.log(district);
-                $("#modalEditFarm").modal("show");
-                $("#modaltextcenter").html(txt_head)
-                $("#farmname").val(farmname);
-                $("#name").val(farmername);
-                $('#modal_herdid').val(rs.id);
-
-                $.ajax({
-                    type: 'get', //post put get delete
-                    dataType: "json",
-                    url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
-                    data: { // ส่งค่าอะไรไปบ้าง
-                        id: '',
-                        function: 'amphuer',
-                    },
-                    success: function(results) {
-                        var data = '';
-                        for (i in results) {
-
-                            if (results[i].amp_id == district) {
-                                data += '<option value="' + results[i].amp_id + '" selected >' + results[i].name_th + '</option>';
-                            } else {
-                                data += '<option value="' + results[i].amp_id + '">' + results[i].name_th + '</option>';
-
-                            }
+            $.ajax({
+                type: 'get', //post put get delete
+                dataType: "json",
+                url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
+                data: { // ส่งค่าอะไรไปบ้าง
+                    id: id,
+                    function: 'showeditFarm',
+                },
+                success: function(rs) {
+                    for (i in rs) {
+                        if (rs[i].id == id) {
+                            var farmname = rs[i].farmname;
+                            var farmername = rs[i].farmername;
+                            var district = rs[i].amphuer_id;
                         }
-                        $("#modalampher_id").html(data);
-
                     }
+                    console.log(district);
+                    $("#modalEditFarm").modal("show");
+                    $("#modaltextcenterfarm").html(txt_head)
+                    $("#farmname").val(farmname);
+                    $("#name").val(farmername);
+                    $('#modal_herdid').val(rs.id);
 
-                })
+                    $.ajax({
+                        type: 'get', //post put get delete
+                        dataType: "json",
+                        url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
+                        data: { // ส่งค่าอะไรไปบ้าง
+                            id: '',
+                            function: 'amphuer',
+                        },
+                        success: function(results) {
+                            var data = '';
+                            for (i in results) {
 
+                                if (results[i].amp_id == district) {
+                                    data += '<option value="' + results[i].amp_id + '" selected >' + results[i].name_th + '</option>';
+                                } else {
+                                    data += '<option value="' + results[i].amp_id + '">' + results[i].name_th + '</option>';
 
-            }
-        })
+                                }
+                            }
+                            $("#modalampher_id").html(data);
 
-    });
-    // modal //
-    $(document).on('click', '.btnsave', function(e) {
-        // $(document).on('click', '.btnEdits', function(e) {
-        e.preventDefault();
+                        }
 
-        var id = $("#modal_herdid").val();
-        var fname = $("#herdname").val();
-        var IDHouse = $("#house_id").val();
-
-
-        var txt_head = 'Edit Herd'
-
-        $.ajax({
-            type: 'get', //post put get delete
-            dataType: "json",
-            url: '', //ทำงานที่ไฟล์อะไร
-            data: { // ส่งค่าอะไรไปบ้าง
-                hname: fname,
-                IDHouse: IDHouse,
-                id: id,
-                function: 'modaleditherd',
-            },
-            success: function(result) {
-                if (result.status != 200) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
                     })
-                    Toast.fire({
-                            icon: 'warning',
+
+
+                }
+            })
+
+        });
+        // modal //
+        $(document).on('click', '.btnsave', function(e) {
+            // $(document).on('click', '.btnEdits', function(e) {
+            e.preventDefault();
+
+            var id = $("#modal_herdid").val();
+            var fname = $("#herdname").val();
+            var IDHouse = $("#house_id").val();
+
+
+            var txt_head = 'Edit Herd'
+
+            $.ajax({
+                type: 'get', //post put get delete
+                dataType: "json",
+                url: '', //ทำงานที่ไฟล์อะไร
+                data: { // ส่งค่าอะไรไปบ้าง
+                    hname: fname,
+                    IDHouse: IDHouse,
+                    id: id,
+                    function: 'modaleditherd',
+                },
+                success: function(result) {
+                    if (result.status != 200) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
+                        Toast.fire({
+                                icon: 'warning',
+                                title: result.message
+
+                            })
+                            .then((result) => {
+                                $("#modalEdit").modal("hide");
+                                location.reload();
+
+                            })
+                    } else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
+                        Toast.fire({
+                            icon: 'success',
                             title: result.message
 
-                        })
-                        .then((result) => {
-                            $("#modalEdit").modal("hide");
-                            location.reload();
-
-                        })
-                } else {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                    })
-                    Toast.fire({
-                        icon: 'success',
-                        title: result.message
-
-                    }).then((result) => {
-                        $("#modalEditherd").modal("hide");
-                        location.reload();
-                        // $('#frmModalEdit')[0].reset();
-                        // $('#title').focus();
-                    })
-                }
-
-            }
-        })
-
-    });
-
-    // delete
-    $(document).on('click', '.btnDels', function(e) {
-        e.preventDefault();
-
-
-        var id = $(this).attr('id');
-
-        Swal.fire({
-            title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: "ยืนยัน",
-            cancelButtonText: "ยกเลิก",
-        }).then((btn) => {
-            if (btn.isConfirmed) {
-                $.ajax({
-                    dataType: 'JSON',
-                    type: "get",
-                    url: "../process/_farm.php",
-                    data: {
-                        id: id,
-
-                        function: 'delsfarm',
-                    },
-                    success: function(result) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: result.message,
                         }).then((result) => {
+                            $("#modalEditherd").modal("hide");
                             location.reload();
+                            // $('#frmModalEdit')[0].reset();
+                            // $('#title').focus();
                         })
-                    },
-                });
-            }
-        })
+                    }
+
+                }
+            })
+
+        });
+
+        // delete
+        $(document).on('click', '.btnDels', function(e) {
+            e.preventDefault();
+
+
+            var id = $(this).attr('id');
+
+            Swal.fire({
+                title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "ยืนยัน",
+                cancelButtonText: "ยกเลิก",
+            }).then((btn) => {
+                if (btn.isConfirmed) {
+                    $.ajax({
+                        dataType: 'JSON',
+                        type: "get",
+                        url: "../process/_farm.php",
+                        data: {
+                            id: id,
+
+                            function: 'delsfarm',
+                        },
+                        success: function(result) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: result.message,
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        },
+                    });
+                }
+            })
 
 
 
-    });
+        });
+    })
 </script>
 
 </html>

@@ -154,11 +154,8 @@ require '../../connect/functions.php';
 
                 var house_id = rs.house_id;
 
-
-
-
                 $("#modalEditherd").modal("show");
-                $("#modaltextcenter").html(txt_head)
+                $("#modalherd").html(txt_head)
                 $("#herdname").val(rs.herd_name);
 
                 $('#modal_herdid').val(rs.id);
@@ -173,7 +170,7 @@ require '../../connect/functions.php';
                     },
                     success: function(rs) {
                         var fact = '';
-                        console.log(house_id)
+                       
                         for (i in rs) {
                             if (rs[i].id == house_id) {
                                 fact += '<option selected value="' + rs[i].id + '" selected >' + rs[i]
