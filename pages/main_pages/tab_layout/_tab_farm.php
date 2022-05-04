@@ -58,7 +58,7 @@
                             farm_id: farm_id,
                         },
                         success: function(result) {
-                            $('#cowdata').html(result.cow);
+                            $('#cowdata').html(result.cow +' ตัว');
                         }
                     })
                 })
