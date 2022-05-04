@@ -150,7 +150,7 @@ class farm extends Database
             FROM tbl_farm  AS f
             INNER JOIN tbl_farmer AS fm 
             ON (f.farmmer_id = fm.id)
-            WHERE f.id = '$id'
+            WHERE f.farmmer_id = '$id'
             ");
         }
 

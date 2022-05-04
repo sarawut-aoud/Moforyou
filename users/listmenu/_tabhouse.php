@@ -60,7 +60,7 @@ if (empty($result)) {
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">ชื่อโรงเรือน</label>
-                                                <input type="text" class="form-control" id="hname" name="hname" placeholder="ชื่อโรงเรือน">
+                                                <input type="text" class="form-control " id="hname" name="hname" placeholder="ชื่อโรงเรือน">
                                             </div>
 
                                         </div>
@@ -126,15 +126,7 @@ if (empty($result)) {
                                             <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                        <!-- foot table -->
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>ชื่อโรงเรือน</th>
-                                                <th>แก้ไข / ลบข้อมูล</th>
-                                            </tr>
-                                        </tfoot>
-                                        <!-- /.foot table -->
+                                     
                                     </table>
                                     <!-- /.table -->
                                 </div>

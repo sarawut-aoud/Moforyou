@@ -29,19 +29,19 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1">Full Name</label>
+                                            <label class="small mb-1">ชื่อ - นามสกุล</label>
                                             <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1">Phone</label>
+                                            <label class="small mb-1">โทรศัพท์</label>
                                             <input class="form-control py-4" id="phone" name="phone" type="tel" placeholder="เบอร์โทรศัพท์" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="small mb-1">Email</label>
+                                    <label class="small mb-1">อีเมล</label>
                                     <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" required>
                                 </div>
                                 <div class="form-group">
@@ -50,14 +50,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="small md-1">Username</label>
+                                    <label class="small md-1">ชื่อเข้าใช้งาน</label>
                                     <input class="form-control py-4" id="username" name="username" type="text" autocomplete="off" placeholder="Enter Username" onblur="checkusername(this.value)" required>
                                     <span class="text-center " id="usernameavailable"></span>
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1">Password</label>
+                                            <label class="small mb-1">รหัสผ่าน</label>
                                             <div class="input-group">
                                                 <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" />
                                                 <div class="input-group-append">
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1">Confirm Password</label>
+                                            <label class="small mb-1">ยันยันรหัสผ่าน</label>
                                             <div class="input-group">
                                                 <input class="password-strength__input form-control py-4" type="password" id="confirm_password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
                                                 <div class="input-group-append">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
-                                    <small class="form-text text-muted mt-2" id="passwordHelp">Add 6 charachters or more, lowercase letters, uppercase letters, numbers and symbols to make the password really strong!</small>
+                                    <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9)  </small>
                                     <small>
                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
                                             <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>

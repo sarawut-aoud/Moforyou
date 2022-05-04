@@ -9,7 +9,7 @@ $id = $_REQUEST['id'];
 $func = $_REQUEST['function'];
 
 
-if ($func == "getdata") {
+if (isset($func) && $func == "getdata") {
     $query = $sqlhouse->gethouseFarmid($id);
     $i = 0;
     while ($row = $query->fetch_object()) {
@@ -28,7 +28,7 @@ if ($func == "getdata") {
     }
 }
 
-if ($func == 'insert') {
+if (isset($func) &&$func == 'insert') {
     $herdname = $_POST['herdname'];
     $house_id = $_POST['house_id'];
     if (empty($herdname) || empty($house_id)) {

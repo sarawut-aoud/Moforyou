@@ -173,7 +173,7 @@ if (empty($result)) {
                     'hideMethod': 'fadeOut'
                 }
                 //from select house_id
-                var farm_id = '<?php echo $_SESSION['id']; ?>';
+                var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
                 $.ajax({
                     type: 'get',
                     dataType: 'json',

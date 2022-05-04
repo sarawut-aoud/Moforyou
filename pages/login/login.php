@@ -141,7 +141,7 @@ if (isset($_POST['username'])) {
             }
         }
     } else {
-        echo warning_toast("โปรดกรอกข้อมูลเข้าใช้งาน");
+        echo warning_toast("โปรดกรอกข้อมูลลงชื่อเข้าใช้งาน");
         exit();
     }
 }

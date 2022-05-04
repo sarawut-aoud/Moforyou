@@ -81,13 +81,13 @@
                                                     <td style="width: 20%;"><?php echo $row->id; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
 
-                                                    <td style="width: 20%;">
-                                                        <center>
+                                                    <td class="cowdata" style="width: 20%;" id="<?php echo $row->id; ?>">
+                                                        <!-- <center>
 
                                                             <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
-                                                        </center>
+                                                        </center> -->
                                                     </td>
 
                                                 </tr>
@@ -111,7 +111,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require '../modalDetail.php';
+        <?php
         require '../sub/fooster.php'; ?>
 
     </div>
@@ -119,10 +119,12 @@
     <script src="../../dist/js/datatableprint.js"></script>
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.btnDetail', function(e) {
-                e.preventDefault();
-                var txt = 'ดูรายละเอียดจำนวนโค';
-                var farm_id = $(this).attr('id');
+
+
+            $('.cowdata').ready(function() {
+
+
+                var farm_id = $('.cowdata').attr('id');
                 $.ajax({
                     type: 'get',
                     dataType: 'json',
@@ -132,10 +134,10 @@
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        $("#modalshowcow").modal('show');
-                        $("#modaltextcenter2").html(txt);
-                        $("#modalfarm").html(result.farmname);
-                        $("#modalcow").html(result.cow + '  ตัว');
+                        // $("#modalshowcow").modal('show');
+                        // $("#modaltextcenter2").html(txt);
+                        // $("#modalfarm").html(result.farmname);
+                        $(".cowdata").html(result.cow + '  ตัว');
 
                     }
                 })

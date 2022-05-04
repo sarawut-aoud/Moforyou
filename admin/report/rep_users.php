@@ -78,7 +78,7 @@ $query = $sql->select_allfarmer('');
                                                 <th>เบอร์โทร</th>
                                                 <th>อีเมล</th>
                                                 <th>บัตรประชาชน</th>
-                                                <th>ดูรายละเอียด</th>
+                                                <!-- <th>ดูรายละเอียด</th> -->
                                                
                                             </tr>
                                         </thead>
@@ -91,14 +91,14 @@ $query = $sql->select_allfarmer('');
                                                 <td><?php echo $row->phone; ?></td>
                                                 <td><?php echo $row->email; ?></td>
                                                 <td><?php echo substr($row->card,0,7)."*******"; ?></td>
-                                                <td>
+                                                <!-- <td>
                                                     <center>
                                                         
                                                         <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                     </center>
-                                                </td>
+                                                </td> -->
                                                
                                                
                                             </tr>
