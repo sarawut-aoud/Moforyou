@@ -127,7 +127,10 @@ require '../../connect/functions.php';
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require '../sub/fooster.php'; ?>
+        <?php
+        require '../modalcow.php';
+        require '../sub/fooster.php';
+        ?>
 
     </div>
     <!-- ./wrapper -->
@@ -140,6 +143,8 @@ require '../../connect/functions.php';
         $(document).on('click', '.btnEdit', function(e) {
             e.preventDefault();
             var cowid = $(this).attr('id');
+            $('#modalEdit').modal('show');
+            $('#modaltextcenter').html('แก้ไขข้อมูลโคเนื้อ');
         })
         $(document).on('click', '.btnDels', function(e) {
             e.preventDefault();
@@ -170,7 +175,7 @@ require '../../connect/functions.php';
                                 }).then((result) => {
                                     location.reload();
                                 })
-                            }else{
+                            } else {
                                 Swal.fire({
                                     icon: 'warning',
                                     title: result.message,

@@ -264,7 +264,7 @@ require '../../connect/session_ckeck.php';
 
             while ($rss = $query3->fetch_object()) {
               $sum[$i] = 0;
-              $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
+              $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food; /// คำนวน
               $total =  $total + $sum[$i];
         ?>['<?php echo "รอบที่ ".$x++; ?>', <?php echo  $total; ?>],
         <?php

@@ -11,7 +11,7 @@ $(document).ready(function () {
     responsive: true,
     lengthChange: false,
     autoWidth: false,
-    dom :'Btrip',
+    dom: "Btrip",
     buttons: {
       dom: {
         button: {
@@ -56,6 +56,7 @@ $(document).ready(function () {
       ],
       columnDefs: [
         {
+      
           targets: -1,
           visible: false,
         },

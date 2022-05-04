@@ -65,7 +65,7 @@ require '../../connect/functions.php';
                             <form id="frm_data">
                                 <div class="card card-primary shadow">
                                     <div class="card-header  ">
-                                        <h3 class="text-center">เพิ่มข้อมูลโรคหรืออาการป่วย</h3>
+                                        <h3 id="head" class="text-center">เพิ่มข้อมูลโรคหรืออาการป่วย</h3>
                                     </div>
                                     <div class="card-body ">
 
@@ -176,7 +176,8 @@ require '../../connect/functions.php';
             $(document).on('click', '.reset', function(e) {
                 e.preventDefault();
                 $('#btn').removeClass();
-                $('#btn').html('ยืนยันการเพิ่มข้อมูล');
+                $('#btn').html('ยืนยันการเพิ่มข้อมูล')
+                $('#head').html('เพิ่มข้อมูลโรคหรืออาการป่วย');;
                 $('#btn').addClass('btn btn-primary submit');
                 $('#frm_data')[0].reset();
 
@@ -225,6 +226,7 @@ require '../../connect/functions.php';
                 e.preventDefault();
                 $('#btn').removeClass();
                 $('#btn').html('ยืนยันการแก้ไข');
+                $('#head').html('แก้ไขข้อมูลโรคหรืออาการป่วย');
                 $('#btn').addClass('btn btn-warning btnsave');
 
                 var id = $(this).attr('id');

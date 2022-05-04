@@ -5,8 +5,7 @@ require_once '../../connect/functions.php';
 $id = $_SESSION['id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
-$selectdata = $sql->selectfarm($id);
-$result_data = $selectdata->fetch_object();
+
 // เช็คว่ามีการลงทะเบียนฟาร์มหรือไม่
 $result = mysqli_num_rows($fcheck);
 //ถ้าไม่มีส่งไปหน้าลงทะเบียน
@@ -16,6 +15,8 @@ if (empty($result)) {
     while ($obj = $fcheck->fetch_object()) {
         $_SESSION['farm_id'] = $obj->id;
     }
+    $selectdata = $sql->selectfarm($_SESSION['farm_id']);
+    $result_data = $selectdata->fetch_object();
 }
 ?>
 <!DOCTYPE html>
