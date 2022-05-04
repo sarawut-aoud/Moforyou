@@ -60,8 +60,11 @@ if (empty($result)) {
                                                     <label class=" col-form-label" for="cow_id_male">
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/male.png" alt="ตัวผุ้">
                                                     </label>
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <select class="form-control select2" id="cow_id_male" data-placeholder="เลือกพ่อโค"></select>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <input type="text" class="form-control  " id="spec_id" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,8 +73,11 @@ if (empty($result)) {
                                                     <label class=" col-form-label" for="cow_id_female">
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                                     </label>
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <select class="form-control select2 " id="cow_id_female" data-placeholder="เลือกแม่โค"></select>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <input type="text" class="form-control  " id="spec_id2" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,8 +260,10 @@ if (empty($result)) {
                     var data = '<option value="" selected disabled>--เลือกแม่โค--</option>';
                     for (i in result) {
                         data += '<option value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
+                        var spec = result[i].spec_id;
                     }
                     $('#cow_id_female').html(data);
+                    // $('#spec_id2').val(spec);
                     //$('#modal_cow_id_female').html(data);
 
                 }
@@ -272,8 +280,10 @@ if (empty($result)) {
                     var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
                     for (i in result) {
                         data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
+                       
                     }
                     $('#cow_id_male').html(data);
+                  
                     // $('#modal_cow_id_male').html(data);
 
                 }

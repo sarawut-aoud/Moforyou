@@ -1,5 +1,6 @@
-<?php require($_SERVER['DOCUMENT_ROOT'] . "./plugins/phpmailer/PHPMailerAutoload.php"); ?>
-<?php
+<?php 
+require($_SERVER['DOCUMENT_ROOT'] . "./plugins/phpmailer/PHPMailerAutoload.php");
+
 header('Content-Type: text/html; charset=utf-8');
 
 $mail = new PHPMailer;
@@ -16,8 +17,8 @@ $gmail_password = "xxxx"; // รหัสผ่าน gmail
 // ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
 
 
-$sender = "IBS Support"; // ชื่อผู้ส่ง
-$email_sender = "noreply@ibsone.com"; // เมล์ผู้ส่ง 
+$sender = "MOFORYOU"; // ชื่อผู้ส่ง
+$email_sender = "u.sarawut586@gmail.com"; // เมล์ผู้ส่ง 
 $email_receiver = "aun.puri@gmail.com"; // เมล์ผู้รับ ***
 
 $subject = "เปลี่ยนรหัสผ่าน"; // หัวข้อเมล์

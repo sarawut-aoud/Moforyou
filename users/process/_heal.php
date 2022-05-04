@@ -110,13 +110,12 @@ if (isset($func) && $func == 'update') {
     $healend = $_POST['healend'];
     $detail = $_POST['detail'];
 
-    if($datestart <= $healend ||  $datestart > $healstart ){
+    if (($datestart >= $healend ||  $datestart >= $healstart) && $healend >= $healstart) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถแก้ไขได้");
-    }
-    else if (empty($id) || empty($cowid) || empty($disid)  || empty($datestart)) {
+    } else if (empty($id) || empty($cowid)   || empty($datestart)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถแก้ไขได้");
     } else {
-         
+
         $query = $sql->update_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $id);
         $msg = array(
             "status" => 200,
@@ -127,7 +126,7 @@ if (isset($func) && $func == 'update') {
     http_response_code(200);
 }
 if (isset($func) && $func == 'delete') {
-    
+
     $id = $_GET['id'];
     if (empty($id)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถลบข้อมูลได้");

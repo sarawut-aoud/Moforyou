@@ -164,7 +164,7 @@ $result2 = mysqli_fetch_object($farm);
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input class="password-strength__input form-control" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" />
+                                                        <input class="password-strength__input form-control" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="รหัสผ่านใหม่" maxlength="20" />
                                                         <div class="input-group-append">
                                                             <button class="password-strength__visibility btn btn-outline-secondary" type="button">
                                                                 <span class="password-strength__visibility-icon" data-visible="hidden">
@@ -177,10 +177,7 @@ $result2 = mysqli_fetch_object($farm);
                                                     <small class="password-strength__error text-danger js-hidden">This
                                                         symbol is not allowed!</small>
                                                     <p>
-                                                        <small class="form-text text-muted mt-2 " id="passwordHelp">Add
-                                                            9 charachters or more, lowercase letters, uppercase letters,
-                                                            numbers and symbols to make the password really
-                                                            strong!</small>
+                                                        <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9)  </small>
                                                     </p>
                                                     <small>
                                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
@@ -191,7 +188,7 @@ $result2 = mysqli_fetch_object($farm);
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input class=" form-control" type="password" id="confrim_passnew" name="confrim_passnew" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
+                                                        <input class=" form-control" type="password" id="confrim_passnew" name="confrim_passnew" aria-describedby="passwordHelp" placeholder="ยืนยันรหัสผ่านใหม่" maxlength="20" />
                                                         <div class="input-group-append">
                                                             <button class="btn btn-outline-secondary" type="button" onclick="myFunction()">
                                                                 <span data-visible="hidden">

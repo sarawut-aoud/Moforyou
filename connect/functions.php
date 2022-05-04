@@ -531,16 +531,18 @@ class cow extends Database
     }
     public function selectcow_forbreed_male($farm_id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id FROM tbl_cow AS c 
         INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+        -- INNER JOIN tbl_species as s ON (c.spec_id = s.id)
         WHERE ho.farm_id = $farm_id AND c.gender = '1' ");
         return  $sel;
     }
     public function selectcow_forbreed_female($farm_id, $cowid)
     {
 
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id FROM tbl_cow AS c 
                 INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
+                -- INNER JOIN tbl_species as s ON (c.spec_id = s.id)
                 WHERE ho.farm_id = $farm_id AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
         return  $sel;
     }

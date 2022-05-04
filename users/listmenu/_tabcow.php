@@ -194,6 +194,7 @@ if (empty($result)) {
                                                     <th>ชื่อโค</th>
                                                     <th>ส่วนสูง</th>
                                                     <th>น้ำหนัก</th>
+                                                    <th>สายพันธุ์</th>
                                                     <th>เพศ</th>
                                                     <th>แก้ไข / ลบข้อมูล</th>
                                                 </tr>
@@ -211,6 +212,7 @@ if (empty($result)) {
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $rs->high; ?></td>
                                                         <td><?php echo $rs->weight; ?></td>
+                                                        <td><?php echo $rs->spec_name; ?></td>
                                                         <td><?php echo $rs->gender; ?></td>
 
                                                         <td class="text-center">

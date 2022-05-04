@@ -28,6 +28,8 @@ if (isset($func) && $func == 'showfemale') {
                 $data[$i] = array(
                     "cow_id" => intval($row->id),
                     "cow_name" => $row->cow_name,
+                    "spec_id" => intval($row->spec_id),
+
                 );
             }
         } else {
@@ -47,6 +49,7 @@ if (isset($func) && $func == 'showmale') {
         $cowmale[$i] = array(
             "cow_id" => intval($row->id),
             "cow_name" => $row->cow_name,
+            "spec_id" => intval($row->spec_id),
         );
         $i++;
     }
