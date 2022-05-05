@@ -49,29 +49,58 @@ if (empty($result)) {
                                         <hr class="mt-2 mb-2">
                                         <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                             <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabhouse" role="button">โรงเรือน</a>
+                                                <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabhouse" role="button">
+                                                    <img src="../../dist/img/icon/โรงเรือนn.png">
+                                                </a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg box_list-1 shadow" role="button" href="../listmenu/_tabherd">ฝูงโค</a>
+                                                <a class="btn btn-lg box_list-1 shadow" role="button" href="../listmenu/_tabherd">
+                                                    <img class="img w-25" src="../../dist/img/icon/ฝูงโคn.png">
+                                                </a>
                                             </li>
 
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabcow" role="button">โคเนื้อ</a>
+                                                <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabcow" role="button">
+                                                    <img class="img w-25" src="../../dist/img/icon/โคเนื้อ.png">
+                                                </a>
                                             </li>
 
-                                            <li class="nav-item  col-md-6 col-sm-12 mt-2">
-                                                <a class="btn btn-lg box_list-2 shadow" href="../listmenu/_tabbreed" role="button">ผสมพันธุ์</a>
-                                            </li>
-                                            <li class="nav-item  col-md-6 col-sm-12 mt-2">
-                                                <a class="btn box_list-2 shadow" href="../listmenu/_tabfood" role="button">อาหารโคเนื้อ</a>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg box_list-2 shadow" href="../listmenu/_tabbreed" role="button">
+                                                    <img src="../../dist/img/icon/ผสม.png">
+                                                </a>
                                             </li>
                                             <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabheal" role="button">โรค/อาการป่วย/การรักษา</a>
-                                            </li>
-                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                                <a class="btn btn-lg bt_list shadow" href="../listmenu/_tabgivefood" role="button">ให้อาหาร</a>
-                                            </li>
+                                                <a class="btn box_list-2 shadow" href="../listmenu/_tabfood" role="button">
+                                                    <div class="row justify-content-center">
+                                                        <img class="img w-50" src="../../dist/img/icon/ต้นข้าว.svg">
+                                                        <span class="text-lg">อาหาร</span>
+                                                    </div>
 
+                                                </a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+
+                                                <a class=" btn btn-lg box_list shadow" href="../listmenu/_tabheal" role="button">
+                                                    <div class="row justify-content-center">
+                                                        <img class="img w-50" src="../../dist/img/icon/heal.svg">
+                                                        <span  class="text-lg">โรค/อาการป่วย/การรักษา</span>
+                                                    </div>
+
+
+                                                </a>
+
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg box_list shadow" href="../listmenu/_tabgivefood" role="button">
+                                                    <img class="img w-25" src="../../dist/img/icon/ให้อาหาร.png">
+                                                </a>
+                                            </li>
+                                            <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                                <a class="btn btn-lg box_list shadow" href="" role="button">
+                                                    <img class="img w-25" src="../../dist/img/icon/report.svg">
+                                                </a>
+                                            </li>
                                         </ul>
 
 
