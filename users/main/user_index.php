@@ -15,7 +15,7 @@ if (empty($result)) {
     while ($obj = $fcheck->fetch_object()) {
         $_SESSION['farm_id'] = $obj->id;
     }
-    $selectdata = $sql->selectfarm($_SESSION['farm_id']);
+    $selectdata = $sql->selectfarmbyid($_SESSION['farm_id']);
     $result_data = $selectdata->fetch_object();
 }
 ?>
@@ -91,7 +91,12 @@ if (empty($result)) {
                                             คุณ : <?php echo $_SESSION['fullname']; ?>
                                         </h3>
                                         <h3 class="card-text">
-                                            ฟาร์ม : <?php echo $result_data->farmname; ?>
+                                            ฟาร์ม : <?php if ($result_data->farmname != "") {
+                                                        echo $result_data->farmname;
+                                                    } else {
+                                                        echo 'ยังไม่ได้ลงทะเบียนฟาร์ม';
+                                                    }
+                                                    ?>
                                         </h3>
                                     </div>
 

@@ -81,13 +81,29 @@
                                                     <td style="width: 20%;"><?php echo $row->id; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
 
-                                                    <td class="cowdata" style="width: 20%;" id="<?php echo $row->id; ?>">
-                                                        <!-- <center>
+                                                    <td class='data'style="width: 20%;" id="cowdata">
+                                                        <script>
+                                                            $(document).ready(function() {
+                                                                var farm_id = '<?php echo $row->id; ?>';
+                                                                $.ajax({
+                                                                    type: 'get',
+                                                                    dataType: 'json',
+                                                                    url: '../process/_req_cowfarm.php',
+                                                                    data: {
+                                                                        function: 'showcow',
+                                                                        farm_id: farm_id,
+                                                                    },
+                                                                    success: function(result) {
+                                                                       
+                                                                            $(".data").html(result.cow + '  ตัว');
+                                                                        
+                                                                        
 
-                                                            <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </center> -->
+                                                                    }
+                                                                })
+
+                                                            });
+                                                        </script>
                                                     </td>
 
                                                 </tr>
@@ -117,33 +133,7 @@
     </div>
     <!-- ./wrapper -->
     <script src="../../dist/js/datatableprint.js"></script>
-    <script>
-        $(document).ready(function() {
 
-
-            $('.cowdata').ready(function() {
-
-
-                var farm_id = $('.cowdata').attr('id');
-                $.ajax({
-                    type: 'get',
-                    dataType: 'json',
-                    url: '../process/_req_cowfarm.php',
-                    data: {
-                        function: 'showcow',
-                        farm_id: farm_id,
-                    },
-                    success: function(result) {
-                        // $("#modalshowcow").modal('show');
-                        // $("#modaltextcenter2").html(txt);
-                        // $("#modalfarm").html(result.farmname);
-                        $(".cowdata").html(result.cow + '  ตัว');
-
-                    }
-                })
-            })
-        });
-    </script>
 </body>
 
 

@@ -156,6 +156,20 @@ class farm extends Database
 
         return $sel_farm;
     }
+    public function selectfarmbyid($farmid)
+    {
+        if ($farmid == '') {
+            $sel_farm = mysqli_query($this->dbcon, "SELECT COUNT(id) AS datarow FROM tbl_farm  ");
+        } else {
+            $sel_farm = mysqli_query($this->dbcon, "SELECT f.id,f.farmname,f.address,f.district_id,f.farmmer_id,fm.fullname
+        FROM tbl_farm  AS f
+        INNER JOIN tbl_farmer AS fm 
+        ON (f.farmmer_id = fm.id)
+        WHERE f.id = '$farmid'
+        ");
+        }
+        return $sel_farm;
+    }
     public function delsfarm($id)
     {
         $del_farm = mysqli_query($this->dbcon, "DELETE FROM tbl_farm WHERE id='$id'");
@@ -914,8 +928,8 @@ class reports extends Database
     {
         $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname 
         FROM tbl_cow as c
-        INNER JOIN tbl_house as ho ON (c.house_id = ho.id )
-        INNER JOIN tbl_farm as f ON (ho.farm_id  = f.id)
+        RIGHT JOIN tbl_house as ho ON (c.house_id = ho.id )
+        RIGHT JOIN tbl_farm as f ON (ho.farm_id  = f.id)
         WHERE ho.farm_id = '$farm_id'");
         return $re;
     }
