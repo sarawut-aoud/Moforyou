@@ -66,48 +66,28 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>ฟาร์ม</th>
-
+                                                <th>เจ้าของฟาร์ม</th>
                                                 <th>ดูรายละเอียดจำนวนโค</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php require '../../connect/functions.php';
-                                            $sql = new farm();
-                                            $query = $sql->selectfarm('admin');
+                                            $sql = new reports();
+                                            $query = $sql->req_countcow('');
+                                            $i = 1;
                                             while ($row = $query->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td style="width: 20%;"><?php echo $row->id; ?></td>
+                                                    <td style="width: 20%;"><?php echo $i; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
+                                                    <td><?php echo $row->fullname; ?></td>
 
-                                                    <td class='data'style="width: 20%;" id="cowdata">
-                                                        <script>
-                                                            $(document).ready(function() {
-                                                                var farm_id = '<?php echo $row->id; ?>';
-                                                                $.ajax({
-                                                                    type: 'get',
-                                                                    dataType: 'json',
-                                                                    url: '../process/_req_cowfarm.php',
-                                                                    data: {
-                                                                        function: 'showcow',
-                                                                        farm_id: farm_id,
-                                                                    },
-                                                                    success: function(result) {
-                                                                       
-                                                                            $(".data").html(result.cow + '  ตัว');
-                                                                        
-                                                                        
-
-                                                                    }
-                                                                })
-
-                                                            });
-                                                        </script>
-                                                    </td>
+                                                    <td class='data' style="width: 20%;"><?php echo $row->cou_cow; ?> ตัว</td>
 
                                                 </tr>
                                             <?php
+                                                $i++;
                                             } ?>
                                         </tbody>
                                     </table>

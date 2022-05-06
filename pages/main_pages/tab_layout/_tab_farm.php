@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h5 class="card-title mb-4">ชื่อเจ้าของฟาร์ม : คุณ <?php echo $result['fullname']; ?> </h5>
 
-                        <p class="card-text ">โคเนื้อจำนวน : <span id="cowdata"></span></p>
+                        <p class="card-text ">โคเนื้อจำนวน : <?php echo $result['cow']; ?> ตัว</p>
                         <p class="card-text ">ที่อยู่: <?php echo $result['address']; ?></p>
                         <p class="card-text ">อำเภอ:
                             <?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
@@ -46,23 +46,7 @@
                 </div>
             </div>
             <!-- ./col -->
-            <script>
-                $(document).ready(function() {
-                    var farm_id = '<?php echo $result['id']; ?>';
-                    $.ajax({
-                        type: 'get',
-                        dataType: 'json',
-                        url: '_tabindex.php',
-                        data: {
-                            function: 'countcow',
-                            farm_id: farm_id,
-                        },
-                        success: function(result) {
-                            $('#cowdata').html(result.cow +' ตัว');
-                        }
-                    })
-                })
-            </script>
+            
         <?php } ?>
 
     </div>

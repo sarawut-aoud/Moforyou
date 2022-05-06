@@ -26,6 +26,13 @@ if (isset($func) && $func == 'farm') {
 
 if (isset($func) && $func == 'countcow') {
     $farm_id = $_GET['farm_id'];
+    $query2 = $sql->req_countcow($farm_id);
+    $row2 = $query2->fetch_object();
+    $data = array(
+        "cow" => $row2->cou_cow,
+    );
+    echo json_encode($data);
+    http_response_code(200);
 }
 
 if (isset($func) && $func == 'cow') {

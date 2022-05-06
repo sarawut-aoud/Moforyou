@@ -74,11 +74,15 @@ require '../../connect/functions.php';
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>#</th>
                                                 <th>ชื่อโค</th>
                                                 <th>ส่วนสูง</th>
                                                 <th>น้ำหนัก</th>
                                                 <th>เพศ</th>
+                                                <th>โรงเรือน</th>
+                                                <th>ฝูง</th>
                                                 <th>ฟาร์ม</th>
+
                                                 <th>แก้ไข / ลบข้อมูล</th>
                                             </tr>
                                         </thead>
@@ -89,13 +93,22 @@ require '../../connect/functions.php';
                                             $datahouse = new cow();
                                             $row = $datahouse->selectdatacowbyfarmer('');
                                             while ($rs = $row->fetch_object()) {
+                                                if ($rs->cow_pic != NULL) {
+                                                    $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
+                                                } else {
+                                                    $img =   "src='../../dist/img/icon/sacred-cow.png'";
+                                                }
+
                                             ?>
                                                 <tr>
                                                     <td><?php echo $rs->id; ?></td>
+                                                    <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                     <td><?php echo $rs->cow_name; ?></td>
                                                     <td><?php echo $rs->high; ?></td>
                                                     <td><?php echo $rs->weight; ?></td>
                                                     <td><?php echo $rs->gender; ?></td>
+                                                    <td><?php echo $rs->house_name; ?></td>
+                                                    <td><?php echo $rs->herd_name; ?></td>
                                                     <td><?php echo $rs->farmname; ?></td>
 
                                                     <td class="text-center">

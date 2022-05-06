@@ -74,6 +74,7 @@ require '../../connect/functions.php';
                                                 <th>ระหว่าง</th>
                                                 <th>วันที่ / เวลา</th>
                                                 <th>ประมาณวันที่คลอด</th>
+                                                <th>สถานะการตั้งท้อง</th>
                                                 <th>ฟาร์ม</th>
                                             </tr>
                                         </thead>
@@ -100,7 +101,13 @@ require '../../connect/functions.php';
                                             $data = new breed();
                                             $row = $data->select_breed_all('');
                                             while ($rs = mysqli_fetch_object($row)) {
-
+                                                if ($rs->breed_status == 'y') {
+                                                    $msg = 'แม่โคมีการตั้งท้อง';
+                                                } else if ($rs->breed_status == 'n') {
+                                                    $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+                                                } else {
+                                                    $msg = 'รอดูผลการตั้งครรภ์';
+                                                }
 
                                             ?>
                                                 <tr align="center">
@@ -108,6 +115,7 @@ require '../../connect/functions.php';
                                                     <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                     <td><?php echo DateThai($rs->breed_date); ?></td>
                                                     <td><?php echo DateThai($rs->breednext); ?></td>
+                                                    <td><?php echo  $msg; ?></td>
                                                     <td><?php echo ($rs->farmname); ?></td>
                                                     <!--  -->
                                                 </tr>

@@ -67,7 +67,7 @@
                 <a href="#" class="h1 text-white">MoForYou</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">คุณลืมรหัสผ่านใช่หรือไม่ ? กรอก E-mail เพื่อรับรหัสผ่านใหม่ได้ที่นี้ </p>
+                <p class="login-box-msg">คุณลืมรหัสผ่านใช่หรือไม่ ? <br>กรอก E-mail เพื่อรับรหัสผ่านใหม่ </p>
                 <form method="post">
                     <span id="alertcheck"></span>
                     <div class="input-group mb-3">

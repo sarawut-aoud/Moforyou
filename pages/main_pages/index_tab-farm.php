@@ -99,8 +99,14 @@
                         $('#farmname').html(result.farmname);
                         $('#farmername').html('คุณ ' + result.fullname);
                         $('#phone').html(result.phone);
-                        $('#cow').html(result.cow + ' ตัว');
+
                         $('#email').html(result.email);
+                        if (result.cow == null) {
+                            $('#cow').html('0 ตัว');
+                        } else {
+                            $('#cow').html(result.cow + ' ตัว');
+                        }
+
 
                     }
                 })

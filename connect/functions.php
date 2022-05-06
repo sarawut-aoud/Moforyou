@@ -179,12 +179,18 @@ class farm extends Database
 
     public function pagin()
     {
-        $pag = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone FROM tbl_farm as f INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)");
+        $pag = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
+        FROM tbl_cow as c
+        RIGHT JOIN tbl_farm as f ON (c.farm_id = f.id)
+        RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) GROUP BY f.farmname");
         return $pag;
     }
     public function pagin_page($start, $perpage)
     {
-        $page = mysqli_query($this->dbcon, "SELECT f.id,f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone FROM tbl_farm as f INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) limit {$start},{$perpage} ");
+        $page = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
+        FROM tbl_cow as c
+        RIGHT JOIN tbl_farm as f ON (c.farm_id = f.id)
+        RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) GROUP BY f.farmname limit {$start},{$perpage} ");
         return $page;
     }
 }
@@ -204,9 +210,9 @@ class house extends Database
     }
     public function select_house_countcowbyfarm($id)
     {
-    
+
         $sel_houseFid = mysqli_query($this->dbcon, "SELECT h.id , h.house_name , COUNT(c.id) as cow FROM tbl_cow as c RIGHT JOIN tbl_house as h ON (c.house_id = h.id) WHERE h.farm_id = '$id' GROUP BY h.house_name;");
-   
+
         return $sel_houseFid;
     }
     // Insert  
@@ -426,7 +432,7 @@ class cow extends Database
     }
 
     // Insert
-    public function addcow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $farm_id,$picture)
+    public function addcow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $farm_id, $picture)
     {
         if (empty($picture)) {
             $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,gender,farm_id)   
@@ -571,8 +577,9 @@ class cow extends Database
                 WHERE c.farm_id = '$farm_id' AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
         return  $sel;
     }
-    public function select_cow_byhouse($house_id,$farm_id){
-        $a = mysqli_query($this->dbcon,"SELECT c.id 
+    public function select_cow_byhouse($house_id, $farm_id)
+    {
+        $a = mysqli_query($this->dbcon, "SELECT c.id 
         FROM tbl_cow AS c 
         INNER JOIN tbl_house AS h ON (c.house_id = h.id)
         WHERE h.id = '$house_id' AND h.farm_id = '$farm_id'");
@@ -583,7 +590,7 @@ class cow extends Database
 class breed extends Database
 {
     // Insert
-    public function insertbreed($datestart, $datenext, $farm_id, $female, $male,$status)
+    public function insertbreed($datestart, $datenext, $farm_id, $female, $male, $status)
     {
 
         $insert = mysqli_query($this->dbcon, "INSERT INTO tbl_breed(breed_date,breed_date_next,farm_id,cow_id_male,cow_id_female,breed_status)
@@ -600,8 +607,6 @@ class breed extends Database
 
         return $insert;
     }
-
-
     // Select
     public function select_breed_all($farm_id)
     {
@@ -612,7 +617,7 @@ class breed extends Database
             FROM tbl_breed AS be
             INNER JOIN tbl_cow  as cm on(be.cow_id_male=cm.id ) 
             INNER JOIN tbl_cow  as cf on(be.cow_id_female=cf.id )
-            INNER JOIN tbl_farm as f ON (be.farm_id = f.id)
+            INNER JOIN tbl_farm as f ON (be.farm_id = f.id) ORDER BY breed_date ASC;
            ");
         } else {
             $breed = mysqli_query($this->dbcon, "SELECT be.id , be.breed_date , be.breed_date_next AS breednext , 
@@ -621,7 +626,7 @@ class breed extends Database
             FROM tbl_breed AS be
             INNER JOIN tbl_cow  as cm on(be.cow_id_male=cm.id ) 
             INNER JOIN tbl_cow  as cf on(be.cow_id_female=cf.id )
-            WHERE be.farm_id = $farm_id 
+            WHERE be.farm_id = '$farm_id'  ORDER BY breed_date ASC;
             ");
         }
         return $breed;
@@ -631,7 +636,7 @@ class breed extends Database
         $selectbreed = mysqli_query($this->dbcon, "SELECT be.id , be.breed_date AS breed_date , be.breed_date_next AS breednext ,
         be.farm_id , be.cow_id_male AS cowmale ,be.cow_id_female AS cowfemale 
         FROM tbl_breed AS be
-        WHERE be.id = $id
+        WHERE be.id = '$id'
         ");
         return $selectbreed;
     }
@@ -655,14 +660,15 @@ class breed extends Database
         ");
         return $updatecow;
     }
-    public function update_status($id,$status){
-        if($status == 'y'){
+    public function update_status($id, $status)
+    {
+        if ($status == 'y') {
             $update = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
             breed_status = 'y'
             
             WHERE id = '$id'
             ");
-        }else{
+        } else {
             $update = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
            breed_status = 'n'
             WHERE id = '$id'
@@ -960,10 +966,22 @@ class reports extends Database
     }
     public function req_countcow($farm_id)
     {
-        $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname 
+        if (empty($farm_id)) {
+            $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname ,fm.fullname
+            FROM tbl_cow as c
+            RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
+            INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
+            GROUP BY f.farmname
+            ");
+        } else {
+            $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname ,fm.fullname
         FROM tbl_cow as c
-        RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id)
-        WHERE c.farm_id = '$farm_id'");
+        RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
+        INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
+        WHERE c.farm_id = '$farm_id' GROUP BY f.farmname
+        ");
+        }
+
         return $re;
     }
     public function req_countcowmale($farm_id)

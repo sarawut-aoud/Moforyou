@@ -1,4 +1,5 @@
 <?php
+error_reporting(~E_NOTICE);
 define('DB_SERVER', 'localhost'); // Hostname
 define('DB_USER', 'root'); //Database Username
 define('DB_PASS', ''); // Database Password
