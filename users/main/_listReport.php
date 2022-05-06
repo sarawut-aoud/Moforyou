@@ -47,56 +47,68 @@ if (empty($result)) {
                                     <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-file-chart-pie"></i> รายงานข้อมูล</h2>
                                     <hr class="mt-2 mb-2">
                                     <!-- list Manage -->
-                                    <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
+                                    <ul class="nav nav-pills " id="custom-content-below-tab">
 
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
-
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg box_list-1 shadow" href="../report/rep-house" role="button">
                                                 <div class="row justify-content-center">
+                                                    <img class="imggg " src="../../dist/img/icon/rep-1 (6).png">
+
                                                     <span class="text-lg mt-2">โรงเรือน</span>
                                                 </div>
                                             </a>
                                         </li>
 
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg box_list-2 shadow" href="../report/req-herd" role="button">
                                                 <div class="row justify-content-center">
+                                                    <img class="imggg " src="../../dist/img/icon/rep-1 (7).png">
+
                                                     <span class="text-lg mt-2">ฝูงโค</span>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg box_list-3 shadow" href="../report/req-cow" role="button">
                                                 <div class="row justify-content-center">
-                                                    <span class="text-lg mt-2">โคเนื้อ</span>
+                                                    <img class="imggg " src="../../dist/img/icon/req-cow.png">
+
+                                                    <span class="txt-resp mt-2">โคเนื้อ</span>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-6 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-4 shadow" href="../report/req-breed" role="button">
                                                 <div class="row justify-content-center">
-                                                    <span class="text-lg mt-2">ผสมพันธุ์</span>
+                                                    <img class="imggg " src="../../dist/img/icon/rep-1 (8).png">
+                                                    <span class="txt-resp mt-2">ผสมพันธุ์</span>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-6 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-4 shadow" href="../report/req-disease" role="button">
                                                 <div class="row justify-content-center">
-                                                    <span class="text-lg mt-2">โรค/อาการป่วย</span>
+                                                    <img class="imggg " src="../../dist/img/icon/medical-checkup.png">
+
+                                                    <span class="txt-resp mt-2">โรค/อาการป่วย</span>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-5 shadow" href="../report/req-heal" role="button">
                                                 <div class="row justify-content-center">
-                                                    <span class="text-lg mt-2">ประวัติการรักษา</span>
+                                                    <img class="imggg " src="../../dist/img/icon/rep-1 (1).png">
+
+                                                    <span class="txt-resp mt-2">ประวัติการรักษา</span>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-5 shadow" href="../report/req-foodrecord" role="button">
                                                 <div class="row justify-content-center">
-                                                    <span class="text-lg mt-2">ประวัติการให้อาหาร</span>
+                                                    <img class="imggg " src="../../dist/img/icon/food.png">
+
+                                                    <span class="txt-resp mt-2">ประวัติการให้อาหาร</span>
                                                 </div>
                                             </a>
                                         </li>

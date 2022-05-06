@@ -68,7 +68,7 @@ if (empty($result)) {
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg box_list-3 shadow" href="../listmenu/_tabcow" role="button">
                                                 <div class="row justify-content-center">
-                                                    <img class="img w-25" src="../../dist/img/icon/sacred-cow.png">
+                                                    <img class="imggg" src="../../dist/img/icon/sacred-cow.png">
                                                     <span class="txt-resp mt-2">โคเนื้อ</span>
                                                 </div>
                                             </a>

@@ -19,7 +19,7 @@
 
                 while ($result = $query->fetch_assoc()) {
                     if ($result['cow_pic'] == NULL) {
-                        $picture = '../../dist/img/pic2.png';
+                        $picture = '../../dist/img/icon/sacred-cow.png';
                     } else {
                         $picture = '../../dist/img/cow_upload/' . $result['cow_pic'] . '';
                     }
