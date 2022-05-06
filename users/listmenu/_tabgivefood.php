@@ -122,6 +122,14 @@ if (empty($result)) {
                                         <div class="card-body ">
                                             <div class="form-group row ">
                                                 <div class=" input-group">
+                                                    <label class=" col-form-label col-sm-3" for="house_id">โรงเรือน: </label>
+                                                    <div class="col-md">
+                                                        <select class="form-control select2" name="house_id" id="house_id" data-placeholder="โรงเรือน" required="required" title="โรงเรือน"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class=" input-group">
                                                     <label class=" col-form-label col-sm-3" for="foodid2">รายการอาหาร: </label>
                                                     <div class="col-md">
                                                         <select class="form-control select2" name="foodid2" id="foodid2" data-placeholder="รายการอาหาร" required="required" title="รายการอาหาร"></select>
@@ -152,6 +160,7 @@ if (empty($result)) {
                                             <button type="reset" class="btn  btn-secondary reset2">ยกเลิก</button>
                                             <button type="submit2" id="btn2" class="btn btn-info submit2">ยืนยันการเพิ่มข้อมูล</button>
                                         </div>
+                                        <input type="hidden" id="cowdata" value="">
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -272,15 +281,15 @@ if (empty($result)) {
         $(document).ready(function() {
             var url = '<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>';
 
-            new QRCode(document.getElementById("qrcode"), url);
+            new QRCode(document.getElementById('qrcode'), url);
             $(document).on('click', '.btnqrcode', function(e) {
                 $('#modalqrcode').modal('show');
-                var qrcode = new QRCode("test", {
+                var qrcode = new QRCode('test', {
                     text: url,
                     width: 128,
                     height: 128,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.H
                 });
                 qrcode.clear();
@@ -303,6 +312,7 @@ if (empty($result)) {
 
                 $('#frm_data2')[0].reset();
                 $('#foodid2').val(0).trigger("change");
+                $('#house_id').val(0).trigger("change");
 
 
             })
@@ -325,7 +335,43 @@ if (empty($result)) {
             }
 
             var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "../process/_givefood.php",
+                data: {
+                    function: "showhouse",
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    var data = '<option value="" selected disabled>เลือกโรงเรือน</option>';
+                    for (i in result) {
+                        data += '<option value="' + result[i].id + '">' + result[i].housename + '&nbsp&nbsp&nbsp(' + result[i].cow + ' ตัว)' + '</option>';
+                    }
+                    $('#house_id').html(data);
 
+                    $('#house_id').change(function() {
+                        var house_id = $('#house_id').val();
+                        $.ajax({
+                            type: "get",
+                            dataType: "json",
+                            url: "../process/_givefood.php",
+                            data: {
+                                function: "showhouse",
+                                farm_id: farm_id,
+                            },
+                            success: function(result) {
+                                for (i in result) {
+                                    if (result[i].id == house_id) {
+                                        var cowdata = result[i].cow;
+                                    }
+                                }
+                                $('#cowdata').val(cowdata);
+                            }
+                        })
+                    })
+                }
+            })
 
             $.ajax({
                 type: "get",
@@ -439,9 +485,10 @@ if (empty($result)) {
             $(document).on('click', '.submit2', function(e) {
                 e.preventDefault();
                 var foodid = $('#foodid2').val();
+                var house_id = $('#house_id').val();
                 var foodweight = $('#foodweight2').val();
                 var date = $('#date2').val();
-
+                var cowdata = $('#cowdata').val()
                 $.ajax({
                     type: "post",
                     dataType: "json",
@@ -451,6 +498,8 @@ if (empty($result)) {
                         foodid: foodid,
                         foodweight: foodweight,
                         date: date,
+                        house_id: house_id,
+                        cowdata:cowdata,
                         farm_id: farm_id,
                     },
                     success: function(result) {
@@ -620,8 +669,8 @@ if (empty($result)) {
                     title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
                     confirmButtonText: "ยืนยัน",
                     cancelButtonText: "ยกเลิก",
                 }).then((btn) => {

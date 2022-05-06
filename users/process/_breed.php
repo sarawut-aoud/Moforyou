@@ -29,7 +29,7 @@ if (isset($func) && $func == 'showfemale') {
                     "cow_id" => intval($row->id),
                     "cow_name" => $row->cow_name,
                     "spec_id" => intval($row->spec_id),
-
+                    "spec_name" => ($row->spec_name),
                 );
             }
         } else {
@@ -50,6 +50,7 @@ if (isset($func) && $func == 'showmale') {
             "cow_id" => intval($row->id),
             "cow_name" => $row->cow_name,
             "spec_id" => intval($row->spec_id),
+            "spec_name" => ($row->spec_name),
         );
         $i++;
     }
@@ -77,7 +78,7 @@ if (isset($func) && $func == 'insert') {
         $datestart = date($date_bredd);
         $date = date($date_bredd); //? วันที่ปัจจุบัน
         $datenext = date('Y-m-d', strtotime($date . "+282 days")); //? วันที่เฉลี่ย ในการผสมพันธุ์
-        $query = $sqlbreed->insertbreed($datestart, $datenext, $farm_id, $female, $male,$status);
+        $query = $sqlbreed->insertbreed($datestart, $datenext, $farm_id, $female, $male, $status);
         $msg = array(
             "status" => 200,
             "message" => 'บันทึกข้อมูลสำเร็จ',

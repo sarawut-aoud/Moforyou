@@ -20,6 +20,22 @@ if (isset($func) && $func == 'showfood') {
     echo json_encode($data);
     http_response_code(200);
 }
+if (isset($func) && $func == 'showhouse') {
+    $house = new house();
+    $farmid = $_GET['farm_id'];
+    $i = 0;
+    $query = $house->select_house_countcowbyfarm($farmid);
+    while ($row = $query->fetch_object()) {
+        $data[$i] = array(
+            "id" => intval($row->id),
+            "housename" => $row->house_name,
+            "cow" => $row->cow,
+        );
+        $i++;
+    }
+    echo json_encode($data);
+    http_response_code(200);
+}
 if (isset($func) && $func == 'showcow') {
     $cow = new cow();
     $farmid = $_GET['farm_id'];
@@ -73,17 +89,28 @@ if (isset($func) && $func == 'insertall') {
     $wei_food = $_POST['foodweight'];
     $date = $_POST['date'];
     $farm_id = $_POST['farm_id'];
+    $house_id = $_POST['house_id'];
+    $cowdata = $_POST['cowdata'];
 
     if (empty($foodid) || empty($wei_food) || empty($farm_id) || empty($date)) {
         $msg = array(
             "status" => 0,
             "message" => 'ไม่สามารถบันทึกข้อมูลได้',
         );
+    } else if ($cowdata == 0) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'ไม่มีโคในโรงเรือน',
+        );
     } else {
+
         $sqlcow = new cow();
-        $querycow = $sqlcow->selectdatacowbyfarmer($farm_id);
-        while ($rows = $querycow->fetch_object()) {
-            $querysum = $sql->select_sumrecordbyfarm($farm_id, $rows->id);
+        $queryhouse = $sqlcow->select_cow_byhouse($house_id, $farm_id);
+
+        while ($rowhouse = $queryhouse->fetch_object()) {
+            // $querycow = $sqlcow->selectdatacowbyfarmer($farm_id);
+
+            $querysum = $sql->select_sumrecordbyfarm($farm_id, $rowhouse->id);
             $sum = $querysum->fetch_object();
             if ($sum->sumweight == null) {
                 $sumwei_food = 0 + $wei_food;
@@ -91,13 +118,18 @@ if (isset($func) && $func == 'insertall') {
                 $sumwei_food = $sum->sumweight + $wei_food;
             }
 
-            $query = $sql->insert_record($date, $wei_food, $sumwei_food, $rows->weight, $rows->id, $foodid, $farm_id);
+            $query = $sql->insert_record($date, $wei_food, $sumwei_food, $rows->weight, $rowhouse->id, $foodid, $farm_id);
             $msg = array(
                 "status" => 200,
                 "message" => 'บันทึกข้อมูลสำเร็จ',
             );
         }
+
+        // while ($rows = $querycow->fetch_object()) {
+
+        // }
     }
+
     echo json_encode($msg);
     http_response_code(200);
 }

@@ -60,10 +60,10 @@ if (empty($result)) {
                                                     <label class=" col-form-label" for="cow_id_male">
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/male.png" alt="ตัวผุ้">
                                                     </label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md col-lg-6 ">
                                                         <select class="form-control select2" id="cow_id_male" data-placeholder="เลือกพ่อโค"></select>
                                                     </div>
-                                                    <div class="col-md">
+                                                    <div class="col-md col-lg ">
                                                         <input type="text" class="form-control  " id="spec_id" readonly>
                                                     </div>
                                                 </div>
@@ -73,12 +73,15 @@ if (empty($result)) {
                                                     <label class=" col-form-label" for="cow_id_female">
                                                         <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                                     </label>
-                                                    <div class="col-md-6">
+
+                                                    <div class="col-md col-lg-6 ">
                                                         <select class="form-control select2 " id="cow_id_female" data-placeholder="เลือกแม่โค"></select>
                                                     </div>
-                                                    <div class="col-md">
+                                                    <div class="col-md col-lg">
                                                         <input type="text" class="form-control  " id="spec_id2" readonly>
                                                     </div>
+
+
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -276,8 +279,27 @@ if (empty($result)) {
                         var spec = result[i].spec_id;
                     }
                     $('#cow_id_female').html(data);
-                    // $('#spec_id2').val(spec);
-                    //$('#modal_cow_id_female').html(data);
+                    $('#cow_id_female').change(function() {
+                        var female = $('#cow_id_female').val();
+                        $.ajax({
+                            type: "get",
+                            dataType: 'json',
+                            url: '../process/_breed.php',
+                            data: {
+                                function: "showfemale",
+                                farm_id: farm_id,
+                            },
+                            success: function(result) {
+                                for (i in result) {
+                                    if (result[i].cow_id == female) {
+                                        var s_name = result[i].spec_name;
+                                    }
+                                }
+
+                                $('#spec_id2').val(s_name);
+                            }
+                        })
+                    })
 
                 }
             })
@@ -293,10 +315,29 @@ if (empty($result)) {
                     var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
                     for (i in result) {
                         data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-
                     }
                     $('#cow_id_male').html(data);
+                    $('#cow_id_male').change(function() {
+                        var male = $('#cow_id_male').val();
+                        $.ajax({
+                            type: "get",
+                            dataType: 'json',
+                            url: '../process/_breed.php',
+                            data: {
+                                function: "showmale",
+                                farm_id: farm_id,
+                            },
+                            success: function(result) {
+                                for (i in result) {
+                                    if (result[i].cow_id == male) {
+                                        var s_name = result[i].spec_name;
+                                    }
+                                }
 
+                                $('#spec_id').val(s_name);
+                            }
+                        })
+                    })
                     // $('#modal_cow_id_male').html(data);
 
                 }

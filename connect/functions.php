@@ -202,6 +202,13 @@ class house extends Database
 
         return $sel_houseFid;
     }
+    public function select_house_countcowbyfarm($id)
+    {
+    
+        $sel_houseFid = mysqli_query($this->dbcon, "SELECT h.id , h.house_name , COUNT(c.id) as cow FROM tbl_cow as c RIGHT JOIN tbl_house as h ON (c.house_id = h.id) WHERE h.farm_id = '$id' GROUP BY h.house_name;");
+   
+        return $sel_houseFid;
+    }
     // Insert  
     public function inserthouse($hname, $farm_id)
     {
@@ -549,20 +556,27 @@ class cow extends Database
     }
     public function selectcow_forbreed_male($farm_id)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id, s.spec_name FROM tbl_cow AS c 
         INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-        -- INNER JOIN tbl_species as s ON (c.spec_id = s.id)
-        WHERE c.farm_id = $farm_id AND c.gender = '1' ");
+        INNER JOIN tbl_species as s ON (c.spec_id = s.id)
+        WHERE c.farm_id = '$farm_id' AND c.gender = '1' ");
         return  $sel;
     }
     public function selectcow_forbreed_female($farm_id, $cowid)
     {
 
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id ,s.spec_name FROM tbl_cow AS c 
                 INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-                -- INNER JOIN tbl_species as s ON (c.spec_id = s.id)
-                WHERE c.farm_id = $farm_id AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
+                INNER JOIN tbl_species as s ON (c.spec_id = s.id)
+                WHERE c.farm_id = '$farm_id' AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
         return  $sel;
+    }
+    public function select_cow_byhouse($house_id,$farm_id){
+        $a = mysqli_query($this->dbcon,"SELECT c.id 
+        FROM tbl_cow AS c 
+        INNER JOIN tbl_house AS h ON (c.house_id = h.id)
+        WHERE h.id = '$house_id' AND h.farm_id = '$farm_id'");
+        return $a;
     }
 }
 // ผสมพันธุ์
