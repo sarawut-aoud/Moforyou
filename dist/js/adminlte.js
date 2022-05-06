@@ -1464,7 +1464,7 @@
       var leftPos = $__default['default'](SELECTOR_TAB_NAVBAR_NAV).scrollLeft();
       $__default['default'](SELECTOR_TAB_NAVBAR_NAV).animate({
         scrollLeft: leftPos + offset
-      }, 250, 'linear');
+      }, 600, 'linear');
     };
 
     _proto._setupListeners = function _setupListeners() {

@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-4 ">
                             <div class="row justify-content-center">
-                                <img class=" img-rounded w-50 h-50" src="../../dist/img/icon/sacred-cow.png" alt="ตัว">
+                            <img id='modalimg' class=" img-rounded w-50 h-50"  alt="ตัว">
                                 <div class="form-group row">
                                     <div class="input-group">
                                         <div class="col-md mt-3">

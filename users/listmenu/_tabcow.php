@@ -98,11 +98,11 @@ if (empty($result)) {
                                                 <div class="row ">
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <label class="col-form-label col-2" for="weightcow">น้ำหนัก : </label>
+                                                            <label class="col-form-label col-sm-2" for="weightcow">น้ำหนัก : </label>
                                                             <div class="col-md-4">
                                                                 <input type="number" class="form-control " id="weightcow" name="weightcow" placeholder="น้ำหนัก" require>
                                                             </div>
-                                                            <label class="col-form-label col-2" for="highcow">ส่วนสูง : </label>
+                                                            <label class="col-form-label col-sm-2" for="highcow">ส่วนสูง : </label>
                                                             <div class="col-md-4">
                                                                 <input type="number" class="form-control " id="highcow" name="highcow" placeholder="ส่วนสูง" require>
                                                             </div>
@@ -110,11 +110,11 @@ if (empty($result)) {
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <label class="col-form-label col-2" for="fathercow">พ่อโค : </label>
+                                                            <label class="col-form-label col-sm-2" for="fathercow">พ่อโค : </label>
                                                             <div class="col-md-4">
                                                                 <input type="text" class="form-control " id="fathercow" name="fathercow" placeholder="พ่อโค">
                                                             </div>
-                                                            <label class="col-form-label col-2" for="mothercow">แม่โค : </label>
+                                                            <label class="col-form-label col-sm-2" for="mothercow">แม่โค : </label>
                                                             <div class="col-md-4">
                                                                 <input type="text" class="form-control " id="mothercow" name="mothercow" placeholder="แม่โค">
                                                             </div>
@@ -191,9 +191,12 @@ if (empty($result)) {
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>#</th>
                                                     <th>ชื่อโค</th>
                                                     <th>ส่วนสูง</th>
                                                     <th>น้ำหนัก</th>
+                                                    <th>โรงเรือน</th>
+                                                    <th>ฝูง</th>
                                                     <th>สายพันธุ์</th>
                                                     <th>เพศ</th>
                                                     <th>แก้ไข / ลบข้อมูล</th>
@@ -206,12 +209,21 @@ if (empty($result)) {
                                                 $datahouse = new cow();
                                                 $row = $datahouse->selectdatacowbyfarmer($farmid);
                                                 while ($rs = $row->fetch_object()) {
+                                                    if ($rs->cow_pic != NULL) {
+                                                        $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
+                                                    } else {
+                                                        $img =   "src='../../dist/img/icon/sacred-cow.png'";
+                                                    }
+
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $rs->id; ?></td>
+                                                        <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $rs->high; ?></td>
                                                         <td><?php echo $rs->weight; ?></td>
+                                                        <td><?php echo $rs->house_name; ?></td>
+                                                        <td><?php echo $rs->herd_name; ?></td>
                                                         <td><?php echo $rs->spec_name; ?></td>
                                                         <td><?php echo $rs->gender; ?></td>
 
@@ -334,7 +346,15 @@ if (empty($result)) {
                             $('#modalfathercow').val(result.cow_father);
                             $('#modalmothercow').val(result.cow_mother);
                             $('#modal_cowid').val(result.cow_id);
+                            if (result.cow_pic != null) {
+                              
+                            $('#modalimg').attr('src',"../../dist/img/cow_upload/"+result.cow_pic+"");
 
+                            } else {
+                                
+                                $('#modalimg').attr('src',"../../dist/img/icon/sacred-cow.png");
+
+                            }
                             if (result.cow_gender == '1') {
                                 $('#modalradioPrimary1').prop('checked', true);
                             } else if (result.cow_gender == '2') {
@@ -567,10 +587,10 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext);
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } else {
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '');
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '', $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } // check picture
             } // check Undendifind values
@@ -635,7 +655,7 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext,$idcow);
+                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext, $idcow);
                     echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
                 } else {
                     $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '', $idcow);

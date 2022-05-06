@@ -21,6 +21,7 @@
                     if ($result['cow_pic'] == NULL) {
                         $picture = '../../dist/img/pic2.png';
                     } else {
+                        $picture = '../../dist/img/cow_upload/' . $result['cow_pic'] . '';
                     }
                     $datenew = date_create($result['cow_date']);
                     $datenow = date_create(date('d-m-Y'));

@@ -69,14 +69,16 @@
                 <!-- /.row card -->
             </div>
         </div>
-
+        <!-- <button type="button" class="scroll-top" onclick="goToTop();">Go to Top</button> -->
         <!-- /.content-wrapper -->
         <?php require_once './modalreqcow.php';
         require_once './modalreqfarm.php';
         require './footer.php'; ?>
-        <!-- <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <!-- id="back-to-top" -->
+        <a id="back-to-top" href="#" class="btn btn-secondary back-to-top opacity-75" role="button" aria-label="Scroll to top">
             <i class="fas fa-chevron-up"></i>
-        </a> -->
+        </a>
+
     </div>
     <!-- ./wrapper -->
     <script>
@@ -114,6 +116,7 @@
             })
         })
     </script>
+  
 </body>
 
 

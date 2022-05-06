@@ -145,6 +145,7 @@ if (empty($result)) {
                                                 <th>ระหว่าง</th>
                                                 <th>วันที่/เวลา</th>
                                                 <th>ประมาณวันที่</th>
+                                                <th>ยืนยันการผสมติด</th>
                                                 <th>แก้ไข / ลบข้อมูล</th>
                                             </tr>
                                         </thead>
@@ -171,14 +172,26 @@ if (empty($result)) {
                                             $data = new breed();
                                             $row = $data->select_breed_all($farmid);
                                             while ($rs = $row->fetch_object()) {
-
+                                                if ($rs->breed_status == 'y') {
+                                                    $msg = 'แม่โคมีการตั้งท้อง';
+                                                } else {
+                                                    $msg = ' <a class="btn btn-success btn_status_y" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-check-square"></i>
+                                                            </a>
+                                                            <a class="btn btn-warning btn_status_n" id="<?php echo $rs->id; ?>">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                            </a>';
+                                                }
                                             ?>
                                                 <tr>
                                                     <td style="width: 10%;"><?php echo $rs->id; ?></td>
                                                     <td><?php echo $rs->namemale . ' และ ' . $rs->namefemale ?></td>
                                                     <td><?php echo DateThai($rs->breed_date); ?></td>
                                                     <td><?php echo DateThai($rs->breednext); ?></td>
-                                                    <td class="text-center">
+                                                    <td style="width: 18%;" class="text-center">
+                                                        <?php echo $msg; ?>
+                                                    </td>
+                                                    <td style="width: 15%;" class="text-center">
 
                                                         <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
                                                             <i class="fa fa-pen-alt"></i>
@@ -280,10 +293,10 @@ if (empty($result)) {
                     var data = '<option value="" selected disabled>--เลือกพ่อพันธุ์โค--</option>';
                     for (i in result) {
                         data += '<option  value="' + result[i].cow_id + '" > ' + result[i].cow_name + '</option>';
-                       
+
                     }
                     $('#cow_id_male').html(data);
-                  
+
                     // $('#modal_cow_id_male').html(data);
 
                 }
