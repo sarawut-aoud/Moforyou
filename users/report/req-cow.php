@@ -66,9 +66,12 @@ if (empty($result)) {
 
                                                 <tr align="center">
                                                     <th>#</th>
+                                                    <th>#</th>
                                                     <th>ชื่อ</th>
                                                     <th>เพศ</th>
                                                     <th>สายพันธุ์</th>
+                                                    <th>โรงเรือน</th>
+                                                    <th>ฝูง</th>
                                                     <th>อายุ</th>
 
                                                 </tr>
@@ -81,6 +84,12 @@ if (empty($result)) {
                                                 $datahouse = new cow();
                                                 $row = $datahouse->selectdatacowbyfarmer($farmid);
                                                 while ($rs = mysqli_fetch_object($row)) {
+
+                                                    if ($rs->cow_pic != NULL) {
+                                                        $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
+                                                    } else {
+                                                        $img =   "src='../../dist/img/icon/sacred-cow.png'";
+                                                    }
                                                     $datenew = date_create($rs->date);
                                                     $datenow = date_create(date('d-m-Y'));
                                                     $datediff = date_diff($datenow, $datenew);
@@ -91,10 +100,13 @@ if (empty($result)) {
                                                 ?>
                                                     <tr>
                                                         <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $rs->gender; ?></td>
                                                         <td><?php echo $rs->spec_name; ?></td>
-                                                        <td><?php echo  $years." ปี ".$months." เดือน ".$day." วัน "; ?></td>
+                                                        <td><?php echo $rs->house_name; ?></td>
+                                                        <td><?php echo $rs->herd_name; ?></td>
+                                                        <td><?php echo  $years . " ปี " . $months . " เดือน " . $day . " วัน "; ?></td>
                                                         <!--  -->
                                                     </tr>
                                                 <?php } ?>

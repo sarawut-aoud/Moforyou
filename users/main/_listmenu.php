@@ -52,7 +52,7 @@ if (empty($result)) {
                                             <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabhouse" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/barn.png">
-                                                    <span class="txt-resp   mt-2 ">โรงเรือน</span>
+                                                    <span class=" txt-resp mt-2  ">โรงเรือน</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -77,7 +77,7 @@ if (empty($result)) {
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-4 shadow" href="../listmenu/_tabbreed" role="button">
                                                 <div class="row justify-content-center">
-                                                    <img class="imggg"src="../../dist/img/icon/breed.png">
+                                                    <img class="imggg" src="../../dist/img/icon/breed.png">
                                                     <span class="txt-resp mt-2">ผสมพันธุ์</span>
                                                 </div>
                                             </a>
@@ -120,7 +120,7 @@ if (empty($result)) {
                                         <li class="nav-item  col-md-4 col-sm-12 col-12 mt-2">
                                             <a class="btn btn-lg bt_list-9 shadow" href="./_listReport" role="button">
                                                 <div class="row justify-content-center">
-                                                    <img class="img w-25" src="../../dist/img/icon/report.png">
+                                                    <img class="imggg" src="../../dist/img/icon/report.png">
                                                     <span class="txt-resp smt-2">รายงานข้อมูล</span>
                                                 </div>
                                             </a>

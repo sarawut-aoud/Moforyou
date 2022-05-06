@@ -250,6 +250,7 @@
 .bt_list-7.active {
   background: #00ac92;
 }
+
 .bt_list-8 {
   line-height: 1.5;
   color: #fff;
@@ -280,6 +281,7 @@
 .bt_list-8.active {
   background: #0d806a;
 }
+
 .bt_list-9 {
   line-height: 1.5;
   color: #fff;
@@ -310,6 +312,7 @@
 .bt_list-9.active {
   background: #7c7c7c;
 }
+
 .main-footer {
   padding: 0 0 0 0;
   width: 100%;
@@ -451,35 +454,82 @@
   background: #32cd32;
 }
 
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .txt-resp {
-        display: inline;
-        font-size:medium;
-    }
-    
-    .imggg{
-      width: 100%;
-    }
-}
+  .txt-resp {
+      display: inline;
+      font-size: medium;
+  }
 
+  .imggg {
+      width: 100%;
+  }
+}
+@media only screen and (min-width: 440px)  {
+  .txt-resp {
+      display: inline;
+      font-size: medium;
+  }
+
+  .imggg {
+      width: 50%;
+  }
+}
+@media only screen and (min-width: 570px)  {
+  .txt-resp {
+      display: inline;
+      font-size: medium;
+  }
+
+  .imggg {
+      width: 40%;
+  }
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .txt-resp {
-        display: inline;
-        font-size: medium;
-    }
-    .imggg{
-      width: 100%;
-    }
+  .txt-resp {
+      display: inline;
+      font-size: medium;
+  }
+
+  .imggg {
+      width: 25%;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .txt-resp {
-        display: inline;
-        font-size: x-large;
-    }
-    .imggg{
+  .txt-resp {
+      display: inline;
+      font-size: medium;
+  }
+
+  .imggg {
+      width: 50%;
+
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .txt-resp {
+      display: inline;
+      font-size: large;
+  }
+
+  .imggg {
       width: 25%;
-    }
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .txt-resp {
+      display: inline;
+      font-size: large;
+  }
+
+  .imggg {
+      width: 25%;
+  }
 }

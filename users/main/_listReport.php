@@ -41,7 +41,7 @@ if (empty($result)) {
                 <div class="container ">
                     <!-- Manage -->
                     <div class="row  mt-5 mb-5">
-                        <div class="col   mb-5">
+                        <div class="col-md-12 ">
                             <div class="card shadow">
                                 <div class="card-body">
                                     <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-file-chart-pie"></i> รายงานข้อมูล</h2>
@@ -54,7 +54,7 @@ if (empty($result)) {
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (6).png">
 
-                                                    <span class="text-lg mt-2">โรงเรือน</span>
+                                                    <span class="txt-resp mt-2">โรงเรือน</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -64,7 +64,7 @@ if (empty($result)) {
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (7).png">
 
-                                                    <span class="text-lg mt-2">ฝูงโค</span>
+                                                    <span class="txt-resp mt-2">ฝูงโค</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -133,9 +133,7 @@ if (empty($result)) {
             </div>
             <!-- /.content-header -->
 
-            <!-- Main content -->
-
-
+        
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->

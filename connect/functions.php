@@ -655,6 +655,21 @@ class breed extends Database
         ");
         return $updatecow;
     }
+    public function update_status($id,$status){
+        if($status == 'y'){
+            $update = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
+            breed_status = 'y'
+            
+            WHERE id = '$id'
+            ");
+        }else{
+            $update = mysqli_query($this->dbcon, "UPDATE tbl_breed SET
+           breed_status = 'n'
+            WHERE id = '$id'
+            ");
+        }
+        return $update;
+    }
 }
 
 class doctor extends Database

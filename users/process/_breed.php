@@ -74,7 +74,7 @@ if (isset($func) && $func == 'insert') {
             "message" => 'ไม่สามารถบันทึกข้อมูลได้',
         );
     } else {
-        $status = 'n';
+        $status = 'null';
         $datestart = date($date_bredd);
         $date = date($date_bredd); //? วันที่ปัจจุบัน
         $datenext = date('Y-m-d', strtotime($date . "+282 days")); //? วันที่เฉลี่ย ในการผสมพันธุ์
@@ -153,6 +153,28 @@ if (isset($func) && $func == 'edit') {
         $msg = array(
             "status" => 200,
             "message" => 'แก้ไขข้อมูลสำเร็จ',
+        );
+
+        echo json_encode($msg);
+        http_response_code(200);
+    }
+}
+if (isset($func) && $func == 'status') {
+    $id = $_POST['b_id'];
+    $status = $_POST['b_status'];
+    if (empty($id) || empty($status)) {
+        $msg = array(
+            "error" => true,
+            "status" => 0,
+            "message" => 'อัพเดตสถานะการตั้งครรภ์ไม่สำเร็จ',
+        );
+        echo json_encode($msg);
+        http_response_code(404);
+    } else {
+        $query = $sqlbreed->update_status($id, $status);
+        $msg = array(
+            "status" => 200,
+            "message" => 'อัพเดตสถานะข้อมูลสำเร็จ',
         );
 
         echo json_encode($msg);

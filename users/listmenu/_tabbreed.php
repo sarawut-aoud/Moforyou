@@ -177,12 +177,27 @@ if (empty($result)) {
                                             while ($rs = $row->fetch_object()) {
                                                 if ($rs->breed_status == 'y') {
                                                     $msg = 'แม่โคมีการตั้งท้อง';
+                                                    $stm = '<a class="btn btn-danger btn_del" id="' . $rs->id . '">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>';
+                                                } else if ($rs->breed_status == 'n') {
+                                                    $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+                                                    $stm = '<a class="btn btn-danger btn_del" id="' . $rs->id . '">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>';
                                                 } else {
-                                                    $msg = ' <a class="btn btn-success btn_status_y" id="<?php echo $rs->id; ?>">
+                                                    $msg = ' <a class="btn btn-success btn_status_y" id="' . $rs->id . '" title="ผสมติด">
                                                                 <i class="fa fa-check-square"></i>
                                                             </a>
-                                                            <a class="btn btn-warning btn_status_n" id="<?php echo $rs->id; ?>">
+                                                            <a class="btn btn-warning btn_status_n" id="' . $rs->id . '" title="ผสมไม่ติด">
                                                                 <i class="fa fa-exclamation-triangle"></i>
+                                                            </a>';
+                                                    $stm = '
+                                                            <a class="btn btn-info btn_edit" id="' . $rs->id . '">
+                                                                <i class="fa fa-pen-alt"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btn_del" id="' . $rs->id . '">
+                                                                <i class="fa fa-trash"></i>
                                                             </a>';
                                                 }
                                             ?>
@@ -195,13 +210,7 @@ if (empty($result)) {
                                                         <?php echo $msg; ?>
                                                     </td>
                                                     <td style="width: 15%;" class="text-center">
-
-                                                        <a class="btn btn-info btn_edit" id="<?php echo $rs->id; ?>">
-                                                            <i class="fa fa-pen-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger btn_del" id="<?php echo $rs->id; ?>">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
+                                                        <?php echo $stm; ?>
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -233,7 +242,7 @@ if (empty($result)) {
 
     <script>
         $(document).ready(function() {
-            var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
+            var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
 
             $('#timeabout').html('00-00-0000').css('color', 'red');
             $('#modal_timeabout').html('00-00-0000').css('color', 'red');
@@ -244,7 +253,7 @@ if (empty($result)) {
                 $('#cow_id_female').val(0).trigger("change");
                 $('#frm_breed')[0].reset();
                 $('#timeabout').html('00-00-0000').css('color', 'red');
-            })
+            });
 
             toastr.options = {
                 'closeButton': false,
@@ -604,15 +613,15 @@ if (empty($result)) {
                 var cowfemale = $("#modal_cow_id_female").val();
                 var datebreed = $("#modaldate_breed").val();
                 $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: '../process/_breed.php',
+                    type: "post",
+                    dataType: "json",
+                    url: "../process/_breed.php",
                     data: {
                         update_id: update_id,
                         cowmale: cowmale,
                         cowfemale: cowfemale,
                         datebreed: datebreed,
-                        function: "edit"
+                        function: 'edit'
                     },
                     success: function(result) {
                         if (result.status == 200) {
@@ -644,7 +653,111 @@ if (empty($result)) {
 
 
             });
+            $(document).on('click', '.btn_status_y', function(e) {
+                e.preventDefault();
+                var b_id = $(this).attr('id');
+                Swal.fire({
+                    title: 'คุณต้องการอัพเดตสถานะการผสมพันธุ์ใช่หรือไม่ ?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                }).then((btn) => {
+                    if (btn.isConfirmed) {
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: "../process/_breed.php",
+                            data: {
+                                function: "status",
+                                b_id: b_id,
+                                b_status: "y",
+                            },
+                            success: function(result) {
+                                if (result.status == 200) {
+                                    toastr.success(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                } else {
+                                    toastr.warning(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        });
+                    }
+                })
 
+
+            });
+            $(document).on('click', '.btn_status_n', function(e) {
+                e.preventDefault();
+                var b_id = $(this).attr('id');
+                Swal.fire({
+                    title: 'คุณต้องการอัพเดตสถานะการผสมพันธุ์ใช่หรือไม่ ?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                }).then((btn) => {
+                    if (btn.isConfirmed) {
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: "../process/_breed.php",
+                            data: {
+                                function: "status",
+                                b_id: b_id,
+                                b_status: "n",
+                            },
+                            success: function(result) {
+                                if (result.status == 200) {
+                                    toastr.success(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                } else {
+                                    toastr.warning(
+                                        result.message,
+                                        '', {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function() {
+                                                location.reload();
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        });
+                    }
+                })
+
+            });
         })
     </script>
     <script src="../../dist/js/datatable.js"></script>
