@@ -1,8 +1,8 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'] . "/main_2plugins/phpmailer/PHPMailerAutoload.php");
-
+require($_SERVER['DOCUMENT_ROOT'] . "/main_2/plugins/phpmailer/PHPMailerAutoload.php");
+$email = $_REQUEST['email'];
 header('Content-Type: text/html; charset=utf-8');
-
+$path = 'http://127.0.0.1/main_2/pages/login/_active_id.php?email='.$email.'';
 $mail = new PHPMailer;
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
@@ -19,7 +19,7 @@ $gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
 
 $sender = "MOFORYOU"; // ชื่อผู้ส่ง
 $email_sender = "MOFORYOU@gmail.com"; // เมล์ผู้ส่ง 
-$email_receiver = "sarawut.aou@pcru.ac.th"; // เมล์ผู้รับ ***
+$email_receiver = $email; // เมล์ผู้รับ ***
 
 $subject = "ยืนยันตัวตน"; // หัวข้อเมล์
 
@@ -37,7 +37,7 @@ $email_content = "
     <meta charset='UTF-8' />
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>Reset Your Password</title>
+    <title>Active Your Password</title>
   </head>
 
   <body>
@@ -67,7 +67,7 @@ $email_content = "
             </td>
             <tr>
               <td align='center'> 
-                <a href='#' target='_blank'>
+                <a href='" . $path . "' target='_blank'>
                   <h4 style=' padding: 10px 10px 20px 10px;margin-top: 10px;'>
                   <strong style='color: #3c83f9'>
                     >> กรุณาคลิ๊กที่นี่ เพื่อยืนยันตัวตน <<
@@ -103,6 +103,10 @@ if ($email_receiver) {
 		echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
 	} else {
 		// กรณีส่ง email สำเร็จ
-		echo "ระบบได้ส่งข้อความไปเรียบร้อย";
+    echo "<script>
+          window.setTimeout(function() {
+            window.location = '../email/sendmail.html';
+          }, 1000);
+        </script>";
 	}
 }

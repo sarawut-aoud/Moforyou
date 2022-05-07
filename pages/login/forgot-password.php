@@ -115,27 +115,11 @@
                         },
                         success: function(result) {
                             if (result.status == 200) {
-                                toastr.success(
-                                    result.message,
-                                    '', {
-                                        timeOut: 1000,
-                                        fadeOut: 1000,
-                                        onHidden: function() {
-                                            
-                                            window.location = 'https://mail.google.com';
-                                        }
-                                    }
-                                );
+                               
+                                window.location = '../email/email_recover?email='+email+'';
                             } else {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'warning',
-                                    title: result.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then((result) => {
-                                    location.reload();
-                                })
+                                $("#alertcheck").show(0).html("<div align='center' class='bg-red mb-2 rounded'>"+ result.message+"</div>")
+                                    .delay(2500).fadeOut('fast');
                             }
                         }
                     })

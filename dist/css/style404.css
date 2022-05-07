@@ -89,7 +89,7 @@ body {
   color: #151515;
 }
 
-.notfound a {
+.notfound .btn-404 {
  
   font-size: 14px;
   text-decoration: none;

@@ -35,10 +35,8 @@
                     <small class="password-strength__error text-danger js-hidden">This
                         symbol is not allowed!</small>
                     <p>
-                        <small class="form-text text-muted mt-2 " id="passwordHelp">Add
-                            9 charachters or more, lowercase letters, uppercase letters,
-                            numbers and symbols to make the password really
-                            strong!</small>
+                        <small class="form-text text-muted mt-2 " id="passwordHelp">
+                            ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9) </small>
                     </p>
                     <small>
                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
@@ -131,7 +129,7 @@
             $(document).on('click', '.password-strength__submit', function(e) {
                 e.preventDefault();
                 var pass = $('#password-input').val();
-                var email = '<?php echo $_GET['recov-email']; ?>';
+                var email = '<?php echo $_GET['email']; ?>';
                 $.ajax({
                     type: 'post',
                     dataType: 'json',

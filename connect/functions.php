@@ -24,6 +24,11 @@ class registra extends Database
         VALUES('$card','$fname','$email','$phone','$username','$password','NO')");
         return $reg;
     }
+    public function active_id($email)
+    {
+        $up = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET active ='YES' WHERE email = '$email' ");
+        return $up;
+    }
 
     // Login 
     public function login($password, $username, $email)

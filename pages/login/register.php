@@ -42,7 +42,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">อีเมล</label>
-                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" required>
+                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" onblur="checkmail(this.value)" required>
+                                    <span class="text-center " id="emailcheck"></span>
+                                
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">บัตรประชาชน</label>
@@ -59,7 +61,7 @@
                                         <div class="form-group">
                                             <label class="small mb-1">รหัสผ่าน</label>
                                             <div class="input-group">
-                                                <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" />
+                                                <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" required/>
                                                 <div class="input-group-append">
                                                     <button class="password-strength__visibility btn btn-outline-secondary" type="button">
                                                         <span class="password-strength__visibility-icon" data-visible="hidden">
@@ -77,7 +79,7 @@
                                         <div class="form-group">
                                             <label class="small mb-1">ยันยันรหัสผ่าน</label>
                                             <div class="input-group">
-                                                <input class="password-strength__input form-control py-4" type="password" id="confirm_password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" />
+                                                <input class="password-strength__input form-control py-4" type="password" id="confirm_password" name="confirm_password" aria-describedby="passwordHelp" placeholder="Confirm password" maxlength="20" required />
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="myFunction()">
                                                         <span data-visible="hidden">
@@ -91,7 +93,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <small class="password-strength__error text-danger js-hidden">This symbol is not allowed!</small>
-                                    <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9)  </small>
+                                    <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9) </small>
                                     <small>
                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
                                             <div id="bar" name="bar" class="password-strength__bar progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -137,7 +139,10 @@
         $.ajax({
             type: 'POST',
             url: '../../connect/checkuser_available.php',
-            data: 'username=' + val,
+            data: {
+                username: val,
+                function: "checkusername",
+            },
             success: function(data) {
                 $('#usernameavailable').html(data);
 
@@ -145,6 +150,20 @@
         });
     };
 
+    function checkmail(val) {
+        $.ajax({
+            type: 'POST',
+            url: '../../connect/checkuser_available.php',
+            data: {
+                email: val,
+                function: "checkmail",
+            },
+            success: function(data) {
+                $('#emailcheck').html(data);
+
+            }
+        });
+    };
     // Check Confrim Password
     $('#confirm_password,#password-input').keyup(function() {
         var pass = $('#password-input').val();
@@ -169,43 +188,51 @@
         }
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#submit', function(e) {
+            e.preventDefault();
+            var email = $('#email').val();
+            var card = $('#card').val();
+            var fname = $('#fname').val();
+            var phone = $('#phone').val();
+            var username = $('#username').val();
+            var password = $('#password-input').val();
+            var con_password = $('#confirm_password').val();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '_recov-password.php',
+                data: {
+                    function: "register",
+                    email: email,
+                    card: card,
+                    fname: fname,
+                    phone: phone,
+                    username: username,
+                    password: password,
+                    confirm_password: con_password,
+                },
+                success: function(result) {
+                    if (result.status == 200) {
+                        window.location = '../email/email_active?email=' + email + '';
+                    } else {
+                        toastr.warning(
+                            result.message,
+                            '', {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function() {
+                                    location.reload();
+                                }
+                            }
+                        );
+                    }
+                }
+            })
+
+        });
+    });
+</script>
 
 </html>
-<?php
-require '../../connect/functions.php';
-require '../../connect/func_pass.php';
-require '../../connect/alert.php';
-
-if (isset($_POST['submit'])) {
-
-    /// data
-    $userdata = new registra();
-    $card = preg_replace('/[-]/i', '', $_POST['card']);
-    $fname = $_POST['fname'];
-    $email = $_POST['email'];
-    $phone = preg_replace('/[-]/i', '', $_POST['phone']);
-    $username = $_POST['username'];
-    $password = $_POST['password-input'];
-    $con_password = $_POST['confirm_password'];
-    /// password
-    $sql = new Setpwd();
-
-    $encode = $sql->encode($password); // เข้ารหัส pass
-    $pass_sha = $sql->Setsha256($encode); //เอา pass+user เข้า hmac 
-    $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
-
-    if ($con_password != $password) {
-         echo warning("ยืนยัน Password ไม่ถูกต้อง");
-    } else {
-        $sql = $userdata->register($card, $fname, $email, $phone, $username, $pwd_hashed);
-
-        if ($sql) {
-            echo success_1("Successful!!", "./login"); // "แสดงอะไร","ส่งไปหน้าไหน"
-
-        } else {
-            echo "<script>alert('Something went wrong! Please try again.');</>";
-            echo "<script>window.location.href='./register'</script>";
-        }
-    }
-}
-?>
