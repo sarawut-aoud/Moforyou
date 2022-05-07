@@ -104,7 +104,7 @@ if (isset($_POST['username'])) {
                 $row = mysqli_fetch_array($result);
                 $encode = $sql->encode($password); // เข้ารหัส password
                 $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
-                if (password_verify($pass_sha, $row['password'])) { // เปรียบเทียบ password ที่รับค่า และ password from db
+                if (password_verify($pass_sha, $row['password']) && $row['active'] == 'YES') { // เปรียบเทียบ password ที่รับค่า และ password from db
                     // Select data จาก Username or Email
                     $results = $userdata->login($row['password'], $row['username'], $row['email']);
                     $row_login = mysqli_fetch_array($results);
@@ -114,11 +114,13 @@ if (isset($_POST['username'])) {
                     $person_id =  $row_login['card'];
                     $phone =  $row_login['phone'];
                     $email =  strval($row_login['email']);
-                    
+
                     require '../../connect/func_login.php';
                     echo login($id, $username, $fullname, $person_id, $phone, $email);
 
                     exit();
+                } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {
+                    echo info_toast("โปรดยืนยันตัวตนก่อนเข้าสู่ระบบ");
                 } else {
                     echo warning_toast("รหัสผ่านผิด โปรดลองอีกครั้ง");
                     exit();

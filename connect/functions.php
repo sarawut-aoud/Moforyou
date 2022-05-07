@@ -20,8 +20,8 @@ class registra extends Database
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
-        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password)
-        VALUES('$card','$fname','$email','$phone','$username','$password')");
+        $reg = mysqli_query($this->dbcon, "INSERT INTO tbl_farmer(card,fullname,email,phone,username,password,active)
+        VALUES('$card','$fname','$email','$phone','$username','$password','NO')");
         return $reg;
     }
 
@@ -36,7 +36,7 @@ class registra extends Database
     //password 
     public function Getpwd($username, $email)
     {
-        $getpass = mysqli_query($this->dbcon, "SELECT username,email,password FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
+        $getpass = mysqli_query($this->dbcon, "SELECT username,email,password,active FROM tbl_farmer WHERE username = '" . $username . "' OR email = '$email' ");
         return $getpass;
     }
     // recover password

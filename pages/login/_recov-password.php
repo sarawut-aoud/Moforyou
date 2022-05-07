@@ -21,6 +21,14 @@ if (isset($func) && $func == 'emailcheck') {
     echo json_encode($msg);
     http_response_code(200);
 }
+
+
+
+
+
+
+
+
 if (isset($func) && $func == 'recovepass') {
     $sql = new registra();
     $email = $_POST['email'];

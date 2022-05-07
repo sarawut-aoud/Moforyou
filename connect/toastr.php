@@ -116,14 +116,7 @@ function info_toast($msg)
        }
        toastr.info(
          '$msg',
-         '',
-         {
-           timeOut: 1000,
-           fadeOut: 1000,
-           onHidden: function () {
-               window.location.reload();
-             }
-         }
+         
        );
                  </script>";
 }

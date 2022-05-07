@@ -122,7 +122,7 @@
                                         fadeOut: 1000,
                                         onHidden: function() {
                                             
-                                            window.location = './recover-password?recov-email='+email+'';
+                                            window.location = 'https://mail.google.com';
                                         }
                                     }
                                 );
