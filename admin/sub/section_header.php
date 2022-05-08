@@ -9,7 +9,7 @@
             <div class="icon">
                 <i class="fas fa-farm"></i>
             </div>
-            <a href="#" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="../report/rep_farms.php" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -24,7 +24,7 @@
             <div class="icon">
                 <i class="fad fa-cow"></i>
             </div>
-            <a href="#" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="../report/rep_spec_farm.php" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

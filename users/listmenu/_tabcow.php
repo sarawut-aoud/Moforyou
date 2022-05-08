@@ -108,7 +108,7 @@ if (empty($result)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
+                                                    <!-- <div class="form-group row">
                                                         <div class="input-group">
                                                             <label class="col-form-label col-sm-2" for="fathercow">พ่อโค : </label>
                                                             <div class="col-md-4">
@@ -119,7 +119,7 @@ if (empty($result)) {
                                                                 <input type="text" class="form-control " id="mothercow" name="mothercow" placeholder="แม่โค">
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group row">
                                                         <div class="input-group">
                                                             <label class="col-form-label col-md-2 col-sm" for="house_id">โรงเรือน : </label>
@@ -343,16 +343,16 @@ if (empty($result)) {
                             $('#modal_cowdate').val(result.cow_date);
                             $('#modalweightcow').val(result.weight);
                             $('#modalhighcow').val(result.high);
-                            $('#modalfathercow').val(result.cow_father);
-                            $('#modalmothercow').val(result.cow_mother);
+                            // $('#modalfathercow').val(result.cow_father);
+                            // $('#modalmothercow').val(result.cow_mother);
                             $('#modal_cowid').val(result.cow_id);
                             if (result.cow_pic != null) {
-                              
-                            $('#modalimg').attr('src',"../../dist/img/cow_upload/"+result.cow_pic+"");
+
+                                $('#modalimg').attr('src', "../../dist/img/cow_upload/" + result.cow_pic + "");
 
                             } else {
-                                
-                                $('#modalimg').attr('src',"../../dist/img/icon/sacred-cow.png");
+
+                                $('#modalimg').attr('src', "../../dist/img/icon/sacred-cow.png");
 
                             }
                             if (result.cow_gender == '1') {
@@ -557,8 +557,8 @@ if (empty($result)) {
             $species_id =  $_POST['species_id'];
             $weightcow =  $_POST['weightcow'];
             $highcow =  $_POST['highcow'];
-            $fathercow =  $_POST['fathercow'];
-            $mothercow =  $_POST['mothercow'];
+            // $fathercow =  $_POST['fathercow'];
+            // $mothercow =  $_POST['mothercow'];
             $house_id =  $_POST['house_id'];
             $herd_id =  $_POST['herd_id'];
             $gender =  $_POST['gender'];
@@ -587,10 +587,10 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } else {
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '', $farmid);
+                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } // check picture
             } // check Undendifind values
@@ -626,8 +626,8 @@ if (empty($result)) {
             $species_id =  $_POST['modalspecies_id'];
             $weightcow =  $_POST['modalweightcow'];
             $highcow =  $_POST['modalhighcow'];
-            $fathercow =  $_POST['modalfathercow'];
-            $mothercow =  $_POST['modalmothercow'];
+            // $fathercow =  $_POST['modalfathercow'];
+            // $mothercow =  $_POST['modalmothercow'];
             $house_id =  $_POST['modalhouse_id'];
             $herd_id =  $_POST['modalherd_id'];
             $gender =  $_POST['gender'];

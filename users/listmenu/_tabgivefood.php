@@ -46,11 +46,11 @@ if (empty($result)) {
 
                     <div class="container col-10">
                         <!-- Manage -->
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-4 mb-3">
                                 <button class="btn btn-info  btn-lg float-start btnqrcode"" ><i class=" fas fa-qrcode"></i> สร้าง QR-CODE</button>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row justify-content-around">
 
                             <div class="col-lg-5 col-md-12">

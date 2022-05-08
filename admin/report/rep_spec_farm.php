@@ -65,17 +65,18 @@
                                         <thead>
                                             <tr>
                                                 <th>สายพันธุ์</th>
-                                                <th>จำนวน  (ตัว)</th>
-
+                                                <th>จำนวน (ตัว)</th>
                                             </tr>
+
                                         </thead>
                                         <tbody>
                                             <?php require '../../connect/functions.php';
                                             $sql = new reports();
 
-
+                                            $sum = 0;
                                             $query1 = $sql->req_cow('');
                                             while ($row = $query1->fetch_object()) {
+                                                $sum =  $sum + $row->cow;
                                             ?>
                                                 <tr>
                                                     <td><?php echo $row->spec_name; ?></td>
@@ -84,6 +85,10 @@
                                             <?php
 
                                             } ?>
+                                            <tr>
+                                                <td align="center">รวม</td>
+                                                <td><?php echo $sum; ?></td>
+                                            </tr>
                                         </tbody>
 
                                     </table>

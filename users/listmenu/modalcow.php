@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <div class="input-group">
                                 <label class="col-form-label col-2" for="modalfathercow">พ่อโค : </label>
                                 <div class="col-md-4">
@@ -73,7 +73,7 @@
                                     <input type="text" class="form-control " id="modalmothercow" name="modalmothercow" placeholder="แม่โค">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                             <div class="input-group">
                                 <label class="col-form-label col-md-2 col-sm" for="modalhouse_id">โรงเรือน : </label>

@@ -441,17 +441,16 @@ class cow extends Database
     }
 
     // Insert
-    public function addcow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $farm_id, $picture)
+    public function addcow($cow_name, $cow_date, $high, $weight, $spec_id, $herd_id, $house_id, $gender, $picture, $farm_id)
     {
         if (empty($picture)) {
-            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,gender,farm_id)   
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,spec_id,herd_id,house_id,gender,farm_id)   
             VALUES(
                 '$cow_name',
                 '$cow_date',
                 '$high',
                 '$weight',
-                '$cow_father',
-                '$cow_mother',
+               
                 '$spec_id',
                 '$herd_id',
                 '$house_id',
@@ -459,14 +458,13 @@ class cow extends Database
                 '$farm_id'
             )");
         } else {
-            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,cow_father,cow_mother,spec_id,herd_id,house_id,gender,cow_pic,farm_id)   
+            $add_cow = mysqli_query($this->dbcon, "INSERT INTO tbl_cow(cow_name,cow_date,high,weight,spec_id,herd_id,house_id,gender,cow_pic,farm_id)   
             VALUES(
                 '$cow_name',
                 '$cow_date',
                 '$high',
                 '$weight',
-                '$cow_father',
-                '$cow_mother',
+                
                 '$spec_id',
                 '$herd_id',
                 '$house_id',
@@ -479,7 +477,7 @@ class cow extends Database
         return $add_cow;
     }
     // Update
-    public function update_cow($cow_name, $cow_date, $high, $weight, $cow_father, $cow_mother, $spec_id, $herd_id, $house_id, $gender, $picture, $cowid)
+    public function update_cow($cow_name, $cow_date, $high, $weight, $spec_id, $herd_id, $house_id, $gender, $picture, $cowid)
     {
         if (empty($picture)) {
             $update = mysqli_query($this->dbcon, "UPDATE tbl_cow 
@@ -487,8 +485,7 @@ class cow extends Database
                 cow_date = '$cow_date' ,
                 high = '$high' ,
                 weight='$weight',
-                cow_father='$cow_father',
-                cow_mother='$cow_mother',
+               
                 spec_id='$spec_id',
                 herd_id='$herd_id',
                 house_id='$house_id',
@@ -501,8 +498,7 @@ class cow extends Database
                 cow_date = '$cow_date' ,
                 high = '$high' ,
                 weight='$weight',
-                cow_father='$cow_father',
-                cow_mother='$cow_mother',
+               
                 spec_id='$spec_id',
                 herd_id='$herd_id',
                 house_id='$house_id',
@@ -526,7 +522,7 @@ class cow extends Database
         if ($id == 'count') {
             $sel_cow = mysqli_query($this->dbcon, "SELECT count(id) AS datacow FROM tbl_cow ");
         } else {
-            $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_father,c.cow_mother,c.cow_date, c.cow_pic, c.gender as gender
+            $sel_cow = mysqli_query($this->dbcon, "SELECT c.id , c.cow_name , c.high, c.weight, c.spec_id,c.herd_id ,c.house_id,c.cow_date, c.cow_pic, c.gender as gender
     
             FROM tbl_cow AS c 
             INNER JOIN tbl_house as ho ON(c.house_id = ho.id)

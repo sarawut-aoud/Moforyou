@@ -80,8 +80,8 @@ if (isset($func) && $func == "showdata") {
                 "house_id" => intval($row->house_id),
                 "herd_id" => intval($row->herd_id),
                 "cow_date" => ($cowdate),
-                "cow_father" => ($row->cow_father),
-                "cow_mother" => ($row->cow_mother),
+                // "cow_father" => ($row->cow_father),
+                // "cow_mother" => ($row->cow_mother),
                 "cow_pic" => ($row->cow_pic),
                 "cow_gender" => intval($row->gender),
             );

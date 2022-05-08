@@ -1,7 +1,7 @@
 <?php
 error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
-@$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
 $sql = new farm();
 
 
@@ -12,7 +12,7 @@ if (isset($func) && $func == 'showeditFarm') {
     
     $i = 0;
     $id = $_GET['id'];
-    $query = $sql->selectfarm($id);
+    $query = $sql->selectfarmbyid($id);
     while ($row = $query->fetch_object()) {
         $tombon = json_decode($get_tombon);
         foreach ($tombon as $value) {
@@ -52,6 +52,7 @@ if (isset($func) && $func == 'amphuer') {
     }
     echo json_encode($data);
 }
+
 // if (isset($id) && $func == 'editfarmer') {
 //     $fname = $_GET['fname'];
 //     $email = $_GET['email'];
