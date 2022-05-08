@@ -76,7 +76,7 @@ require '../../connect/functions.php';
                                                 <th>ฝูง</th>
                                                 <th>โรงเรือน</th>
                                                 <th>ฟาร์ม</th>
-                                                <th>Edit&Delete</th>
+                                                <th>Edit</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
@@ -97,9 +97,9 @@ require '../../connect/functions.php';
                                                                 <i class="fas fa-pencil-alt"></i>
 
                                                             </a>
-                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id; ?>">
+                                                            <!-- <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id; ?>">
                                                                 <i class="fas fa-trash-alt"></i>
-                                                            </a>
+                                                            </a> -->
                                                         </center>
                                                     </td>
                                                 </tr>

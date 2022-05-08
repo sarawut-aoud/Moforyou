@@ -83,7 +83,7 @@ require '../../connect/functions.php';
                                                 <th>ฝูง</th>
                                                 <th>ฟาร์ม</th>
 
-                                                <th>แก้ไข / ลบข้อมูล</th>
+                                                <th>แก้ไข/ลบ</th>
                                             </tr>
                                         </thead>
                                         <!-- /.head table -->
@@ -159,6 +159,67 @@ require '../../connect/functions.php';
             $('#modalEdit').modal('show');
             $('#modaltextcenter').html('แก้ไขข้อมูลโคเนื้อ');
         })
+
+        var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
+
+
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '../process/_cow.php',
+            data: {
+                id: '',
+                function: "getdataspecies",
+            },
+            success: function(result) {
+                var data = '<option value="" selected disabled>--เลือกสายพันธุ์--</option>';
+                for (i in result) {
+                    data += '<option value="' + result[i].spec_id + '" > ' + result[i].spec_name + '</option>';
+                }
+                $('#species_id').html(data);
+            }
+        });
+
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '../process/_cow.php',
+            data: {
+                id: farm_id,
+                function: "getdatahouse",
+            },
+            success: function(result) {
+                var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
+                for (i in result) {
+                    data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
+                }
+                $('#house_id').html(data);
+
+                $('#house_id').change(function() {
+                    var house_id = $('#house_id').val();
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_cow.php',
+                        data: {
+                            id: house_id,
+                            function: "getdataherd",
+                        },
+                        success: function(result) {
+                            var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
+                            for (i in result) {
+                                data += '<option value="' + result[i].herd_id + '" > ' + result[i].herdname + '</option>';
+                            }
+                            $('#herd_id').html(data);
+
+                        }
+                    });
+
+                });
+            }
+        });
+
+
         $(document).on('click', '.btnDels', function(e) {
             e.preventDefault();
             var cowid = $(this).attr('id');
