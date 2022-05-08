@@ -126,7 +126,7 @@ if (isset($_POST['username'])) {
                     exit();
                 }
             } else {
-                echo warning_toast("ฃื่อเข้าใช้งานผิด โปรดลองอีกครั้ง");
+                echo warning_toast("ชื่อเข้าใช้งานผิดหรือรหัสผ่านผิด โปรดลองอีกครั้ง");
                 exit();
             }
         } else {
@@ -134,7 +134,7 @@ if (isset($_POST['username'])) {
                 session_start();
                 $_SESSION["id"] = $username;
                 $_SESSION["user"] = $username;
-                $_SESSION["fullname"] = "Sarawut Aoudkla";
+                $_SESSION["fullname"] = "Admin Moforyou";
                 echo success_toast("Login Sucessful !", $_SESSION["fullname"], "../../admin/main/admin_index");
                 exit();
             } else {

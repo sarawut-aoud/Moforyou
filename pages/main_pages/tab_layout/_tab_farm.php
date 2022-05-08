@@ -3,6 +3,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4  ">
 
         <?php
+        @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
         require_once '../../connect/functions.php';
         $sql = new farm();
         $perpage = 8;  // แสดงจำนวนในแต่ละหน้า
@@ -18,35 +19,51 @@
 
 
         while ($result = mysqli_fetch_assoc($query)) {
+
+            if ($result['farmname'] != "") {
+                $farm = $result['farmname'];
+            } else {
+                $farm = '-';
+            }
+            if ($result['address'] != '') {
+                $address = $result['address'];
+            } else {
+                $address = '-';
+            }
+            if ($result['district_id'] != '') {
+                $tombon = json_decode($get_tombon);
+                foreach ($tombon as $value) {
+                    if ($result['district_id'] == $value->id) { //? check id amphur
+                        $district_id =  $value->name_th;
+                    }
+                }
+            } else {
+                $district_id = '-';
+            }
         ?>
             <div class="card-deck">
                 <div class="card ">
                     <div class="card-header card-data text-center">
-                        <h3>ฟาร์ม : <?php echo $result['farmname']; ?></h3>
+                        <h3>ฟาร์ม : <?php echo $farm; ?></h3>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title mb-4">ชื่อเจ้าของฟาร์ม : คุณ <?php echo $result['fullname']; ?> </h5>
 
                         <p class="card-text ">โคเนื้อจำนวน : <?php echo $result['cow']; ?> ตัว</p>
-                        <p class="card-text ">ที่อยู่: <?php echo $result['address']; ?></p>
+                        <p class="card-text ">ที่อยู่: <?php echo  $address; ?></p>
                         <p class="card-text ">อำเภอ:
-                            <?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
-                            $tombon = json_decode($get_tombon);
-                            foreach ($tombon as $value) {
-                                if ($result['district_id'] == $value->id) { //? check id amphur
-                                    echo  $value->name_th;
-                                }
-                            }; ?>
+                            <?php echo $district_id; ?>
                         </p>
                         <p class="card-text ">ติดต่อ : <?php echo $result['phone'] . " หรือ " . $result['email']; ?></p>
                     </div>
                     <div class="card-footer text-center">
-                        <button id="<?php echo $result['id']; ?>" class="btn btn-success modalreqfarm">ดูรายละเอียด</button>
+                        <button id="<?php echo $result['id'];?>" emailfarm="<?php echo $result['email']; ?>" phone="<?php echo $result['phone']; ?>" farmmer="<?php echo $result['fullname']; ?>" class="btn btn-success modalreqfarm">ดูรายละเอียด
+                        </button>
                     </div>
                 </div>
             </div>
             <!-- ./col -->
-            
+
         <?php } ?>
 
     </div>

@@ -7,6 +7,8 @@ $_SESSION["fullname"] = $_POST['fullname'];
 $_SESSION["person_id"] = $_POST['person_id'];
 $_SESSION["phone"] = $_POST['phone'];
 $_SESSION["email"] = $_POST['email'];
+$_SESSION["farm_id"] = $_POST['farmid'];
+
 
 
 $msg = array(

@@ -47,7 +47,7 @@ if (empty($result)) {
                     <div class="container">
                         <!-- Manage -->
                         <div class="row justify-content-center">
-                           
+
                             <div class="col-md-8">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
@@ -98,6 +98,7 @@ if (empty($result)) {
                                             <tr>
                                                 <th>#</th>
                                                 <th>ชื่อโรงเรือน</th>
+                                                <th>สร้าง Qrcode โรงเรือน</th>
                                                 <th>แก้ไข / ลบข้อมูล</th>
                                             </tr>
 
@@ -113,8 +114,14 @@ if (empty($result)) {
                                             ?>
                                                 <tr>
                                                     <td style="width: 20%;"><?php echo $rs->id; ?></td>
-                                                    <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                    <td style="width: 40%;"><?php echo $rs->house_name; ?></td>
+                                                    <td style="width: 20%;" class="text-center">
+                                                        <button class="btn btn-primary btnqrcode" title="สร้าง QR-code" id="<?php echo $rs->id; ?>">
+                                                            <i class=" fa fa-qrcode"></i>
+                                                        </button>
+                                                    </td>
                                                     <td style="width:30%;" class="text-center">
+
                                                         <a class="btn btn-info btnEdit" title="แก้ไขข้อมูล" id="<?php echo $rs->id; ?>">
                                                             <i class="fa fa-pen-alt"></i>
                                                         </a>
@@ -126,7 +133,7 @@ if (empty($result)) {
                                             <?php } ?>
                                         </tbody>
                                         <!-- /.body table -->
-                                     
+
                                     </table>
                                     <!-- /.table -->
                                 </div>
@@ -137,16 +144,33 @@ if (empty($result)) {
                     </div>
                 </div>
             </div>
+            <?php require_once 'modalQrcode.php'; ?>
             <?php require_once './modalhouse.php'; ?>
             <!-- /.content-wrapper -->
         </section>
         <!-- Main Footer -->
         <?php require '../sub/footer.php'; ?>
     </div>
-
+    <script src="../../plugins/qrocde/qrcode.js"></script>
     <!-- ./wrapper -->
     <script>
         $(document).ready(function() {
+
+
+
+            $(document).on('click', '.btnqrcode', function(e) {
+                var farmid = $(this).attr('id');
+                // var qrcode = new QRCode("qrcode");
+                var url = '<?php echo $_SERVER['HTTP_HOST'] . '/main_2/users/qrcodefrom/givefood.php?farmid=' ?>' + farmid;
+                $('#qrcode').html('');
+                if (farmid) {
+                   
+                    new QRCode(qrcode, url);
+                    $('#modalqrcode').modal('show');
+                }
+            });
+
+
 
             toastr.options = {
                 'closeButton': false,

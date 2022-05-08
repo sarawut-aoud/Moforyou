@@ -273,10 +273,7 @@ if (empty($result)) {
 
     <script src="../../plugins/qrocde/qrcode.js"></script>
 
-    <script type="text/javascript">
-
-
-    </script>
+   
     <script>
         $(document).ready(function() {
             var url = '<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>';

@@ -151,7 +151,7 @@ if (empty($result)) {
                         </div>
                         <!-- ./col -->
 
-                        <div class="col-md-6  col-sm-12 ">
+                        <div class="col-lg-6 col-md-12 col-sm-12  ">
 
                             <div class="card card-purple card-outline">
                                 <div class="card-header">
@@ -198,7 +198,7 @@ if (empty($result)) {
                 </div>
                 <div class="container ">
                     <div class="row mb-5">
-                        <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                        <div class="col-lg-6 col-md-12 col-sm-12 ">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -218,7 +218,7 @@ if (empty($result)) {
 
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                        <div class="col-lg-6 col-md-12 col-sm-12 ">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -398,11 +398,18 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        var date1 = new Date(result.date2)
-                        var date = toThaiDateString(date1);
-                        $('#datebreed').html(date);
-                        $('#namemale').html(result.namemale2);
-                        $('#namefemale').html(result.namefemale2);
+                        if (result.date2 != null) {
+                            var date1 = new Date(result.date2)
+                            var date = toThaiDateString(date1);
+                            $('#datebreed').html(date);
+                            $('#namemale').html(result.namemale2);
+                            $('#namefemale').html(result.namefemale2);
+                        } else {
+                            $('#datebreed').html('-');
+                            $('#namemale').html('-');
+                            $('#namefemale').html('-');
+
+                        }
                     }
                 });
                 $.ajax({
@@ -414,9 +421,16 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        $('#cowdata').html(result.cou_cow);
-                        $('#male').html(result.cou_male);
-                        $('#female').html(result.cou_female);
+                        if (result.cou_cow == null) {
+                            $('#cowdata').html('0');
+                            $('#male').html(result.cou_male);
+                            $('#female').html(result.cou_female);
+                        } else {
+                            $('#cowdata').html(result.cou_cow);
+                            $('#male').html(result.cou_male);
+                            $('#female').html(result.cou_female);
+                        }
+
                     }
                 });
                 $.ajax({
@@ -428,11 +442,20 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        var date1 = new Date(result.date)
-                        var date = toThaiDateString(date1);
-                        $('#datefood').html(date);
-                        // $('#cowfood').html(result.cow);
-                        $('#weightfood').html(result.weight_food);
+                        if (result.date == null) {
+                            $('#datefood').html('--/--/----');
+                            $('#weightfood').html('--');
+                        } else {
+                            var date1 = new Date(result.date)
+                            var date = toThaiDateString(date1);
+                            $('#datefood').html(date);
+                            $('#weightfood').html(result.weight_food);
+                        }
+
+
+
+
+
                         var date = result.date;
                         $.ajax({
                             type: "get",
@@ -460,13 +483,25 @@ if (empty($result)) {
                         farm_id: farm_id,
                     },
                     success: function(result) {
-                        var date1 = new Date(result.date)
-                        var date = toThaiDateString(date1);
-                        $('#dateheal').html(result.date);
-                        $('#namecowheal').html(result.cow);
+                        if (result.date == null) {
+                            $('#dateheal').html('--/--/----');
+                            $('#namecowheal').html('-');
 
-                        $('#doctorheal').html(result.docname);
+                            $('#doctorheal').html('-');
+                        } else {
+                            var date1 = new Date(result.date)
+                            var date = toThaiDateString(date1);
+                            $('#dateheal').html(result.date);
+                            $('#namecowheal').html(result.cow);
 
+                            $('#doctorheal').html(result.docname);
+                        }
+
+                        if (result.heal == null) {
+                            var heal = '-';
+                        } else {
+                            var heal = result.heal;
+                        }
 
                         var dis_id = result.dis;
                         $.ajax({
@@ -481,12 +516,13 @@ if (empty($result)) {
                                 for (i in results) {
                                     if (results[i].id == dis_id) {
                                         var detail = results[i].detail
+                                    } else {
+                                        var detail = '';
                                     }
                                 }
                                 if (dis_id != "") {
-                                    $('#heal').html(detail + "  " + result.heal);
-                                }
-
+                                    $('#heal').html(detail + "  " + heal);
+                                } 
                             }
                         });
                     }

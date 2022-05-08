@@ -15,7 +15,7 @@
                     <!--? /.Title Name -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
+                    <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary resetqrcode" data-bs-dismiss="modal">ปิดหน้านี้</button>
 
                 </div>
             </div>

@@ -85,7 +85,10 @@
         $(document).ready(function() {
             $(document).on('click', '.modalreqfarm', function() {
                 var id = $(this).attr('id');
-
+                var farmer = $(this).attr('farmmer');
+                var email = $(this).attr('emailfarm');
+                var phone = $(this).attr('phone');
+               
                 $.ajax({
                     type: 'get',
                     dataType: 'json',
@@ -96,11 +99,14 @@
                     },
                     success: function(result) {
                         $('#reqfarm').modal('show');
-                        $('#farmname').html(result.farmname);
-                        $('#farmername').html('คุณ ' + result.fullname);
-                        $('#phone').html(result.phone);
-
-                        $('#email').html(result.email);
+                        if (result.farmname != null) {
+                            $('#farmname').html(result.farmname);
+                        } else {
+                            $('#farmname').html('-');
+                        }
+                        $('#farmername').html('คุณ ' + farmer);
+                        $('#phone').html(phone);
+                        $('#email').html(email);
                         if (result.cow == null) {
                             $('#cow').html('0 ตัว');
                         } else {

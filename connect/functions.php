@@ -24,9 +24,13 @@ class registra extends Database
         VALUES('$card','$fname','$email','$phone','$username','$password','NO')");
         return $reg;
     }
-    public function active_id($email)
+    public function active_id($email, $stm)
     {
-        $up = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET active ='YES' WHERE email = '$email' ");
+        if ($stm == 'update') {
+            $up = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET active ='YES' WHERE email = '$email' ");
+        } else if ($stm == 'select') {
+            $up = mysqli_query($this->dbcon, "SELECT active FROM tbl_farmer WHERE email = '$email'");
+        }
         return $up;
     }
 
@@ -77,7 +81,7 @@ class farmer extends Database
         if ($id == '') {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer ORDER BY id ASC  ");
         } else {
-            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id' ");
+            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id'  ");
         }
         return $data;
     }
@@ -980,10 +984,10 @@ class reports extends Database
             ");
         } else {
             $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname ,fm.fullname
-        FROM tbl_cow as c
-        RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
-        INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
-        WHERE c.farm_id = '$farm_id' GROUP BY f.farmname
+            FROM tbl_cow as c
+            RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
+            INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
+            WHERE c.farm_id = '$farm_id' GROUP BY f.farmname
         ");
         }
 
@@ -1030,11 +1034,14 @@ class reports extends Database
 
     public function req_indexfarm($farm_id)
     {
+
         $re = mysqli_query($this->dbcon, "SELECT f.farmname , fm.fullname ,fm.phone ,fm.email
-         FROM tbl_farm AS f
-         INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
-         WHERE f.id = '$farm_id'
-         ");
+            FROM tbl_farm AS f
+            INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
+            WHERE f.id = '$farm_id'
+            ");
+
+
         return  $re;
     }
     public function req_indexcow($cow_id)
