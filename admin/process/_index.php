@@ -39,6 +39,7 @@ if (isset($func) && $func == 'showdatafarm') {
 
 if (isset($func) && $func == 'showcowdata') {
     $query = $sql_cow->selectdatacow('count');
+   
     while ($row = $query->fetch_object()) {
         $data = array(
             "datarow" => intval($row->datacow),
