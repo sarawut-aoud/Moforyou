@@ -252,12 +252,7 @@ if (empty($result)) {
 
         </div>
         <!-- ./wrapper -->
-        <!-- <script src="../../plugins/flot/jquery.flot.js"></script>
-
-        <script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
-
-        <script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script> -->
-
+       
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {
