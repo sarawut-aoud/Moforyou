@@ -67,7 +67,7 @@ $email_content = "
             <td align='center' >
               <img
                 style='width: 25%'
-                src='https://cdn-icons.flaticon.com/png/512/3256/premium/3256783.png?token=exp=1651909525~hmac=2922924e12504b99ff20a6d3e1efdb26'
+                src='https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/344/external-password-cycber-security-system-inipagistudio-mixed-inipagistudio.png'
               />
             </td>
             <tr>

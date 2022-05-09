@@ -65,7 +65,7 @@ $email_content = "
             <td align='center' >
               <img
                 style='width:25%'
-                src='https://cdn-icons.flaticon.com/png/512/1709/premium/1709977.png?token=exp=1652000609~hmac=77c04fd6f63865c9c346bc4bc5e0c183'
+                src='https://img.icons8.com/plasticine/344/check-all.png'
               />
             </td>
             <tr>
