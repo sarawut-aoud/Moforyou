@@ -23,6 +23,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -78,21 +81,21 @@ if (empty($result)) {
                                                 <?php
                                                 $data = new heal();
                                                 function DateThai($strDate)
-                                                    {
-                                                        $strYear = date("Y", strtotime($strDate)) + 543;
-                                                        $strMonth = date("n", strtotime($strDate));
-                                                        $strDay = date("j", strtotime($strDate));
-                                                        $strHour = date("H", strtotime($strDate));
-                                                        $strMinute = date("i", strtotime($strDate));
-                                                        $strSeconds = date("s", strtotime($strDate));
-                                                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                        $strMonthThai = $strMonthCut[$strMonth];
-                                                        if ($strHour == '00' && $strMinute == '00') {
-                                                            return "$strDay $strMonthThai $strYear   ";
-                                                        } else {
-                                                            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                        }
+                                                {
+                                                    $strYear = date("Y", strtotime($strDate)) + 543;
+                                                    $strMonth = date("n", strtotime($strDate));
+                                                    $strDay = date("j", strtotime($strDate));
+                                                    $strHour = date("H", strtotime($strDate));
+                                                    $strMinute = date("i", strtotime($strDate));
+                                                    $strSeconds = date("s", strtotime($strDate));
+                                                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                                                    $strMonthThai = $strMonthCut[$strMonth];
+                                                    if ($strHour == '00' && $strMinute == '00') {
+                                                        return "$strDay $strMonthThai $strYear   ";
+                                                    } else {
+                                                        return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
                                                     }
+                                                }
                                                 $row = $data->select_healbyfarm($farmid);
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                     if ($rs->detail != NULL && $rs->healmore != NULL) {
@@ -102,7 +105,7 @@ if (empty($result)) {
                                                     } else {
                                                         $dis = $rs->detail;
                                                     }
-                                                    
+
 
                                                 ?>
                                                     <tr>

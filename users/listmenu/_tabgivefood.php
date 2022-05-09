@@ -23,6 +23,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -273,7 +276,7 @@ if (empty($result)) {
 
     <script src="../../plugins/qrocde/qrcode.js"></script>
 
-   
+
     <script>
         $(document).ready(function() {
             var url = '<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>';
@@ -496,7 +499,7 @@ if (empty($result)) {
                         foodweight: foodweight,
                         date: date,
                         house_id: house_id,
-                        cowdata:cowdata,
+                        cowdata: cowdata,
                         farm_id: farm_id,
                     },
                     success: function(result) {

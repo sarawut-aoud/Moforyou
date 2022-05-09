@@ -8,6 +8,9 @@ ob_start();
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Log in | MFU</title>
     <?php require '../../build/script.php'; ?>
@@ -24,7 +27,7 @@ ob_start();
             </div>
 
             <div class="card-body">
-                <p class="login-box-msg"> <u><a style="font-size: 22px;" href="../main_pages/index_tab-farm">www.moforyou.com <i class="fad fa-home"></i></a></u></p>
+                <p class="login-box-msg"> <u><a style="font-size: 22px;" href="../main_pages/index_tab-farm.php">www.moforyou.com <i class="fad fa-home"></i></a></u></p>
                 <div class="col-12">
                     <!-- Form -->
                     <form method="post" id="loginForm">
@@ -135,7 +138,7 @@ if (isset($_POST['username'])) {
                 $_SESSION["id"] = $username;
                 $_SESSION["user"] = $username;
                 $_SESSION["fullname"] = "Admin Moforyou";
-                echo success_toast("Login Sucessful !", $_SESSION["fullname"], "../../admin/main/admin_index");
+                echo success_toast("Login Sucessful !", $_SESSION["fullname"], "../../admin/main/admin_index.php");
                 exit();
             } else {
                 echo warning_toast("ฃื่อเข้าใช้งาน หรือ รหัสผ่านผิด");

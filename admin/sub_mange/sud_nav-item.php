@@ -1,24 +1,24 @@
 <?php
-              if ($cut[3] == 'main' and $cut[4] == 'dist_prov') {
+              if ($cut[3] == 'main' and $cut[4] == 'dist_prov.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'farmer') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'farmer.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'house') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'house.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'herd') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'herd.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'farm') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'farm.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'species' ) {
+              } else if ($cut[3] == 'main' and $cut[4] == 'species.php' ) {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'cow') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'cow.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'breed') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'breed.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'food') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'food.php') {
                 echo "menu-open";
-              } else if ($cut[3] == 'main' and $cut[4] == 'diseased') {
+              } else if ($cut[3] == 'main' and $cut[4] == 'diseased.php') {
                 echo "menu-open";
               } else{
                 echo "";
-              } ?>
+              }

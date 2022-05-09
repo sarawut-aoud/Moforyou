@@ -23,6 +23,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -322,7 +325,7 @@ if (empty($result)) {
             $(document).on('click', '.btnDels', function(e) {
                 e.preventDefault();
                 var id = $(this).attr('id');
-             
+
                 var _row = $(this).parent();
                 Swal.fire({
                     title: 'คุณต้องการลบข้อมูลใช่หรือไม่ ?',

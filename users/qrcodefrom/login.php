@@ -8,6 +8,9 @@ ob_start();
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Log in | MFU</title>
     <?php require '../../build/script.php'; ?>
@@ -49,7 +52,7 @@ ob_start();
                 </div>
                 <center>
                     <p class="mb-1 mt-2">
-                        <a href="../../pages/login/forgot-password">ลืมรหัสผ่าน</a>
+                        <a href="../../pages/login/forgot-password.php">ลืมรหัสผ่าน</a>
                     </p>
 
                     <!-- <p class="mb-0  mt-5">

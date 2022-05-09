@@ -23,6 +23,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -70,7 +73,7 @@ if (empty($result)) {
                                                     <th>วันที่ให้อาหาร</th>
                                                     <th>น้ำหนักอาหาร</th>
                                                     <th>น้ำหนักอาหาร(รวม)</th>
-                                                    
+
                                                 </tr>
                                             </thead>
                                             <!-- /.head table -->

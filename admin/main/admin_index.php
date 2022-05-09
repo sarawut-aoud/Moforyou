@@ -7,7 +7,11 @@ require '../../connect/session_ckeck.php';
 
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+  <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Admin|Dashboard</title>
   <?php
   include '../../build/script.php';
@@ -251,7 +255,7 @@ require '../../connect/session_ckeck.php';
         $query = $sqlcow->selectdatacowbyfarmer('');
         $year = date('Y');
         $i = 0;
-        $x=1;
+        $x = 1;
         $total = 0;
         while ($row = $query->fetch_object()) {
           $query2 = $sql->req_recordfoodadmin('', $year);
@@ -266,7 +270,7 @@ require '../../connect/session_ckeck.php';
               $sum[$i] = 0;
               $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food; /// คำนวน
               $total =  $total + $sum[$i];
-        ?>['<?php echo "รอบที่ ".$x++; ?>', <?php echo  $total; ?>],
+        ?>['<?php echo "รอบที่ " . $x++; ?>', <?php echo  $total; ?>],
         <?php
             }
           }

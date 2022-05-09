@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recover Password </title>
 
@@ -65,7 +68,7 @@
         </form>
 
         <p class="mt-3 mb-1">
-            <a href="login">Login</a>
+            <a href="login.php">Login</a>
         </p>
     </div>
     <!-- /.login-card-body -->

@@ -23,6 +23,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -108,7 +111,7 @@ if (empty($result)) {
                                                             <tr>
                                                                 <td><?php echo $rs->id; ?></td>
                                                                 <td><?php echo $rs->name; ?></td>
-                                                                
+
 
                                                                 <td class="text-center">
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
@@ -184,18 +187,18 @@ if (empty($result)) {
 
             var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
 
-            
+
             $(document).on('click', '.submit', function(e) {
                 e.preventDefault();
                 var name = $('#foodname').val();
-                
+
                 $.ajax({
                     type: "post",
                     dataType: "json",
                     url: '../process/_food.php',
                     data: {
                         function: "insert",
-                        
+
                         name: name,
                         farm_id: farm_id,
                     },
@@ -246,7 +249,7 @@ if (empty($result)) {
                     },
                     success: function(result) {
                         $('#foodname').val(result.name);
-                        
+
 
                         var foodid = result.id;
 
@@ -255,7 +258,7 @@ if (empty($result)) {
                         $(document).on('click', '.btnsave', function(e) {
                             e.preventDefault();
                             var name = $('#foodname').val();
-                            
+
                             $.ajax({
                                 type: "post",
                                 dataType: "json",
@@ -263,7 +266,7 @@ if (empty($result)) {
                                 data: {
                                     function: "edit",
                                     name: name,
-                                    
+
                                     foodid: foodid,
                                 },
                                 success: function(result) {

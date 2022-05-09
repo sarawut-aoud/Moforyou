@@ -24,6 +24,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
     <?php require '../../build/script.php'; ?>
@@ -126,7 +129,7 @@ if (empty($result)) {
                                     <i class="fas fa-venus-mars"></i>
                                 </div>
 
-                                <a href="../report/req-breed" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="../report/req-breed.php" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -146,7 +149,7 @@ if (empty($result)) {
                                 <div class="icon">
                                     <i class="fad fa-cow"></i>
                                 </div>
-                                <a href="../report/req-cow" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="../report/req-cow.php" class="small-box-footer">ดูข้อมูล <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -165,7 +168,7 @@ if (empty($result)) {
                                     <p class="card-text">โค : <span id="namecowheal"></span> </p>
                                     <p class="card-text">อาการป่วย / โรค : <span id="heal"></span></p>
                                     <p class="card-text">สัตวแพทย์ : <span id="doctorheal"></span></p>
-                                    <a href="../report/req-heal" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
+                                    <a href="../report/req-heal.php" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
 
                                 </div>
                             </div>
@@ -185,7 +188,7 @@ if (empty($result)) {
                                     <hr>
                                     <p class="card-text">ทั้งหมด <span id="cowfood"></span> ตัว</p>
                                     <p class="card-text">น้ำหนักอาหารทั้งสิ้น <span id="weightfood"></span> กิโลกรัม</p>
-                                    <a href="../report/req-foodrecord" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
+                                    <a href="../report/req-foodrecord.php" class="btn btn-primary"><i class="fas fa-search"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
 
@@ -252,7 +255,7 @@ if (empty($result)) {
 
         </div>
         <!-- ./wrapper -->
-       
+
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {
@@ -517,7 +520,7 @@ if (empty($result)) {
                                 }
                                 if (dis_id != "") {
                                     $('#heal').html(detail + "  " + heal);
-                                } 
+                                }
                             }
                         });
                     }

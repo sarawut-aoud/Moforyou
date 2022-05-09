@@ -10,25 +10,25 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
 
 <li class="nav-item  <?php require '../sub_mange/sud_nav-item.php'; ?> ">
   <a href="#" class="nav-link  <?php
-                                if ($cut[4] == 'dist_prov') {
+                                if ($cut[4] == 'dist_prov.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'farmer') {
+                                } else if ($cut[4] == 'farmer.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'house') {
+                                } else if ($cut[4] == 'house.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'herd') {
+                                } else if ($cut[4] == 'herd.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'farm') {
+                                } else if ($cut[4] == 'farm.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'species') {
+                                } else if ($cut[4] == 'species.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'cow') {
+                                } else if ($cut[4] == 'cow.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'breed') {
+                                } else if ($cut[4] == 'breed.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'food') {
+                                } else if ($cut[4] == 'food.php') {
                                   echo "active";
-                                } else if ($cut[4] == 'diseased') {
+                                } else if ($cut[4] == 'diseased.php') {
                                   echo "active";
                                 } else {
                                   echo "";
@@ -43,7 +43,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
   </a>
   <ul class="nav nav-treeview">
     <!-- <li class="nav-item">
-      <a href="../main/dist_prov" class="nav-link <?php if ($cut[4] == 'dist_prov') {
+      <a href="../main/dist_prov" class="nav-link <?php if ($cut[4] == 'dist_prov.php') {
                                                     echo "active";
                                                   }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -52,7 +52,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
     </li> -->
 
     <li class="nav-item">
-      <a href="../main/farmer" class="nav-link <?php if ($cut[4] == 'farmer') {
+      <a href="../main/farmer.php" class="nav-link <?php if ($cut[4] == 'farmer.php') {
                                                   echo "active";
                                                 }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -60,7 +60,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/house" class="nav-link <?php if ($cut[4] == 'house') {
+      <a href="../main/house.php" class="nav-link <?php if ($cut[4] == 'house.php') {
                                                 echo "active";
                                               }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -68,7 +68,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/herd" class="nav-link <?php if ($cut[4] == 'herd') {
+      <a href="../main/herd.php" class="nav-link <?php if ($cut[4] == 'herd.php') {
                                                 echo "active";
                                               }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -76,7 +76,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/farm" class="nav-link <?php if ($cut[4] == 'farm') {
+      <a href="../main/farm.php" class="nav-link <?php if ($cut[4] == 'farm.php') {
                                                 echo "active";
                                               }  ?> ">
         <i class="far fa-circle nav-icon"></i>
@@ -84,7 +84,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/species" class="nav-link <?php if ($cut[4] == 'species') {
+      <a href="../main/species.php" class="nav-link <?php if ($cut[4] == 'species.php') {
                                                   echo "active";
                                                 }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -92,7 +92,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <li class="nav-item">
-      <a href="../main/cow" class="nav-link <?php if ($cut[4] == 'cow') {
+      <a href="../main/cow.php" class="nav-link <?php if ($cut[4] == 'cow.php') {
                                               echo "active";
                                             }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -100,7 +100,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
       </a>
     </li>
     <!-- <li class="nav-item">
-      <a href="../main/breed" class="nav-link <?php if ($cut[4] == 'breed') {
+      <a href="../main/breed" class="nav-link <?php if ($cut[4] == 'breed.php') {
                                                 echo "active";
                                               }  ?>">
         <i class="far fa-circle nav-icon"></i>
@@ -109,7 +109,7 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
     </li> -->
 
     <li class="nav-item">
-      <a href="../main/diseased" class="nav-link <?php if ($cut[4] == 'diseased') {
+      <a href="../main/diseased.php" class="nav-link <?php if ($cut[4] == 'diseased.php') {
                                                     echo "active";
                                                   }  ?>">
         <i class="far fa-circle nav-icon"></i>

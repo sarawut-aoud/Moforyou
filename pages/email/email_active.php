@@ -2,7 +2,7 @@
 require($_SERVER['DOCUMENT_ROOT'] . "/moforyou/plugins/phpmailer/PHPMailerAutoload.php");
 $email = $_REQUEST['email'];
 header('Content-Type: text/html; charset=utf-8');
-$path = $_SERVER['HTTP_HOST'] .'/moforyou/pages/login/_active_id.php?email='.$email.'';
+$path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/_active_id.php?email=' . $email . '';
 $mail = new PHPMailer;
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
@@ -35,6 +35,9 @@ $email_content = "
 <html>
   <head>
     <meta charset='UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta http-equiv='Content-Type' content='text/html; charset=windows-874'>
+    <meta http-equiv='Content-Type' content='text/html; charset=tis-620'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>Active Your Password</title>
@@ -93,20 +96,20 @@ $email_content = "
 
 //  ถ้ามี email ผู้รับ
 if ($email_receiver) {
-	$mail->msgHTML($email_content);
+  $mail->msgHTML($email_content);
 
 
-	if (!$mail->send()) {  // สั่งให้ส่ง email
+  if (!$mail->send()) {  // สั่งให้ส่ง email
 
-		// กรณีส่ง email ไม่สำเร็จ
-		echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
-		echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
-	} else {
-		// กรณีส่ง email สำเร็จ
+    // กรณีส่ง email ไม่สำเร็จ
+    echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
+    echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
+  } else {
+    // กรณีส่ง email สำเร็จ
     echo "<script>
           window.setTimeout(function() {
             window.location = '../email/sendmail.html';
           }, 1000);
         </script>";
-	}
+  }
 }

@@ -1,6 +1,6 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: rgba(207, 116, 27, 1); ">
     <div class="container">
-        <a href="../main/user_index" class="navbar-brand">
+        <a href="../main/user_index.php" class="navbar-brand">
             <img src="../../dist/img/icon/icon.ico" alt="MFULogo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text text-white">MoFoYou</span>
         </a>
@@ -35,8 +35,8 @@
             </li> -->
 
             <li class=" nav-item ">
-                <a class="nav-link " href="../../pages/login/logout">
-                    <i class="far fa-unlock-alt mr-2"><span class=" colorfont"> ออกจากระบบ</span> </i> 
+                <a class="nav-link " href="../../pages/login/logout.php">
+                    <i class="far fa-unlock-alt mr-2"><span class=" colorfont"> ออกจากระบบ</span> </i>
                 </a>
             </li>
         </ul>

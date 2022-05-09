@@ -11,17 +11,17 @@ $cut = explode("/", $_SERVER["REQUEST_URI"]);
     <div class="container">
         <ul class="nav nav-pills nav-fill ">
             <li class="nav-item ">
-                <a class="nav-link flex-sm-fill " role="button" style="color: white;" href="../main/user_index">
+                <a class="nav-link flex-sm-fill " role="button" style="color: white;" href="../main/user_index.php">
                     <i class="far  fa-home" style="font-size:30px"></i>
                 </a>
             </li>
             <li class=" nav-item ">
-                <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_listmenu">
+                <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_listmenu.php">
                     <i class="far fa-bars" style="font-size:30px"></i>
                 </a>
             </li>
             <li class=" nav-item ">
-                <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_setting">
+                <a class="nav-link flex-sm-fill " role="button" style="color: white; " href="../main/_setting.php">
                     <i class="far fa-user-cog" style="font-size:30px"></i>
                 </a>
             </li>

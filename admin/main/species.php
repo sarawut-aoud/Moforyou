@@ -8,6 +8,9 @@ require '../../connect/functions.php';
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin|Dashboard</title>
     <?php
@@ -42,7 +45,7 @@ require '../../connect/functions.php';
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="./admin_index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="./admin_index.php">Home</a></li>
                                 <li class="breadcrumb-item active">Specise</li>
                             </ol>
                         </div>
@@ -168,7 +171,7 @@ require '../../connect/functions.php';
                                                         </td>
                                                         <td style="width: 15%;">
                                                             <center>
-                                                                <a class="btn btn-info edit_data" href="../update-form/_spec?id=<?php echo $row->id; ?>">
+                                                                <a class="btn btn-info edit_data" href="../update-form/_spec.php?id=<?php echo $row->id; ?>">
                                                                     <i class="fas fa-pencil-alt"></i>
 
                                                                 </a>
@@ -215,10 +218,10 @@ require '../../connect/functions.php';
 </body>
 
 <script src="../../dist/js/imgshow.js"></script>
-<script src="../../dist/js/datatable.js">// data table ปริ้น -1 </script>
+<script src="../../dist/js/datatable.js">
+    // data table ปริ้น -1 
+</script>
 <script>
-    
-
     function del(id) {
         Swal.fire({
             title: 'คุณแน่ใจ ?',
@@ -231,7 +234,7 @@ require '../../connect/functions.php';
             confirmButtonText: 'ตกลง'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location = "../delete/delete_species?del=" + id;
+                window.location = "../delete/delete_species.php?del=" + id;
             }
         })
     };
@@ -272,10 +275,10 @@ if (isset($_POST['submit'])) {
 
         copy($specpic, "../../dist/img/spec_upload/" . $ext);
         $sql = $specdata->addspec_pic($specname, $specdetail, $ext);
-        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
+        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species.php"); // "แสดงอะไร","ส่งไปหน้าไหน"
     } else {
         $sql = $specdata->addspec($specname, $specdetail);
-        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species"); // "แสดงอะไร","ส่งไปหน้าไหน"
+        echo success_1("เพิ่มข้อมูลสำเร็จ", "./species.php"); // "แสดงอะไร","ส่งไปหน้าไหน"
     }
 }
 

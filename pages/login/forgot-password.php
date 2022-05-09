@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Forgot Password </title>
 
@@ -88,8 +91,8 @@
                     </div>
                 </form>
                 <div class="d-flex mt-3 mb-1 ">
-                    <a href="login" class="me-auto p-2">เข้าสู่ระบบ</a>
-                    <a href="../login/login" class="p-2">ย้อนกลับ</a>
+                    <a href="login.php" class="me-auto p-2">เข้าสู่ระบบ</a>
+                    <a href="../login/login.php" class="p-2">ย้อนกลับ</a>
 
                 </div>
             </div>
@@ -115,10 +118,10 @@
                         },
                         success: function(result) {
                             if (result.status == 200) {
-                               
-                                window.location = '../email/email_recover?email='+email+'';
+
+                                window.location = '../email/email_recover?email=' + email + '';
                             } else {
-                                $("#alertcheck").show(0).html("<div align='center' class='bg-red mb-2 rounded'>"+ result.message+"</div>")
+                                $("#alertcheck").show(0).html("<div align='center' class='bg-red mb-2 rounded'>" + result.message + "</div>")
                                     .delay(2500).fadeOut('fast');
                             }
                         }

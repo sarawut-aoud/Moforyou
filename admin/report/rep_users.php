@@ -12,6 +12,9 @@ $query = $sql->select_allfarmer('');
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin|Dashboard</title>
     <?php
@@ -49,7 +52,7 @@ $query = $sql->select_allfarmer('');
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../main/admin_index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../main/admin_index.php">Home</a></li>
                                 <li class="breadcrumb-item active">ข้อมูลผู้ใช้งาน</li>
                             </ol>
                         </div>
@@ -79,19 +82,19 @@ $query = $sql->select_allfarmer('');
                                                 <th>อีเมล</th>
                                                 <th>บัตรประชาชน</th>
                                                 <!-- <th>ดูรายละเอียด</th> -->
-                                               
+
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()){?>
-                                            <tr>
-                                                <td style="width: 10%;"><?php echo $row->id; ?></td>
-                                                <td><?php echo $row->fullname; ?></td>
-                                                <td><?php echo $row->phone; ?></td>
-                                                <td><?php echo $row->email; ?></td>
-                                                <td><?php echo substr($row->card,0,7)."*******"; ?></td>
-                                                <!-- <td>
+                                            <?php while ($row = $query->fetch_object()) { ?>
+                                                <tr>
+                                                    <td style="width: 10%;"><?php echo $row->id; ?></td>
+                                                    <td><?php echo $row->fullname; ?></td>
+                                                    <td><?php echo $row->phone; ?></td>
+                                                    <td><?php echo $row->email; ?></td>
+                                                    <td><?php echo substr($row->card, 0, 7) . "*******"; ?></td>
+                                                    <!-- <td>
                                                     <center>
                                                         
                                                         <a class="btn btn-info  btnDetail" title="ดูรายละเอียด" id="<?php echo $row->id; ?>">
@@ -99,12 +102,12 @@ $query = $sql->select_allfarmer('');
                                                         </a>
                                                     </center>
                                                 </td> -->
-                                               
-                                               
-                                            </tr>
+
+
+                                                </tr>
                                             <?php   } ?>
                                         </tbody>
-                                       
+
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
@@ -131,7 +134,7 @@ $query = $sql->select_allfarmer('');
 </body>
 <script src="../../dist/js/datatableprint.js"></script>
 <script>
-    $(document).on('click','.btnDetail', function(e){
+    $(document).on('click', '.btnDetail', function(e) {
         e.preventDefault();
 
         var id = $(this).attr('id');
@@ -141,12 +144,12 @@ $query = $sql->select_allfarmer('');
             type: 'get',
             dataType: "json",
             url: '../process/_detailfarmer',
-            data:{
+            data: {
                 id: id,
                 function: 'showdetailfarmer',
             },
             success: function(rs) {
-                function UnicodeDecodeB64(str){
+                function UnicodeDecodeB64(str) {
                     return decodeURIComponent(atob(str));
                 };
                 $("#modalDetail").modal("show");
@@ -156,7 +159,7 @@ $query = $sql->select_allfarmer('');
                 $("#modalemail").html(rs.email)
                 var personid = UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
 
-                $("#modalpersonid").html((personid).substr(0,7)+"*******");
+                $("#modalpersonid").html((personid).substr(0, 7) + "*******");
 
             }
         })

@@ -5,7 +5,7 @@ $sql = new registra();
 $email = $_REQUEST['email'];
 $query = $sql->active_id($email, 'select');
 $rs = $query->fetch_object();
-$paths = 'http://127.0.0.1/main_2/pages/login/login.php';
+$paths = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/login.php';
 
 
 if ($rs->active == 'YES') {

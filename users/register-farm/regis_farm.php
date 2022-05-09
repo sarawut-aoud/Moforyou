@@ -11,7 +11,7 @@ $fcheck = $sql->checkregisfarm($id);
 $result = mysqli_num_rows($fcheck);
 //ถ้าไม่มีส่งไปหน้าลงทะเบียน
 if (!empty($result)) {
-    echo "<script>window.location='../main/_setting';</script>";
+    echo "<script>window.location='../main/_setting.php ';</script>";
 } else {
 
 
@@ -22,6 +22,9 @@ if (!empty($result)) {
 
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+        <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MoForYou</title>
 
@@ -155,7 +158,7 @@ if (!empty($result)) {
             echo warning_toast('กรุณากรอกข้อมูลให้ครบ');
         } else {
             $query = $sql->registerfarm($farmame, $address, $tombon_id, $farmmer_id);
-            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย', '', '../main/_setting');
+            echo success_toast('บันทึกข้อมูลฟาร์มเรียบร้อย', '', '../main/_setting.php');
         }
     }
 }

@@ -11,6 +11,9 @@ $id = $_SESSION['id'];
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -102,7 +105,7 @@ $id = $_SESSION['id'];
             <!-- /.content-wrapper -->
         </section>
         <!-- Main Footer -->
-        
+
     </div>
 
     <!-- ./wrapper -->
@@ -118,7 +121,7 @@ $id = $_SESSION['id'];
     </script>
     <script>
         $(document).ready(function() {
-           
+
 
 
 

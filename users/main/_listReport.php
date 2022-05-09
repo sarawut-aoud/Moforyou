@@ -19,6 +19,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -50,7 +53,7 @@ if (empty($result)) {
                                     <ul class="nav nav-pills " id="custom-content-below-tab">
 
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-1 shadow" href="../report/rep-house" role="button">
+                                            <a class="btn btn-lg box_list-1 shadow" href="../report/rep-house.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (6).png">
 
@@ -60,7 +63,7 @@ if (empty($result)) {
                                         </li>
 
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-2 shadow" href="../report/req-herd" role="button">
+                                            <a class="btn btn-lg box_list-2 shadow" href="../report/req-herd.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (7).png">
 
@@ -69,7 +72,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-3 shadow" href="../report/req-cow" role="button">
+                                            <a class="btn btn-lg box_list-3 shadow" href="../report/req-cow.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/req-cow.png">
 
@@ -78,7 +81,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-4 shadow" href="../report/req-breed" role="button">
+                                            <a class="btn btn-lg bt_list-4 shadow" href="../report/req-breed.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (8).png">
                                                     <span class="txt-resp mt-2">ผสมพันธุ์</span>
@@ -86,7 +89,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-4 shadow" href="../report/req-disease" role="button">
+                                            <a class="btn btn-lg bt_list-4 shadow" href="../report/req-disease.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/medical-checkup.png">
 
@@ -95,7 +98,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-5 shadow" href="../report/req-heal" role="button">
+                                            <a class="btn btn-lg bt_list-5 shadow" href="../report/req-heal.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/rep-1 (1).png">
 
@@ -104,7 +107,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-5 shadow" href="../report/req-foodrecord" role="button">
+                                            <a class="btn btn-lg bt_list-5 shadow" href="../report/req-foodrecord.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/food.png">
 
@@ -113,7 +116,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-12 col-sm-12 mt-2">
-                                            <a class="btn btn-lg bt_list shadow" href="./_listmenu" role="button">
+                                            <a class="btn btn-lg bt_list shadow" href="./_listmenu.php" role="button">
                                                 <i class="fa fa-arrow-alt-to-left"></i>
                                                 <span class="ml-3">ย้อนกลับ</span>
                                             </a>
@@ -133,7 +136,7 @@ if (empty($result)) {
             </div>
             <!-- /.content-header -->
 
-        
+
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->

@@ -17,6 +17,9 @@ $result2 = mysqli_fetch_object($farm);
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -177,7 +180,7 @@ $result2 = mysqli_fetch_object($farm);
                                                     <small class="password-strength__error text-danger js-hidden">This
                                                         symbol is not allowed!</small>
                                                     <p>
-                                                        <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9)  </small>
+                                                        <small class="form-text text-muted mt-2 text-center" id="passwordHelp">ใช้ อย่างน้อย 6 ตัวอักษร ผสม ด้วยตัวอักษร(A-Z) ตัวเลข(0-9) </small>
                                                     </p>
                                                     <small>
                                                         <div class="password-strength__bar-block progress mt-2 mb-2 rounded-2" style="height:18px;">
@@ -223,11 +226,7 @@ $result2 = mysqli_fetch_object($farm);
             <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-            <script src="../../plugins/modal_img/autosize.min.js"></script>
-            <script src="../../plugins/modal_img/index.all.min.js"></script>
-            <script src="../../plugins/modal_img/iziToast.min.js"></script>
-            <script src="../../plugins/modal_img/perfect-scrollbar.min.js"></script>
-            <script src="../../plugins/modal_img/popper.min.js"></script>
+         
 
             <script src="../../dist/js/modal_img.js"></script> -->
             <script src="../../dist/js/phone.js"></script>

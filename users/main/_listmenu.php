@@ -19,6 +19,9 @@ if (empty($result)) {
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -49,7 +52,7 @@ if (empty($result)) {
                                     <hr class="mt-2 mb-2">
                                     <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
                                         <li class="nav-item col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabhouse" role="button">
+                                            <a class="btn btn-lg box_list-1 shadow" href="../listmenu/_tabhouse.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg " src="../../dist/img/icon/barn.png">
                                                     <span class=" txt-resp mt-2  ">โรงเรือน</span>
@@ -57,7 +60,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-2 shadow" role="button" href="../listmenu/_tabherd">
+                                            <a class="btn btn-lg box_list-2 shadow" role="button" href="../listmenu/_tabherd.php">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/smart-farm.png">
                                                     <span class=" mt-2   txt-resp">ฝูงโค</span>
@@ -66,7 +69,7 @@ if (empty($result)) {
                                         </li>
 
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg box_list-3 shadow" href="../listmenu/_tabcow" role="button">
+                                            <a class="btn btn-lg box_list-3 shadow" href="../listmenu/_tabcow.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/sacred-cow.png">
                                                     <span class="txt-resp mt-2">โคเนื้อ</span>
@@ -75,7 +78,7 @@ if (empty($result)) {
                                         </li>
 
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-4 shadow" href="../listmenu/_tabbreed" role="button">
+                                            <a class="btn btn-lg bt_list-4 shadow" href="../listmenu/_tabbreed.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/breed.png">
                                                     <span class="txt-resp mt-2">ผสมพันธุ์</span>
@@ -83,7 +86,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn bt_list-5 shadow" href="../listmenu/_tabfood" role="button">
+                                            <a class="btn bt_list-5 shadow" href="../listmenu/_tabfood.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/ต้นข้าว.png">
                                                     <span class="txt-resp mt-2">อาหาร</span>
@@ -93,7 +96,7 @@ if (empty($result)) {
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
 
-                                            <a class=" btn btn-lg bt_list-6 shadow" href="../listmenu/_tabheal" role="button">
+                                            <a class=" btn btn-lg bt_list-6 shadow" href="../listmenu/_tabheal.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/disease.png">
                                                     <span class="txt-resp mt-2">โรค-ป่วย/การรักษา</span>
@@ -102,7 +105,7 @@ if (empty($result)) {
 
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-7 shadow" href="../listmenu/_tabgivefood" role="button">
+                                            <a class="btn btn-lg bt_list-7 shadow" href="../listmenu/_tabgivefood.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/feed.png">
                                                     <span class="txt-resp mt-2">ให้อาหาร</span>
@@ -110,7 +113,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
-                                            <a class="btn btn-lg bt_list-8 shadow" href="../doctor/_tabdoctor" role="button">
+                                            <a class="btn btn-lg bt_list-8 shadow" href="../doctor/_tabdoctor.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/doctor.png">
                                                     <span class="txt-resp mt-2">สัตวแพทย์</span>
@@ -118,7 +121,7 @@ if (empty($result)) {
                                             </a>
                                         </li>
                                         <li class="nav-item  col-md-4 col-sm-12 col-12 mt-2">
-                                            <a class="btn btn-lg bt_list-9 shadow" href="./_listReport" role="button">
+                                            <a class="btn btn-lg bt_list-9 shadow" href="./_listReport.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/report.png">
                                                     <span class="txt-resp smt-2">รายงานข้อมูล</span>

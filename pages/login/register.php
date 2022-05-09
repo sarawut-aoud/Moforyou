@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registrationn</title>
     <?php
@@ -44,7 +47,7 @@
                                     <label class="small mb-1">อีเมล</label>
                                     <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" onblur="checkmail(this.value)" required>
                                     <span class="text-center " id="emailcheck"></span>
-                                
+
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">บัตรประชาชน</label>
@@ -61,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="small mb-1">รหัสผ่าน</label>
                                             <div class="input-group">
-                                                <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" required/>
+                                                <input class="password-strength__input form-control py-4" type="password" id="password-input" name="password-input" aria-describedby="passwordHelp" placeholder="Enter password" maxlength="20" required />
                                                 <div class="input-group-append">
                                                     <button class="password-strength__visibility btn btn-outline-secondary" type="button">
                                                         <span class="password-strength__visibility-icon" data-visible="hidden">
@@ -106,7 +109,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <div class="small"><a href="login">ฉันเป็นสมาชิกอยู่แล้ว</a></div>
+                    <div class="small"><a href="login.php">ฉันเป็นสมาชิกอยู่แล้ว</a></div>
                 </div>
             </div>
             <!-- /card -->

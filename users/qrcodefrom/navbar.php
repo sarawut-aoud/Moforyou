@@ -18,8 +18,8 @@
 
 
             <li class=" nav-item ">
-                <a class="nav-link " href="../../pages/login/logout">
-                    <i class="far fa-unlock-alt mr-2"><span class=" colorfont"> ออกจากระบบ</span> </i> 
+                <a class="nav-link " href="../../pages/login/logout.php">
+                    <i class="far fa-unlock-alt mr-2"><span class=" colorfont"> ออกจากระบบ</span> </i>
                 </a>
             </li>
         </ul>

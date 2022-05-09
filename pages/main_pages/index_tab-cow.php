@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MoForYou</title>
 
@@ -42,13 +45,13 @@
                         <div class="col">
                             <ul class="nav nav-pills " id="custom-content-below-tab" role="tablist">
                                 <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                    <a class="bt " id="tab-farm-tab" href="index_tab-farm">ฟาร์ม</a>
+                                    <a class="bt " id="tab-farm-tab" href="index_tab-farm.php">ฟาร์ม</a>
                                 </li>
                                 <li class="nav-item  col-md-4 col-sm-12 mt-2">
-                                    <a class="bt active" id="tab-cow-tab" href="index_tab-cow">โคเนื้อ</a>
+                                    <a class="bt active" id="tab-cow-tab" href="index_tab-cow.php">โคเนื้อ</a>
                                 </li>
                                 <li class="nav-item col-md-4 col-sm-12 mt-2">
-                                    <a class="bt " id="tab-specise-tab" href="index_tab-specise">สายพันธุ์โคเนื้อ</a>
+                                    <a class="bt " id="tab-specise-tab" href="index_tab-specise.php">สายพันธุ์โคเนื้อ</a>
                                 </li>
                             </ul>
                         </div>
@@ -116,7 +119,7 @@
             })
         })
     </script>
-  
+
 </body>
 
 

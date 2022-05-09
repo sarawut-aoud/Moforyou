@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+    <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin|Dashboard</title>
     <?php
@@ -40,7 +43,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../main/admin_index">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../main/admin_index.php">Home</a></li>
                                 <li class="breadcrumb-item active">ข้อมูลฟาร์ม</li>
                             </ol>
                         </div>

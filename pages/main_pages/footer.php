@@ -5,7 +5,7 @@
          <ul class="navbar-nav ">
              <li class="nav-item ">
                  
-                 <a class="nav-link" role="button" href="./index_tab-farm">
+                 <a class="nav-link" role="button" href="./index_tab-farm.php">
                      <i class="fas fa-home" style="font-size:30px"></i>
 
                  </a>
