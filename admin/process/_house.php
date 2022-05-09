@@ -1,5 +1,5 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 $sql = new house();
 $sql_herd = new herd();
@@ -49,7 +49,7 @@ if (isset($id) && $func == 'delshouse') {
 
     if (($result->rowhid) > 0) {
         $msg = array(
-            "status" => 400,
+            "status" => 0,
             "message" => 'มีการใช้งานข้อมูลโรงเรือนอยู่',
         );
     } else {

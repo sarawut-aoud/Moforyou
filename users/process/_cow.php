@@ -103,16 +103,38 @@ if (isset($func) && $func == 'del') {
         echo json_encode($msg);
         // http_response_code(404);
     } else {
-        $query = $sqlcow->delete_cow($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
+        $cow = $sql->selectcowfrombreed($id);
+        $row = $cow->num_rows;
+        if ($row > 0) {
+            $msg = array(
+                "status" => 0,
+                "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
+            );
+        } else {
+            $pic = $sqlcow->selectdatacow($id);
+            $result = $pic->fetch_object();
 
-        echo json_encode($msg);
+            if ($result->cow_pic != null) {
+                @unlink("../../dist/img/cow_upload/$result->cow_pic");
+                $query = $sqlcow->delete_cow($id);
+                $msg = array(
+                    "status" => 200,
+                    "message" => 'ลบข้อมูลสำเร็จ',
+                );
+            } else {
+                $query = $sqlcow->delete_cow($id);
+                $msg = array(
+                    "status" => 200,
+                    "message" => 'ลบข้อมูลสำเร็จ',
+                );
+            }
+        }
+
         // http_response_code(200);
     }
 }
+
+
 // parse_str($_POST["formdata"], $_POST);
 // //    echo  $file =  $_POST['file'];
 //     $namecow =  $_POST['namecow'];

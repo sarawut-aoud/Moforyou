@@ -57,13 +57,20 @@ if (isset($func) && $func == 'modaleditherd') {
 
 if (isset($func) && $func == 'delsherd') {
     $id = $_GET['id'];
-
-
-    $query = $sql->delete_herd($id);
-    $msg = array(
-        "status" => 0,
-        "message" => 'ลบข้อมูลแล้ว',
-    );
+    $herdcheck = $sql->selectherdfromcow($id);
+    $row = $herdcheck->num_rows;
+    if ($row > 0) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
+        );
+    } else {
+        $query = $sql->delete_herd($id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'ลบข้อมูลแล้ว',
+        );
+    }
 
     echo json_encode($msg);
 }

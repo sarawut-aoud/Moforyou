@@ -9,7 +9,7 @@ $func = $_REQUEST['function'];
 
 
 if (isset($func) && $func == 'showeditFarm') {
-    
+
     $i = 0;
     $id = $_GET['id'];
     $query = $sql->selectfarmbyid($id);
@@ -53,33 +53,25 @@ if (isset($func) && $func == 'amphuer') {
     echo json_encode($data);
 }
 
-// if (isset($id) && $func == 'editfarmer') {
-//     $fname = $_GET['fname'];
-//     $email = $_GET['email'];
-//     $phone = $_GET['phone'];
 
-//     if (empty($id) || empty($fname) || empty($phone) || empty($email)) {
-//         $msg = array(
-//             "status" => 0,
-//             "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
-//         );
-//     } else {
-//         $query = $sql->update_farmer($id, $fname, $phone, $email);
-//         $msg = array(
-//             "status" => 200,
-//             "message" => 'แก้ไข้ข้อมูลสำเร็จ',
-//         );
-//     }
-//     echo json_encode($msg);
-// }
 
 if (isset($func) && $func == 'delsfarm') {
     $id = $_GET['id'];
-    $query = $sql->delsfarm($id);
-    $msg = array(
-        "status" => 200,
-        "message" => 'ลบข้อมูลแล้ว',
-    );
+    $farm = $sql->selectfarmfromcow($id);
+    $row = $farm->num_rows;
+    if ($row > 0) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'มีการใช้ข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
+        );
+    } else {
+        $query = $sql->delsfarm($id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'ลบข้อมูลแล้ว',
+        );
+    }
+
 
 
     echo json_encode($msg);

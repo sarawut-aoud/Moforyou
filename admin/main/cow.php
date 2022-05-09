@@ -166,61 +166,6 @@ require '../../connect/functions.php';
         var farm_id = '<?php echo $_SESSION['farm_id']; ?>';
 
 
-        $.ajax({
-            type: 'get',
-            dataType: 'json',
-            url: '../process/_cow.php',
-            data: {
-                id: '',
-                function: "getdataspecies",
-            },
-            success: function(result) {
-                var data = '<option value="" selected disabled>--เลือกสายพันธุ์--</option>';
-                for (i in result) {
-                    data += '<option value="' + result[i].spec_id + '" > ' + result[i].spec_name + '</option>';
-                }
-                $('#species_id').html(data);
-            }
-        });
-
-        $.ajax({
-            type: 'get',
-            dataType: 'json',
-            url: '../process/_cow.php',
-            data: {
-                id: farm_id,
-                function: "getdatahouse",
-            },
-            success: function(result) {
-                var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
-                for (i in result) {
-                    data += '<option value="' + result[i].house_id + '" > ' + result[i].housename + '</option>';
-                }
-                $('#house_id').html(data);
-
-                $('#house_id').change(function() {
-                    var house_id = $('#house_id').val();
-                    $.ajax({
-                        type: 'get',
-                        dataType: 'json',
-                        url: '../process/_cow.php',
-                        data: {
-                            id: house_id,
-                            function: "getdataherd",
-                        },
-                        success: function(result) {
-                            var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
-                            for (i in result) {
-                                data += '<option value="' + result[i].herd_id + '" > ' + result[i].herdname + '</option>';
-                            }
-                            $('#herd_id').html(data);
-
-                        }
-                    });
-
-                });
-            }
-        });
 
 
         $(document).on('click', '.btnDels', function(e) {
@@ -267,7 +212,222 @@ require '../../connect/functions.php';
             })
         })
 
+
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '../process/_cow.php',
+            data: {
+                id: '',
+                function: "getdataspecies",
+            },
+            success: function(result) {
+                var data = '<option value="" selected disabled>--เลือกสายพันธุ์--</option>';
+                for (i in result) {
+                    data += '<option value="' + result[i].spec_id + '" > ' + result[i].spec_name + '</option>';
+                }
+                $('#species_id').html(data);
+            }
+        });
+        $(document).on('click', '.btnEdit', function(e) {
+            e.preventDefault();
+            var id = $(this).attr('id');
+            var txt = 'แก้ไขข้อมูลโค';
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                url: '../process/_cow.php',
+                data: {
+                    function: 'showdata',
+                    id: id,
+                },
+                success: function(result) {
+                    $('#modalEdit').modal('show');
+                    $('#modaltextcenter').html(txt);
+                    $('#modalnamecow').val(result.cowname);
+                    $('#modal_cowdate').val(result.cow_date);
+                    $('#modalweightcow').val(result.weight);
+                    $('#modalhighcow').val(result.high);
+                    // $('#modalfathercow').val(result.cow_father);
+                    // $('#modalmothercow').val(result.cow_mother);
+                    $('#modal_cowid').val(result.cow_id);
+                    if (result.cow_pic != null) {
+
+                        $('#modalimg').attr('src', "../../dist/img/cow_upload/" + result.cow_pic + "");
+
+                    } else {
+
+                        $('#modalimg').attr('src', "../../dist/img/icon/sacred-cow.png");
+
+                    }
+                    if (result.cow_gender == '1') {
+                        $('#modalradioPrimary1').prop('checked', true);
+                    } else if (result.cow_gender == '2') {
+                        $('#modalradioPrimary2').prop('checked', true);
+                    } else {
+                        $('#modalradioPrimary1').prop('checked', false);
+                        $('#modalradioPrimary2').prop('checked', false);
+                    }
+                    $('#modalhouse_id2').val(result.spec_id);
+                    $('#modalherd_id2').val(result.house_id);
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_cow.php',
+                        data: {
+                            id: '',
+                            function: "getdataspecies",
+                        },
+                        success: function(results) {
+                            var data = '';
+                            for (i in results) {
+                                if (results[i].spec_id == result.spec_id) {
+                                    data += '<option value="' + results[i].spec_id + '" selected > ' + results[i].spec_name + ' </option>';
+
+                                } else {
+                                    data += '<option value="' + results[i].spec_id + '" > ' + results[i].spec_name + '</option>';
+                                }
+                            }
+                            $('#modalspecies_id').html(data);
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_cow.php',
+                        data: {
+                            id: farm_id,
+                            function: "getdatahouse",
+                        },
+                        success: function(results) {
+                            var data = '';
+                            for (i in results) {
+                                if (results[i].house_id == result.house_id) {
+                                    data += '<option value="' + results[i].house_id + '" selected > ' + results[i].housename + '</option>';
+
+                                } else {
+                                    data += '<option value="' + results[i].house_id + '" > ' + results[i].housename + '</option>';
+
+                                }
+                            }
+                            $('#modalhouse_id').html(data);
+
+
+                            var house_id = $('#modalhouse_id').val();
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'json',
+                                url: '../process/_cow.php',
+                                data: {
+                                    id: house_id,
+                                    function: "getdataherd",
+                                },
+                                success: function(results) {
+                                    var data = '';
+                                    for (i in results) {
+                                        if (results[i].herd_id == result.herd_id) {
+                                            data += '<option value="' + results[i].herd_id + '"selected > ' + results[i].herdname + '</option>';
+
+                                        } else {
+                                            data += '<option value="' + results[i].herd_id + '" > ' + results[i].herdname + '</option>';
+                                        }
+                                    }
+                                    $('#modalherd_id').html(data);
+
+                                }
+                            });
+
+
+                            $('#modalhouse_id').change(function() {
+                                var house_id = $('#modalhouse_id').val();
+                                $.ajax({
+                                    type: 'get',
+                                    dataType: 'json',
+                                    url: '../process/_cow.php',
+                                    data: {
+                                        id: house_id,
+                                        function: "getdataherd",
+                                    },
+                                    success: function(result) {
+                                        var data = '<option value="" selected disabled>--เลือกโรงเรือน--</option>';
+                                        for (i in result) {
+                                            data += '<option value="' + result[i].herd_id + '" > ' + result[i].herdname + '</option>';
+                                        }
+                                        $('#modalherd_id').html(data);
+
+                                    }
+                                });
+
+                            });
+                        }
+                    });
+
+
+                }
+            })
+        })
+
+
     });
 </script>
 
 </html>
+<?php
+require_once '../../connect/toastr.php';
+require_once '../../connect/resize.php';
+$sql = new cow();
+if (isset($_POST['btnsave'])) {
+    if (empty($_POST['modalspecies_id'])) {
+        echo '<script>
+                $(document).ready(function(){
+                    $("#modalspecies_id").focus();
+                })
+             </script>';
+        echo warning_toast('กรุณาเลือกสายพันธ์ุ ');
+    } else {
+        $idcow = $_POST['modal_cowid'];
+        $namecow =  $_POST['modalnamecow'];
+        $cowdate =  $_POST['modal_cowdate'];
+        $species_id =  $_POST['modalspecies_id'];
+        $weightcow =  $_POST['modalweightcow'];
+        $highcow =  $_POST['modalhighcow'];
+        // $fathercow =  $_POST['modalfathercow'];
+        // $mothercow =  $_POST['modalmothercow'];
+        $house_id =  $_POST['modalhouse_id2'];
+        $herd_id =  $_POST['modalherd_id2'];
+        $gender =  $_POST['gender'];
+        $picture = $_FILES['file']['tmp_name'];
+        //? function ลดขนาดรูปภาพ
+        function imageResize($imageResourceId, $width, $height)
+        {
+            $targetWidth = $width < 1280 ? $width : 1280;
+            $targetHeight = ($height / $width) * $targetWidth;
+            $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
+            imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
+            return $targetLayer;
+        }
+        if (empty($namecow) || empty($cowdate)  || empty($weightcow) || empty($highcow)  || empty($gender)) {
+
+            echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
+        } else {
+            if (!empty($picture)) {
+                $time = date('Ymdhis');
+                $sourceProperties = getimagesize($picture);
+                $fileNewName = $time;
+                $folderPath = "../../dist/img/cow_img/";
+                $ext = $_FILES['file']['name'];
+                $imageType = $sourceProperties[2];
+                echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
+                copy($picture, "../../dist/img/cow_upload/" . $ext);
+
+                $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, $ext, $idcow);
+                echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./cow.php");
+            } else {
+                $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $idcow);
+                echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./cow.php");
+            } // check picture
+        } // check Undendifind values
+    } // check select spec_id / house_id / herd_id
+} // isset btnsave
+?>

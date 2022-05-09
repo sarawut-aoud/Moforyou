@@ -122,6 +122,11 @@ class farmer extends Database
 // ฟาร์ม
 class farm extends Database
 {
+    public function selectfarmfromcow($id)
+    {
+        $se =  mysqli_query($this->dbcon, "SELECT count(farm_id) AS farm_id FROM tbl_cow WHERE farm_id = '$id'");
+        return $se;
+    }
     // Resgistration Farm
     public function registerfarm($farmname, $address, $district, $farmmer_id)
     {
@@ -209,10 +214,17 @@ class house extends Database
     // Selcet id where Farm_id
     public function gethouseFarmid($id)
     {
-        // if(empty($id)){
-        //     $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house ");
-        // }else{
         $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        // }
+
+        return $sel_houseFid;
+    }
+    // Selcet id where Farm_id
+    public function getcowFarmid($id)
+    {
+        $sel_houseFid = mysqli_query($this->dbcon, "SELECT h.id ,h.house_name,h.farm_id  FROM tbl_house AS h 
+        INNER JOIN tbl_cow AS c ON(c.house_id = h.id)
+        WHERE c.id='$id'");
         // }
 
         return $sel_houseFid;
@@ -298,6 +310,11 @@ class herd extends Database
         $del = mysqli_query($this->dbcon, "SELECT count(house_id) AS rowhid FROM tbl_herd WHERE house_id='$id'");
         return $del;
     }
+    public function selectherdfromcow($id)
+    {
+        $se =  mysqli_query($this->dbcon, "SELECT count(herd_id) AS herd_id FROM tbl_cow WHERE herd_id = '$id'");
+        return $se;
+    }
     public function select_herd($id)
     {
         if (empty($id)) {
@@ -340,6 +357,11 @@ class specise extends Database
     {
         $page = mysqli_query($this->dbcon, "SELECT * FROM tbl_species limit {$start},{$perpage} ");
         return $page;
+    }
+    public function selectspecfromcow($id)
+    {
+        $se =  mysqli_query($this->dbcon, "SELECT count(spec_id) AS spec_id FROM tbl_cow WHERE spec_id = '$id'");
+        return $se;
     }
     // Insert Picure
     public function addspec_pic($specname, $specdetail, $specpic)
@@ -439,7 +461,11 @@ class cow extends Database
         limit {$start},{$perpage} ");
         return $page;
     }
-
+    public function selectcowfrombreed($id)
+    {
+        $se =  mysqli_query($this->dbcon, "SELECT count(*) AS cow_id FROM tbl_breed WHERE cow_id_male = '$id' OR cow_id_female = '$id'");
+        return $se;
+    }
     // Insert
     public function addcow($cow_name, $cow_date, $high, $weight, $spec_id, $herd_id, $house_id, $gender, $picture, $farm_id)
     {
@@ -509,6 +535,7 @@ class cow extends Database
         }
         return $update;
     }
+
     // Delete
     public function delete_cow($id)
     {
@@ -769,6 +796,11 @@ class food extends Database
 // Disease
 class disease extends Database
 {
+    public function selectdisfromcow($id)
+    {
+        $se =  mysqli_query($this->dbcon, "SELECT count(diseaseid) AS diseaseid FROM tbl_heal WHERE diseaseid = '$id'");
+        return $se;
+    }
     // admin by insert
     public function insert_disease($detail)
     {

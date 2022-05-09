@@ -66,11 +66,20 @@ if (isset($func) && $func == 'delete') {
             "error" => true,
         );
     } else {
-        $query = $sql->delete_disease($id);
-        $msg = array(
-            "status" => 200,
-            "message" => "ลบข้อมูลสำเร็จ",
-        );
+        $dis = $sql->selectdisfromcow($id);
+        $row = $dis->num_rows;
+        if ($row > 0) {
+            $msg = array(
+                "status" => 0,
+                "message" => "มีการใช้ข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้",
+            );
+        } else {
+            $query = $sql->delete_disease($id);
+            $msg = array(
+                "status" => 200,
+                "message" => "ลบข้อมูลสำเร็จ",
+            );
+        }
     }
     echo json_encode($msg);
     // http_response_code(200);

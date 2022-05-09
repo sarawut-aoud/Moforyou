@@ -18,6 +18,23 @@ function success_1($msg, $redirect)
            })
      </script>";
 }
+function warning_2($msg, $redirect)
+{
+  return "<script>
+           const Toast = Swal.mixin({
+              toast: true,
+               position: 'center',
+              showConfirmButton: false,
+               timer: 3000,
+           })
+           Toast.fire({
+               icon: 'success',
+               title: '$msg'
+           }).then((result)=>{
+               window.location = '$redirect';
+           })
+     </script>";
+}
 function error_1($msg)
 {
   return "<script>

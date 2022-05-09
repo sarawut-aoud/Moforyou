@@ -1,7 +1,7 @@
 <?php
 error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
-$sql = new cow();
+$sqlcow = new cow();
 $sqlhouse = new house();
 $sqlherd = new herd();
 $sqlspec = new specise();
@@ -22,7 +22,7 @@ if ($func == "getdataspecies") {
     // http_response_code(200);
 }
 if ($func == "getdatahouse") {
-    $query = $sqlhouse->gethouseFarmid($id);
+    $query = $sqlhouse->selecthouse($id);
     $i = 0;
     while ($row = $query->fetch_object()) {
         $data[$i] = array(
@@ -55,6 +55,7 @@ if ($func == "getdataherd") {
 }
 
 if (isset($func) && $func == "showdata") {
+    $id = $_GET['id'];
     if (empty($id)) {
         $msg = array(
             "error" => true,
@@ -102,11 +103,32 @@ if (isset($func) && $func == 'del') {
         echo json_encode($msg);
         // http_response_code(404);
     } else {
-        $query = $sqlcow->delete_cow($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
+        $cow = $sql->selectcowfrombreed($id);
+        $row = $cow->num_rows;
+        if ($row > 0) {
+            $msg = array(
+                "status" => 0,
+                "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
+            );
+        } else {
+            $pic = $sqlcow->selectdatacow($id);
+            $result = $pic->fetch_object();
+
+            if ($result->cow_pic != null) {
+                @unlink("../../dist/img/cow_upload/$result->cow_pic");
+                $query = $sqlcow->delete_cow($id);
+                $msg = array(
+                    "status" => 200,
+                    "message" => 'ลบข้อมูลสำเร็จ',
+                );
+            } else {
+                $query = $sqlcow->delete_cow($id);
+                $msg = array(
+                    "status" => 200,
+                    "message" => 'ลบข้อมูลสำเร็จ',
+                );
+            }
+        }
 
         echo json_encode($msg);
         // http_response_code(200);

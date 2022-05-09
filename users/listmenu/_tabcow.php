@@ -658,10 +658,10 @@ if (empty($result)) {
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
 
-                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, $ext, $idcow);
+                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, $ext, $idcow);
                     echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
                 } else {
-                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow, $fathercow, $mothercow, $species_id, $herd_id, $house_id, $gender, '', $idcow);
+                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $idcow);
                     echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
                 } // check picture
             } // check Undendifind values

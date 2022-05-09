@@ -109,9 +109,9 @@ require '../../connect/functions.php';
                                                             <a class="btn btn-info btnEdits" title="แก้ไขข้อมูล" id="<?php echo $row->id ?>">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
-                                                            <!-- <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id ?>">
+                                                            <a class="btn btn-danger btnDels" title="ลบข้อมูล" id="<?php echo $row->id ?>">
                                                                 <i class="fas fa-trash-alt"></i>
-                                                            </a> -->
+                                                            </a>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -302,12 +302,22 @@ require '../../connect/functions.php';
                             function: 'delsfarm',
                         },
                         success: function(result) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: result.message,
-                            }).then((result) => {
-                                location.reload();
-                            })
+                            if (result.status == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: result.message,
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: result.message,
+                                }).then((result) => {
+                                    location.reload();
+                                })
+                            }
+
                         },
                     });
                 }

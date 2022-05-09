@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-4 ">
                             <div class="row justify-content-center">
-                                <img class=" img-rounded w-50 h-50" src="../../dist/img/icon/sacred-cow.png" alt="ตัว">
+                                <img id="modalimg" class=" img-rounded w-50 h-50" alt="ตัว">
                                 <div class="form-group row">
                                     <div class="input-group">
                                         <div class="col-md mt-3">
@@ -78,11 +78,13 @@
                             <div class="input-group">
                                 <label class="col-form-label col-md-2 col-sm" for="modalhouse_id">โรงเรือน : </label>
                                 <div class="col-sm-12  col-md-4">
-                                    <select class="form-control select2" id="modalhouse_id" name="modalhouse_id" data-placeholder="เลือกโรงเรือน" require></select>
+                                    <select class="form-control select2" id="modalhouse_id" name="modalhouse_id" data-placeholder="เลือกโรงเรือน" disabled require></select>
+                                   
+
                                 </div>
                                 <label class="col-form-label col-md-2 col-sm" for="modalherd_id">ฝูง : </label>
                                 <div class="col-sm-12 col-md-4">
-                                    <select class="form-control select2" id="modalherd_id" name="modalherd_id" data-placeholder="เลือกฝูง" require></select>
+                                    <select class="form-control select2" id="modalherd_id" name="modalherd_id" data-placeholder="เลือกฝูง" disabled require></select>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +94,7 @@
                                 <div class="d-flex col-form-label">
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-primary d-inline  ">
-                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1"   >
+                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1">
                                             <label for="modalradioPrimary1" class="align-self-center">
                                                 <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
                                             </label>
@@ -100,7 +102,7 @@
                                     </div>
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-pink d-inline ">
-                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2"  >
+                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2">
                                             <label for="modalradioPrimary2">
                                                 <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                             </label>
@@ -118,6 +120,9 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="modalherd_id2" value="" name="modalherd_id2">
+
+    <input type="hidden" id="modalhouse_id2" value="" name="modalhouse_id2">
     <input type="hidden" value="" id="modal_cowid" name="modal_cowid" />
 </form>
 <!-- Modal Edit -->

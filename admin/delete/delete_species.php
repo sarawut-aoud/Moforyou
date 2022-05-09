@@ -20,16 +20,22 @@
     if (isset($_GET['del'])) {
         $id = $_GET['del'];
         $deletedata = new specise();
-        $query = $deletedata->selectid($id);
-        $result = mysqli_fetch_object($query);
+        $spec = $deletedata->selectspecfromcow($id);
+        $row = $spec->num_rows;
+        if ($row > 0) {
+            echo warning_2("มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้", "../main/species.php");
+        } else {
+            $query = $deletedata->selectid($id);
+            $result = mysqli_fetch_object($query);
 
-        if ($result->spec_pic != NULL) {
-            @unlink("../../dist/img/spec_upload/$result->spec_pic");
-        }
-        $sql = $deletedata->delspec($id);
+            if ($result->spec_pic != NULL) {
+                @unlink("../../dist/img/spec_upload/$result->spec_pic");
+            }
+            $sql = $deletedata->delspec($id);
 
-        if ($sql) {
-            echo success("ลบข้อมูลสำเร็จ", "../main/species.php");
+            if ($sql) {
+                echo success("ลบข้อมูลสำเร็จ", "../main/species.php");
+            }
         }
     }
     ?>
