@@ -150,7 +150,7 @@
                                     timeOut: 1000,
                                     fadeOut: 1000,
                                     onHidden: function() {
-                                        location.href = 'login';
+                                        location.href = 'login.php';
                                     }
                                 }
                             );

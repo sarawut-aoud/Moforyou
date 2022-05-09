@@ -2,7 +2,7 @@
 require_once "functions.php";
 $sql = new registra();
 $func = $_REQUEST['function'];
-if ($func == 'usernamecheck') {
+if ($func == 'checkusername') {
     // Getting post value
     $username = $_POST['username'];
 

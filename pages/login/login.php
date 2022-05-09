@@ -52,7 +52,7 @@ ob_start();
                 </div>
                 <center>
                     <p class="mb-1 mt-2">
-                        <a href="forgot-password">ลืมรหัสผ่าน</a>
+                        <a href="forgot-password.php">ลืมรหัสผ่าน</a>
                     </p>
 
                     <p class="mb-0  mt-5">

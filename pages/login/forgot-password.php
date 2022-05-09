@@ -119,7 +119,7 @@
                         success: function(result) {
                             if (result.status == 200) {
 
-                                window.location = '../email/email_recover?email=' + email + '';
+                                window.location = '../email/email_recover.php?email=' + email + '';
                             } else {
                                 $("#alertcheck").show(0).html("<div align='center' class='bg-red mb-2 rounded'>" + result.message + "</div>")
                                     .delay(2500).fadeOut('fast');
