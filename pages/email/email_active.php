@@ -1,8 +1,8 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'] . "/main_2/plugins/phpmailer/PHPMailerAutoload.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/moforyou/plugins/phpmailer/PHPMailerAutoload.php");
 $email = $_REQUEST['email'];
 header('Content-Type: text/html; charset=utf-8');
-$path = 'http://127.0.0.1/main_2/pages/login/_active_id.php?email='.$email.'';
+$path = $_SERVER['HTTP_HOST'] .'/moforyou/pages/login/_active_id.php?email='.$email.'';
 $mail = new PHPMailer;
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
