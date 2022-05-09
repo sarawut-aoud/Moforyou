@@ -34,12 +34,12 @@ if (isset($func) && $func == 'showfemale') {
             }
         } else {
             echo json_encode(array('message' => 'ไม่มีข้อมูล', 'status' => 200));
-            http_response_code(200);
+            // http_response_code(200);
         }
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'showmale') {
@@ -56,10 +56,10 @@ if (isset($func) && $func == 'showmale') {
     }
     if (empty($cowmale)) {
         echo json_encode(array());
-        http_response_code(200);
+        // http_response_code(200);
     } else {
         echo json_encode($cowmale);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
@@ -86,7 +86,7 @@ if (isset($func) && $func == 'insert') {
     }
 
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'showedit') {
@@ -106,10 +106,10 @@ if (isset($func) && $func == 'showedit') {
     }
     if (empty($cowmale)) {
         echo json_encode(array());
-        http_response_code(200);
+        // http_response_code(200);
     } else {
         echo json_encode($cowmale);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 if (isset($func) && $func == 'delete') {
@@ -130,7 +130,7 @@ if (isset($func) && $func == 'delete') {
     }
 
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'edit') {
     $id = $_POST['update_id'];
@@ -144,7 +144,7 @@ if (isset($func) && $func == 'edit') {
             "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $datestart = date($date_bredd);
         $date = date($date_bredd); //? วันที่ปัจจุบัน
@@ -156,7 +156,7 @@ if (isset($func) && $func == 'edit') {
         );
 
         echo json_encode($msg);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 if (isset($func) && $func == 'status') {
@@ -169,7 +169,7 @@ if (isset($func) && $func == 'status') {
             "message" => 'อัพเดตสถานะการตั้งครรภ์ไม่สำเร็จ',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $query = $sqlbreed->update_status($id, $status);
         $msg = array(
@@ -178,6 +178,6 @@ if (isset($func) && $func == 'status') {
         );
 
         echo json_encode($msg);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }

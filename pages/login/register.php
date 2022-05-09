@@ -218,7 +218,7 @@
                 },
                 success: function(result) {
                     if (result.status == 200) {
-                        window.location = '../email/email_active?email=' + email + '';
+                        window.location = '../email/email_active.php?email=' + email + '';
                     } else {
                         toastr.warning(
                             result.message,

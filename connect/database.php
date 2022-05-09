@@ -17,6 +17,7 @@ class Database
     public function __construct()
     {
         $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+        $conn->set_charset("utf8");
         $this->dbcon = $conn;
 
         if (mysqli_connect_errno()) {

@@ -18,7 +18,7 @@ if (isset($func) && $func == 'showfood') {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'showhouse') {
     $house = new house();
@@ -34,7 +34,7 @@ if (isset($func) && $func == 'showhouse') {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'showcow') {
     $cow = new cow();
@@ -50,7 +50,7 @@ if (isset($func) && $func == 'showcow') {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'insert') {
@@ -82,7 +82,7 @@ if (isset($func) && $func == 'insert') {
         );
     }
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'insertall') {
     $foodid = $_POST['foodid'];
@@ -131,7 +131,7 @@ if (isset($func) && $func == 'insertall') {
     }
 
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'showdata') {
     $id = $_GET['id'];
@@ -147,7 +147,7 @@ if (isset($func) && $func == 'showdata') {
         );
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'update') {
     $foodid = $_POST['foodid'];
@@ -179,7 +179,7 @@ if (isset($func) && $func == 'update') {
         );
     }
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'delete') {
     $id = $_GET['id'];
@@ -197,5 +197,5 @@ if (isset($func) && $func == 'delete') {
         );
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }

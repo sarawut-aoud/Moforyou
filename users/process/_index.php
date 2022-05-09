@@ -14,7 +14,7 @@ if (isset($func) && $func  == 'breed') {
         "namefemale2" => $row->female
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func  == 'cow') {
     $farm = $_GET['farm_id'];
@@ -30,7 +30,7 @@ if (isset($func) && $func  == 'cow') {
         "cou_female" => $row3->cou_female
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func  == 'food') {
     $farm = $_GET['farm_id'];
@@ -42,7 +42,7 @@ if (isset($func) && $func  == 'food') {
         "cow" => $row->cow
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func  == 'foodcow') {
     $farm = $_GET['farm_id'];
@@ -53,7 +53,7 @@ if (isset($func) && $func  == 'foodcow') {
         "cow" => $row->cow
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func  == 'heal') {
     $farm = $_GET['farm_id'];
@@ -68,7 +68,7 @@ if (isset($func) && $func  == 'heal') {
         "docname" => $row->docname,
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'showdisease') {
@@ -83,7 +83,7 @@ if (isset($func) && $func == 'showdisease') {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 // $sqlcow = new cow();
 

@@ -19,7 +19,7 @@ if ($func == "getdataspecies") {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if ($func == "getdatahouse") {
     $query = $sqlhouse->gethouseFarmid($id);
@@ -33,7 +33,7 @@ if ($func == "getdatahouse") {
         $i++;
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if ($func == "getdataherd") {
     $query = $sqlherd->select_herd($id);
@@ -50,7 +50,7 @@ if ($func == "getdataherd") {
         echo json_encode(array());
     } else {
         echo json_encode($data);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
@@ -62,7 +62,7 @@ if (isset($func) && $func == "showdata") {
             "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $query = $sqlcow->selectdatacow($id);
         // $i = 0;
@@ -87,7 +87,7 @@ if (isset($func) && $func == "showdata") {
             // $i++;
         }
         echo json_encode($data);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
@@ -100,7 +100,7 @@ if (isset($func) && $func == 'del') {
             "message" => 'ไม่สามารถลบข้อมูลได้',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $query = $sqlcow->delete_cow($id);
         $msg = array(
@@ -109,6 +109,6 @@ if (isset($func) && $func == 'del') {
         );
 
         echo json_encode($msg);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }

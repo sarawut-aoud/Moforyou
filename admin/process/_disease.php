@@ -20,7 +20,7 @@ if (isset($func) && $func == 'insert') {
         );
     }
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'showdata') {
     $id = $_GET['id'];
@@ -33,7 +33,7 @@ if (isset($func) && $func == 'showdata') {
         );
     }
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'update') {
     $detail = $_POST['detail'];
@@ -53,7 +53,7 @@ if (isset($func) && $func == 'update') {
         );
     }
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }
 if (isset($func) && $func == 'delete') {
 
@@ -73,5 +73,5 @@ if (isset($func) && $func == 'delete') {
         );
     }
     echo json_encode($msg);
-    http_response_code(200);
+    // http_response_code(200);
 }

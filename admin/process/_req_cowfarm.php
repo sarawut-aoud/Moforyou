@@ -14,5 +14,5 @@ if (isset($func) && $func == 'showcow') {
         "cow" => $row->cou_cow,
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }

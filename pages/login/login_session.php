@@ -13,4 +13,4 @@ $msg = array(
     "status" => 200, "message" => "เข้าสู่ระบบสำเร็จ",
 );
 echo json_encode($msg);
-http_response_code(200);
+// http_response_code(200);

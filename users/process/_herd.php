@@ -24,7 +24,7 @@ if (isset($func) && $func == "getdata") {
         echo json_encode(array());
     } else {
         echo json_encode($data);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
@@ -55,7 +55,7 @@ if (isset($func) && $func == 'showdata') {
             "message" => 'เกิดข้อผิดพลาด',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $query = $sql->select_herd($id);
         while ($row = $query->fetch_object()) {
@@ -66,7 +66,7 @@ if (isset($func) && $func == 'showdata') {
             );
         }
         echo json_encode($data);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
@@ -82,7 +82,7 @@ if (isset($func) && $func == 'edit') {
             "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
         );
         echo json_encode($msg);
-        http_response_code(404);
+        // http_response_code(404);
     } else {
         $query = $sql->update_herd($herdname, $house_id, $id);
         $msg = array(
@@ -91,7 +91,7 @@ if (isset($func) && $func == 'edit') {
         );
 
         echo json_encode($msg);
-        http_response_code(200);
+        // http_response_code(200);
     }
 }
 
