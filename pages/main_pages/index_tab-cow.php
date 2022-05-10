@@ -108,9 +108,57 @@
                         $('#age').html(result.age);
                         $('#weight').html(result.weight);
                         $('#high').html(result.high);
-                        $('#cow_id').val(result.cow_id);
-                        $('#farm_id').val(result.farm_id);
 
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: './_reqindex.php',
+                            data: {
+                                function: "reqhealloop",
+                                cowid: result.cow_id,
+                                farmid: result.farm_id,
+                            },
+                            success: function(rs) {
+                                var data = '';
+
+                                for (i in rs) {
+                                    if (rs[i].dis_id == '1') {
+                                        var dis = '';
+                                    } else {
+                                        dis = rs[i].detail;
+                                    }
+                                    if (rs[i].healmore != null && dis == '') {
+                                        var disa = rs[i].healmore;
+                                    } else {
+                                        disa = dis + " และ " + rs[i].healmore;
+                                    }
+                                    data += ' <div class="form-group row ">';
+                                    data += ' <b class="col-lg-3 col-sm-6 col-md-3 font-big">อาการป่วย :</b>';
+                                    data += ' <div class="col-lg-3 ">';
+                                    data += ' <div id="dis-name">' + disa + '</div>';
+                                    data += ' </div>';
+                                    data += ' </div>';
+
+                                    data += '<div class="form-group row">';
+                                    data += '  <b class="col-lg-3 col-sm-6 col-md-3 font-big">เริ่มแสดงอาการ :</b>';
+                                    data += ' <div class="col-lg ">';
+                                    data += ' <div id="date-dis">' + rs[i].datestart + '</div>';
+                                    data += '</div>';
+                                    data += '</div>';
+                                    data += '<div class="form-group row">';
+                                    data += ' <b class="col-lg-3 col-sm-6 col-md-6 font-big">วันที่เริ่มการรักษา:</b>';
+                                    data += ' <div class="col-lg-3 col-sm-6 col-md-6">';
+                                    data += '   <div id="start-heal">' + rs[i].healstart + '</div>';
+                                    data += ' </div>';
+                                    data += '<b class="col-lg-3 col-sm-6 col-md-6 font-big">วันที่สิ้นสุดการรักษา:</b>';
+                                    data += '<div class="col-lg-3 col-sm-6 col-md-6">';
+                                    data += '<div id="end-heal">' + rs[i].healend + '</div>';
+                                    data += '</div>';
+                                    data += ' </div>';
+                                }
+                                $('#showheal').html(data)
+                            }
+                        })
                     }
                 })
 

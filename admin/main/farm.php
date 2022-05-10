@@ -89,11 +89,12 @@ require '../../connect/functions.php';
                                             <?php
                                             $sql = new farm();
                                             $query = $sql->selectfarm('admin');
+                                            $i = 1;
                                             while ($row = $query->fetch_object()) {
 
                                             ?>
                                                 <tr>
-                                                    <td><?php echo $row->id ?></td>
+                                                    <td><?php echo $i ?></td>
                                                     <td><?php echo $row->farmname ?></td>
                                                     <td><?php @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
                                                         $tombon = json_decode($get_tombon);
@@ -115,7 +116,9 @@ require '../../connect/functions.php';
                                                         </center>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php
+                                                $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

@@ -12,7 +12,7 @@ $query = $sql->select_allfarmer('');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin|Dashboard</title>
     <?php
@@ -86,9 +86,10 @@ $query = $sql->select_allfarmer('');
                                         <!-- /.head table -->
                                         <!-- body table -->
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()) { ?>
+                                            <?php $i = 1;
+                                            while ($row = $query->fetch_object()) { ?>
                                                 <tr>
-                                                    <td style="width: 10%;"><?php echo $row->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $i; ?></td>
                                                     <td><?php echo $row->fullname; ?></td>
                                                     <td><?php echo $row->phone; ?></td>
                                                     <td><?php echo $row->email; ?></td>
@@ -106,7 +107,8 @@ $query = $sql->select_allfarmer('');
                                                     </td>
 
                                                 </tr>
-                                            <?php  } ?>
+                                            <?php $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
                                     </table>

@@ -95,6 +95,7 @@ require '../../connect/functions.php';
                                             <?php
                                             $datahouse = new cow();
                                             $row = $datahouse->selectdatacowbyfarmer('');
+                                            $i = 1;
                                             while ($rs = $row->fetch_object()) {
                                                 if ($rs->cow_pic != NULL) {
                                                     $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
@@ -104,7 +105,7 @@ require '../../connect/functions.php';
 
                                             ?>
                                                 <tr>
-                                                    <td><?php echo $rs->id; ?></td>
+                                                    <td><?php echo $i; ?></td>
                                                     <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                     <td><?php echo $rs->cow_name; ?></td>
                                                     <td><?php echo $rs->high; ?></td>
@@ -123,7 +124,9 @@ require '../../connect/functions.php';
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php
+                                                $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

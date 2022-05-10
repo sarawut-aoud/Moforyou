@@ -86,9 +86,10 @@ require '../../connect/functions.php';
                                             <?php
                                             $sql = new house();
                                             $query = $sql->selecthouse('');
+                                            $i = 1;
                                             while ($row = $query->fetch_object()) { ?>
                                                 <tr>
-                                                    <td><?php echo $row->id; ?></td>
+                                                    <td><?php echo $i; ?></td>
                                                     <td><?php echo $row->house_name; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
                                                     <td style="width: 20%;">
@@ -102,7 +103,8 @@ require '../../connect/functions.php';
                                                         </center>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

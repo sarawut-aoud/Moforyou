@@ -87,9 +87,10 @@ $query = $sql->select_allfarmer('');
                                         </thead>
 
                                         <tbody>
-                                            <?php while ($row = $query->fetch_object()) { ?>
+                                            <?php $i = 1;
+                                            while ($row = $query->fetch_object()) { ?>
                                                 <tr>
-                                                    <td style="width: 10%;"><?php echo $row->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $i; ?></td>
                                                     <td><?php echo $row->fullname; ?></td>
                                                     <td><?php echo $row->phone; ?></td>
                                                     <td><?php echo $row->email; ?></td>
@@ -105,7 +106,8 @@ $query = $sql->select_allfarmer('');
 
 
                                                 </tr>
-                                            <?php   } ?>
+                                            <?php $i++;
+                                            } ?>
                                         </tbody>
 
                                     </table>

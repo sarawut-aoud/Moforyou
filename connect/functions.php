@@ -990,7 +990,7 @@ class recordfood extends Database
 class reports extends Database
 {
     // user report breed
-    
+
     public function req_breed($farm_id)
     {
         $re = mysqli_query($this->dbcon, "SELECT b.breed_date 
@@ -1060,14 +1060,14 @@ class reports extends Database
         WHERE h.farm_id = '$farm_id' ");
         return $re;
     }
-    public function req_healmore ($farm_id,$cow_id)
+    public function req_healmore($farm_id, $cow_id)
     {
-        $re = mysqli_query($this->dbcon,"SELECT h.healmore,h.healstart,h.healend 
+        $re = mysqli_query($this->dbcon, "SELECT h.datestart,h.healmore,h.healstart,h.healend 
         , d.detail ,h.diseaseid as did
        FROM tbl_heal AS h 
        INNER JOIN tbl_disease as d on (h.diseaseid = d.id)
        WHERE h.farm_id = '$farm_id' and h.cowid ='$cow_id'");
-       return $re;
+        return $re;
     }
     public function req_indexfarm($farm_id)
     {
@@ -1189,7 +1189,5 @@ class reports extends Database
         ORDER BY h.date LIMIT 1");
         return $re;
     }
-    
-  
 }
 //SELECT;

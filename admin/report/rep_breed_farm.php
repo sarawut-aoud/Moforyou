@@ -101,20 +101,21 @@ require '../../connect/functions.php';
                                                     return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
                                                 }
                                             }
+                                            $i = 1;
                                             $data = new breed();
                                             $row = $data->select_breed_all('');
                                             while ($rs = mysqli_fetch_object($row)) {
                                                 if ($rs->breed_status == 'y') {
-                                                    $msg = 'แม่โคมีการตั้งท้อง';
+                                                    $msg = '<span style="color:green;">แม่โคมีการตั้งท้อง</span>';
                                                 } else if ($rs->breed_status == 'n') {
-                                                    $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+                                                    $msg = '<span style="color:red;">แม่โคผสมพันธุ์ไม่ติด</span>';
                                                 } else {
-                                                    $msg = 'รอดูผลการตั้งครรภ์';
+                                                    $msg = '<span style="color:blue;">รอดูผลการตั้งครรภ์</span>';
                                                 }
 
                                             ?>
                                                 <tr align="center">
-                                                    <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $i; ?></td>
                                                     <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                     <td><?php echo DateThai($rs->breed_date); ?></td>
                                                     <td><?php echo DateThai($rs->breednext); ?></td>
@@ -122,7 +123,8 @@ require '../../connect/functions.php';
                                                     <td><?php echo ($rs->farmname); ?></td>
                                                     <!--  -->
                                                 </tr>
-                                            <?php } ?>
+                                            <?php $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

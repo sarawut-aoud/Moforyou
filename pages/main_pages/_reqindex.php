@@ -21,7 +21,7 @@ if (isset($func) && $func == 'farm') {
         "cow" => $row2->cou_cow,
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'countcow') {
@@ -32,7 +32,7 @@ if (isset($func) && $func == 'countcow') {
         "cow" => $row2->cou_cow,
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
 }
 
 if (isset($func) && $func == 'cow') {
@@ -95,5 +95,56 @@ if (isset($func) && $func == 'cow') {
 
     );
     echo json_encode($data);
-    http_response_code(200);
+    // http_response_code(200);
+}
+if (isset($func) && $func == 'reqhealloop') {
+    $farm_id = $_GET['farmid'];
+    $cow_id = $_GET['cowid'];
+    $sql = new reports();
+    $qurry = $sql->req_healmore($farm_id,  $cow_id);
+    $i = 0;
+    function DateThai($strDate)
+    {
+        $strYear = date("Y", strtotime($strDate)) + 543;
+        $strMonth = date("n", strtotime($strDate));
+        $strDay = date("j", strtotime($strDate));
+        $strHour = date("H", strtotime($strDate));
+        $strMinute = date("i", strtotime($strDate));
+        $strSeconds = date("s", strtotime($strDate));
+        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+        $strMonthThai = $strMonthCut[$strMonth];
+        if ($strHour == '00' && $strMinute == '00') {
+            return "$strDay $strMonthThai $strYear   ";
+        } else {
+            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+        }
+    }
+    while ($rs = $qurry->fetch_object()) {
+
+        if ($rs->datestart == null) {
+            $datestart = '-';
+        } else {
+            $datestart = DateThai($rs->datestart);
+        }
+        if ($rs->healstart == null) {
+            $healstart = 'ยังไม่ได้รักษา';
+        } else {
+            $healstart = DateThai($rs->healstart);
+        }
+        if ($rs->healend == null) {
+            $healend = '-';
+        } else {
+            $healend = DateThai($rs->healend);
+        }
+        $data[$i] = array(
+            "healmore" => $rs->healmore,
+            "dis_id" => $rs->did,
+            "datestart" => $datestart,
+            "detail" =>  $rs->detail,
+            "healstart" =>   $healstart,
+            "healend" => $healend,
+        );
+        $i++;
+    }
+    echo json_encode($data);
 }

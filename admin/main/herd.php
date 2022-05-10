@@ -88,9 +88,10 @@ require '../../connect/functions.php';
                                             <?php
                                             $sql = new herd();
                                             $query = $sql->select_herd('');
+                                            $i = 1;
                                             while ($row = $query->fetch_object()) { ?>
                                                 <tr>
-                                                    <td><?php echo $row->id; ?></td>
+                                                    <td><?php echo $i; ?></td>
                                                     <td><?php echo $row->herd_name; ?></td>
                                                     <td><?php echo $row->house_name; ?></td>
                                                     <td><?php echo $row->farmname; ?></td>
@@ -106,7 +107,8 @@ require '../../connect/functions.php';
                                                         </center>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

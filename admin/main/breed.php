@@ -106,17 +106,19 @@ require '../../connect/functions.php';
                                             }
                                             $data = new breed();
                                             $row = $data->select_breed_all('');
-
+                                            $i = 1;
                                             while ($rs = mysqli_fetch_object($row)) {
                                             ?>
                                                 <tr align="center">
-                                                    <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $i; ?></td>
                                                     <td><?php echo $rs->namemale . " และ " . $rs->namefemale; ?></td>
                                                     <td><?php echo DateThai($rs->breed_date); ?></td>
                                                     <td><?php echo DateThai($rs->breednext); ?></td>
                                                     <!--  -->
                                                 </tr>
-                                            <?php } ?>
+                                            <?php
+                                                $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 

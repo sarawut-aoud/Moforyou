@@ -78,6 +78,7 @@
 
                                             $sum = 0;
                                             $query1 = $sql->req_cow('');
+                                           
                                             while ($row = $query1->fetch_object()) {
                                                 $sum =  $sum + $row->cow;
                                             ?>

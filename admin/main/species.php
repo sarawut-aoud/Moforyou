@@ -148,6 +148,7 @@ require '../../connect/functions.php';
                                             <tbody>
                                                 <?php
                                                 $sel_data = new specise();
+                                               
                                                 $result = $sel_data->selspec();
                                                 while ($row = mysqli_fetch_object($result)) {
                                                 ?>
