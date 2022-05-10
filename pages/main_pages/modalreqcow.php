@@ -56,10 +56,22 @@
                     </div>
                 </div>
                 <hr class="mt-3 mb-3 ">
+                <?php
+                error_reporting(~E_NOTICE);
+                require_once '../../connect/functions.php';
+                $sql = new reports();
+                $qurry = $sql->req_healmore(3,1);
+                while ($rs =$qurry->fetch_object()){
+
+
+                
+                ?>
                 <div class="form-group row ">
                     <b class="col-lg-3 col-sm-6 col-md-3 font-big">อาการป่วย :</b>
                     <div class="col-lg-3 ">
-                        <div id="dis-name"></div>
+                        <div id="dis-name"><?php
+                        echo $rs->detail;
+                        ?></div>
                     </div>
                 </div>
 
@@ -79,7 +91,9 @@
                         <div id="end-heal"></div>
                     </div>
                 </div>
-
+<?php
+}
+?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
