@@ -81,15 +81,18 @@ if (empty($result)) {
                                                 <?php
                                                 $data = new herd();
                                                 $row = $data->select_herd_farm($farmid);
+                                                $i = 1;
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 20%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 20%;"><?php echo $i; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->herd_name; ?></td>
                                                         <!--  -->
                                                     </tr>
-                                                <?php } ?>
+                                                <?php
+                                                    $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
                                         </table>

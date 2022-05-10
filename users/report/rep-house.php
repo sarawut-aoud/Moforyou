@@ -78,14 +78,17 @@ if (empty($result)) {
                                                 <?php
                                                 $datahouse = new house();
                                                 $row = $datahouse->gethouseFarmid($farm_id);
+                                                $i = 1;
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 10%;"><?php echo $i; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
                                                         <!--  -->
                                                     </tr>
-                                                <?php } ?>
+                                                <?php
+                                                    $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
 

@@ -106,10 +106,11 @@ if (empty($result)) {
                                                         <?php
                                                         $data = new food();
                                                         $row = $data->select_food2($farmid);
+                                                        $i = 1;
                                                         while ($rs = $row->fetch_object()) {
                                                         ?>
                                                             <tr>
-                                                                <td><?php echo $rs->id; ?></td>
+                                                                <td><?php echo $i; ?></td>
                                                                 <td><?php echo $rs->name; ?></td>
 
 
@@ -122,7 +123,9 @@ if (empty($result)) {
                                                                     </a>
                                                                 </td>
                                                             </tr>
-                                                        <?php } ?>
+                                                        <?php
+                                                            $i++;
+                                                        } ?>
                                                     </tbody>
                                                     <!-- /.body table -->
 

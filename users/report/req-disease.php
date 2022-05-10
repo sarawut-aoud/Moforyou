@@ -97,26 +97,32 @@ if (empty($result)) {
                                                     }
                                                 }
                                                 $row = $data->select_healbyfarm($farmid);
+                                                $i = 1;
                                                 while ($rs = mysqli_fetch_object($row)) {
-                                                    if ($rs->detail != NULL && $rs->healmore != NULL) {
-                                                        $dis = $rs->detail . ' และ ' . $rs->healmore;
-                                                    } else if ($rs->detail == NULL) {
-                                                        $dis = $rs->healmore;
+                                                    if ($rs->dis_id == '1') {
+                                                        $dis = '';
                                                     } else {
                                                         $dis = $rs->detail;
+                                                    }
+                                                    if ($rs->healmore != NULL && $dis == '') {
+                                                        $disa = $rs->healmore;
+                                                    } else {
+                                                        $disa =  $dis . " และ " . $rs->healmore;
                                                     }
 
 
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 10%;"><?php echo $i; ?></td>
                                                         <td style="width: 30%;"><?php echo $rs->cow_name; ?></td>
-                                                        <td><?php echo $dis; ?></td>
+                                                        <td><?php echo $disa; ?></td>
                                                         <td style="width: 30%;"><?php echo DateThai($rs->datestart); ?></td>
 
                                                         <!--  -->
                                                     </tr>
-                                                <?php } ?>
+                                                <?php
+                                                    $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
 

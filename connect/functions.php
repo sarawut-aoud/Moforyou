@@ -330,7 +330,7 @@ class herd extends Database
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
-            WHERE herd.id = '$id' 
+            WHERE herd.house_id = '$id' 
             ORDER BY herd.id ASC ");
         }
         return $selectadmin;
@@ -903,7 +903,7 @@ class heal extends Database
     }
     public function select_healbyfarm($farmid)
     {
-        $sel = mysqli_query($this->dbcon, "SELECT  h.id,h.healmore,h.datestart,h.healstart,h.healend, h.detail, 
+        $sel = mysqli_query($this->dbcon, "SELECT  h.id,h.healmore,h.datestart,h.healstart,h.healend, h.detail as h_detail, h.diseaseid AS dis_id,
             f.farmname ,c.cow_name, h.doctor_id ,d.detail
             FROM tbl_heal AS h 
             INNER JOIN tbl_farm AS f ON(h.farm_id = f.id) 
@@ -1084,7 +1084,7 @@ class reports extends Database
     public function req_indexcow($cow_id)
     {
         $re = mysqli_query($this->dbcon, "SELECT c.id,c.cow_name ,c.cow_date, c.high , c.weight ,IF(c.gender=1,'พ่อโค','แม่โค') AS gender,
-        s.spec_name ,fm.fullname ,f.farmname
+        s.spec_name ,fm.fullname ,f.farmname ,f.id as farm_id
         FROM tbl_cow AS c
         INNER JOIN tbl_species AS s ON(c.spec_id = s.id) 
         INNER JOIN tbl_house AS h ON(c.house_id = h.id)

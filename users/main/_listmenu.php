@@ -99,7 +99,7 @@ if (empty($result)) {
                                             <a class=" btn btn-lg bt_list-6 shadow" href="../listmenu/_tabheal.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/disease.png">
-                                                    <span class="txt-resp mt-2">โรค-ป่วย/การรักษา</span>
+                                                    <span class="txt-resp mt-2">บันทึก โรค/ประวัติการรักษา</span>
                                                 </div>
                                             </a>
 

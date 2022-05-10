@@ -81,6 +81,8 @@ if (isset($func) && $func == 'cow') {
     }
 
     $data = array(
+        "cow_id" => $row->id,
+        "farm_id" => $row->farm_id,
         "name" => $row->fullname,
         "farm_name" => $row->farmname,
         "cow_name" => $row->cow_name,
@@ -89,10 +91,7 @@ if (isset($func) && $func == 'cow') {
         "high" => $row->high,
         "weight" => $row->weight,
         "gender" => $row->gender,
-        "detail" => $row2->detail,
-        "datestart" =>  $date,
-        "healend" => $date1,
-        "healend" => $date2,
+
 
     );
     echo json_encode($data);

@@ -143,7 +143,7 @@ if (empty($result)) {
                             <div class="col-lg-8 col-md-12">
                                 <div class="card card-warning shadow">
                                     <div class="card-header ">
-                                        <h3 class="text-center"> โรค อาการป่วย / การรักษา</h3>
+                                        <h3 class="text-center"> บันทึก โรค/ประวัติการรักษา</h3>
                                     </div>
                                     <!-- /.card-header -->
 
@@ -189,14 +189,19 @@ if (empty($result)) {
                                                         }
                                                         $data = new heal();
                                                         $query = $data->select_healbyfarm($farmid);
+                                                        $i = 1;
                                                         while ($rs = $query->fetch_object()) {
-                                                            if ($rs->detail != NULL && $rs->healmore != NULL) {
-                                                                $dis = $rs->detail . ' และ ' . $rs->healmore;
-                                                            } else if ($rs->detail == NULL) {
-                                                                $dis = $rs->healmore;
+                                                            if ($rs->dis_id == '1') {
+                                                                $dis = '';
                                                             } else {
                                                                 $dis = $rs->detail;
                                                             }
+                                                            if ($rs->healmore != NULL && $dis == '') {
+                                                                $disa = $rs->healmore;
+                                                            } else {
+                                                                $disa =  $dis . " และ " . $rs->healmore;
+                                                            }
+
                                                             if ($rs->doctor_id != NULL) {
                                                                 $data2 = new doctor();
                                                                 $query2 = $data2->select_docbyfarm($farmid);
@@ -220,9 +225,9 @@ if (empty($result)) {
 
                                                         ?>
                                                             <tr>
-                                                                <td><?php echo $rs->id; ?></td>
+                                                                <td><?php echo $i; ?></td>
                                                                 <td><?php echo $rs->cow_name; ?></td>
-                                                                <td><?php echo  $dis; ?></td>
+                                                                <td><?php echo  $disa;  ?></td>
                                                                 <td><?php echo DateThai($rs->datestart); ?></td>
                                                                 <td><?php echo $startheal; ?></td>
                                                                 <td><?php echo $endheal; ?></td>
@@ -232,12 +237,13 @@ if (empty($result)) {
                                                                     <a class="btn btn-info btnEdit" id="<?php echo $rs->id; ?>">
                                                                         <i class="fa fa-pen-alt"></i>
                                                                     </a>
-                                                                    <a class="btn btn-danger btnDels" id="<?php echo $rs->id; ?>">
+                                                                    <a class="btn btn-danger btnDel" id="<?php echo $rs->id; ?>">
                                                                         <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 </td>
                                                             </tr>
-                                                        <?php }
+                                                        <?php $i++;
+                                                        }
                                                         ?>
                                                     </tbody>
                                                     <!-- /.body table -->
@@ -321,10 +327,15 @@ if (empty($result)) {
                     function: 'showdisease',
                 },
                 success: function(result) {
-                    var data = '<option  value="0" selected disabled>---กรุณาเลือกโรคหรืออาการป่วย--</option>';
+                    var data = '';
                     for (i in result) {
                         //  data += '<option value="0">ไม่มีข้อมูลโรคหรืออาการป่วยที่ต้องการ</option>';
-                        data += '<option value="' + result[i].id + '">' + result[i].detail + '</option>'
+                        if (result[i].id == 1) {
+                            data += '<option value="' + 1 + '"selected disabled>' + result[i].detail + '</option>';
+                        } else {
+                            data += '<option value="' + result[i].id + '">' + result[i].detail + '</option>'
+
+                        }
                     }
                     $('#disease').html(data);
                 }

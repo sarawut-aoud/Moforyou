@@ -211,6 +211,7 @@ if (empty($result)) {
                                                 <?php
                                                 $datahouse = new cow();
                                                 $row = $datahouse->selectdatacowbyfarmer($farmid);
+                                                $i = 1;
                                                 while ($rs = $row->fetch_object()) {
                                                     if ($rs->cow_pic != NULL) {
                                                         $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
@@ -220,7 +221,7 @@ if (empty($result)) {
 
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $i; ?></td>
                                                         <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $rs->high; ?></td>
@@ -239,7 +240,8 @@ if (empty($result)) {
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                <?php } ?>
+                                                <?php $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
 

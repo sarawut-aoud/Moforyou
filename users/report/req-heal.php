@@ -99,6 +99,7 @@ if (empty($result)) {
                                                 }
                                                 $data = new heal();
                                                 $row = $data->select_healbyfarm($farmid);
+                                                $i = 1;
                                                 while ($rs = $row->fetch_object()) {
                                                     if ($rs->detail != NULL && $rs->healmore != NULL) {
                                                         $dis = $rs->detail . ' และ ' . $rs->healmore;
@@ -124,7 +125,7 @@ if (empty($result)) {
 
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $rs->id; ?></td>
+                                                        <td><?php echo $i; ?></td>
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo  $dis; ?></td>
 
@@ -134,7 +135,9 @@ if (empty($result)) {
 
 
                                                     </tr>
-                                                <?php } ?>
+                                                <?php
+                                                    $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
 

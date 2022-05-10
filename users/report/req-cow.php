@@ -86,6 +86,7 @@ if (empty($result)) {
                                                 <?php
                                                 $datahouse = new cow();
                                                 $row = $datahouse->selectdatacowbyfarmer($farmid);
+                                                $i = 1;
                                                 while ($rs = mysqli_fetch_object($row)) {
 
                                                     if ($rs->cow_pic != NULL) {
@@ -102,7 +103,7 @@ if (empty($result)) {
                                                     $day =  $diff - (($years * 365) + ($months * 30));
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                        <td style="width: 10%;"><?php echo $i; ?></td>
                                                         <td style="width:10%" class="text-center"><img <?php echo $img; ?> class="rounded w-100"></td>
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo $rs->gender; ?></td>
@@ -112,7 +113,9 @@ if (empty($result)) {
                                                         <td><?php echo  $years . " ปี " . $months . " เดือน " . $day . " วัน "; ?></td>
                                                         <!--  -->
                                                     </tr>
-                                                <?php } ?>
+                                                <?php
+                                                    $i++;
+                                                } ?>
                                             </tbody>
                                             <!-- /.body table -->
 

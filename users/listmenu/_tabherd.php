@@ -114,10 +114,11 @@ if (empty($result)) {
                                             <?php
                                             $datahouse = new herd();
                                             $row = $datahouse->select_herd_farm($farmid);
+                                            $i = 1;
                                             while ($rs = $row->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td style="width: 10%;"><?php echo $rs->id; ?></td>
+                                                    <td style="width: 10%;"><?php echo $i; ?></td>
                                                     <td style="width: 20%;"><?php echo $rs->herd_name; ?></td>
                                                     <td style="width: 20%;"><?php echo $rs->house_name; ?></td>
                                                     <td style="width:30%;" class="text-center">
@@ -129,7 +130,9 @@ if (empty($result)) {
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php
+                                                $i++;
+                                            } ?>
 
                                         </tbody>
                                         <!-- /.body table -->

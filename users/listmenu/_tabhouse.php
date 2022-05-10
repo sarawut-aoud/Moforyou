@@ -113,10 +113,11 @@ if (empty($result)) {
                                             $datahouse = new house();
                                             $farmid = $_SESSION['farm_id'];
                                             $row = $datahouse->gethouseFarmid($farmid);
+                                            $i = 1;
                                             while ($rs = $row->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td style="width: 20%;"><?php echo $rs->id; ?></td>
+                                                    <td style="width: 20%;"><?php echo $i; ?></td>
                                                     <td style="width: 40%;"><?php echo $rs->house_name; ?></td>
                                                     <td style="width: 20%;" class="text-center">
                                                         <button class="btn btn-primary btnqrcode" title="สร้าง QR-code" id="<?php echo $rs->id; ?>">
@@ -133,7 +134,9 @@ if (empty($result)) {
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php 
+                                            $i++;
+                                        } ?>
                                         </tbody>
                                         <!-- /.body table -->
 
