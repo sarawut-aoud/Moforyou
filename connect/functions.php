@@ -1171,7 +1171,7 @@ class reports extends Database
     }
     public function req_recordfood_30($cow_id, $year, $month)
     {
-        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow
         FROM tbl_foodrecord AS h 
         INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
         INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
@@ -1181,7 +1181,7 @@ class reports extends Database
     }
     public function req_recordfood_1($cow_id, $year, $month)
     {
-        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow
         FROM tbl_foodrecord AS h 
         INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
         INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
@@ -1189,5 +1189,13 @@ class reports extends Database
         ORDER BY h.date LIMIT 1");
         return $re;
     }
+    public function req_healanddis()
+    {
+        $re = mysqli_query($this->dbcon, "SELECT d.detail,COUNT(*) as dis 
+        FROM tbl_disease as d 
+        INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
+        WHERE d.id != '1'
+        GROUP BY d.detail");
+        return $re;
+    }
 }
-//SELECT;

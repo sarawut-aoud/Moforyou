@@ -201,7 +201,7 @@ if (empty($result)) {
                 </div>
                 <div class="container ">
                     <div class="row mb-5">
-                        <div class="col-lg-6 col-md-12 col-sm-12 ">
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -216,12 +216,12 @@ if (empty($result)) {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div id="bar-chart" style="height: 300px;"></div>
+                                    <div id="bar-chart" style="width: 1000px; height: 500px;margin-left:3rem"></div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 ">
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -236,7 +236,7 @@ if (empty($result)) {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div id="donut-chart" style="height: 300px;"></div>
+                                    <div id="donut-chart" style="width: 900px; height: 500px;margin-left:6rem"></div>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +284,7 @@ if (empty($result)) {
             }
         </script>
         <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['bar']
             });
@@ -294,22 +294,7 @@ if (empty($result)) {
                 var data = google.visualization.arrayToDataTable([
                     ['Month', 'การเติบโต'],
                     <?php
-                    function DateThai($strDate)
-                    {
-                        $strYear = date("Y", strtotime($strDate)) + 543;
-                        $strMonth = date("n", strtotime($strDate));
-                        $strDay = date("j", strtotime($strDate));
-                        $strHour = date("H", strtotime($strDate));
-                        $strMinute = date("i", strtotime($strDate));
-                        $strSeconds = date("s", strtotime($strDate));
-                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                        $strMonthThai = $strMonthCut[$strMonth];
-                        if ($strHour == '00' && $strMinute == '00') {
-                            return "$strDay $strMonthThai $strYear   ";
-                        } else {
-                            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                        }
-                    }
+
                     require_once '../../connect/functions.php';
                     $farm_id = $_SESSION['farm_id'];
                     $sql = new reports();
@@ -354,6 +339,81 @@ if (empty($result)) {
                 var chart = new google.charts.Bar(document.getElementById('bar-chart'));
 
                 chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+        </script> -->
+        <script type="text/javascript">
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+
+                    <?php
+                    function DateThai($strDate)
+                    {
+                        $strYear = date("Y", strtotime($strDate)) + 543;
+                        $strMonth = date("n", strtotime($strDate));
+                        $strDay = date("j", strtotime($strDate));
+                        $strHour = date("H", strtotime($strDate));
+                        $strMinute = date("i", strtotime($strDate));
+                        $strSeconds = date("s", strtotime($strDate));
+                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                        $strMonthThai = $strMonthCut[$strMonth];
+                        if ($strHour == '00' && $strMinute == '00') {
+                            return "$strMonthThai $strYear   ";
+                        } else {
+                            return " $strMonthThai $strYear $strHour:$strMinute  ";
+                        }
+                    }
+                    require_once '../../connect/functions.php';
+                    $farm_id = 3;
+                    $sql = new reports();
+                    $sqlcow = new cow();
+                    $year = date('Y');
+                    $i = 0;
+                    $x = 1;
+                    $total = 0;
+
+                    $month = date('m');
+                    $datenow = date('Y-m');
+                    $query = $sqlcow->selectdatacowbyfarmer($farm_id);
+                    ?>['เดือน', '<?php echo  DateThai($datenow); ?>'],
+                    <?php
+                    while ($row = $query->fetch_object()) {
+                        $query2 = $sql->req_recordfood_30($row->id, $year, $month); //? เอาเฉพาะ วันที่ 30 or 31 ของเดือน
+
+                        while ($row2 = $query2->fetch_object()) {
+
+
+                            $query3 = $sql->req_recordfood_1($row->id, $year, $month); //? เอาเฉพาะ วันที่ 1 ของเดือน
+
+
+                            while ($row3 = $query3->fetch_object()) {
+                                $sum = ($row2->weight_cow - $row3->weight_cow) / $row2->sumweight_food;
+                    ?>
+
+
+                                ['<?php echo "ตัวที่ ". $row->id; ?>', <?php echo  $sum; ?>],
+
+                    <?php }
+                        }
+                    }
+                    ?>
+                ]);
+
+                var options = {
+                    title: '',
+                    curveType: 'function',
+                    legend: {
+                        position: 'bottom'
+                    }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('bar-chart'));
+
+                chart.draw(data, options);
             }
         </script>
         <script>

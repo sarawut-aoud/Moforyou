@@ -70,48 +70,47 @@ if (empty($result)) {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="form-group row">
-                                                            <div class="input-group">
-                                                                <label class="col-form-label col-4" for="namecow">ชื่อโค : </label>
-                                                                <div class="col-md">
-                                                                    <input type="text" class="form-control" id="namecow" name="namecow" placeholder="ชื่อโค" require>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <label class="col-form-label col-4" for="namecow">ชื่อโค : </label>
+                                                                    <div class="col-md">
+                                                                        <input type="text" class="form-control" id="namecow" name="namecow" placeholder="ชื่อโค" require>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <label class="col-form-label col-4" for="cowdate">วันที่เกิด/รับเข้ามา </label>
+                                                                    <div class="col-md">
+                                                                        <input type="datetime-local" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <label class="col-form-label col-4" for="species_id">สายพันธุ์ : </label>
+                                                                    <div class="col-md ">
+                                                                        <select class="form-control select2" id="species_id" name="species_id" data-placeholder="เลือกสายพันธุ์" require></select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="row ">
                                                         <div class="form-group row">
                                                             <div class="input-group">
-                                                                <label class="col-form-label col-4" for="cowdate">วันที่เกิด/รับเข้ามา </label>
-                                                                <div class="col-md">
-                                                                    <input type="datetime-local" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
+                                                                <label class="col-form-label col-sm-2" for="weightcow">น้ำหนัก : </label>
+                                                                <div class="col-md-4">
+                                                                    <input type="number" class="form-control " id="weightcow" name="weightcow" placeholder="น้ำหนัก" require>
+                                                                </div>
+                                                                <label class="col-form-label col-sm-2" for="highcow">ส่วนสูง : </label>
+                                                                <div class="col-md-4">
+                                                                    <input type="number" class="form-control " id="highcow" name="highcow" placeholder="ส่วนสูง" require>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <div class="input-group">
-                                                                <label class="col-form-label col-4" for="species_id">สายพันธุ์ : </label>
-                                                                <div class="col-md ">
-                                                                    <select class="form-control select2" id="species_id" name="species_id" data-placeholder="เลือกสายพันธุ์" require></select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row ">
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <label class="col-form-label col-sm-2" for="weightcow">น้ำหนัก : </label>
-                                                            <div class="col-md-4">
-                                                                <input type="number" class="form-control " id="weightcow" name="weightcow" placeholder="น้ำหนัก" require>
-                                                            </div>
-                                                            <label class="col-form-label col-sm-2" for="highcow">ส่วนสูง : </label>
-                                                            <div class="col-md-4">
-                                                                <input type="number" class="form-control " id="highcow" name="highcow" placeholder="ส่วนสูง" require>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="form-group row">
+                                                        <!-- <div class="form-group row">
                                                         <div class="input-group">
                                                             <label class="col-form-label col-sm-2" for="fathercow">พ่อโค : </label>
                                                             <div class="col-md-4">
@@ -123,49 +122,49 @@ if (empty($result)) {
                                                             </div>
                                                         </div>
                                                     </div> -->
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <label class="col-form-label col-md-2 col-sm" for="house_id">โรงเรือน : </label>
-                                                            <div class="col-sm-12  col-md-4">
-                                                                <select class="form-control select2" id="house_id" name="house_id" data-placeholder="เลือกโรงเรือน" require></select>
-                                                            </div>
-                                                            <label class="col-form-label col-md-2 col-sm" for="herd_id">ฝูง : </label>
-                                                            <div class="col-sm-12 col-md-4">
-                                                                <select class="form-control select2" id="herd_id" name="herd_id" data-placeholder="เลือกฝูง" require></select>
+                                                        <div class="form-group row">
+                                                            <div class="input-group">
+                                                                <label class="col-form-label col-md-2 col-sm" for="house_id">โรงเรือน : </label>
+                                                                <div class="col-sm-12  col-md-4">
+                                                                    <select class="form-control select2" id="house_id" name="house_id" data-placeholder="เลือกโรงเรือน" require></select>
+                                                                </div>
+                                                                <label class="col-form-label col-md-2 col-sm" for="herd_id">ฝูง : </label>
+                                                                <div class="col-sm-12 col-md-4">
+                                                                    <select class="form-control select2" id="herd_id" name="herd_id" data-placeholder="เลือกฝูง" require></select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <div class="input-group justify-content-center">
-                                                            <div class="d-flex col-form-label">
-                                                                <div class="form-group clearfix mr-3">
-                                                                    <div class="icheck-primary d-inline  ">
-                                                                        <input type="radio" id="radioPrimary1" name="gender" value="1" checked>
-                                                                        <label for="radioPrimary1" class="align-self-center">
-                                                                            <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
-                                                                        </label>
+                                                        <div class="form-group row">
+                                                            <div class="input-group justify-content-center">
+                                                                <div class="d-flex col-form-label">
+                                                                    <div class="form-group clearfix mr-3">
+                                                                        <div class="icheck-primary d-inline  ">
+                                                                            <input type="radio" id="radioPrimary1" name="gender" value="1" checked>
+                                                                            <label for="radioPrimary1" class="align-self-center">
+                                                                                <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group clearfix mr-3">
-                                                                    <div class="icheck-pink d-inline ">
-                                                                        <input type="radio" id="radioPrimary2" name="gender" value="2">
-                                                                        <label for="radioPrimary2">
-                                                                            <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
-                                                                        </label>
+                                                                    <div class="form-group clearfix mr-3">
+                                                                        <div class="icheck-pink d-inline ">
+                                                                            <input type="radio" id="radioPrimary2" name="gender" value="2">
+                                                                            <label for="radioPrimary2">
+                                                                                <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- /.card-body -->
+                                                <!-- /.card-body -->
 
-                                            <div class="card-footer text-end">
-                                                <button type="reset" class="btn btn-secondary reset">ยกเลิก</button>
-                                                <button type="submit" name="submit_cow" id="submit_cow" class="btn  btn-cow ">ยืนยันการเพิ่มข้อมูล</button>
-                                            </div>
+                                                <div class="card-footer text-end">
+                                                    <button type="reset" class="btn btn-secondary reset">ยกเลิก</button>
+                                                    <button type="submit" name="submit_cow" id="submit_cow" class="btn  btn-cow ">ยืนยันการเพิ่มข้อมูล</button>
+                                                </div>
                                         </form>
                                     </div>
                                     <!-- /.card -->
@@ -581,23 +580,9 @@ if (empty($result)) {
             if (empty($namecow) || empty($cowdate)  || empty($weightcow) || empty($highcow)  || empty($gender)) {
 
                 echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
+                //echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
             } else {
-                if (!empty($picture)) {
-                    $time = date('Ymdhis');
-                    $sourceProperties = getimagesize($picture);
-                    $fileNewName = $time;
-                    $folderPath = "../../dist/img/cow_img/";
-                    $ext = $_FILES['file']['name'];
-                    $imageType = $sourceProperties[2];
-                    echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
-                    copy($picture, "../../dist/img/cow_upload/" . $ext);
-
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
-                } else {
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $farmid);
-                    echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
-                } // check picture
+               
             } // check Undendifind values
         } // check select
     } //isset submit_cow

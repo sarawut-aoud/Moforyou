@@ -73,53 +73,53 @@ require '../../connect/session_ckeck.php';
           <div class="row">
 
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg connectedSortable">
-              <!-- Calendar -->
-              <div class="row mb-5">
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
-                  <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <h3 class="card-title">
-                        <i class="far fa-chart-bar"></i>
-                        น้ำหนักของโคในแต่ละเดือน (เปอร์เซ็นต์)
-                      </h3>
-                      <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                          <i class="fas fa-minus"></i>
-                        </button>
+            <!-- <section class="col-lg connectedSortable"> -->
+            <!-- Calendar -->
+            <div class="row mb-5">
+              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="far fa-chart-bar"></i>
+                      โรค
+                    </h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
 
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <div id="bar-chart" style="height: 300px;"></div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
-                  <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <h3 class="card-title">
-                        <i class="far fa-chart-bar"></i>
-                        จำนวนสายพันธุ์ทั้งหมด
-                      </h3>
-                      <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                          <i class="fas fa-minus"></i>
-                        </button>
-
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <div id="donut-chart" style="height: 300px;"></div>
                     </div>
                   </div>
+                  <div class="card-body">
+                    <div id="bar-chart" style="height: 300px;"></div>
+                  </div>
+
                 </div>
-                <!-- /.row -->
               </div>
-              <!-- /.card -->
+              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="far fa-chart-bar"></i>
+                      จำนวนสายพันธุ์ทั้งหมด
+                    </h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
 
-            </section>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div id="donut-chart" style="height: 300px;"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.card -->
+
+            <!-- </section> -->
             <!-- right col -->
           </div>
           <!-- /.row (main row) -->
@@ -222,76 +222,32 @@ require '../../connect/session_ckeck.php';
       chart.draw(data, options);
     }
   </script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   <script type="text/javascript">
     google.charts.load('current', {
-      'packages': ['bar']
+      'packages': ['corechart']
     });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Month', 'การเติบโต'],
+        ['detail', 'dis'],
         <?php
-        function DateThai($strDate)
-        {
-          $strYear = date("Y", strtotime($strDate)) + 543;
-          $strMonth = date("n", strtotime($strDate));
-          $strDay = date("j", strtotime($strDate));
-          $strHour = date("H", strtotime($strDate));
-          $strMinute = date("i", strtotime($strDate));
-          $strSeconds = date("s", strtotime($strDate));
-          $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-          $strMonthThai = $strMonthCut[$strMonth];
-          if ($strHour == '00' && $strMinute == '00') {
-            return "$strDay $strMonthThai $strYear   ";
-          } else {
-            return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-          }
-        }
-        require_once '../../connect/functions.php';
-
-        $sql = new reports();
-        $sqlcow = new cow();
-        $query = $sqlcow->selectdatacowbyfarmer('');
-        $year = date('Y');
-        $i = 0;
-        $x = 1;
-        $total = 0;
-        while ($row = $query->fetch_object()) {
-          $query2 = $sql->req_recordfoodadmin('', $year);
-          while ($rs = $query2->fetch_object()) {
-            $date_check =  date("Y-m-d", strtotime($rs->date . " -30 Day"));
-            $a = $rs->weight_cow;
-            $b =  $rs->sumweight_food;
-
-            $query3 =  $sql->req_recordfoodadmin($date_check, '');
-
-            while ($rss = $query3->fetch_object()) {
-              $sum[$i] = 0;
-              $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food; /// คำนวน
-              $total =  $total + $sum[$i];
-        ?>['<?php echo "รอบที่ " . $x++; ?>', <?php echo  $total; ?>],
-        <?php
-            }
-          }
-          $i++;
+        $sqlreq = new reports();
+        $query = $sqlreq->req_healanddis();
+        while ($row =  $query->fetch_array()) {
+          echo "['" . $row["detail"] . "', " . $row["dis"] . "],";
         }
         ?>
       ]);
-
       var options = {
-        chart: {
-          title: '',
-          subtitle: '',
-          width: 800,
-          height: 500,
-        },
-        bars: 'vertical' // Required for Material Bar Charts.
+        is3D: true,
+        title: '',
+        pieHole: 0.4,
       };
-
-      var chart = new google.charts.Bar(document.getElementById('bar-chart'));
-
-      chart.draw(data, google.charts.Bar.convertOptions(options));
+      var chart = new google.visualization.PieChart(document.getElementById('bar-chart'));
+      chart.draw(data, options);
     }
   </script>
 
