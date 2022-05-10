@@ -60,10 +60,15 @@ if (isset($func) && $func == 'insert') {
     $healend = $_POST['healend'];
     $detail = $_POST['detail'];
     $farm_id = $_POST['farmid'];
-    if (empty($cowid) || empty($disid) || empty($datestart)) {
+    if (empty($cowid)  || empty($datestart)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
     } else {
-        $query = $sql->insert_heal($cowid, $disid, $dismore, $datestart, $docid, $healstart, $healend, $detail, $farm_id);
+        if ($disid = $_POST['dis_id'] == 0) {
+            $dis = 1;
+        } else {
+            $dis = $_POST['dis_id'];
+        }
+        $query = $sql->insert_heal($cowid, $dis, $dismore, $datestart, $docid, $healstart, $healend, $detail, $farm_id);
         $msg = array(
             "status" => 200,
             "message" => 'บันทึกข้อมูลสำเร็จ',

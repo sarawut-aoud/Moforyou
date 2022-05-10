@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'] . "/moforyou/plugins/phpmailer/PHPMailerAutoload.php");
+require '../../plugins/phpmailer/PHPMailerAutoload.php';
 $email = $_REQUEST['email'];
 header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/_active_id.php?email=' . $email . '';

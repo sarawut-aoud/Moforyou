@@ -108,11 +108,8 @@
                         $('#age').html(result.age);
                         $('#weight').html(result.weight);
                         $('#high').html(result.high);
-                        $('#dis-name').html(result.detail);
-                        $('#date-dis').html(result.datestart);
-                        $('#start-heal').html(result.healend);
-                        $('#end-heal').html(result.healend);
-
+                        $('#cow_id').val(result.cow_id);
+                        $('#farm_id').val(result.farm_id);
 
                     }
                 })

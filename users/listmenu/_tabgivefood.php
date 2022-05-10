@@ -217,10 +217,11 @@ if (empty($result)) {
                                                         }
                                                         $data = new recordfood();
                                                         $row = $data->select_recordbyfarm($farmid);
+                                                        $i = 1;
                                                         while ($rs = $row->fetch_object()) {
                                                         ?>
                                                             <tr>
-                                                                <td><?php echo $rs->id; ?></td>
+                                                                <td><?php echo $i; ?></td>
                                                                 <td><?php echo $rs->cow_name; ?></td>
                                                                 <td><?php echo $rs->foodname; ?></td>
                                                                 <td><?php echo DateThai($rs->date); ?></td>
@@ -236,7 +237,9 @@ if (empty($result)) {
                                                                     </a>
                                                                 </td>
                                                             </tr>
-                                                        <?php } ?>
+                                                        <?php
+                                                            $i++;
+                                                        } ?>
                                                     </tbody>
                                                     <!-- /.body table -->
 

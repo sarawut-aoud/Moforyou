@@ -56,6 +56,7 @@
                     </div>
                 </div>
                 <hr class="mt-3 mb-3 ">
+                
                 <div class="form-group row ">
                     <b class="col-lg-3 col-sm-6 col-md-3 font-big">อาการป่วย :</b>
                     <div class="col-lg-3 ">
