@@ -1160,5 +1160,25 @@ class reports extends Database
         }
         return $re;
     }
+    public function req_recordfood_30($cow_id, $year, $month)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+        FROM tbl_foodrecord AS h 
+        INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
+        INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+         WHERE c.id = '$cow_id' AND (YEAR(h.date) = '$year' AND MONTH(h.date) = '$month' )AND( DAYOFMONTH(h.date) ='30'  OR DAYOFMONTH(h.date)='31')
+        ORDER BY h.date LIMIT 1");
+        return $re;
+    }
+    public function req_recordfood_1($cow_id, $year, $month)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT h.cow_id , h.date ,h.weight_food , h.sumweight_food , h.weight_cow, c.cow_name 
+        FROM tbl_foodrecord AS h 
+        INNER JOIN tbl_cow AS c ON (h.cow_id= c.id) 
+        INNER JOIN tbl_farm as f ON (h.farm_id = f.id)
+         WHERE c.id = '$cow_id' AND (YEAR(h.date) = '$year' AND MONTH(h.date) = '$month' )AND( DAYOFMONTH(h.date) ='01' )
+        ORDER BY h.date LIMIT 1");
+        return $re;
+    }
 }
 //SELECT;

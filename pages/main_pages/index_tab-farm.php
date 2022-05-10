@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="./_main_page.css">
     <style>
         .card-data {
-            background: rgb(209, 128, 0);
-            background: linear-gradient(0deg, rgba(209, 128, 0, 1) 0%, rgba(255, 231, 168, 1) 45%, rgba(255, 231, 168, 1) 58%, rgba(209, 128, 0, 1) 100%);
+            background: rgb(255, 189, 104);
+            background: radial-gradient(circle, rgba(255, 189, 104, 1) 0%, rgba(82, 48, 16, 1) 92%);
+            color: white;
         }
 
         .edit-head {

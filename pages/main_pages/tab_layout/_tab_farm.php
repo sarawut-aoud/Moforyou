@@ -44,7 +44,8 @@
             <div class="card-deck">
                 <div class="card ">
                     <div class="card-header card-data text-center">
-                        <h3>ฟาร์ม : <?php echo $farm; ?></h3>
+                      
+                        <h3>  <i class="fas fa-farm"></i> ฟาร์ม : <?php echo $farm; ?></h3>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title mb-4">ชื่อเจ้าของฟาร์ม : คุณ <?php echo $result['fullname']; ?> </h5>
@@ -57,7 +58,7 @@
                         <p class="card-text ">ติดต่อ : <?php echo $result['phone'] . " หรือ " . $result['email']; ?></p>
                     </div>
                     <div class="card-footer text-center">
-                        <button id="<?php echo $result['id'];?>" emailfarm="<?php echo $result['email']; ?>" phone="<?php echo $result['phone']; ?>" farmmer="<?php echo $result['fullname']; ?>" class="btn btn-success modalreqfarm">ดูรายละเอียด
+                        <button id="<?php echo $result['id']; ?>" emailfarm="<?php echo $result['email']; ?>" phone="<?php echo $result['phone']; ?>" farmmer="<?php echo $result['fullname']; ?>" class="btn btn-success modalreqfarm">ดูรายละเอียด
                         </button>
                     </div>
                 </div>

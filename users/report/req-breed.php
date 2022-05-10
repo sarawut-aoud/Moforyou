@@ -102,11 +102,11 @@ if (empty($result)) {
                                                     while ($rs = mysqli_fetch_object($row)) {
 
                                                         if ($rs->breed_status == 'y') {
-                                                            $msg = 'แม่โคมีการตั้งท้อง';
+                                                            $msg = '<span style="color:green;">แม่โคมีการตั้งท้อง</span>';
                                                         } else if ($rs->breed_status == 'n') {
-                                                            $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+                                                            $msg = '<span style="color:red;">แม่โคผสมพันธุ์ไม่ติด</span>';
                                                         } else {
-                                                            $msg = 'รอดูผลการตั้งครรภ์';
+                                                            $msg = '<span style="color:blue;">รอดูผลการตั้งครรภ์</span>';
                                                         }
                                                     ?>
                                                         <tr align="center">

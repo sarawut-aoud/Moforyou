@@ -179,12 +179,12 @@ if (empty($result)) {
                                             $row = $data->select_breed_all($farmid);
                                             while ($rs = $row->fetch_object()) {
                                                 if ($rs->breed_status == 'y') {
-                                                    $msg = 'แม่โคมีการตั้งท้อง';
+                                                    $msg = '<span style="color:green;">แม่โคมีการตั้งท้อง</span>';
                                                     $stm = '<a class="btn btn-danger btn_del" id="' . $rs->id . '">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>';
                                                 } else if ($rs->breed_status == 'n') {
-                                                    $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+                                                    $msg = '<span style="color:red;">แม่โคผสมพันธุ์ไม่ติด</span>';
                                                     $stm = '<a class="btn btn-danger btn_del" id="' . $rs->id . '">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>';

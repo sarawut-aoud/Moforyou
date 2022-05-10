@@ -36,7 +36,7 @@
 
 
                             <div class="card-header card-data">
-                                <h4>ฟาร์ม : <?php echo $result['farmname']; ?></h4>
+                                <h4><i class="fad fa-cow"></i> ฟาร์ม : <?php echo $result['farmname']; ?></h4>
                             </div>
                             <div class="text-center p-4">
                                 <img src="<?php echo $picture; ?>" class="card-img-top rounded w-50" alt="...">
