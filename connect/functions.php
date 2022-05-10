@@ -589,7 +589,7 @@ class cow extends Database
         $func = mysqli_query($this->dbcon, "SELECT c.id,DATE_FORMAT(DATE_ADD(c.cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date_add , DATE_FORMAT(c.cow_date,'%Y-%m-%d') as cow_date 
         FROM tbl_cow AS c 
         INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-        WHERE c.farm_id = $farm_id AND gender = '2' ");
+        WHERE c.farm_id = '$farm_id' AND gender = '2' ");
         return $func;
     }
     public function selectcow_forbreed_male($farm_id)

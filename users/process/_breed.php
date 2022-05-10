@@ -21,7 +21,7 @@ if (isset($func) && $func == 'showfemale') {
         $datediff[$i] = date_diff($datenow, $cowdate[$i]); //? check จากวันล่าสุดว่าครบ 18 เดือนไหม
         $diff[$i] = $datediff[$i]->format('%a'); //? แปลงออกมาเป้นวัน
         $month_now[$i] = floor(($diff[$i]) / 30); //? แปลงออกมาเป็นเดือน
-
+        // echo $month_now[$i];
         if ($month_now[$i] >= 18) {
             $query_selectcow = $sql->selectcow_forbreed_female($farm_id, $cow_id[$i]);
             while ($row = $query_selectcow->fetch_object()) {
