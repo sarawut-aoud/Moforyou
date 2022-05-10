@@ -216,7 +216,7 @@ require '../../connect/session_ckeck.php';
         is3D: true,
         title: '',
         pieHole: 0.4,
-        colors: ['#864313', '#c9641d', '#e68c4d', '#efb78f', '#f5d4bc'],
+        colors: ['#402E32', '#864313', '#c9641d', '#e68c4d', '#936444', '#B4876C', '#efb78f', '#f5d4bc', '#FFF7F0', '#DFE0DF'],
       };
       var chart = new google.visualization.PieChart(document.getElementById('donut-chart'));
       chart.draw(data, options);

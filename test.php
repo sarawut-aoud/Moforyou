@@ -10,7 +10,7 @@ $x = 1;
 $ii = 0;
 $total = 0;
 $startmonth = 1;
-$endmonth =3;
+$endmonth =12;
 
 for ($startmonth; $startmonth <= $endmonth; $startmonth++) {
     if ($startmonth <= 9) {
@@ -40,10 +40,10 @@ for ($startmonth; $startmonth <= $endmonth; $startmonth++) {
                 print_r($row3);
                 echo "</pre>";
                 $total =  $sum + $total;
-               
+                echo $total."<br>";
             }
-            
-            echo $total."<br>";
+          
+           
             
             $ii++;
 
