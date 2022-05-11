@@ -4,12 +4,12 @@ define('DB_SERVER', 'localhost'); // Hostname
 define('DB_USER', 'root'); //Database Username
 define('DB_PASS', ''); // Database Password
 define('DB_NAME', 'db_moforyou'); // Database Name
-// date_default_timezone_set('Asia/Bangkok');
-// define('DB_SERVER', 'localhost'); // Hostname
-// define('DB_USER', 'adminmoforyou'); //Database Username
-// define('DB_PASS', '123456'); // Database Password
-// define('DB_NAME', 'db_moforyou'); // Database Name
 date_default_timezone_set('Asia/Bangkok');
+// define('DB_SERVER', 'localhost'); // Hostname
+// define('DB_USER', 'id18910149_moforyou'); //Database Username
+// define('DB_PASS', 'In=!7NPInf_hRkM6'); // Database Password
+// define('DB_NAME', 'id18910149_dbmoforyou'); // Database Name
+// date_default_timezone_set('Asia/Bangkok');
 
 class Database
 {

@@ -1,5 +1,4 @@
 <?php
-
 require '../../connect/functions.php';
 ob_start();
 ?>
@@ -102,14 +101,13 @@ if (isset($_POST['username'])) {
         if ($username != "admin" && $password != "masterkey") {
             $sql = new Setpwd(); //password
 
-            $result = $userdata->Getpwd($username_escape,  $email_escape);
+            $result = $userdata->Getpwd($username_escape, $email_escape);
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_array($result);
                 $encode = $sql->encode($password); // เข้ารหัส password
                 $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
                 if (password_verify($pass_sha, $row['password']) && $row['active'] == 'YES') { // เปรียบเทียบ password ที่รับค่า และ password from db
                     // Select data จาก Username or Email
-                    echo $pass_sha.'<br>'.$row['password'] . "<br>", $row['username'];
                     $results = $userdata->login($row['password'], $row['username'], $row['email']);
                     $row_login = mysqli_fetch_array($results);
                     $id =  $row_login["id"];
@@ -119,15 +117,9 @@ if (isset($_POST['username'])) {
                     $phone =  $row_login['phone'];
                     $email =  strval($row_login['email']);
 
-                    session_start();
-                    $_SESSION["id"] = $id;
-                    $_SESSION["user"] =  $username;
-                    $_SESSION["fullname"] =  $fullname;
-                    $_SESSION["person_id"] =  $person_id;
-                    $_SESSION["phone"] = $phone;
-                    $_SESSION["email"] = $email;
+                    require '../../connect/func_login.php';
+                    echo login($id, $username, $fullname, $person_id, $phone, $email);
 
-                     echo loginsuccess();
                     exit();
                 } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {
                     echo info_toast("โปรดยืนยันตัวตนที่ Email ของท่านก่อนเข้าสู่ระบบ ");
