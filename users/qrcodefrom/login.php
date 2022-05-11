@@ -125,8 +125,14 @@ if (isset($_POST['username'])) {
                 } else {
                     $row_farm =  $query_farm->fetch_array();
                     $farm_id =  $row_farm['id'];
-                    require 'func_login.php';
-                    echo login($id, $username, $fullname, $person_id, $phone, $email, $farm_id);
+                    session_start();
+                    $_SESSION["id"] = $id;
+                    $_SESSION["user"] =  $username;
+                    $_SESSION["fullname"] =  $fullname;
+                    $_SESSION["person_id"] =  $person_id;
+                    $_SESSION["phone"] = $phone;
+                    $_SESSION["email"] = $email;
+                    $_SESSION["farm_id"] =  $farm_id;
 
                     exit();
                 }

@@ -5,18 +5,17 @@ header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/pages/login/_active_id.php?email=' . $email . '';
 // $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/_active_id.php?email=' . $email . '';
 $mail = new PHPMailer;
+
+
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
-$mail->Host = 'primary-serv.com';
-
-// $mail->Host = 'smtp.gmail.com';
-$mail->Port = 587;
-$mail->SMTPSecure = 'tls';
+$mail->SMTPSecure = 'ssl';
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = '465';
 $mail->SMTPAuth = true;
 
-
-$gmail_username = "moforyou@mfu.primary-serv.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+$gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
 $sender = "MOFORYOU"; // ชื่อผู้ส่ง
 $email_sender = "MOFORYOU@gmail.com"; // เมล์ผู้ส่ง 
 $email_receiver = $email; // เมล์ผู้รับ ***

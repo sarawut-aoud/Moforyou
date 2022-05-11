@@ -1,26 +1,31 @@
 <?php
-// require($_SERVER['DOCUMENT_ROOT'] . "/moforyou/plugins/phpmailer/PHPMailerAutoload.php");
-// require($_SERVER['DOCUMENT_ROOT'] . "/plugins/phpmailer/PHPMailerAutoload.php");
-require('../../plugins/phpmailer/class.phpmailer.php');
-require('../../plugins/phpmailer/PHPMailerAutoload.php');
+
+
+
+require '../../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+
+//Load Composer's autoloader
+require '../../vendor/autoload.php';
 $email = $_REQUEST['email'];
-header('Content-Type: text/html; charset=utf-8');
+// header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/pages/login/recover-password.php?email=' . $email . '';
 // $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/recover-password.php?email=' . $email . '';
 $mail = new PHPMailer;
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
-// $mail->Host = 'smtp.gmail.com';
-$mail->Host = 'primary-serv.com';
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;   
 
-// $mail->Host = 'smtp.gmail.com';
-$mail->Port = 587;
-$mail->SMTPSecure = 'tls';
+$mail->SMTPSecure = 'ssl';
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = '465';
 $mail->SMTPAuth = true;
 
 
-$gmail_username = "moforyou@mfu.primary-serv.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+$gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
 // ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
 
 
@@ -117,7 +122,7 @@ if ($email_receiver) {
 
     // กรณีส่ง email ไม่สำเร็จ
     echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
-     echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
+    echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
   } else {
     // กรณีส่ง email สำเร็จ
     // echo "ระบบได้ส่งข้อความไปเรียบร้อย";

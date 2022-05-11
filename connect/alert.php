@@ -1,5 +1,39 @@
 <?php
-
+function loginsuccess()
+{
+  return "<script>
+  
+  toastr.options = {
+    'closeButton': false,
+    'debug': false,
+    'newestOnTop': false,
+    'progressBar': false,
+    'positionClass': 'toast-top-right',
+    'preventDuplicates': false,
+    'onclick': null,
+    'showDuration': '300',
+    'hideDuration': '1000',
+    'timeOut': '5000',
+    'extendedTimeOut': '1000',
+    'showEasing': 'swing',
+    'hideEasing': 'linear',
+    'showMethod': 'fadeIn',
+    'hideMethod': 'fadeOut'
+  }
+  toastr.success(
+    'Login Success !',
+    '',
+    {
+      timeOut: 1000,
+      fadeOut: 1000,
+      onHidden: function () {
+          window.location.replace('../../users/main/user_index.php');
+        }
+    }
+  );
+  
+  </script>";
+}
 //Toast Alert Sweetalert
 function success_1($msg, $redirect)
 {
@@ -142,5 +176,3 @@ function error($msg, $redirect)
       })
     </script>";
 }
-
-

@@ -118,9 +118,15 @@ if (isset($_POST['username'])) {
                     $phone =  $row_login['phone'];
                     $email =  strval($row_login['email']);
 
-                    require '../../connect/func_login.php';
-                    echo login($id, $username, $fullname, $person_id, $phone, $email);
+                    session_start();
+                    $_SESSION["id"] = $id;
+                    $_SESSION["user"] =  $username;
+                    $_SESSION["fullname"] =  $fullname;
+                    $_SESSION["person_id"] =  $person_id;
+                    $_SESSION["phone"] = $phone;
+                    $_SESSION["email"] = $email;
 
+                    echo loginsuccess();
                     exit();
                 } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {
                     echo info_toast("โปรดยืนยันตัวตนที่ Email ของท่านก่อนเข้าสู่ระบบ ");
