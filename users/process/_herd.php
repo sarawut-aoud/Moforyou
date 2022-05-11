@@ -28,7 +28,7 @@ if (isset($func) && $func == "getdata") {
     }
 }
 
-if (isset($func) &&$func == 'insert') {
+if (isset($func) && $func == 'insert') {
     $herdname = $_POST['herdname'];
     $house_id = $_POST['house_id'];
     if (empty($herdname) || empty($house_id)) {
@@ -98,22 +98,28 @@ if (isset($func) && $func == 'edit') {
 
 if (isset($func) && $func == 'del') {
 
-    if (empty($id)) {
+    $herdcheck = $sql->selectherdfromcow($id);
+    $row = $herdcheck->fetch_object();
+    if ($row->herd_id > 0) {
         $msg = array(
-            "error" => true,
             "status" => 0,
-            "message" => 'ไม่สามารถลบข้อมูลได้',
+            "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
         );
-        echo json_encode($msg);
-        http_response_code(404);
     } else {
-        $query = $sql->delete_herd($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
 
-        echo json_encode($msg);
-        http_response_code(200);
+        if (empty($id)) {
+            $msg = array(
+                "error" => true,
+                "status" => 0,
+                "message" => 'ไม่สามารถลบข้อมูลได้',
+            );
+        } else {
+            $query = $sql->delete_herd($id);
+            $msg = array(
+                "status" => 200,
+                "message" => 'ลบข้อมูลสำเร็จ',
+            );
+        }
     }
+    echo json_encode($msg);
 }

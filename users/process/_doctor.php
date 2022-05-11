@@ -13,7 +13,7 @@ if (isset($func) && $func == 'insert') {
     $farm_id = $_POST['farm_id'];
     if (empty($name) || empty($phone) || empty($farm_id)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
-    } else  {
+    } else {
         $query = $sql->insert_doc($name, $phone, $farm_id);
         $msg = array(
             "status" => 200,
@@ -39,21 +39,7 @@ if (isset($func) && $func == 'update') {
     echo json_encode($msg);
     // http_response_code(200);
 }
-if (isset($func) && $func == 'delete') {
 
-    $id = $_GET['id'];
-    if (empty($id)) {
-        $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถลบข้อมูลได้");
-    } else {
-        $query = $sql->delete_doc($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
-    }
-    echo json_encode($msg);
-    // http_response_code(200);
-}
 if (isset($func) && $func == 'showdata') {
     $id = $_GET['id'];
     $query = $sql->select_doc($id);
@@ -73,4 +59,29 @@ if (isset($func) && $func == 'showdata') {
         echo json_encode($data);
         // http_response_code(200);
     }
+}
+if (isset($func) && $func == 'delete') {
+    $sqldoctor =  new doctor();
+    $id = $_GET['id'];
+    $query = $sqldoctor->selectdeldoc($id);
+    $row = $query->fetch_object();
+    if ($row->doc_id > 0) {
+        $msg = array(
+            "status" => 0,
+            "message" => "มีการใช้งานข้อมูลอยู่ไม่สามารถลบข้อมูลได้"
+        );
+    } else {
+        if (empty($id)) {
+            $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถลบข้อมูลได้");
+        } else {
+            $query = $sql->delete_doc($id);
+            $msg = array(
+                "status" => 200,
+                "message" => 'ลบข้อมูลสำเร็จ',
+            );
+        }
+    }
+
+    echo json_encode($msg);
+    // http_response_code(200);
 }

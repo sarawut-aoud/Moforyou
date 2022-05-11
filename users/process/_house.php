@@ -1,5 +1,5 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 
 $sql = new house();
@@ -60,19 +60,31 @@ if (isset($id) && $func == 'edit') {
     echo json_encode($msg);
 }
 if (isset($id) && $func == 'del') {
+    $sql_herd = new herd();
+    $query_herd = $sql_herd->sel_herdDel($id);
+    $result = $query_herd->fetch_object();
 
-    if (empty($id)) {
+    if (($result->rowhid) > 0) {
         $msg = array(
-            "error" => true,
             "status" => 0,
-            "message" => 'ไม่สามารถลบข้อมูลได้',
+            "message" => 'มีการใช้งานข้อมูลโรงเรือนอยู่',
         );
     } else {
-        $query = $sql->delhouse($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
+        if (empty($id)) {
+            $msg = array(
+                "error" => true,
+                "status" => 0,
+                "message" => 'ไม่สามารถลบข้อมูลได้',
+            );
+        } else {
+            $query = $sql->delhouse($id);
+            $msg = array(
+                "status" => 200,
+                "message" => 'ลบข้อมูลสำเร็จ',
+            );
+        }
     }
+
+
     echo json_encode($msg);
 }

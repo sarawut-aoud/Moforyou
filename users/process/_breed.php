@@ -112,26 +112,7 @@ if (isset($func) && $func == 'showedit') {
         // http_response_code(200);
     }
 }
-if (isset($func) && $func == 'delete') {
-    $id = $_GET['id'];
 
-
-    if (empty($id)) {
-        $msg = array(
-            "status" => 0,
-            "message" => 'ไม่สามารถลบข้อมูลได้',
-        );
-    } else {
-        $query = $sqlbreed->delete_breed($id);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
-    }
-
-    echo json_encode($msg);
-    // http_response_code(200);
-}
 if (isset($func) && $func == 'edit') {
     $id = $_POST['update_id'];
     $cowmale = $_POST['cowmale'];
@@ -180,4 +161,24 @@ if (isset($func) && $func == 'status') {
         echo json_encode($msg);
         // http_response_code(200);
     }
+}
+if (isset($func) && $func == 'delete') {
+    $id = $_GET['id'];
+
+
+    if (empty($id)) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'ไม่สามารถลบข้อมูลได้',
+        );
+    } else {
+        $query = $sqlbreed->delete_breed($id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'ลบข้อมูลสำเร็จ',
+        );
+    }
+
+    echo json_encode($msg);
+    // http_response_code(200);
 }

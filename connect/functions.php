@@ -761,6 +761,11 @@ class doctor extends Database
 
         return $s;
     }
+    public function selectdeldoc($id)
+    {
+        $se = mysqli_query($this->dbcon, "SELECT COUNT(*) AS doc_id FROM tbl_heal WHERE doctor_id = '$id'");
+        return $se;
+    }
 }
 // Food
 class food extends Database
@@ -994,6 +999,11 @@ class recordfood extends Database
             WHERE fr.id = '$id'
         ");
         return $sel;
+    }
+    public function selectdelfood($id)
+    {
+        $se = mysqli_query($this->dbcon, "SELECT COUNT(*) AS food_id FROM tbl_foodrecord WHERE food_id = '$id'");
+        return $se;
     }
 }
 // All Report

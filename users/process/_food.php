@@ -1,5 +1,5 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 
 $sql = new food();
@@ -31,13 +31,13 @@ if (isset($func) && $func == 'insert') {
 if (isset($func) && $func == 'show') {
     $id = $_GET['id'];
     $query = $sql->select_food($id);
-    
+
 
     while ($row = $query->fetch_object()) {
         $data = array(
             "id" => intval($row->id),
             "name" => $row->name,
-            
+
         );
     }
     echo json_encode($data);
@@ -64,19 +64,33 @@ if (isset($func) && $func == 'edit') {
 }
 if (isset($func) && $func == 'delete') {
     $foodid = $_GET['foodid'];
-
-    if (empty($foodid)) {
+    $sqlfood = new recordfood();
+    $query = $sqlfood->selectdelfood($foodid);
+    $row = $query->fetch_object();
+    if ($row->food_id > 0) {
         $msg = array(
-            "error" => true,
             "status" => 0,
-            "message" => 'ไม่สามารถลบข้อมูลได้',
+            "message" => 'มีการใช้งานข้อมูลอยู่ไม่สามารถลบได้',
         );
     } else {
-        $query = $sql->delete_food($foodid);
-        $msg = array(
-            "status" => 200,
-            "message" => 'ลบข้อมูลสำเร็จ',
-        );
+
+        if (empty($foodid)) {
+            $msg = array(
+                "error" => true,
+                "status" => 0,
+                "message" => 'ไม่สามารถลบข้อมูลได้',
+            );
+        } else {
+            $query = $sql->delete_food($foodid);
+            $msg = array(
+                "status" => 200,
+                "message" => 'ลบข้อมูลสำเร็จ',
+            );
+        }
     }
+
+
+
+
     echo json_encode($msg);
 }
