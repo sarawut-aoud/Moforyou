@@ -102,7 +102,7 @@ if (isset($_POST['username'])) {
         if ($username != "admin" && $password != "masterkey") {
             $sql = new Setpwd(); //password
 
-            $result = $userdata->Getpwd($username, $password);
+            $result = $userdata->Getpwd($username_escape,  $email_escape);
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_array($result);
                 $encode = $sql->encode($password); // เข้ารหัส password
