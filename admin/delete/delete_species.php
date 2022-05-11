@@ -21,8 +21,8 @@
         $id = $_GET['del'];
         $deletedata = new specise();
         $spec = $deletedata->selectspecfromcow($id);
-        $row = $spec->num_rows;
-        if ($row > 0) {
+        $row = $spec->fetch_object();
+        if ($row->spec_id > 0) {
             echo warning_2("มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้", "../main/species.php");
         } else {
             $query = $deletedata->selectid($id);

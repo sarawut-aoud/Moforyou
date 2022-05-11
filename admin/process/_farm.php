@@ -58,8 +58,8 @@ if (isset($func) && $func == 'amphuer') {
 if (isset($func) && $func == 'delsfarm') {
     $id = $_GET['id'];
     $farm = $sql->selectfarmfromcow($id);
-    $row = $farm->num_rows;
-    if ($row > 0) {
+    $row = $farm->fetch_object();
+    if ($row->farm_id > 0) {
         $msg = array(
             "status" => 0,
             "message" => 'มีการใช้ข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',

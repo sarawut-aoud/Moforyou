@@ -189,7 +189,7 @@ require '../../connect/functions.php';
                         type: "get",
                         url: "../process/_cow.php",
                         data: {
-                            id: id,
+                            id: cowid,
                             function: 'del',
                         },
                         success: function(result) {
@@ -271,8 +271,8 @@ require '../../connect/functions.php';
                         $('#modalradioPrimary1').prop('checked', false);
                         $('#modalradioPrimary2').prop('checked', false);
                     }
-                    $('#modalhouse_id2').val(result.spec_id);
-                    $('#modalherd_id2').val(result.house_id);
+                    $('#modalhouse_id2').val(result.house_id);
+                    $('#modalherd_id2').val(result.herd_id);
                     $.ajax({
                         type: 'get',
                         dataType: 'json',

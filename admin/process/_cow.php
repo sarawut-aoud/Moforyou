@@ -93,7 +93,7 @@ if (isset($func) && $func == "showdata") {
 }
 
 if (isset($func) && $func == 'del') {
-
+$id = $_REQUEST['id'];
     if (empty($id)) {
         $msg = array(
             "error" => true,
@@ -103,9 +103,9 @@ if (isset($func) && $func == 'del') {
         echo json_encode($msg);
         // http_response_code(404);
     } else {
-        $cow = $sql->selectcowfrombreed($id);
-        $row = $cow->num_rows;
-        if ($row > 0) {
+        $cow = $sqlcow->selectcowfrombreed($id);
+        $row = $cow->fetch_object();
+        if ($row->cow_id > 0) {
             $msg = array(
                 "status" => 0,
                 "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',

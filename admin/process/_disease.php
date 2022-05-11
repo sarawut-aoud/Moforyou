@@ -67,8 +67,8 @@ if (isset($func) && $func == 'delete') {
         );
     } else {
         $dis = $sql->selectdisfromcow($id);
-        $row = $dis->num_rows;
-        if ($row > 0) {
+        $row = $dis->fetch_object();
+        if ($row->diseaseid > 0) {
             $msg = array(
                 "status" => 0,
                 "message" => "มีการใช้ข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้",

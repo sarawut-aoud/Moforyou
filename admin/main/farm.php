@@ -78,7 +78,7 @@ require '../../connect/functions.php';
                                                 <th>#</th>
                                                 <th>ฟาร์ม</th>
                                                 <th>อำเภอ</th>
-                                                <th>จังหวัด</th>
+ 
                                                 <th>เจ้าของฟาร์ม</th>
                                                 <th>Edit</th>
                                             </tr>
@@ -103,7 +103,7 @@ require '../../connect/functions.php';
                                                                 echo  $value->name_th;
                                                             }
                                                         }; ?></td>
-                                                    <td><?php echo $row->farmname ?></td>
+                                                    
                                                     <td><?php echo $row->fullname ?></td>
                                                     <td>
                                                         <center>
