@@ -107,6 +107,23 @@ if (empty($result)) {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class=" input-group justify-content-start">
+                                                <span id="notification" style="color:darkblue;font-size:16px;">
+                                                    <br>วิธีการให้อาหารโคขุน<br>
+                                                    ระยะแรก ข้น : หยาบ => 30:70 <br>
+                                                    ระยะกลาง ข้น : หยาบ => 50:50 <br>
+                                                    ระยะปลาย ข้น : หยาบ => 70:30 <br>
+
+                                                </span>
+                                            </div>
+                                            <div class=" input-group justify-content-start">
+
+                                                <span id="notification" style="color:darkblue;font-size:16px;">
+                                                    <br> * ถ้าไม่ทราบน้ำหนักที่แน่ชัดของโคจะต้องให้อาหาร "ข้น" ประมาณตัวละ 2 ถึง 2.5 ก.ก.<br>
+                                                    * การให้อาหาร "ข้น" คิดเป็น 1 ถึง 1.5 % ของน้ำหนักโค <br>
+                                                    * การให้อาหาร "หยาบ" คิดเป็น 1 ถึง 2 % ของน้ำหนักโค
+                                                </span>
+                                            </div>
                                         </div>
                                         <!-- /.card-body -->
 
@@ -156,6 +173,7 @@ if (empty($result)) {
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <!-- /.card-body -->
 

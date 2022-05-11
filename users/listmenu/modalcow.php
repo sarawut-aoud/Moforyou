@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-4 ">
                             <div class="row justify-content-center">
-                            <img id='modalimg' class=" img-rounded w-50 h-50"  alt="ตัว">
+                                <img id='modalimg' class=" img-rounded w-50 h-50" alt="ตัว">
                                 <div class="form-group row">
                                     <div class="input-group">
                                         <div class="col-md mt-3">
@@ -92,7 +92,7 @@
                                 <div class="d-flex col-form-label">
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-primary d-inline  ">
-                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1"   >
+                                            <input type="radio" id="modalradioPrimary1" name="gender" value="1">
                                             <label for="modalradioPrimary1" class="align-self-center">
                                                 <img class="img-circle elevation-2 " src="../../dist/img/icon/male.png" alt="ตัว">
                                             </label>
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="form-group clearfix mr-3">
                                         <div class="icheck-pink d-inline ">
-                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2"  >
+                                            <input type="radio" id="modalradioPrimary2" name="gender" value="2">
                                             <label for="modalradioPrimary2">
                                                 <img class="img-circle elevation-2  " src="../../dist/img/icon/female.png" alt="ตัวเมีย">
                                             </label>

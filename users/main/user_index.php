@@ -206,7 +206,7 @@ if (empty($result)) {
                                 <div class="card-header">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        น้ำหนักของโคในแต่ละเดือน (เปอร์เซ็นต์)
+                                        การเจริญเติบโตของโคในแต่ละเดือน (เปอร์เซ็นต์)
                                     </h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">

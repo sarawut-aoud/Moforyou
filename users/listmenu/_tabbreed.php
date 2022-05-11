@@ -103,15 +103,13 @@ if (empty($result)) {
 
                                                 </div>
                                             </div>
-                                            <div id="shownotification" class="d-none">
-                                                <div class="form-group row">
-                                                    <div class=" input-group justify-content-center">
-                                                        <label class=" col-form-label ">
-                                                            <span id="notification" style="font-size:18px;"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+
+                                            <div class=" input-group justify-content-center">
+
+                                                <span id="notification" style="color:darkgray;font-size:16px;">
+                                                    * แม่โคจะผสมพันธุ์ได้ก็ต่อเมื่ออายุแม่โคมากกว่า 18 เดือน หรือ มีน้ำหนักมากกว่า 270 ก.ก. </span>
                                             </div>
+
 
                                         </div>
                                         <!-- /.card-body -->
