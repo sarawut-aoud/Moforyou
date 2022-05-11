@@ -395,7 +395,7 @@ if (empty($result)) {
                     ?>
 
 
-                                ['<?php echo "ตัวที่ ". $row->id; ?>', <?php echo  $sum; ?>],
+                                ['<?php echo  $row->cow_name; ?>', <?php echo  $sum; ?>],
 
                     <?php }
                         }
