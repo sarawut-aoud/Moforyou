@@ -53,7 +53,24 @@ if (isset($func) && $func == 'amphuer') {
     echo json_encode($data);
 }
 
-
+if (isset($func) && $func == 'update') {
+    $amphuer = $_POST['amphuer'];
+    $farm_name = $_POST['farm_name'];
+    $farm_id = $_POST['farm_id'];
+    if (empty($amphuer) || empty($amphuer) || empty($amphuer)) {
+        $msg = array(
+            "status" => 0,
+            "message" => 'ไม่สามารถแก้ไขข้อมูลได้',
+        );
+    } else {
+        $query = $sql->updatefarmbyadmin($farm_name, $amphuer, $farm_id);
+        $msg = array(
+            "status" => 200,
+            "message" => 'แก้ไขข้อมูลสำเร็จ',
+        );
+    }
+    echo json_encode($msg);
+}
 
 if (isset($func) && $func == 'delsfarm') {
     $id = $_GET['id'];

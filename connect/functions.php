@@ -37,7 +37,7 @@ class registra extends Database
     // Login 
     public function login($password, $username, $email)
     {
-        
+
         $log = mysqli_query($this->dbcon, "SELECT id,fullname,username,password,email,phone,card
         FROM tbl_farmer 
         WHERE username = '" . $username . "' OR email = '$email' AND password = ('" . $password . "')");
@@ -147,6 +147,15 @@ class farm extends Database
         $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET 
         farmname ='$farmname'
         WHERE farmmer_id='$farmmer_id'
+        ");
+        return $upfarm;
+    }
+    public function updatefarmbyadmin($farmname, $district, $farmmer_id)
+    {
+        $upfarm = mysqli_query($this->dbcon, "UPDATE tbl_farm SET 
+        farmname ='$farmname',
+        district_id = '$district'
+        WHERE id='$farmmer_id'
         ");
         return $upfarm;
     }
@@ -331,7 +340,7 @@ class herd extends Database
             FROM tbl_herd AS herd 
             INNER JOIN tbl_house AS house 
             ON (herd.house_id = house.id) 
-            WHERE herd.house_id = '$id' 
+            WHERE  herd.id = '$id' 
             ORDER BY herd.id ASC ");
         }
         return $selectadmin;

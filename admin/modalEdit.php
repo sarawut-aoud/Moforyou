@@ -121,7 +121,7 @@
                         <div class="input-group">
                             <label class="col-md-2 col-form-label">ชื่อโรงเรือน : </label>
                             <div class="col-md-10">
-                                <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" id="house_id">
+                                <select class="form-control select2 select2-info " data-dropdown-css-class="select2-info" disabled id="house_id">
                                     <!-- <option value="">--เลือกโรงเรือน --</option> -->
                                 </select>
                             </div>
@@ -174,7 +174,7 @@
                         <div class="input-group">
                             <label class="col-md-2 col-form-label">ชื่อเจ้าของฟาร์ม  </label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control " id="name" name="farmname" readonly />
+                                <input type="text" class="form-control " id="name" name="name" readonly />
                             </div>
                         </div>
                     </div>
@@ -187,6 +187,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" value="" id="modal_herdid" name="id" />
-
+    
+    <input type="hidden" id="farm_id" value="">
 </form>

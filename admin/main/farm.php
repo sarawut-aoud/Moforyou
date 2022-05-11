@@ -78,7 +78,7 @@ require '../../connect/functions.php';
                                                 <th>#</th>
                                                 <th>ฟาร์ม</th>
                                                 <th>อำเภอ</th>
- 
+
                                                 <th>เจ้าของฟาร์ม</th>
                                                 <th>Edit</th>
                                             </tr>
@@ -103,7 +103,7 @@ require '../../connect/functions.php';
                                                                 echo  $value->name_th;
                                                             }
                                                         }; ?></td>
-                                                    
+
                                                     <td><?php echo $row->fullname ?></td>
                                                     <td>
                                                         <center>
@@ -175,15 +175,16 @@ require '../../connect/functions.php';
                             var farmname = rs[i].farmname;
                             var farmername = rs[i].farmername;
                             var district = rs[i].amphuer_id;
+                            var farm_id = rs[i].id;
                         }
                     }
-                    console.log(district);
+
                     $("#modalEditFarm").modal("show");
                     $("#modaltextcenterfarm").html(txt_head)
                     $("#farmname").val(farmname);
                     $("#name").val(farmername);
-                    $('#modal_herdid').val(rs.id);
 
+                    $("#farm_id").val(farm_id);
                     $.ajax({
                         type: 'get', //post put get delete
                         dataType: "json",
@@ -219,22 +220,20 @@ require '../../connect/functions.php';
             // $(document).on('click', '.btnEdits', function(e) {
             e.preventDefault();
 
-            var id = $("#modal_herdid").val();
-            var fname = $("#herdname").val();
-            var IDHouse = $("#house_id").val();
-
-
-            var txt_head = 'Edit Herd'
+            var farm_id = $("#farm_id").val();
+            var farm_name = $("#farmname").val();
+            var amphuer = $("#modalampher_id").val();
+            console.log(amphuer);
 
             $.ajax({
-                type: 'get', //post put get delete
+                type: 'post', //post put get delete
                 dataType: "json",
-                url: '', //ทำงานที่ไฟล์อะไร
+                url: '../process/_farm.php', //ทำงานที่ไฟล์อะไร
                 data: { // ส่งค่าอะไรไปบ้าง
-                    hname: fname,
-                    IDHouse: IDHouse,
-                    id: id,
-                    function: 'modaleditherd',
+                    amphuer: amphuer,
+                    farm_name: farm_name,
+                    farm_id: farm_id,
+                    function: 'update',
                 },
                 success: function(result) {
                     if (result.status != 200) {
@@ -250,7 +249,7 @@ require '../../connect/functions.php';
 
                             })
                             .then((result) => {
-                                $("#modalEdit").modal("hide");
+                                $("#modalEditFarm").modal("hide");
                                 location.reload();
 
                             })
@@ -266,10 +265,9 @@ require '../../connect/functions.php';
                             title: result.message
 
                         }).then((result) => {
-                            $("#modalEditherd").modal("hide");
+                            $("#modalEditFarm").modal("hide");
                             location.reload();
-                            // $('#frmModalEdit')[0].reset();
-                            // $('#title').focus();
+                            
                         })
                     }
 
