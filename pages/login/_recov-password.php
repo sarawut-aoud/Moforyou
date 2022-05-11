@@ -22,7 +22,8 @@ if (isset($func) && $func == 'register') {
 
     $encode = $sql->encode($password); // เข้ารหัส pass
     $pass_sha = $sql->Setsha256($encode); //เอา pass+user เข้า hmac 
-    $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
+    // $pwd_hashed = password_hash($pass_sha, PASSWORD_ARGON2I);
+    $pwd_hashed = md5($pass_sha);
     if ($con_password != $password) {
         $msg = array(
             "status" => 0,

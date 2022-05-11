@@ -1,33 +1,42 @@
 <?php
 
+// require '../../vendor/phpmailer/phpmailer/src/Exception.php';
+// require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+// require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
-
-require '../../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
-
-
+require '../../plugins/phpmailer/PHPMailerAutoload.php';
 //Load Composer's autoloader
-require '../../vendor/autoload.php';
+// require '../../vendor/autoload.php';
 $email = $_REQUEST['email'];
 // header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/pages/login/recover-password.php?email=' . $email . '';
 // $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/recover-password.php?email=' . $email . '';
-$mail = new PHPMailer;
+
+//mail server//
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;   
+$mail->Mailer = 'stmp';
+$mail->Host = 'mail.primary-serv.com';
+$mail->Port = 25;
+$mail->SMTPAuth = false;
+$mail->SMTPAutoTLS = false;
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+$gmail_username = "moforyou@mfu.primary-serv.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+//mail server//
 
-$mail->SMTPSecure = 'ssl';
-$mail->Host = 'smtp.gmail.com';
-$mail->Port = '465';
-$mail->SMTPAuth = true;
-
-
-$gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
-// ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
-
+//gamil
+// $mail->CharSet = "utf-8";
+// $mail->isSMTP();
+// $mail->Mailer = 'stmp';
+// $mail->SMTPSecure = 'ssl';
+// $mail->Host = 'smtp.gmail.com';
+// $mail->Port = '465';
+// $mail->SMTPAuth = true;
+// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+// $gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
+// $gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
+//gamil
 
 $sender = "MOFORYOU"; // ชื่อผู้ส่ง
 $email_sender = "MOFORYOU@gmail.com"; // เมล์ผู้ส่ง 

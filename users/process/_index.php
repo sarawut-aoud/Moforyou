@@ -47,7 +47,7 @@ if (isset($func) && $func  == 'food') {
 if (isset($func) && $func  == 'foodcow') {
     $farm = $_GET['farm_id'];
     $date = $_GET['date'];
-    $query  = $sql->req_givefoodcow($farm,$date);
+    $query  = $sql->req_givefoodcow($farm, $date);
     $row = $query->fetch_object();
     $data = array(
         "cow" => $row->cow
@@ -85,30 +85,37 @@ if (isset($func) && $func == 'showdisease') {
     echo json_encode($data);
     // http_response_code(200);
 }
-// $sqlcow = new cow();
+if (isset($func) && $func == 'barchart') {
+    $sql = new reports();
+    $sqlcow = new cow();
+    $year = date('Y');
+    $i = 0;
+    $farm_id = $_REQUEST['farm_id'];
+    $x = 1;
+    $total = 0;
+    $month = $_REQUEST['month'];;
+    $query = $sqlcow->selectdatacowbyfarmer($farm_id);
+    while ($row = $query->fetch_object()) {
+        $query2 = $sql->req_recordfood_30($row->id, $year, $month); //? เอาเฉพาะ วันที่ 30 or 31 ของเดือน
 
-// $query = $sqlcow->selectdatacowbyfarmer(3);
-// $datenow = date_create(date('Y-m-d'));
-// while ($row = $query->fetch_object()) {
-//     $query2 = $sql->req_recordfood(3, $row->id, '');
+        while ($row2 = $query2->fetch_object()) {
 
-//     while ($rs = $query2->fetch_object()) {
-//         $datecow = date_create($rs->date);
-//         $datediff = date_diff($datecow, $datenow);
-//         $diff = $datediff->format('%a');
-//         $diff2 = $datediff->format('%Y-%m-%d');
-//         // echo $rs->date. "<br>";
-//         if ($diff >= 30) {
-//             $date_check =  date("Y-m-d", strtotime($rs->date . "  -30 Day"));
-//             echo $date_check. "<br>";
-//             $query3 =  $sql->req_recordfood(3, $rs->id, $date_check);
-//             while ($rss = $query3->fetch_object()) {
-//                 echo $rss->id;
-//                 // $sum = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
 
-//                 // $sum2 = $sum += $sum;
-//                 // echo $sum . "<br>";
-//             }
-//         }
-//     }
-// }
+            $query3 = $sql->req_recordfood_1($row->id, $year, $month); //? เอาเฉพาะ วันที่ 1 ของเดือน
+
+
+            while ($row3 = $query3->fetch_object()) {
+                $sum = ($row2->weight_cow - $row3->weight_cow) / $row2->sumweight_food;
+                $data[$i] = array(
+                    "name" => $row->cow_name,
+                    "weight" => $sum,
+                    
+                );
+                $i++;
+            }
+        }
+    }
+    
+   
+    echo json_encode($data);
+}
