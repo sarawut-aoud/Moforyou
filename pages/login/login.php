@@ -109,6 +109,7 @@ if (isset($_POST['username'])) {
                 $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
                 if (password_verify($pass_sha, $row['password']) && $row['active'] == 'YES') { // เปรียบเทียบ password ที่รับค่า และ password from db
                     // Select data จาก Username or Email
+                    echo $pass_sha.'<br>'.$row['password'] . "<br>", $row['username'];
                     $results = $userdata->login($row['password'], $row['username'], $row['email']);
                     $row_login = mysqli_fetch_array($results);
                     $id =  $row_login["id"];
@@ -126,7 +127,7 @@ if (isset($_POST['username'])) {
                     $_SESSION["phone"] = $phone;
                     $_SESSION["email"] = $email;
 
-                    echo loginsuccess();
+                     echo loginsuccess();
                     exit();
                 } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {
                     echo info_toast("โปรดยืนยันตัวตนที่ Email ของท่านก่อนเข้าสู่ระบบ ");
