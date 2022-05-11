@@ -28,7 +28,7 @@ function warning_2($msg, $redirect)
                timer: 3000,
            })
            Toast.fire({
-               icon: 'success',
+               icon: 'info',
                title: '$msg'
            }).then((result)=>{
                window.location = '$redirect';

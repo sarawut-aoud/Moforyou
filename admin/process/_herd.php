@@ -56,10 +56,10 @@ if (isset($func) && $func == 'modaleditherd') {
 
 
 if (isset($func) && $func == 'delsherd') {
-    $id = $_GET['id'];
+    $id = $_REQUEST['id'];
     $herdcheck = $sql->selectherdfromcow($id);
-    $row = $herdcheck->num_rows;
-    if ($row > 0) {
+    $row = $herdcheck->fetch_object();
+    if ($row->herd_id > 0) {
         $msg = array(
             "status" => 0,
             "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',
