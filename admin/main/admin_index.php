@@ -81,7 +81,7 @@ require '../../connect/session_ckeck.php';
                   <div class="card-header">
                     <h3 class="card-title">
                       <i class="far fa-chart-bar"></i>
-                      โรค
+                      สถิติการเกิดโรคโรคของโค
                     </h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
