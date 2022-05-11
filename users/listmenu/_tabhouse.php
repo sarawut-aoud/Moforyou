@@ -134,9 +134,9 @@ if (empty($result)) {
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php 
-                                            $i++;
-                                        } ?>
+                                            <?php
+                                                $i++;
+                                            } ?>
                                         </tbody>
                                         <!-- /.body table -->
 
@@ -167,7 +167,7 @@ if (empty($result)) {
             $(document).on('click', '.btnqrcode', function(e) {
                 var farmid = $(this).attr('id');
                 // var qrcode = new QRCode("qrcode");
-                var url = '<?php echo $_SERVER['HTTP_HOST'] . '/moforyou/users/qrcodefrom/givefood.php?farmid=' ?>' + farmid;
+                var url = '<?php echo $_SERVER['HTTP_HOST'] . '/users/qrcodefrom/login.php' ?>';
                 $('#qrcode').html('');
                 if (farmid) {
 

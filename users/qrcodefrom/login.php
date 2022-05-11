@@ -107,7 +107,8 @@ if (isset($_POST['username'])) {
             $row = mysqli_fetch_array($result);
             $encode = $sql->encode($password); // เข้ารหัส password
             $pass_sha = $sql->Setsha256($encode); //เอา pass + user เข้า hmac 
-            if (password_verify($pass_sha, $row['password']) && $row['active'] == 'YES') { // เปรียบเทียบ password ที่รับค่า และ password from db
+            // if (password_verify($pass_sha, $row['password']) && $row['active'] == 'YES') { // เปรียบเทียบ password ที่รับค่า และ password from db
+            if ((md5($pass_sha) == $row['password']) && $row['active'] == 'YES') {
                 // Select data จาก Username or Email
                 $results = $userdata->login($row['password'], $row['username'], $row['email']);
                 $row_login = mysqli_fetch_array($results);

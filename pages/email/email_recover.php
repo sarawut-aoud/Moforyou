@@ -1,12 +1,8 @@
 <?php
 
-// require '../../vendor/phpmailer/phpmailer/src/Exception.php';
-// require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-// require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 require '../../plugins/phpmailer/PHPMailerAutoload.php';
-//Load Composer's autoloader
-// require '../../vendor/autoload.php';
+
 $email = $_REQUEST['email'];
 // header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/pages/login/recover-password.php?email=' . $email . '';
@@ -21,8 +17,8 @@ $mail->Port = 25;
 $mail->SMTPAuth = false;
 $mail->SMTPAutoTLS = false;
 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-$gmail_username = "moforyou@mfu.primary-serv.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+$gmail_username = "uat@primary-serv.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Aa123456"; // รหัสผ่าน gmail
 //mail server//
 
 //gamil

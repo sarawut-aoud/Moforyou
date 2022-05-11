@@ -7,7 +7,7 @@ $path = $_SERVER['HTTP_HOST'] . '/pages/login/_active_id.php?email=' . $email . 
 $mail = new PHPMailer;
 
 //mail server//
-$mail->CharSet = "utf-8";
+$mail->CharSet = "UTF-8";
 $mail->isSMTP();
 $mail->Mailer = 'stmp';
 $mail->Host = 'mail.primary-serv.com';
@@ -15,8 +15,9 @@ $mail->Port = 25;
 $mail->SMTPAuth = false;
 $mail->SMTPAutoTLS = false;
 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-$gmail_username = "moforyou@mfu.primary-serv.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+$gmail_username = "uat@primary-serv.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Aa123456"; // รหัสผ่าน gmail
+
 //mail server//
 //gamil
 // $mail->CharSet = "utf-8";
