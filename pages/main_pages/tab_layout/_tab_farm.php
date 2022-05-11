@@ -6,7 +6,7 @@
         @$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
         require_once '../../connect/functions.php';
         $sql = new farm();
-        $perpage = 8;  // แสดงจำนวนในแต่ละหน้า
+        $perpage = 9;  // แสดงจำนวนในแต่ละหน้า
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {

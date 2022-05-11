@@ -216,75 +216,141 @@ if (empty($result)) {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div id="bar-chart" style="width: 1000px; height: 500px;margin-left:3rem"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 ">
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <i class="far fa-chart-bar"></i>
-                                        โคแต่ละสายพันธุ์
-                                    </h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
+                                    <div class="row justify-content-end">
+                                        <div class="col-md-5">
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <label class="col-form-label col-4" for="month_id">เลือกเดือน : </label>
+                                                    <div class="col-md">
+                                                        <select class="form-select" id="month_id">
+                                                            <?php for ($i = 1; $i <= 12; $i++) {
+                                                                if ($i <= 9) {
+                                                                    $month = "0" . $i;
+                                                                } else if ($i >= 10) {
+                                                                    $month = $i;
+                                                                }
+                                                                switch ($month) {
+                                                                    case '01':
+                                                                        $month_name = "มกราคม";
+                                                                        break;
+                                                                    case '02':
+                                                                        $month_name = "กุมภาพันธ์";
+                                                                        break;
+                                                                    case '03':
+                                                                        $month_name = "มีนาคม";
+                                                                        break;
+                                                                    case '04':
+                                                                        $month_name = "เมษายน";
+                                                                        break;
+                                                                    case '05':
+                                                                        $month_name = "พฤษภาคม";
+                                                                        break;
+                                                                    case '06':
+                                                                        $month_name = "มิถุนายน";
+                                                                        break;
+                                                                    case '07':
+                                                                        $month_name = "กรกฎาคม";
+                                                                        break;
+                                                                    case '08':
+                                                                        $month_name = "สิงหาคม";
+                                                                        break;
+                                                                    case '09':
+                                                                        $month_name = "กันยายน";
+                                                                        break;
+                                                                    case '10':
+                                                                        $month_name = "ตุลาคม";
+                                                                        break;
+                                                                    case '11':
+                                                                        $month_name = "พฤศจิกายน";
+                                                                        break;
+                                                                    case '12':
+                                                                        $month_name = "ธันวาคม";
+                                                                        break;
+                                                                }
+                                                            ?>
+                                                                <option value="<?php echo $month; ?>"><?php echo  $month_name; ?> </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
+
+
+
                                 </div>
-                                <div class="card-body">
-                                    <div id="donut-chart" style="width: 900px; height: 500px;margin-left:6rem"></div>
+
+                                <div id="bar-chart" style="width: 1000px; height: 500px;margin-left:3rem"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 ">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="far fa-chart-bar"></i>
+                                    โคแต่ละสายพันธุ์
+                                </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+
                                 </div>
                             </div>
+                            <div class="card-body">
+                                <div id="donut-chart" style="width: 900px; height: 500px;margin-left:6rem"></div>
+                            </div>
                         </div>
-                        <!-- /.row -->
                     </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-            <!-- Main Footer -->
-            <?php require '../sub/footer.php';
-            $sql = new reports();
-            $farm_id = $_SESSION['farm_id'];
-            $query = $sql->req_cow($farm_id);
-            ?>
-
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <?php require '../sub/footer.php';
+        $sql = new reports();
+        $farm_id = $_SESSION['farm_id'];
+        $query = $sql->req_cow($farm_id);
+        ?>
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(drawChart);
+    </div>
+    <!-- ./wrapper -->
 
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ['spec_name', 'cow'],
-                    <?php
-                    while ($row =  $query->fetch_array()) {
-                        echo "['" . $row["spec_name"] . "', " . $row["cow"] . "],";
-                    }
-                    ?>
-                ]);
-                var options = {
-                    is3D: true,
-                    title: '',
-                    pieHole: 0.4,
-                    colors: ['#402E32', '#864313', '#c9641d', '#e68c4d', '#936444', '#B4876C', '#efb78f', '#f5d4bc', '#FFF7F0', '#DFE0DF'],
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
 
-                };
-                var chart = new google.visualization.PieChart(document.getElementById('donut-chart'));
-                chart.draw(data, options);
-            }
-        </script>
-        <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-        <!-- <script type="text/javascript">
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['spec_name', 'cow'],
+                <?php
+                while ($row =  $query->fetch_array()) {
+                    echo "['" . $row["spec_name"] . "', " . $row["cow"] . "],";
+                }
+                ?>
+            ]);
+            var options = {
+                is3D: true,
+                title: '',
+                pieHole: 0.4,
+                colors: ['#402E32', '#864313', '#c9641d', '#e68c4d', '#936444', '#B4876C', '#efb78f', '#f5d4bc', '#FFF7F0', '#DFE0DF'],
+
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('donut-chart'));
+            chart.draw(data, options);
+        }
+    </script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <!-- <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['bar']
             });
@@ -341,254 +407,254 @@ if (empty($result)) {
                 chart.draw(data, google.charts.Bar.convertOptions(options));
             }
         </script> -->
-        <script type="text/javascript">
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(drawChart);
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
 
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
 
-                    <?php
-                    function DateThai($strDate)
-                    {
-                        $strYear = date("Y", strtotime($strDate)) + 543;
-                        $strMonth = date("n", strtotime($strDate));
-                        $strDay = date("j", strtotime($strDate));
-                        $strHour = date("H", strtotime($strDate));
-                        $strMinute = date("i", strtotime($strDate));
-                        $strSeconds = date("s", strtotime($strDate));
-                        $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                        $strMonthThai = $strMonthCut[$strMonth];
-                        if ($strHour == '00' && $strMinute == '00') {
-                            return "$strMonthThai $strYear   ";
-                        } else {
-                            return " $strMonthThai $strYear $strHour:$strMinute  ";
-                        }
+                <?php
+                function DateThai($strDate)
+                {
+                    $strYear = date("Y", strtotime($strDate)) + 543;
+                    $strMonth = date("n", strtotime($strDate));
+                    $strDay = date("j", strtotime($strDate));
+                    $strHour = date("H", strtotime($strDate));
+                    $strMinute = date("i", strtotime($strDate));
+                    $strSeconds = date("s", strtotime($strDate));
+                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+                    $strMonthThai = $strMonthCut[$strMonth];
+                    if ($strHour == '00' && $strMinute == '00') {
+                        return "$strMonthThai $strYear   ";
+                    } else {
+                        return " $strMonthThai $strYear $strHour:$strMinute  ";
                     }
-                    require_once '../../connect/functions.php';
-                    $farm_id = 3;
-                    $sql = new reports();
-                    $sqlcow = new cow();
-                    $year = date('Y');
-                    $i = 0;
-                    $x = 1;
-                    $total = 0;
-
-                    $month = date('m');
-                    $datenow = date('Y-m');
-                    $query = $sqlcow->selectdatacowbyfarmer($farm_id);
-                    ?>['เดือน', '<?php echo  DateThai($datenow); ?>'],
-                    <?php
-                    while ($row = $query->fetch_object()) {
-                        $query2 = $sql->req_recordfood_30($row->id, $year, $month); //? เอาเฉพาะ วันที่ 30 or 31 ของเดือน
-
-                        while ($row2 = $query2->fetch_object()) {
-
-
-                            $query3 = $sql->req_recordfood_1($row->id, $year, $month); //? เอาเฉพาะ วันที่ 1 ของเดือน
-
-
-                            while ($row3 = $query3->fetch_object()) {
-                                $sum = ($row2->weight_cow - $row3->weight_cow) / $row2->sumweight_food;
-                    ?>
-
-
-                                ['<?php echo  $row->cow_name; ?>', <?php echo  $sum; ?>],
-
-                    <?php }
-                        }
-                    }
-                    ?>
-                ]);
-
-                var options = {
-                    title: '',
-                    curveType: 'function',
-                    legend: {
-                        position: 'bottom'
-                    }
-                };
-
-                var chart = new google.visualization.LineChart(document.getElementById('bar-chart'));
-
-                chart.draw(data, options);
-            }
-        </script>
-        <script>
-            $(document).ready(function() {
-
-                cache_clear();
-
-                setInterval(function() {
-                    cache_clear()
-                }, 60000);
-            });
-
-
-
-            function cache_clear() {
-                function toThaiDateString(date) {
-                    let monthNames = [
-                        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
-                        "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
-                        "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                    ];
-
-                    let year = date.getFullYear() + 543;
-                    let month = monthNames[date.getMonth()];
-                    let numOfDay = date.getDate();
-
-                    let hour = date.getHours().toString().padStart(2, "0");
-                    let minutes = date.getMinutes().toString().padStart(2, "0");
-                    let second = date.getSeconds().toString().padStart(2, "0");
-
-                    return `${numOfDay} ${month} ${year} `; //+
-                    // `${hour}:${minutes}:${second} น.`;
                 }
-                var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: '../process/_index.php',
-                    data: {
-                        function: 'breed',
-                        farm_id: farm_id,
-                    },
-                    success: function(result) {
-                        if (result.date2 != null) {
-                            var date1 = new Date(result.date2)
-                            var date = toThaiDateString(date1);
-                            $('#datebreed').html(date);
-                            $('#namemale').html(result.namemale2);
-                            $('#namefemale').html(result.namefemale2);
-                        } else {
-                            $('#datebreed').html('-');
-                            $('#namemale').html('-');
-                            $('#namefemale').html('-');
+                require_once '../../connect/functions.php';
+                $farm_id = $_SESSION['farm_id'];
+                $sql = new reports();
+                $sqlcow = new cow();
+                $year = date('Y');
+                $i = 0;
+                $x = 1;
+                $total = 0;
 
-                        }
+                $month = date('m');
+                $datenow = date('Y-m');
+                $query = $sqlcow->selectdatacowbyfarmer($farm_id);
+                ?>['เดือน', '<?php echo  DateThai($datenow); ?>'],
+                <?php
+                while ($row = $query->fetch_object()) {
+                    $query2 = $sql->req_recordfood_30($row->id, $year, $month); //? เอาเฉพาะ วันที่ 30 or 31 ของเดือน
+
+                    while ($row2 = $query2->fetch_object()) {
+
+
+                        $query3 = $sql->req_recordfood_1($row->id, $year, $month); //? เอาเฉพาะ วันที่ 1 ของเดือน
+
+
+                        while ($row3 = $query3->fetch_object()) {
+                            $sum = ($row2->weight_cow - $row3->weight_cow) / $row2->sumweight_food;
+                ?>
+
+
+                            ['<?php echo  $row->cow_name; ?>', <?php echo  $sum; ?>],
+
+                <?php }
                     }
-                });
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: '../process/_index.php',
-                    data: {
-                        function: 'cow',
-                        farm_id: farm_id,
-                    },
-                    success: function(result) {
-                        if (result.cou_cow == null) {
-                            $('#cowdata').html('0');
-                            $('#male').html(result.cou_male);
-                            $('#female').html(result.cou_female);
-                        } else {
-                            $('#cowdata').html(result.cou_cow);
-                            $('#male').html(result.cou_male);
-                            $('#female').html(result.cou_female);
-                        }
+                }
+                ?>
+            ]);
 
-                    }
-                });
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: '../process/_index.php',
-                    data: {
-                        function: 'food',
-                        farm_id: farm_id,
-                    },
-                    success: function(result) {
-                        if (result.date == null) {
-                            $('#datefood').html('--/--/----');
-                            $('#weightfood').html('--');
-                        } else {
-                            var date1 = new Date(result.date)
-                            var date = toThaiDateString(date1);
-                            $('#datefood').html(date);
-                            $('#weightfood').html(result.weight_food);
-                        }
+            var options = {
+                title: '',
+                curveType: 'function',
+                legend: {
+                    position: 'bottom'
+                }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('bar-chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            cache_clear();
+
+            setInterval(function() {
+                cache_clear()
+            }, 60000);
+        });
 
 
 
+        function cache_clear() {
+            function toThaiDateString(date) {
+                let monthNames = [
+                    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                    "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+                    "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                ];
 
+                let year = date.getFullYear() + 543;
+                let month = monthNames[date.getMonth()];
+                let numOfDay = date.getDate();
 
-                        var date = result.date;
-                        $.ajax({
-                            type: "get",
-                            dataType: 'json',
-                            url: '../process/_index.php',
-                            data: {
-                                function: 'foodcow',
-                                date: date,
-                                farm_id: farm_id,
-                            },
-                            success: function(result) {
+                let hour = date.getHours().toString().padStart(2, "0");
+                let minutes = date.getMinutes().toString().padStart(2, "0");
+                let second = date.getSeconds().toString().padStart(2, "0");
 
-                                $('#cowfood').html(result.cow);
-
-                            }
-                        });
-                    }
-                });
-                $.ajax({
-                    type: "get",
-                    dataType: 'json',
-                    url: '../process/_index.php',
-                    data: {
-                        function: 'heal',
-                        farm_id: farm_id,
-                    },
-                    success: function(result) {
-                        if (result.date == null) {
-                            $('#dateheal').html('--/--/----');
-                            $('#namecowheal').html('-');
-
-                            $('#doctorheal').html('-');
-                        } else {
-                            var date1 = new Date(result.date)
-                            var date = toThaiDateString(date1);
-                            $('#dateheal').html(result.date);
-                            $('#namecowheal').html(result.cow);
-
-                            $('#doctorheal').html(result.docname);
-                        }
-
-                        if (result.heal == null) {
-                            var heal = '-';
-                        } else {
-                            var heal = result.heal;
-                        }
-
-                        var dis_id = result.dis;
-                        $.ajax({
-                            type: 'get',
-                            dataType: 'json',
-                            url: '../process/_index.php',
-                            data: {
-                                function: 'showdisease',
-                            },
-                            success: function(results) {
-                                var data = '';
-                                for (i in results) {
-                                    if (results[i].id == dis_id) {
-                                        var detail = results[i].detail
-                                    } else {
-                                        var detail = '';
-                                    }
-                                }
-                                if (dis_id != "") {
-                                    $('#heal').html(detail + "  " + heal);
-                                }
-                            }
-                        });
-                    }
-                });
-
+                return `${numOfDay} ${month} ${year} `; //+
+                // `${hour}:${minutes}:${second} น.`;
             }
-        </script>
+            var farm_id = '<?php echo $_SESSION['farm_id']; ?>'
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_index.php',
+                data: {
+                    function: 'breed',
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    if (result.date2 != null) {
+                        var date1 = new Date(result.date2)
+                        var date = toThaiDateString(date1);
+                        $('#datebreed').html(date);
+                        $('#namemale').html(result.namemale2);
+                        $('#namefemale').html(result.namefemale2);
+                    } else {
+                        $('#datebreed').html('-');
+                        $('#namemale').html('-');
+                        $('#namefemale').html('-');
+
+                    }
+                }
+            });
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_index.php',
+                data: {
+                    function: 'cow',
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    if (result.cou_cow == null) {
+                        $('#cowdata').html('0');
+                        $('#male').html(result.cou_male);
+                        $('#female').html(result.cou_female);
+                    } else {
+                        $('#cowdata').html(result.cou_cow);
+                        $('#male').html(result.cou_male);
+                        $('#female').html(result.cou_female);
+                    }
+
+                }
+            });
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_index.php',
+                data: {
+                    function: 'food',
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    if (result.date == null) {
+                        $('#datefood').html('--/--/----');
+                        $('#weightfood').html('--');
+                    } else {
+                        var date1 = new Date(result.date)
+                        var date = toThaiDateString(date1);
+                        $('#datefood').html(date);
+                        $('#weightfood').html(result.weight_food);
+                    }
+
+
+
+
+
+                    var date = result.date;
+                    $.ajax({
+                        type: "get",
+                        dataType: 'json',
+                        url: '../process/_index.php',
+                        data: {
+                            function: 'foodcow',
+                            date: date,
+                            farm_id: farm_id,
+                        },
+                        success: function(result) {
+
+                            $('#cowfood').html(result.cow);
+
+                        }
+                    });
+                }
+            });
+            $.ajax({
+                type: "get",
+                dataType: 'json',
+                url: '../process/_index.php',
+                data: {
+                    function: 'heal',
+                    farm_id: farm_id,
+                },
+                success: function(result) {
+                    if (result.date == null) {
+                        $('#dateheal').html('--/--/----');
+                        $('#namecowheal').html('-');
+
+                        $('#doctorheal').html('-');
+                    } else {
+                        var date1 = new Date(result.date)
+                        var date = toThaiDateString(date1);
+                        $('#dateheal').html(result.date);
+                        $('#namecowheal').html(result.cow);
+
+                        $('#doctorheal').html(result.docname);
+                    }
+
+                    if (result.heal == null) {
+                        var heal = '-';
+                    } else {
+                        var heal = result.heal;
+                    }
+
+                    var dis_id = result.dis;
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '../process/_index.php',
+                        data: {
+                            function: 'showdisease',
+                        },
+                        success: function(results) {
+                            var data = '';
+                            for (i in results) {
+                                if (results[i].id == dis_id) {
+                                    var detail = results[i].detail
+                                } else {
+                                    var detail = '';
+                                }
+                            }
+                            if (dis_id != "") {
+                                $('#heal').html(detail + "  " + heal);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
 </body>
 
 </html>
