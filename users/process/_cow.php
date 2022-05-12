@@ -100,10 +100,10 @@ if (isset($func) && $func == 'del') {
             "status" => 0,
             "message" => 'ไม่สามารถลบข้อมูลได้',
         );
-        echo json_encode($msg);
+       
         // http_response_code(404);
     } else {
-        $cow = $sql->selectcowfrombreed($id);
+        $cow = $sqlcow->selectcowfrombreed($id);
         $row = $cow->num_rows;
         if ($row > 0) {
             $msg = array(
@@ -132,6 +132,7 @@ if (isset($func) && $func == 'del') {
 
         // http_response_code(200);
     }
+    echo json_encode($msg);
 }
 
 

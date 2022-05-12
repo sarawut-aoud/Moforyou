@@ -7,7 +7,7 @@ $email = $_REQUEST['email'];
 // header('Content-Type: text/html; charset=utf-8');
 $path = $_SERVER['HTTP_HOST'] . '/pages/login/recover-password.php?email=' . $email . '';
 // $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/recover-password.php?email=' . $email . '';
-
+$mail = new PHPMailer;
 //mail server//
 $mail->CharSet = "utf-8";
 $mail->isSMTP();

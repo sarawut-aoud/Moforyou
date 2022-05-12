@@ -134,7 +134,7 @@ if (isset($_POST['username'])) {
                     $_SESSION["phone"] = $phone;
                     $_SESSION["email"] = $email;
                     $_SESSION["farm_id"] =  $farm_id;
-
+                    echo success_toast("Login Sucessful !", $_SESSION["fullname"], "givefood.php");
                     exit();
                 }
             } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {

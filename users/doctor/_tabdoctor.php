@@ -80,7 +80,7 @@ if (empty($result)) {
                                                 <div class=" input-group">
                                                     <label class=" col-form-label" for="phone">เบอร์โทรศัพท์ :</label>
                                                     <div class="col-md">
-                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="เบอร์โทร">
+                                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890" required="required" title="เบอร์โทร" minlength="10">
                                                     </div>
                                                 </div>
                                             </div>
