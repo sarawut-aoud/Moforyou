@@ -55,8 +55,13 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card  ">
+                                <?php
+                                                $datahouse = new house();
+                                                $row1 = $datahouse->refhouse($farm_id);
+                                                $rs1 = mysqli_fetch_object($row1);
+                                                ?>
                                     <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรงเรือน</h3>
+                                        <h3 class=" text-center">โรงเรือน ของ <?php echo $rs1->farmname?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -68,6 +73,7 @@ if (empty($result)) {
                                                 <tr align="center">
                                                     <th>#</th>
                                                     <th>ชื่อโรงเรือน</th>
+                                                    <th>จำนวนโคในโรงเรือน</th>
 
                                                 </tr>
 
@@ -77,13 +83,14 @@ if (empty($result)) {
                                             <tbody>
                                                 <?php
                                                 $datahouse = new house();
-                                                $row = $datahouse->gethouseFarmid($farm_id);
+                                                $row = $datahouse->refhousecountcow($farm_id);
                                                 $i = 1;
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                 ?>
                                                     <tr>
                                                         <td style="width: 10%;"><?php echo $i; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
+                                                        <td style="width: 20%" ><?php echo $rs->cow; ?></td>
                                                         <!--  -->
                                                     </tr>
                                                 <?php

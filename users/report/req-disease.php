@@ -57,8 +57,13 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card card-info ">
+                                <?php
+                                                $data = new heal();
+                                                $row1 = $data->refheal($farmid);
+                                                $rs1 = mysqli_fetch_object($row1);
+                                                ?>
                                     <div class="card-header ">
-                                        <h3 class=" text-center">โรค / อาการป่วย</h3>
+                                        <h3 class=" text-center">รายงาน โรค / อาการป่วย ของ <?php echo $rs1->farmname?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
