@@ -1,5 +1,5 @@
 <!-- Modal Edit -->
-<form action="" method="POST" id="frmModalEdit" enctype="multipart/form-data">
+<form action="modalcowaction" method="POST" id="frmModalEdit" enctype="multipart/form-data">
     <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg  modal-dialog-centered">
             <div class="modal-content">
@@ -113,7 +113,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" title="ปิดหน้านี้" class="btn col-md-4 btn-secondary" data-bs-dismiss="modal">ปิดหน้านี้</button>
-                    <button type="submit" title="บันทึกข้อมูล" id="btnsave" name="btnsave" class="col-md-4 btn btn-cow mt-2 btnsave">ยืนยันการแก้ไข</button>
+                    <button type="submit" title="บันทึกข้อมูล" id="btnmodalsave" name="btnmodalsave" class="col-md-4 btn btn-cow mt-2 btnmodalsave">ยืนยันการแก้ไข</button>
                 </div>
             </div>
         </div>

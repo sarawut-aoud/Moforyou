@@ -166,15 +166,15 @@ if (empty($result)) {
 
             $(document).on('click', '.btnqrcode', function(e) {
                 var farmid = $(this).attr('id');
-                // var qrcode = new QRCode("qrcode");
-                <?php $sql =  new registra();
+                 <?php $sql =  new registra();
                 $query = $sql->Getpwd($_SESSION["user"], $_SESSION["email"]);
                 $row = $query->fetch_object();
                 $username = $row->username;
                 $password = $row->password;
                 ?>
-                var url = '<?php echo $_SERVER['HTTP_HOST'] . '/users/qrcodefrom/login.php' ?>';
-                $('#qrcode').html('');
+                var url = '<?php echo $_SERVER['HTTP_HOST'] . '/users/qrcodefrom/_qrcode.php?username=' . $username . "&password=" . $password ?>';
+               console.log(url);
+		 $('#qrcode').html('');
                 if (farmid) {
 
                     new QRCode(qrcode, url);

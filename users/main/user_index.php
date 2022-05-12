@@ -350,138 +350,70 @@ if (empty($result)) {
         }
     </script>
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-    <!-- <script type="text/javascript">
-            google.charts.load('current', {
-                'packages': ['bar']
-            });
-            google.charts.setOnLoadCallback(drawChart);
 
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ['Month', 'การเติบโต'],
-                    <?php
-
-                    require_once '../../connect/functions.php';
-                    $farm_id = $_SESSION['farm_id'];
-                    $sql = new reports();
-                    $sqlcow = new cow();
-                    $query = $sqlcow->selectdatacowbyfarmer($farm_id);
-                    $year = date('Y');
-                    $i = 0;
-                    $x = 1;
-                    $total = 0;
-                    while ($row = $query->fetch_object()) {
-                        $query2 = $sql->req_recordfood($farm_id, $row->id, '', $year);
-                        while ($rs = $query2->fetch_object()) {
-                            $date_check =  date("Y-m-d", strtotime($rs->date . " -30 Day"));
-                            $a = $rs->weight_cow;
-                            $b =  $rs->sumweight_food;
-
-                            $query3 =  $sql->req_recordfood($farm_id, $row->id, $date_check, '');
-
-                            while ($rss = $query3->fetch_object()) {
-                                $sum[$i] = 0;
-                                $sum[$i] = ($rs->weight_cow - $rss->weight_cow) / $rs->sumweight_food;
-                                $total =  $total + $sum[$i];
-                    ?>['<?php echo "รอบที่ " . $x++;; ?>', <?php echo  $total; ?>],
-                    <?php
-                            }
-                        }
-                        $i++;
-                    }
-                    ?>
-                ]);
-
-                var options = {
-                    chart: {
-                        title: '',
-                        subtitle: '',
-                        width: 800,
-                        height: 500,
-                    },
-                    bars: 'vertical' // Required for Material Bar Charts.
-                };
-
-                var chart = new google.charts.Bar(document.getElementById('bar-chart'));
-
-                chart.draw(data, google.charts.Bar.convertOptions(options));
-            }
-        </script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
-            'packages': ['corechart']
+            packages: ['corechart', 'bar']
         });
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback();
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-
-                <?php
-                function DateThai($strDate)
-                {
-                    $strYear = date("Y", strtotime($strDate)) + 543;
-                    $strMonth = date("n", strtotime($strDate));
-                    $strDay = date("j", strtotime($strDate));
-                    $strHour = date("H", strtotime($strDate));
-                    $strMinute = date("i", strtotime($strDate));
-                    $strSeconds = date("s", strtotime($strDate));
-                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                    $strMonthThai = $strMonthCut[$strMonth];
-                    if ($strHour == '00' && $strMinute == '00') {
-                        return "$strMonthThai $strYear   ";
-                    } else {
-                        return " $strMonthThai $strYear $strHour:$strMinute  ";
-                    }
+        function load_monthwise_data(month, title) {
+            var temp_title = title + ' ' + month + '';
+            var farm = '<?php echo $_SESSION['farm_id']; ?>'
+            $.ajax({
+                url: "../process/_index.php",
+                method: "get",
+                data: {
+                    month: month,
+                    farm_id: farm,
+                    function: 'barchart'
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    drawMonthwiseChart(data, temp_title);
                 }
-                require_once '../../connect/functions.php';
-                $farm_id = $_SESSION['farm_id'];
-                $sql = new reports();
-                $sqlcow = new cow();
-                $year = date('Y');
-                $i = 0;
-                $x = 1;
-                $total = 0;
+            });
+        }
 
-                $month = date('m');
-                $datenow = date('Y-m');
-                $query = $sqlcow->selectdatacowbyfarmer($farm_id);
-                ?>['เดือน', '<?php echo  DateThai($datenow); ?>'],
-                <?php
-                while ($row = $query->fetch_object()) {
-                    $query2 = $sql->req_recordfood_30($row->id, $year, $month); //? เอาเฉพาะ วันที่ 30 or 31 ของเดือน
-
-                    while ($row2 = $query2->fetch_object()) {
-
-
-                        $query3 = $sql->req_recordfood_1($row->id, $year, $month); //? เอาเฉพาะ วันที่ 1 ของเดือน
-
-
-                        while ($row3 = $query3->fetch_object()) {
-                            $sum = ($row2->weight_cow - $row3->weight_cow) / $row2->sumweight_food;
-                ?>
-
-
-                            ['<?php echo  $row->cow_name; ?>', <?php echo  $sum; ?>],
-
-                <?php }
-                    }
-                }
-                ?>
-            ]);
-
+        function drawMonthwiseChart(chart_data, chart_main_title) {
+            var jsonData = chart_data;
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'name');
+            data.addColumn('number', '');
+            $.each(jsonData, function(i, jsonData) {
+                var name = jsonData.name;
+                var weight = parseFloat($.trim(jsonData.weight));
+                data.addRows([
+                    [name, weight]
+                ]);
+            });
             var options = {
                 title: '',
-                curveType: 'function',
-                legend: {
-                    position: 'bottom'
-                }
+                hAxis: {
+                    title: ""
+                },
+
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('bar-chart'));
-
+            var chart = new google.visualization.ColumnChart(document.getElementById('bar-chart'));
             chart.draw(data, options);
         }
     </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#month_id').change(function() {
+                var month = $(this).val();
+                if (month != '') {
+                    load_monthwise_data(month);
+                }
+            });
+
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
 

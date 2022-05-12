@@ -9,9 +9,11 @@ $func = $_REQUEST['function'];
 
 if (isset($func) && $func == 'insert') {
     $name = trim($_POST['docname']);
-    $phone = preg_replace('/[-]/i', '', $_POST['phone']);
+    $phone = preg_replace('/(-|_)/i', '', $_POST['phone']);
     $farm_id = $_POST['farm_id'];
-    if (empty($name) || empty($phone) || empty($farm_id)) {
+    if (strlen($phone) <= 9) {
+        $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
+    } else if (empty($name) || empty($phone) || empty($farm_id)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
     } else {
         $query = $sql->insert_doc($name, $phone, $farm_id);
@@ -25,9 +27,11 @@ if (isset($func) && $func == 'insert') {
 }
 if (isset($func) && $func == 'update') {
     $name = trim($_POST['docname']);
-    $phone = preg_replace('/[-]/i', '', $_POST['phone']);
+    $phone = preg_replace('/(-|_)/i', '', $_POST['phone']);
     $id = $_POST['docid'];
-    if (empty($name) || empty($phone) || empty($id)) {
+    if (strlen($phone) <= 9) {
+        $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถบันทึกได้");
+    } else if (empty($name) || empty($phone) || empty($id)) {
         $msg = array("status" => 0, "error" => true, "message" => "ไม่สามารถแก้ไขได้");
     } else {
         $query = $sql->update_doc($name, $phone, $id);

@@ -564,7 +564,6 @@ class cow extends Database
                 cow_date = '$cow_date' ,
                 high = '$high' ,
                 weight='$weight',
-               
                 spec_id='$spec_id',
                 herd_id='$herd_id',
                 house_id='$house_id',
@@ -577,7 +576,6 @@ class cow extends Database
                 cow_date = '$cow_date' ,
                 high = '$high' ,
                 weight='$weight',
-               
                 spec_id='$spec_id',
                 herd_id='$herd_id',
                 house_id='$house_id',
