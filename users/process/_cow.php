@@ -104,8 +104,8 @@ if (isset($func) && $func == 'del') {
         // http_response_code(404);
     } else {
         $cow = $sqlcow->selectcowfrombreed($id);
-        $row = $cow->num_rows;
-        if ($row > 0) {
+        $row = $cow->fetch_object();
+        if ($row->cow_id > 0) {
             $msg = array(
                 "status" => 0,
                 "message" => 'มีการใช้งานข้อมูลนี้อยู่ไม่สามารถลบข้อมูลได้',

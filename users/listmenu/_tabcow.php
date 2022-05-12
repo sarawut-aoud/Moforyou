@@ -72,7 +72,7 @@ if (empty($result)) {
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        
+
                                                         <div class="form-group row">
                                                             <div class="input-group">
                                                                 <label class="col-form-label col-4" for="namecow">ชื่อโค : </label>
@@ -85,7 +85,7 @@ if (empty($result)) {
                                                             <div class="input-group">
                                                                 <label class="col-form-label col-4" for="cowdate">วันที่เกิด/รับเข้ามา </label>
                                                                 <div class="col-md">
-                                                                    <input type="datetime-local" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
+                                                                    <input type="date" class="form-control" id="cowdate" name="cowdate" placeholder="00/00/0000">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -532,8 +532,9 @@ if (empty($result)) {
     require_once '../../connect/toastr.php';
     require_once '../../connect/resize.php';
     // insert
+    $sql = new cow();
     if (isset($_POST['submit_cow'])) {
-        $sql = new cow();
+       
 
         if (empty($_POST['species_id'])) {
             echo '<script>
@@ -583,6 +584,8 @@ if (empty($result)) {
 
                 echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
             } else {
+                $datecow = date('Y-m-d', strtotime($cowdate));
+
                 if (!empty($picture)) {
                     $time = date('Ymdhis');
                     $sourceProperties = getimagesize($picture);
@@ -592,83 +595,16 @@ if (empty($result)) {
                     $imageType = $sourceProperties[2];
                     echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
                     copy($picture, "../../dist/img/cow_upload/" . $ext);
-
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
+                    $query = $sql->addcow($namecow,  $datecow, $highcow, $weightcow, $species_id, $herd_id, $house_id, $gender, $ext, $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } else {
-                    $query = $sql->addcow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $farmid);
+                    $query = $sql->addcow($namecow,  $datecow, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $farmid);
                     echo success_toasts("บันทึกข้อมูลสำเร็จ", "./_tabcow.php");
                 } // check picture
             } // check Undendifind values
         } // check select
     } //isset submit_cow
     // update
-    if (isset($_POST['btnsave'])) {
-        if (empty($_POST['modalspecies_id'])) {
-            echo '<script>
-                    $(document).ready(function(){
-                        $("#modalspecies_id").focus();
-                    })
-                 </script>';
-            echo warning_toast('กรุณาเลือกสายพันธ์ุ ');
-        } else if (empty($_POST['modalhouse_id'])) {
-            echo '<script>
-                    $(document).ready(function(){
-                        $("#modalhouse_id").focus();
-                    })
-                </script>';
-            echo warning_toast('กรุณาเลือกโรงเรือน ');
-        } else if (empty($_POST['modalherd_id'])) {
-            echo '<script>
-                    $(document).ready(function(){
-                        $("#modalherd_id").focus();
-                    })
-                </script>';
-            echo warning_toast('กรุณาเลือกฝูง');
-        } else {
-            $idcow = $_POST['modal_cowid'];
-            $namecow =  $_POST['modalnamecow'];
-            $cowdate =  $_POST['modal_cowdate'];
-            $species_id =  $_POST['modalspecies_id'];
-            $weightcow =  $_POST['modalweightcow'];
-            $highcow =  $_POST['modalhighcow'];
-            // $fathercow =  $_POST['modalfathercow'];
-            // $mothercow =  $_POST['modalmothercow'];
-            $house_id =  $_POST['modalhouse_id'];
-            $herd_id =  $_POST['modalherd_id'];
-            $gender =  $_POST['gender'];
-            $picture = $_FILES['file']['tmp_name'];
-            //? function ลดขนาดรูปภาพ
-            function imageResize($imageResourceId, $width, $height)
-            {
-                $targetWidth = $width < 1280 ? $width : 1280;
-                $targetHeight = ($height / $width) * $targetWidth;
-                $targetLayer = imagecreatetruecolor($targetWidth, $targetHeight);
-                imagecopyresampled($targetLayer, $imageResourceId, 0, 0, 0, 0, $targetWidth, $targetHeight, $width, $height);
-                return $targetLayer;
-            }
-            if (empty($namecow) || empty($cowdate)  || empty($weightcow) || empty($highcow)  || empty($gender)) {
-
-                echo warning_toast('โปรดระบุข้อมูลบางส่วนให้ครบ');
-            } else {
-                if (!empty($picture)) {
-                    $time = date('Ymdhis');
-                    $sourceProperties = getimagesize($picture);
-                    $fileNewName = $time;
-                    $folderPath = "../../dist/img/cow_img/";
-                    $ext = $_FILES['file']['name'];
-                    $imageType = $sourceProperties[2];
-                    echo resize($picture, $imageType, $folderPath, $fileNewName, $ext, $sourceProperties);
-                    copy($picture, "../../dist/img/cow_upload/" . $ext);
-
-                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, $ext, $idcow);
-                    echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
-                } else {
-                    $query = $sql->update_cow($namecow, $cowdate, $highcow, $weightcow,  $species_id, $herd_id, $house_id, $gender, '', $idcow);
-                    echo success_toasts("แก้ไขข้อมูลโคสำเร็จ", "./_tabcow.php");
-                } // check picture
-            } // check Undendifind values
-        } // check select spec_id / house_id / herd_id
-    } // isset btnsave
+     
 }
 ?>
