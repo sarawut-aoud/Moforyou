@@ -224,11 +224,30 @@ class house extends Database
     // Selcet id where Farm_id
     public function gethouseFarmid($id)
     {
-        $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house  WHERE farm_id='$id'");
+        $sel_houseFid = mysqli_query($this->dbcon, "SELECT * FROM tbl_house AS h
+        INNER JOIN tbl_farm as f on h.farm_id = f.id  WHERE farm_id='$id'");
         // }
 
         return $sel_houseFid;
     }
+    public function refhousecountcow($id)
+    {
+        $refhousecountcow = mysqli_query($this->dbcon, "SELECT * , COUNT(c.id) as cow FROM tbl_cow AS c 
+        RIGHT JOIN tbl_house AS h ON c.house_id = h.id 
+        WHERE h.farm_id = '$id' GROUP BY h.house_name; ");
+        // }
+
+        return $refhousecountcow;
+    }
+    public function refhouse($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
+    }
+
+    
     // Selcet id where Farm_id
     public function getcowFarmid($id)
     {
@@ -325,6 +344,16 @@ class herd extends Database
         $se =  mysqli_query($this->dbcon, "SELECT count(herd_id) AS herd_id FROM tbl_cow WHERE herd_id = '$id'");
         return $se;
     }
+    public function refherdcountcow($id)
+    {
+        $refherdcountcow = mysqli_query($this->dbcon, "SELECT * , COUNT(c.id) as cow FROM tbl_cow AS c 
+        INNER JOIN tbl_herd AS hr ON c.herd_id = hr.id 
+         INNER JOIN tbl_house AS h ON c.house_id = h.id
+         WHERE c.farm_id = '6' GROUP BY hr.herd_name;");
+        // }
+
+        return $refherdcountcow;
+    }
     public function select_herd($id)
     {
         if (empty($id)) {
@@ -344,6 +373,13 @@ class herd extends Database
             ORDER BY herd.id ASC ");
         }
         return $selectadmin;
+    }
+    public function refherd($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
     }
     public function select_herd_farm($farmid)
     {
@@ -470,6 +506,13 @@ class cow extends Database
         INNER JOIN tbl_farm AS f ON (ho.farm_id = f.id)
         limit {$start},{$perpage} ");
         return $page;
+    }
+    public function refcow($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
     }
     public function selectcowfrombreed($id)
     {
@@ -672,6 +715,13 @@ class breed extends Database
             ");
         }
         return $breed;
+    }
+    public function refbreed($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
     }
     public function select_breed($id)
     {
@@ -900,6 +950,13 @@ class heal extends Database
         $del = mysqli_query($this->dbcon, "DELETE FROM tbl_heal WHERE id = '$id' ");
         return $del;
     }
+    public function refheal($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
+    }
     public function select_heal($id)
     {
         if (empty($id)) {
@@ -957,6 +1014,13 @@ class recordfood extends Database
             WHERE id= '$id'
         ");
         return $upd;
+    }
+    public function refrecordfood($id)
+    {
+        $rh = mysqli_query($this->dbcon, "SELECT * FROM tbl_farm AS f 
+        INNER JOIN tbl_farmer as fm on f.farmmer_id = fm.id 
+        INNER JOIN tbl_house as h on h.farm_id = f.id WHERE f.id = '$id'");
+        return $rh;
     }
     public function delete_record($id)
     {

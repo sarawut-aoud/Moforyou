@@ -57,8 +57,13 @@ if (empty($result)) {
                             <div class="row  mb-5">
                                 <div class="col-md-12">
                                     <div class="card card-pink ">
+                                    <?php
+                                                $data = new breed();
+                                                $row1 = $data->refbreed($farmid);
+                                                $rs1 = mysqli_fetch_object($row1);
+                                                ?>
                                         <div class="card-header ">
-                                            <h3 class=" text-center">ผสมพันธุ์</h3>
+                                            <h3 class=" text-center">ผสมพันธุ์ ของ <?php echo $rs1->farmname?></h3>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
