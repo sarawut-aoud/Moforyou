@@ -1,3 +1,4 @@
+<?php require_once '../../connect/functions.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,10 +50,10 @@
                         <div class="col">
                             <ul class="nav nav-pills " id="custom-content-below-tab" role="tablist">
                                 <li class="nav-item  col-md-3 col-sm-12 mt-2">
-                                    <a class="bt " id="tab-index" href="index.php">หน้าแรก</a>
+                                    <a class="bt active" id="tab-farm-tab" href="index.php">หน้าแรก</a>
                                 </li>
                                 <li class="nav-item  col-md-3 col-sm-12 mt-2">
-                                    <a class="bt active" id="tab-farm-tab" href="index_tab-farm.php">ฟาร์ม</a>
+                                    <a class="bt " id="tab-farm-tab" href="index_tab-farm.php">ฟาร์ม</a>
                                 </li>
                                 <li class="nav-item  col-md-3 col-sm-12 mt-2">
                                     <a class="bt " id="tab-cow-tab" href="index_tab-cow.php">โคเนื้อ</a>
@@ -72,7 +73,7 @@
                 <!-- row card -->
                 <!-- tab-1 -->
                 <div class="tab-pane fade show active " id="tab-farm">
-                    <?php require './tab_layout/_tab_farm.php'; ?>
+                    <?php require './tab_layout/_tab_index.php'; ?>
                 </div>
 
                 <!-- /.row card -->
@@ -80,52 +81,101 @@
         </div>
 
         <!-- /.content-wrapper -->
-        <?php require_once './modalreqcow.php';
-        require_once './modalreqfarm.php';
+        <?php
         require './footer.php'; ?>
         <a id="back-to-top" href="#" class="btn btn-secondary back-to-top" role="button" aria-label="Scroll to top">
             <i class="fas fa-chevron-up"></i>
         </a>
     </div>
     <!-- ./wrapper -->
+    <?php
+
+
+    $sql = new reports();
+    $query = $sql->req_cow(''); ?>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['spec_name', 'cow'],
+                <?php
+                while ($row =  $query->fetch_array()) {
+                    echo "['" . $row["spec_name"] . "', " . $row["cow"] . "],";
+                }
+                ?>
+            ]);
+            var options = {
+                is3D: true,
+                title: '',
+                pieHole: 0.4,
+                colors: ['#402E32', '#864313', '#c9641d', '#e68c4d', '#936444', '#B4876C', '#efb78f', '#f5d4bc', '#FFCFAC', '#DFE0DF'],
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('bar1'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function load_monthwise_data(month, year) {
+            var year = year;
+            var month = month;
+
+            $.ajax({
+                url: "../process/_index.php",
+                method: "get",
+                data: {
+                    month: month,
+                    year: year,
+                    function: 'barchart1'
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    drawMonthwiseChart(data, temp_title);
+                }
+            });
+        }
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['detail', 'dis'],
+                <?php
+                $sqlreq = new reports();
+                $query = $sqlreq->req_healanddis($month, $year);
+                while ($row =  $query->fetch_array()) {
+                    echo "['" . $row["detail"] . "', " . $row["dis"] . "],";
+                }
+                ?>
+            ]);
+            var options = {
+                is3D: true,
+                title: '',
+                pieHole: 0.4,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('bar2'));
+            chart.draw(data, options);
+        }
+    </script>
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.modalreqfarm', function() {
-                var id = $(this).attr('id');
-                var farmer = $(this).attr('farmmer');
-                var email = $(this).attr('emailfarm');
-                var phone = $(this).attr('phone');
 
-                $.ajax({
-                    type: 'get',
-                    dataType: 'json',
-                    url: './_reqindex.php',
-                    data: {
-                        function: "farm",
-                        farm_id: id,
-                    },
-                    success: function(result) {
-                        $('#reqfarm').modal('show');
-                        if (result.farmname != null) {
-                            $('#farmname').html(result.farmname);
-                        } else {
-                            $('#farmname').html('-');
-                        }
-                        $('#farmername').html('คุณ ' + farmer);
-                        $('#phone').html(phone);
-                        $('#email').html(email);
-                        if (result.cow == null) {
-                            $('#cow').html('0 ตัว');
-                        } else {
-                            $('#cow').html(result.cow + ' ตัว');
-                        }
+            $('#month_id,#year_id').change(function() {
+                var month = $('#month_id').val();
+                var year = $('#year_id').val();
+                if (month != '' && year != '') {
+                    load_monthwise_data(month, year);
+                }
+            });
 
-
-                    }
-                })
-
-            })
-        })
+        });
     </script>
 </body>
 

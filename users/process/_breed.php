@@ -12,20 +12,21 @@ $func = $_REQUEST['function'];
 if (isset($func) && $func == 'showfemale') {
     $datecow = $sql->datecow($farm_id);
     $i = 0;
-    while ($row = $datecow->fetch_array(MYSQLI_ASSOC)) {
-
-        $cow_id[$i] = $row['id'];
-        $cowdate[$i] =  date_create($row['cow_date']);
-        $cowdate_add[$i] = ($row['cow_date_add']);
+    while ($row = $datecow->fetch_object()) {
+        
+        $cow_id[$i] = $row->id;
+        $cowdate[$i] =  date_create($row->cow_date);
+        $cowdate_add[$i] = ($row->cow_date_add);
 
         $datediff[$i] = date_diff($datenow, $cowdate[$i]); //? check จากวันล่าสุดว่าครบ 18 เดือนไหม
         $diff[$i] = $datediff[$i]->format('%a'); //? แปลงออกมาเป้นวัน
         $month_now[$i] = floor(($diff[$i]) / 30); //? แปลงออกมาเป็นเดือน
-        // echo $month_now[$i];
+
+
         if ($month_now[$i] >= 18) {
             $query_selectcow = $sql->selectcow_forbreed_female($farm_id, $cow_id[$i]);
             while ($row = $query_selectcow->fetch_object()) {
-                $data[$i] = array(
+                $msg[$i] = array(
                     "cow_id" => intval($row->id),
                     "cow_name" => $row->cow_name,
                     "spec_id" => intval($row->spec_id),
@@ -33,12 +34,18 @@ if (isset($func) && $func == 'showfemale') {
                 );
             }
         } else {
-            echo json_encode(array('message' => 'ไม่มีข้อมูล', 'status' => 200));
+            $msg = array(
+                "error" => true,
+                "status" => 0,
+                "message" => 'ไม่มีข้อมูล',
+            );
+
             // http_response_code(200);
         }
         $i++;
     }
-    echo json_encode($data);
+    echo json_encode($msg);
+
     // http_response_code(200);
 }
 

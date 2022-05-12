@@ -597,7 +597,7 @@ class cow extends Database
         $func = mysqli_query($this->dbcon, "SELECT c.id,DATE_FORMAT(DATE_ADD(c.cow_date,INTERVAL 18 MONTH),'%Y-%m-%d') as cow_date_add , DATE_FORMAT(c.cow_date,'%Y-%m-%d') as cow_date 
         FROM tbl_cow AS c 
         INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
-        WHERE c.farm_id = '$farm_id' AND gender = '2' ");
+        WHERE c.farm_id = '$farm_id' AND c.gender = '2' ");
         return $func;
     }
     public function selectcow_forbreed_male($farm_id)
@@ -611,10 +611,11 @@ class cow extends Database
     public function selectcow_forbreed_female($farm_id, $cowid)
     {
 
-        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id ,s.spec_name FROM tbl_cow AS c 
+        $sel = mysqli_query($this->dbcon, "SELECT c.id ,c.cow_name,c.spec_id ,s.spec_name 
+            FROM tbl_cow AS c 
                 INNER JOIN tbl_house as ho ON (c.house_id = ho.id ) 
                 INNER JOIN tbl_species as s ON (c.spec_id = s.id)
-                WHERE c.farm_id = '$farm_id' AND c.gender = '2' AND c.id = $cowid  AND c.weight >= '270' ");
+                WHERE c.farm_id = '$farm_id' AND c.gender = '2' AND c.id = '$cowid' AND c.weight >= '270' ");
         return  $sel;
     }
     public function select_cow_byhouse($house_id, $farm_id)
@@ -1207,13 +1208,27 @@ class reports extends Database
         ORDER BY h.date LIMIT 1");
         return $re;
     }
-    public function req_healanddis()
+    public function req_healanddis($month, $year)
     {
-        $re = mysqli_query($this->dbcon, "SELECT d.detail,COUNT(*) as dis 
-        FROM tbl_disease as d 
-        INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
-        WHERE d.id != '1'
-        GROUP BY d.detail");
+        if (empty($month) && empty($year)) {
+            $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
+            FROM tbl_disease as d 
+            INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
+            WHERE d.id != '1' AND MONTH(h.datestart) ='$month' AND YEAR(h.datestart) ='$year'
+            GROUP BY d.detail");
+        } else {
+            $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
+            FROM tbl_disease as d 
+            INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
+            WHERE d.id != '1'
+            GROUP BY d.detail");
+        }
+
+        return $re;
+    }
+    public function req_healyearindex()
+    {
+        $re = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(h.datestart,'%Y') AS year FROM tbl_heal as h GROUP BY YEAR(h.datestart);");
         return $re;
     }
 }

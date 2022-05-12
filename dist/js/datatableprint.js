@@ -8,7 +8,6 @@ pdfMake.fonts = {
 };
 $(document).ready(function () {
   
-
   $("#example1")
     .DataTable({
       responsive: true,
@@ -22,17 +21,51 @@ $(document).ready(function () {
           },
         },
         buttons: [
-          { extend: "csv", className: "btn btn-outline-info" },
-          { extend: "excel", className: "btn btn-outline-success" },
+          // { extend: "csv", className: "btn btn-outline-info" },
+          // { extend: "excel", className: "btn btn-outline-success" },
           {
             // กำหนดพิเศษเฉพาะปุ่ม pdf
             extend: "pdf", // ปุ่มสร้าง pdf ไฟล์
             text: "PDF", // ข้อความที่แสดง
+
             pageSize: "A4", // ขนาดหน้ากระดาษเป็น A4
             className: "btn btn-outline-danger",
             customize: function (doc) {
-              // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
-              // กำหนด style หลัก
+              doc["header"] = {
+                columns: [
+                  {
+                    alignment: "left",
+                    italics: true,
+                    text: "dataTables",
+                    fontSize: 18,
+                    margin: [10, 0],
+                  },
+                  {
+                    alignment: "right",
+                    fontSize: 16,
+                    text: "Moforyou",
+                    margin: [10, 0],
+                  },
+                ],
+              };
+              doc["footer"] = {
+               
+                columns: [
+                  {
+                    alignment: "left",
+                    italics: true,
+                    text: "dataTables",
+                    fontSize: 18,
+                    margin: [10, 0],
+                  },
+                  {
+                    alignment: "right",
+                    fontSize: 16,
+                    text: "Moforyou",
+                    margin: [10, 0],
+                  },
+                ],
+              };
               doc.defaultStyle = {
                 font: "THSarabun",
                 fontSize: 18,
@@ -43,8 +76,8 @@ $(document).ready(function () {
           }, //,
           {
             extend: "print",
-            title: "โรงเรือน",
-            messageTop: "โรงเรือน",
+            title: "-",
+            messageTop: "-",
             className: "btn btn-outline-primary",
             exportOptions: {
               columns: ":visible",

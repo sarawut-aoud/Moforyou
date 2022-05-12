@@ -145,6 +145,7 @@ if (empty($result)) {
 
         <!-- ./wrapper -->
     </body>
+   
     <script src="../../dist/js/datatableprint.js">
     </script>
 

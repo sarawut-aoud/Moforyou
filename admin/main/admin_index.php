@@ -235,7 +235,7 @@ require '../../connect/session_ckeck.php';
         ['detail', 'dis'],
         <?php
         $sqlreq = new reports();
-        $query = $sqlreq->req_healanddis();
+        $query = $sqlreq->req_healanddis('','');
         while ($row =  $query->fetch_array()) {
           echo "['" . $row["detail"] . "', " . $row["dis"] . "],";
         }

@@ -362,10 +362,10 @@ if (isset($_POST['submit_farmer'])) {
             copy($picture, "../../dist/img/user_upload/" . $ext);
 
             $sql = $sql->updatefarmmer_pic($id, $fname, $phone, $email, $ext);
-            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting");
+            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting.php");
         } else {
             $query = $sql->updatefarmmer($id, $fname, $phone, $email);
-            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting");
+            echo success_toasts("แก้ไขข้อมูลสำเร็จ", "./_setting.php");
         }
     }
 }
@@ -380,7 +380,7 @@ if (isset($_POST['submit_farm'])) {
     } else {
 
         $query = $sql->updatefarm($farmname, $id); //? $id -> SESSION -> farmmer_id
-        echo success_toasts('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting');
+        echo success_toasts('แก้ไขชื่อฟาร์มเรียบร้อย', './_setting.php');
     }
 }
 // todo: แก้ไข้ password
@@ -393,13 +393,13 @@ if (isset($_POST['submit_pass'])) {
     $pwd = new Setpwd();
     $encode = $pwd->encode($password_new);
     $pass_sha = $pwd->Setsha256($encode);
-    $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
+    // $pass_hash = password_hash($pass_sha, PASSWORD_ARGON2I);
 
     if (empty($password_new) && empty($pwdconfrim)) {
         echo warning_toast('โปรดกรอกรหัสผ่าน');
     } else {
-        $updatepass = $user->updatepass($id, $pass_hash); //? $id ->SESSION -> farmer_id
-        echo success_toasts("แก้ไขรหัสผ่านเรียบร้อย", './_setting');
+        $updatepass = $user->updatepass($id, md5($pass_hash)); //? $id ->SESSION -> farmer_id
+        echo success_toasts("แก้ไขรหัสผ่านเรียบร้อย", './_setting.php');
     }
 }
 
