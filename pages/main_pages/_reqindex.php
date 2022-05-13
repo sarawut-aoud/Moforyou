@@ -162,8 +162,8 @@ if (isset($func) && $func == 'barchart1') {
        
                 
                 $data[$i] = array(
-                    "name" => $row->cow_name,
-                    "weight" => $sum,
+                    "detail" => $row->detail,
+                    "dis" => $dis,
                     
                 );
                 $i++;

@@ -1,5 +1,5 @@
 <?php
- error_reporting(~E_NOTICE);
+error_reporting(~E_NOTICE);
 require_once '../../connect/functions.php';
 $sql_farmer = new farmer();
 $sql_farm = new farm();
@@ -39,7 +39,7 @@ if (isset($func) && $func == 'showdatafarm') {
 
 if (isset($func) && $func == 'showcowdata') {
     $query = $sql_cow->selectdatacow('count');
-   
+
     while ($row = $query->fetch_object()) {
         $data = array(
             "datarow" => intval($row->datacow),
@@ -47,4 +47,41 @@ if (isset($func) && $func == 'showcowdata') {
     }
 
     echo json_encode($data);
+}
+if (isset($func) && $func == 'barchartbreed1') {
+
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+    $spec_id = $_GET['spec'];
+
+    $sql = new breed();
+    $i = 0;
+    $query = $sql->req_breed_spec($year, $month, $spec_id);
+    while ($row = $query->fetch_object()) {
+        $data[$i] = array(
+            "specname" => $row->spec_name,
+            "numbreed" => $row->numbreed . "ตัว",
+        );
+        echo json_encode($data);
+        $i++;
+    }
+}
+if (isset($func) && $func == 'barchartbreed2') {
+
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+    $farm = $_GET['farm'];
+
+    $sql = new breed();
+    $i = 0;
+    $query = $sql->req_breed_farm($year, $month, $farm);
+    while ($row = $query->fetch_object()) {
+        $data[$i] = array(
+            "farmname" => $row->farmname,
+            "numbreed" => $row->numbreed . "ตัว",
+        );
+    echo json_encode($data);
+        
+        $i++;
+    }
 }

@@ -139,22 +139,14 @@
                 },
                 dataType: "JSON",
                 success: function(data) {
-                    drawMonthwiseChart(data, temp_title);
+                    drawMonthwiseChart(data);
                 }
             });
         }
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['detail', 'dis'],
-                <?php
-                $sqlreq = new reports();
-                $query = $sqlreq->req_healanddis($month, $year);
-                while ($row =  $query->fetch_array()) {
-                    echo "['" . $row["detail"] . "', " . $row["dis"] . "],";
-                }
-                ?>
-            ]);
+        function drawChart(data) {
+            var jsonData = data;
+            var data = google.visualization.arrayToDataTable();
             var options = {
                 is3D: true,
                 title: '',

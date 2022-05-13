@@ -56,8 +56,7 @@ class registra extends Database
         return $pass;
     }
 
-    // test pagination 
-
+   
 }
 // Farmer
 class farmer extends Database
@@ -77,9 +76,13 @@ class farmer extends Database
     }
     //! login //
     //todo Admin manage//
-    public function select_allfarmer($id)
+    public function select_allfarmer($id,$stm)
     {
-        if ($id == '') {
+        if($stm=='select'&&isset($id)){
+            $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE username = '$id'  ");
+            
+        }
+        else  if ($id == '') {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer ORDER BY id ASC  ");
         } else {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id'  ");
@@ -247,7 +250,7 @@ class house extends Database
         return $rh;
     }
 
-    
+
     // Selcet id where Farm_id
     public function getcowFarmid($id)
     {
@@ -673,6 +676,30 @@ class cow extends Database
 // ผสมพันธุ์
 class breed extends Database
 {
+
+    public function selectyear()
+    {
+        $re = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(breed_date,'%Y') AS year FROM tbl_breed GROUP BY YEAR(breed_date) ");
+        return $re;
+    }
+    public function req_breed_spec($y, $m, $spec_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT COUNT(*) as numbreed,s.spec_name  FROM tbl_breed as b 
+        INNER JOIN tbl_cow as c ON(b.cow_id_male = c.id) 
+        INNER JOIN tbl_cow as cs ON(b.cow_id_male = cs.id) 
+        INNER JOIN tbl_species  as  s ON (c.spec_id =s.id)
+        INNER JOIN tbl_species  as  ss ON (c.spec_id =ss.id)
+        WHERE YEAR(b.breed_date) = '$y' AND MONTH(b.breed_date) ='$m'  AND s.id = '$spec_id' AND b.breed_status ='y'");
+        return $re;
+    }
+    public function req_breed_farm($y, $m, $farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT COUNT(b.id) as numbreed,f.farmname FROM tbl_breed as b 
+        INNER JOIN tbl_farm as f ON(b.farm_id = f.id) 
+        WHERE YEAR(b.breed_date) = '$y' AND MONTH(b.breed_date) ='$m' AND f.id = '$farm_id' AND b.breed_status ='y';
+        ");
+        return $re;
+    }
     // Insert
     public function insertbreed($datestart, $datenext, $farm_id, $female, $male, $status)
     {
@@ -1278,13 +1305,13 @@ class reports extends Database
             $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
             FROM tbl_disease as d 
             INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
-            WHERE d.id != '1' AND MONTH(h.datestart) ='$month' AND YEAR(h.datestart) ='$year'
+            WHERE d.id != '1' 
             GROUP BY d.detail");
         } else {
             $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
             FROM tbl_disease as d 
             INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
-            WHERE d.id != '1'
+            WHERE d.id != '1'AND MONTH(h.datestart) ='$month' AND YEAR(h.datestart) ='$year'
             GROUP BY d.detail");
         }
 

@@ -26,7 +26,7 @@ $query = $sql->select_allfarmer('');
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php
+         <?php
         // Navbar Admin
         require '../sub/navbar.php';
         // Aside Admin
@@ -39,7 +39,7 @@ $query = $sql->select_allfarmer('');
         </ul>
         <!-- /.sidebar-menu -->
         <!-- /.sidebar -->
-        </aside>
+        </aside> 
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -69,6 +69,9 @@ $query = $sql->select_allfarmer('');
 
                             <div class="card">
                                 <div class="card-header">
+                                    <div class="row justify-content-between">
+
+                                    </div>
                                     <h3 class="card-title">ข้อมูลผู้ใช้งาน</h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -135,38 +138,7 @@ $query = $sql->select_allfarmer('');
 
 </body>
 <script src="../../dist/js/datatableprint.js"></script>
-<script>
-    $(document).on('click', '.btnDetail', function(e) {
-        e.preventDefault();
 
-        var id = $(this).attr('id');
-        var txt_head = 'Detail Farmer'
-
-        $.ajax({
-            type: 'get',
-            dataType: "json",
-            url: '../process/_detailfarmer',
-            data: {
-                id: id,
-                function: 'showdetailfarmer',
-            },
-            success: function(rs) {
-                function UnicodeDecodeB64(str) {
-                    return decodeURIComponent(atob(str));
-                };
-                $("#modalDetail").modal("show");
-                $("#modaltextcenter").html(txt_head)
-                $("#modalfullname").html(rs.fullname)
-                $("#modalphone").html(rs.phone)
-                $("#modalemail").html(rs.email)
-                var personid = UnicodeDecodeB64(UnicodeDecodeB64(rs.person_id));
-
-                $("#modalpersonid").html((personid).substr(0, 7) + "*******");
-
-            }
-        })
-    })
-</script>
 
 
 </html>

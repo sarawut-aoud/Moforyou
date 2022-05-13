@@ -53,6 +53,9 @@ ob_start();
                     <p class="mb-1 mt-2">
                         <a href="forgot-password.php">ลืมรหัสผ่าน</a>
                     </p>
+                    <p class="mb-1 mt-2">
+                        <a href="forgot-password.php">ลืมรหัสผ่าน</a>
+                    </p>
 
                     <p class="mb-0  mt-5">
                         </i><a href="register" class="text-center"><small> สร้างบัญชีใหม่ <i class="fas fa-arrow-right"></i></a> <small>

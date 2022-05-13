@@ -1,6 +1,23 @@
 <?php
 require '../../connect/session_ckeck.php';
-
+require '../../connect/functions.php';
+function DateThai($strDate)
+{
+  $strYear = date("Y", strtotime($strDate)) + 543;
+  $strMonth = date("n", strtotime($strDate));
+  $strDay = date("j", strtotime($strDate));
+  $strHour = date("H", strtotime($strDate));
+  $strMinute = date("i", strtotime($strDate));
+  $strSeconds = date("s", strtotime($strDate));
+  $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+  $strMonthThai = $strMonthCut[$strMonth];
+  if ($strHour == '00' && $strMinute == '00') {
+    return "$strDay $strMonthThai $strYear   ";
+  } else {
+    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
+  }
+}
+$date = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,13 +92,13 @@ require '../../connect/session_ckeck.php';
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <!-- <section class="col-lg connectedSortable"> -->
             <!-- Calendar -->
-            <div class="row mb-5">
-              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+            <div class="row ">
+              <div class="col-lg-6 col-md-12 col-sm-12 ">
                 <div class="card card-primary card-outline">
                   <div class="card-header">
                     <h3 class="card-title">
                       <i class="far fa-chart-bar"></i>
-                      สถิติการเกิดโรคโรคของโค
+                      สถิติการเกิดโรคของโค
                     </h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -93,10 +110,12 @@ require '../../connect/session_ckeck.php';
                   <div class="card-body">
                     <div id="bar-chart" style="height: 300px;"></div>
                   </div>
-
+                  <div class="card-footer">
+                    <p class="text-center">ข้อมูล ณ วันที่ : <?php echo Datethai($date); ?></>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+              <div class="col-lg-6 col-md-12 col-sm-12 ">
                 <div class="card card-primary card-outline">
                   <div class="card-header">
                     <h3 class="card-title">
@@ -113,8 +132,221 @@ require '../../connect/session_ckeck.php';
                   <div class="card-body">
                     <div id="donut-chart" style="height: 300px;"></div>
                   </div>
+                  <div class="card-footer">
+                    <p class="text-center">ข้อมูล ณ วันที่ : <?php echo Datethai($date); ?></>
+                  </div>
                 </div>
               </div>
+
+              <!-- /.row -->
+            </div>
+            <div class="row mb-5">
+              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="far fa-chart-bar"></i>
+                      ข้อมูลการผสมพันธุ์แยกตามฟาร์ม
+                    </h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <div class="input-group">
+                        <label class="col-form-label " for="month_id2">เลือกเดือน : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="month_id2">
+                            <?php for ($i = 1; $i <= 12; $i++) {
+                              if ($i <= 9) {
+                                $month = "0" . $i;
+                              } else if ($i >= 10) {
+                                $month = $i;
+                              }
+                              switch ($month) {
+                                case '01':
+                                  $month_name = "มกราคม";
+                                  break;
+                                case '02':
+                                  $month_name = "กุมภาพันธ์";
+                                  break;
+                                case '03':
+                                  $month_name = "มีนาคม";
+                                  break;
+                                case '04':
+                                  $month_name = "เมษายน";
+                                  break;
+                                case '05':
+                                  $month_name = "พฤษภาคม";
+                                  break;
+                                case '06':
+                                  $month_name = "มิถุนายน";
+                                  break;
+                                case '07':
+                                  $month_name = "กรกฎาคม";
+                                  break;
+                                case '08':
+                                  $month_name = "สิงหาคม";
+                                  break;
+                                case '09':
+                                  $month_name = "กันยายน";
+                                  break;
+                                case '10':
+                                  $month_name = "ตุลาคม";
+                                  break;
+                                case '11':
+                                  $month_name = "พฤศจิกายน";
+                                  break;
+                                case '12':
+                                  $month_name = "ธันวาคม";
+                                  break;
+                              }
+                            ?>
+                              <option value="<?php echo $month; ?>"><?php echo  $month_name; ?> </option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                        <label class="col-form-label " for="year_id2">เลือกปี : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="year_id2">
+                            <?php $sql2 = new breed();
+                            $query2 = $sql2->selectyear();
+                            while ($row = $query2->fetch_object()) {
+                            ?>
+                              <option value="<?php echo $row->year; ?>"><?php echo $row->year; ?> </option>
+                            <?php } ?>
+
+                          </select>
+                        </div>
+                        <label class="col-form-label " for="farm_id">เลือกฟาร์ม : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="farm_id">
+                            <?php $sql2 = new farm();
+                            $query2 = $sql2->selectfarm('admin');
+                            while ($row = $query2->fetch_object()) {
+                            ?>
+                              <option value="<?php echo $row->id; ?>"><?php echo $row->farmname; ?> </option>
+                            <?php } ?>
+
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="bar-chart3" style="height: 300px;"></div>
+                  </div>
+                  <div class="card-footer">
+                    <p class="text-center">ข้อมูล ณ วันที่ : <?php echo Datethai($date); ?></>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12 col-sm-12 mb-5">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="far fa-chart-bar"></i>
+                      ข้อมูลการผสมพันธุ์แยกตามสายพันธุ์
+                    </h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <div class="input-group">
+                        <label class="col-form-label " for="month_id">เลือกเดือน : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="month_id">
+                            <?php for ($i = 1; $i <= 12; $i++) {
+                              if ($i <= 9) {
+                                $month = "0" . $i;
+                              } else if ($i >= 10) {
+                                $month = $i;
+                              }
+                              switch ($month) {
+                                case '01':
+                                  $month_name = "มกราคม";
+                                  break;
+                                case '02':
+                                  $month_name = "กุมภาพันธ์";
+                                  break;
+                                case '03':
+                                  $month_name = "มีนาคม";
+                                  break;
+                                case '04':
+                                  $month_name = "เมษายน";
+                                  break;
+                                case '05':
+                                  $month_name = "พฤษภาคม";
+                                  break;
+                                case '06':
+                                  $month_name = "มิถุนายน";
+                                  break;
+                                case '07':
+                                  $month_name = "กรกฎาคม";
+                                  break;
+                                case '08':
+                                  $month_name = "สิงหาคม";
+                                  break;
+                                case '09':
+                                  $month_name = "กันยายน";
+                                  break;
+                                case '10':
+                                  $month_name = "ตุลาคม";
+                                  break;
+                                case '11':
+                                  $month_name = "พฤศจิกายน";
+                                  break;
+                                case '12':
+                                  $month_name = "ธันวาคม";
+                                  break;
+                              }
+                            ?>
+                              <option value="<?php echo $month; ?>"><?php echo  $month_name; ?> </option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                        <label class="col-form-label " for="year_id">เลือกปี : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="year_id">
+                            <?php $sql2 = new breed();
+                            $query2 = $sql2->selectyear();
+                            while ($row = $query2->fetch_object()) {
+                            ?>
+                              <option value="<?php echo $row->year; ?>"><?php echo $row->year; ?> </option>
+                            <?php } ?>
+
+                          </select>
+                        </div>
+                        <label class="col-form-label " for="spec_id">เลือกสายพันธุ์ : </label>
+                        <div class="col-md">
+                          <select class="form-select" id="spec_id">
+                            <?php $sql2 = new specise();
+                            $query2 = $sql2->selspec();
+                            while ($row = $query2->fetch_object()) {
+                            ?>
+                              <option value="<?php echo $row->id; ?>"><?php echo $row->spec_name; ?> </option>
+                            <?php } ?>
+
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="donut-chart4" style="height: 300px;"></div>
+
+                  </div>
+                  <div class="card-footer">
+                    <p class="text-center">ข้อมูล ณ วันที่ : <?php echo Datethai($date); ?></>
+                  </div>
+                </div>
+              </div>
+
               <!-- /.row -->
             </div>
             <!-- /.card -->
@@ -235,7 +467,7 @@ require '../../connect/session_ckeck.php';
         ['detail', 'dis'],
         <?php
         $sqlreq = new reports();
-        $query = $sqlreq->req_healanddis('','');
+        $query = $sqlreq->req_healanddis('', '');
         while ($row =  $query->fetch_array()) {
           echo "['" . $row["detail"] . "', " . $row["dis"] . "],";
         }
@@ -250,7 +482,129 @@ require '../../connect/session_ckeck.php';
       chart.draw(data, options);
     }
   </script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback();
 
+    function load_monthwise_data1(month, year, spec) {
+
+      $.ajax({
+        url: "../process/_index.php",
+        method: "get",
+        data: {
+          month: month,
+          year: year,
+          spec: spec,
+          function: 'barchartbreed1'
+        },
+        dataType: "JSON",
+        success: function(data) {
+          drawMonthwiseChart1(data);
+        }
+      });
+    }
+
+    function drawMonthwiseChart1(chart_data) {
+      var jsonData = chart_data;
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'name');
+      data.addColumn('number', '');
+      $.each(jsonData, function(i, jsonData) {
+        var specname = jsonData.specname;
+        var numbreed = parseFloat($.trim(jsonData.numbreed));
+        data.addRows([
+          [specname, numbreed]
+        ]);
+      });
+      var options = {
+        title: '',
+        hAxis: {
+          title: ""
+        },
+        legend: {
+          position: "none"
+        },
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('donut-chart4'));
+      chart.draw(data, options);
+    }
+  </script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback();
+
+    function load_monthwise_data2(month, year, farm) {
+
+      $.ajax({
+        url: "../process/_index.php",
+        method: "get",
+        data: {
+          month: month,
+          year: year,
+          farm: farm,
+          function: 'barchartbreed2'
+        },
+        dataType: "JSON",
+        success: function(data) {
+          drawMonthwiseChart(data);
+        }
+      });
+    }
+
+    function drawMonthwiseChart(chart_data) {
+      var jsonData = chart_data;
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'name');
+      data.addColumn('number', '');
+      $.each(jsonData, function(i, jsonData) {
+        var farmname = jsonData.farmname;
+        var numbreed = parseFloat($.trim(jsonData.numbreed));
+        data.addRows([
+          [farmname, numbreed]
+        ]);
+      });
+      var options = {
+        title: '',
+        
+        hAxis: {
+          title: ""
+        },
+        legend: {
+          position: "none"
+        },
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('bar-chart3'));
+      chart.draw(data, options);
+    }
+  </script>
+  <script>
+    $(document).ready(function() {
+
+      $('#month_id,#year_id,#spec_id').change(function() {
+        var month = $('#month_id').val();
+        var year = $('#year_id').val();
+        var spec = $('#spec_id').val();
+        if (month != '' || year != '' || spec != '') {
+          load_monthwise_data1(month, year, spec);
+        }
+      });
+      $('#month_id2,#year_id2,#farm_id').change(function() {
+        var month = $('#month_id2').val();
+        var year = $('#year_id2').val();
+        var farm = $('#farm_id').val();
+        if (month != '' || year != '' || farm != '') {
+          load_monthwise_data2(month, year, farm);
+        }
+      });
+    });
+  </script>
 
 </body>
 
