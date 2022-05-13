@@ -4,7 +4,7 @@ require '../../connect/functions.php';
 
 
 $sql = new farmer();
-$query = $sql->select_allfarmer('');
+$query = $sql->select_allfarmer('', '');
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $query = $sql->select_allfarmer('');
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-         <?php
+        <?php
         // Navbar Admin
         require '../sub/navbar.php';
         // Aside Admin
@@ -39,7 +39,7 @@ $query = $sql->select_allfarmer('');
         </ul>
         <!-- /.sidebar-menu -->
         <!-- /.sidebar -->
-        </aside> 
+        </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -137,7 +137,7 @@ $query = $sql->select_allfarmer('');
     <!-- ./wrapper -->
 
 </body>
-<script src="../../dist/js/datatableprint.js"></script>
+<script src="../../dist/js/datatable.js"></script>
 
 
 

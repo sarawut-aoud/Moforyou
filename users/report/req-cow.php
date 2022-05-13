@@ -57,17 +57,21 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card  ">
-                                <?php
-                                                $data = new cow();
-                                                $row1 = $data->refcow($farmid);
-                                                $rs1 = mysqli_fetch_object($row1);
-                                                ?>
+                                    <?php
+                                    $data = new cow();
+                                    $row1 = $data->refcow($farmid);
+                                    $rs1 = mysqli_fetch_object($row1);
+                                    ?>
                                     <div class="card-header card-cow">
-                                        <h3 class=" text-center">โคเนื้อ ของ <?php echo $rs1->farmname?></h3>
+                                        <h3 class=" text-center">โคเนื้อ ของ <?php echo $rs1->farmname ?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <!-- table -->
+                                        <div class=" text-end mb-3">
+                                            <a class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
+                                            <a class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
+                                        </div>
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
                                             <thead>
@@ -144,7 +148,7 @@ if (empty($result)) {
 
     <!-- ./wrapper -->
 </body>
-<script src="../../dist/js/datatableprint.js">
+<script src="../../dist/js/datatable.js">
 </script>
 
 </html>

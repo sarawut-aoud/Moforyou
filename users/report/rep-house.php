@@ -55,16 +55,20 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card  ">
-                                <?php
-                                                $datahouse = new house();
-                                                $row1 = $datahouse->refhouse($farm_id);
-                                                $rs1 = mysqli_fetch_object($row1);
-                                                ?>
+                                    <?php
+                                    $datahouse = new house();
+                                    $row1 = $datahouse->refhouse($farm_id);
+                                    $rs1 = mysqli_fetch_object($row1);
+                                    ?>
                                     <div class="card-header card-outline card-blue">
-                                        <h3 class=" text-center">โรงเรือน ของ <?php echo $rs1->farmname?></h3>
+                                        <h3 class=" text-center">โรงเรือน ของ <?php echo $rs1->farmname ?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        <div class=" text-end mb-3">
+                                            <a class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
+                                            <a class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
+                                        </div>
                                         <!-- table -->
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
@@ -90,7 +94,7 @@ if (empty($result)) {
                                                     <tr>
                                                         <td style="width: 10%;"><?php echo $i; ?></td>
                                                         <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
-                                                        <td style="width: 20%" ><?php echo $rs->cow; ?></td>
+                                                        <td style="width: 20%"><?php echo $rs->cow; ?></td>
                                                         <!--  -->
                                                     </tr>
                                                 <?php
@@ -118,7 +122,7 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-    <script src="../../dist/js/datatableprint.js"></script>
+    <script src="../../dist/js/datatable.js"></script>
 </body>
 
 

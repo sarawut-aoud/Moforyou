@@ -3,7 +3,7 @@ require_once '../../connect/session_ckeck.php';
 require '../../connect/functions.php';
 
 $sql = new farmer();
-$query = $sql->select_allfarmer('');
+$query = $sql->select_allfarmer('','');
 
 ?>
 <!DOCTYPE html>

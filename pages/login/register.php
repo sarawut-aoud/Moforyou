@@ -33,7 +33,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">ชื่อ - นามสกุล</label>
-                                            <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล" required>
+                                            <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล"onblur="checkname(this.value)" required>
+                                            <span class="text-center " id="namecheck"></span>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -45,7 +47,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1">อีเมล</label>
-                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" placeholder="Enter email address" onblur="checkmail(this.value)" required>
+                                    <input class="form-control py-4" id="email" name="email" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" aria-describedby="emailHelp" onkeypress="return bannedKey(event)" placeholder="Enter email address" onblur="checkmail(this.value)" required>
                                     <span class="text-center " id="emailcheck"></span>
 
                                 </div>
@@ -119,6 +121,7 @@
     </main>
 </body>
 <script src="../../dist/js/check_pwd_strong.js"></script>
+<script src="../../dist/js/keypass.js"></script>
 <script type="text/javascript" src="../../dist/js/phone.js"></script>
 <script type="text/javascript" src="../../dist/js/id_card.js"></script>
 <script>
@@ -163,6 +166,21 @@
             },
             success: function(data) {
                 $('#emailcheck').html(data);
+
+            }
+        });
+    };
+
+    function checkname(val) {
+        $.ajax({
+            type: 'POST',
+            url: '../../connect/checkuser_available.php',
+            data: {
+                name: val,
+                function: "checkname",
+            },
+            success: function(data) {
+                $('#namecheck').html(data);
 
             }
         });

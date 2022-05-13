@@ -1,4 +1,8 @@
-<?php require_once '../../connect/functions.php'; ?>
+<?php
+require_once '../../connect/functions.php';
+require_once '../../connect/function_datetime.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

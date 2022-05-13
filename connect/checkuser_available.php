@@ -36,3 +36,14 @@ if ($func == 'checkmail') {
         echo "<script>$('#submit').prop('disabled', true);</script>";
     }
 }
+if ($func == 'checkname') {
+    $name = $_POST['name'];
+
+    $queryname = $sql->checkname($name);
+    $num = mysqli_num_rows($queryname);
+    if ($num > 0) {
+        echo "<span style='color: red;'><small>ชื่อ - นามสกุลนี้มีการลงทะเบียนแล้ว ไม่สามารถใช้ได้</small></span>";
+        echo "<script>$('#submit').prop('disabled', true);</script>";
+    }
+}
+

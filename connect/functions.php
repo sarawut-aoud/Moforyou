@@ -17,6 +17,11 @@ class registra extends Database
         $checkuser = mysqli_query($this->dbcon, "SELECT email FROM tbl_farmer WHERE email = '$email'  ");
         return $checkuser;
     }
+    public function checkname($name)
+    {
+        $checkuser = mysqli_query($this->dbcon, "SELECT fullname FROM tbl_farmer WHERE fullname = '$name'  ");
+        return $checkuser;
+    }
     // Resgistration 
     public function register($card, $fname, $email, $phone, $username, $password)
     {
@@ -55,8 +60,6 @@ class registra extends Database
         $pass = mysqli_query($this->dbcon, "UPDATE tbl_farmer SET password = '$password' WHERE email = '$email'");
         return $pass;
     }
-
-   
 }
 // Farmer
 class farmer extends Database
@@ -76,13 +79,11 @@ class farmer extends Database
     }
     //! login //
     //todo Admin manage//
-    public function select_allfarmer($id,$stm)
+    public function select_allfarmer($id, $stm)
     {
-        if($stm=='select'&&isset($id)){
+        if ($stm == 'select' && isset($id)) {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE username = '$id'  ");
-            
-        }
-        else  if ($id == '') {
+        } else  if ($id == '' &&  $stm == '') {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer ORDER BY id ASC  ");
         } else {
             $data = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE id='$id'  ");

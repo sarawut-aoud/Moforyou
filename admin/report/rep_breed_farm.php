@@ -85,22 +85,7 @@ require '../../connect/functions.php';
                                         <!-- body table -->
                                         <tbody>
                                             <?php
-                                            function DateThai($strDate)
-                                            {
-                                                $strYear = date("Y", strtotime($strDate)) + 543;
-                                                $strMonth = date("n", strtotime($strDate));
-                                                $strDay = date("j", strtotime($strDate));
-                                                $strHour = date("H", strtotime($strDate));
-                                                $strMinute = date("i", strtotime($strDate));
-                                                $strSeconds = date("s", strtotime($strDate));
-                                                $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                $strMonthThai = $strMonthCut[$strMonth];
-                                                if ($strHour == '00' && $strMinute == '00') {
-                                                    return "$strDay $strMonthThai $strYear   ";
-                                                } else {
-                                                    return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                }
-                                            }
+                                            require_once '../../connect/function_datetime.php';
                                             $i = 1;
                                             $data = new breed();
                                             $row = $data->select_breed_all('');
@@ -150,6 +135,6 @@ require '../../connect/functions.php';
     <!-- ./wrapper -->
 
 </body>
-<script src="../../dist/js/datatableprint.js"></script>
+<script src="../../dist/js/datatable.js"></script>
 
 </html>

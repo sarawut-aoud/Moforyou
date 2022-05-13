@@ -118,7 +118,7 @@
     <!-- ./wrapper -->
 
 </body>
-<script src="../../dist/js/datatableprint.js"></script>
+<script src="../../dist/js/datatable.js"></script>
 
 
 </html>

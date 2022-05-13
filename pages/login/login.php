@@ -26,7 +26,7 @@ ob_start();
             </div>
 
             <div class="card-body">
-                <p class="login-box-msg"> <u><a style="font-size: 22px;" href="../main_pages/index_tab-farm.php">www.moforyou.com <i class="fad fa-home"></i></a></u></p>
+                <p class="login-box-msg"> <u><a style="font-size: 22px;" href="../main_pages/index.php">www.moforyou.com <i class="fad fa-home"></i></a></u></p>
                 <div class="col-12">
                     <!-- Form -->
                     <form method="post" id="loginForm">
@@ -50,9 +50,6 @@ ob_start();
                     <!-- /.Form -->
                 </div>
                 <center>
-                    <p class="mb-1 mt-2">
-                        <a href="forgot-password.php">ลืมรหัสผ่าน</a>
-                    </p>
                     <p class="mb-1 mt-2">
                         <a href="forgot-password.php">ลืมรหัสผ่าน</a>
                     </p>

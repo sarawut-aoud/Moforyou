@@ -57,17 +57,21 @@ if (empty($result)) {
                         <div class="row  mb-5">
                             <div class="col-md-12">
                                 <div class="card card-warning ">
-                                <?php
-                                                $data = new recordfood();
-                                                $row1 = $data->refrecordfood($farmid);
-                                                $rs1 = mysqli_fetch_object($row1);
-                                                ?>
+                                    <?php
+                                    $data = new recordfood();
+                                    $row1 = $data->refrecordfood($farmid);
+                                    $rs1 = mysqli_fetch_object($row1);
+                                    ?>
                                     <div class="card-header ">
-                                        <h3 class=" text-center">ประวัติการให้อาหาร ของ<?php echo $rs1->farmname?></h3>
+                                        <h3 class=" text-center">ประวัติการให้อาหาร ของ<?php echo $rs1->farmname ?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <!-- table -->
+                                        <div class=" text-end mb-3">
+                                            <a class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
+                                            <a class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
+                                        </div>
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
                                             <thead>
@@ -85,22 +89,7 @@ if (empty($result)) {
                                             <!-- body table -->
                                             <tbody>
                                                 <?php
-                                                function DateThai($strDate)
-                                                {
-                                                    $strYear = date("Y", strtotime($strDate)) + 543;
-                                                    $strMonth = date("n", strtotime($strDate));
-                                                    $strDay = date("j", strtotime($strDate));
-                                                    $strHour = date("H", strtotime($strDate));
-                                                    $strMinute = date("i", strtotime($strDate));
-                                                    $strSeconds = date("s", strtotime($strDate));
-                                                    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                                    $strMonthThai = $strMonthCut[$strMonth];
-                                                    if ($strHour == '00' && $strMinute == '00') {
-                                                        return "$strDay $strMonthThai $strYear   ";
-                                                    } else {
-                                                        return "$strDay $strMonthThai $strYear $strHour:$strMinute  ";
-                                                    }
-                                                }
+                                                require_once '../../connect/function_datetime.php';
                                                 $data = new recordfood();
                                                 $row = $data->select_recordbyfarm($farmid);
                                                 $i = 1;
@@ -140,7 +129,7 @@ if (empty($result)) {
     </div>
 
     <!-- ./wrapper -->
-    <script src="../../dist/js/datatableprint.js"></script>
+    <script src="../../dist/js/datatable.js"></script>
 </body>
 
 
