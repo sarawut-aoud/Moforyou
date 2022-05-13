@@ -95,10 +95,10 @@ if (empty($result)) {
                                                 while ($rs = mysqli_fetch_object($row)) {
                                                 ?>
                                                     <tr>
-                                                        <td style="width: 20%;"><?php echo $i; ?></td>
-                                                        <td style="width: 50%;"><?php echo $rs->house_name; ?></td>
-                                                        <td style="width: 50%;"><?php echo $rs->herd_name; ?></td>
-                                                        <td style="width: 20%"><?php echo $rs->cow; ?></td>
+                                                        <td style="width: 10%;"><?php echo $i; ?></td>
+                                                        <td style="width: 30%;"><?php echo $rs->house_name; ?></td>
+                                                        <td style="width: 30%;"><?php echo $rs->herd_name; ?></td>
+                                                        <td style="width: 18%"><?php echo $rs->cow; ?></td>
                                                         <!--  -->
                                                     </tr>
                                                 <?php
