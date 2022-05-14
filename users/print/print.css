@@ -4,6 +4,8 @@
          min-height: 20cm;
          padding: 2.5cm;
          position: relative;
+         margin: 0;
+         padding: 0;
      }
 
      .prn {

@@ -1330,7 +1330,16 @@ class reports extends Database
     }
     public function print_req_house($farm_id)
     {
-        $re = mysqli_query($this->dbcon, "");
+        $re = mysqli_query($this->dbcon, "SELECT h.house_name,
+        f.farmname , f.address,f.district_id,
+        fm.fullname,fm.email,fm.phone,
+        COUNT(c.id) as cow
+        FROM tbl_house AS h
+        INNER JOIN tbl_farm AS f ON (h.farm_id = f.id)
+        INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
+        INNER JOIN tbl_cow AS c ON (c.farm_id = f.id)
+        WHERE f.id = '$farm_id' GROUP BY h.house_name
+        ");
         return $re;
     }
 }
