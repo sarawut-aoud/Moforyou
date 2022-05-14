@@ -2,12 +2,20 @@
 require_once('../../connect/session_ckeck.php');
 require_once('../../connect/function_datetime.php');
 require_once('../../connect/functions.php');
+$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+$tombon = json_decode($get_tombon);
+
 $date = date('Y-m-d');
 $farm_id = $_REQUEST['farm'];
 
 $sql = new reports();
 $query = $sql->print_req_house($farm_id);
 $result = $query->fetch_object();
+foreach ($tombon as $value) {
+    if ($result->district_id == $value->id) { //? check id amphur
+        $name_th =  $value->name_th;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +65,7 @@ $result = $query->fetch_object();
                 <td style="font-size: 24px;"><strong>ประเภทโคทื่เลี้ยง</strong> : </td>
             </tr>
             <tr>
-                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . "  " . $result->district_id; ?></td>
+                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . " ตำบล " . $name_th; ?></td>
             </tr>
 
         </table>
@@ -74,9 +82,10 @@ $result = $query->fetch_object();
             </tr>
             <?php
             $i = 1;
+            $sum = 0;
             $query2 = $sql->print_req_house($farm_id);
             while ($row = $query2->fetch_object()) {
-                $sum = $row->cow + $row->cow;
+                $sum =  $sum + $row->cow;
 
             ?>
                 <tr>
@@ -90,7 +99,7 @@ $result = $query->fetch_object();
             } ?>
 
             <tr>
-                <td colspan="2" align="center"><strong>รวมโคทุกโรงเรือน</strong></td>
+                <td colspan="2" align="center"><strong>รวมโคทุกตัวในโรงเรือน</strong></td>
                 <td align="center"><?php echo $sum; ?> ตัว</td>
             </tr>
         </table>

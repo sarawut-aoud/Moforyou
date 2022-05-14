@@ -8,7 +8,7 @@ $func = $_GET['function'];
 
 
 if (isset($id) && $func == 'showeditfarmer') {
-    $query = $sql->select_allfarmer($id);
+    $query = $sql->select_allfarmer($id,'');
     while ($row = $query->fetch_object()) {
         $userfarmer = array(
             "id" => intval($row->id),

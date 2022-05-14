@@ -8,36 +8,7 @@
                     <h3> </h3>
                 </div>
                 <div class="card-body">
-                    <div class="form-group row">
-                        <div class="input-group">
-                            <label class="col-form-label " for="month_id">เลือกเดือน : </label>
-                            <div class="col-md">
-                                <select class="form-select" id="month_id">
-                                    <?php for ($i = 1; $i <= 12; $i++) {
-                                        if ($i <= 9) {
-                                            $month = "0" . $i;
-                                        } else if ($i >= 10) {
-                                            $month = $i;
-                                        }
-
-                                    ?>
-                                        <option value="<?php echo $month; ?>"><?php echo  month($month); ?> </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <label class="col-form-label " for="month_id">เลือกปี : </label>
-                            <div class="col-md">
-                                <select class="form-select" id="year_id">
-                                    <?php $sql = new reports();
-                                    $query = $sql->req_healyearindex();
-                                    while ($row = $query->fetch_object()) {
-                                    ?>
-                                        <option value="<?php echo $row->year; ?>"><?php echo $row->year; ?> </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div id="bar1" class="w-100 " style="height: 500px;"></div>
 
@@ -56,9 +27,9 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="input-group">
-                            <label class="col-form-label " for="month_id">เลือกเดือน : </label>
+                            <label class="col-form-label " for="month_id2">เลือกเดือน : </label>
                             <div class="col-md">
-                                <select class="form-select" id="month_id">
+                                <select class="form-select" id="month_id2">
                                     <?php for ($i = 1; $i <= 12; $i++) {
                                         if ($i <= 9) {
                                             $month = "0" . $i;
@@ -71,9 +42,9 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <label class="col-form-label " for="month_id">เลือกปี : </label>
+                            <label class="col-form-label " for="year_id2">เลือกปี : </label>
                             <div class="col-md">
-                                <select class="form-select" id="year_id">
+                                <select class="form-select" id="year_id2">
                                     <?php $sql = new reports();
                                     $query = $sql->req_healyearindex();
                                     while ($row = $query->fetch_object()) {

@@ -93,8 +93,6 @@ $date = date("Y-m-d");
     </div>
     <!-- ./wrapper -->
     <?php
-
-
     $sql = new reports();
     $query = $sql->req_cow(''); ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -134,7 +132,7 @@ $date = date("Y-m-d");
             var month = month;
 
             $.ajax({
-                url: "../process/_index.php",
+                url: "./_reqindex.php",
                 method: "get",
                 data: {
                     month: month,
@@ -142,15 +140,29 @@ $date = date("Y-m-d");
                     function: 'barchart1'
                 },
                 dataType: "JSON",
-                success: function(data) {
-                    drawMonthwiseChart(data);
+                success: function(data2) {
+                    drawChart(data2);
                 }
             });
         }
 
-        function drawChart(data) {
-            var jsonData = data;
-            var data = google.visualization.arrayToDataTable();
+        function drawChart(data2) {
+            var jsonData = data2;
+
+            function arrayToDataTable(a, types) {
+                var data = new google.visualization.DataTable();
+                var firstRow = a.shift();
+                for (var i = 0; i < firstRow.length; i++) {
+                    var type = types[i] != null ? types[i] : 'number';
+                    data.addColumn(type, firstRow[i]);
+                }
+                data.addRows(a);
+                return data;
+            }
+            var data = arrayToDataTable(jsonData, ["detail", "row"]);
+
+
+
             var options = {
                 is3D: true,
                 title: '',
@@ -163,9 +175,9 @@ $date = date("Y-m-d");
     <script>
         $(document).ready(function() {
 
-            $('#month_id,#year_id').change(function() {
-                var month = $('#month_id').val();
-                var year = $('#year_id').val();
+            $('#month_id2,#year_id2').change(function() {
+                var month = $('#month_id2').val();
+                var year = $('#year_id2').val();
                 if (month != '' && year != '') {
                     load_monthwise_data(month, year);
                 }

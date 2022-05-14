@@ -2,12 +2,19 @@
 require_once('../../connect/session_ckeck.php');
 require_once('../../connect/function_datetime.php');
 require_once('../../connect/functions.php');
+$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+$tombon = json_decode($get_tombon);
 $date = date('Y-m-d');
 $farm_id = $_REQUEST['farm'];
 
 $sql = new reports();
 $query = $sql->print_req_house($farm_id);
 $result = $query->fetch_object();
+foreach ($tombon as $value) {
+    if ($result->district_id == $value->id) { //? check id amphur
+        $name_th =  $value->name_th;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +31,8 @@ $result = $query->fetch_object();
 </head>
 
 <body>
+
+
     <div id="paper">
 
 
@@ -57,42 +66,47 @@ $result = $query->fetch_object();
                 <td style="font-size: 24px;"><strong>ประเภทโคทื่เลี้ยง</strong> : </td>
             </tr>
             <tr>
-                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . "  " . $result->district_id; ?></td>
+                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . " ตำบล " . $name_th; ?></td>
             </tr>
 
         </table>
         <br>
-        <span style="font-size: 30px;"><strong>โรงเรือนของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
+        <span style="font-size: 30px;"><strong>ประวัติการให้อาหารโคของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
         <table width="100%" cellspacing="0" class="border">
             <br>
 
-            <tr>
+            <tr align="center">
                 <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+                <th>ชื่อโค</th>
+                <th>รายการอาหาร</th>
+                <th>วันที่ให้อาหาร</th>
+                <th>น้ำหนักอาหาร</th>
+                <th>น้ำหนักอาหาร(รวม)</th>
 
             </tr>
             <?php
+
+            $data = new recordfood();
+            $row = $data->select_recordbyfarm($farm_id);
             $i = 1;
-            $query2 = $sql->print_req_house($farm_id);
-            while ($row = $query2->fetch_object()) {
-                $sum = $row->cow + $row->cow;
+            while ($rs = $row->fetch_object()) {
 
             ?>
                 <tr>
-                    <td align="center"><?php echo $i; ?></td>
-                    <td align="center"><?php echo $row->house_name; ?></td>
-                    <td align="center"><?php echo $row->cow; ?></td>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $rs->cow_name; ?></td>
+                    <td><?php echo $rs->foodname; ?></td>
+                    <td><?php echo DateThai($rs->date); ?></td>
+                    <td><?php echo $rs->weight_food; ?></td>
+                    <td><?php echo $rs->sumweight_food; ?></td>
 
                 </tr>
             <?php
+
                 $i++;
             } ?>
 
-            <tr>
-                <td colspan="2" align="center"><strong>รวมโคทุกโรงเรือน</strong></td>
-                <td align="center"><?php echo $sum; ?> ตัว</td>
-            </tr>
+
         </table>
 
     </div>

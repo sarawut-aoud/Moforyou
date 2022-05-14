@@ -2,12 +2,20 @@
 require_once('../../connect/session_ckeck.php');
 require_once('../../connect/function_datetime.php');
 require_once('../../connect/functions.php');
+$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+$tombon = json_decode($get_tombon);
+
 $date = date('Y-m-d');
 $farm_id = $_REQUEST['farm'];
 
 $sql = new reports();
 $query = $sql->print_req_house($farm_id);
 $result = $query->fetch_object();
+foreach ($tombon as $value) {
+    if ($result->district_id == $value->id) { //? check id amphur
+        $name_th =  $value->name_th;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,42 +65,53 @@ $result = $query->fetch_object();
                 <td style="font-size: 24px;"><strong>ประเภทโคทื่เลี้ยง</strong> : </td>
             </tr>
             <tr>
-                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . "  " . $result->district_id; ?></td>
+                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . " ตำบล " . $name_th; ?></td>
             </tr>
 
         </table>
         <br>
-        <span style="font-size: 30px;"><strong>โรงเรือนของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
+        <span style="font-size: 30px;"><strong>ประวัติโรคและอาการป่วยโคของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
         <table width="100%" cellspacing="0" class="border">
             <br>
 
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td width="10%">ลำดับ </td>
+                <th>ชื่อโค</th>
+                <th>โรคหรืออาการป่วย</th>
+                <th>เริ่มแสดงอาการวันที่</th>
 
             </tr>
             <?php
+            $data = new heal();
+            $row = $data->select_healbyfarm($farm_id);
             $i = 1;
-            $query2 = $sql->print_req_house($farm_id);
-            while ($row = $query2->fetch_object()) {
-                $sum = $row->cow + $row->cow;
+            while ($rs = mysqli_fetch_object($row)) {
+                if ($rs->dis_id == '1') {
+                    $dis = '';
+                } else {
+                    $dis = $rs->detail;
+                }
+                if ($rs->healmore != NULL && $dis == '') {
+                    $disa = $rs->healmore;
+                } else {
+                    $disa =  $dis . " และ " . $rs->healmore;
+                }
+
 
             ?>
                 <tr>
-                    <td align="center"><?php echo $i; ?></td>
-                    <td align="center"><?php echo $row->house_name; ?></td>
-                    <td align="center"><?php echo $row->cow; ?></td>
+                    <td style="width: 10%;"><?php echo $i; ?></td>
+                    <td style="width: 30%;"><?php echo $rs->cow_name; ?></td>
+                    <td><?php echo $disa; ?></td>
+                    <td style="width: 30%;"><?php echo DateThai($rs->datestart); ?></td>
 
+                    <!--  -->
                 </tr>
             <?php
                 $i++;
             } ?>
 
-            <tr>
-                <td colspan="2" align="center"><strong>รวมโคทุกโรงเรือน</strong></td>
-                <td align="center"><?php echo $sum; ?> ตัว</td>
-            </tr>
+
         </table>
 
     </div>

@@ -149,27 +149,17 @@ if (isset($func) && $func == 'reqhealloop') {
     echo json_encode($data);
 }
 if (isset($func) && $func == 'barchart1') {
-    $sql = new reports();
-    $sqlcow = new cow();
-    $year = $_REQUEST['year'];
+    $sqlreq2 = new reports();
     $i = 0;
-    
-    $x = 1;
     $total = 0;
-    $month = $_REQUEST['month'];;
-    $query = $sqlreq->req_healanddis($month, $year);
-    while ($row = $query->fetch_object()) {
-       
-                
-                $data[$i] = array(
-                    "detail" => $row->detail,
-                    "dis" => $dis,
-                    
-                );
-                $i++;
-        
+    $month = $_GET['month'];;
+    $year = $_GET['year'];
+    $query2 = $sqlreq2->req_healanddis2($month, $year);
+    while ($row = $query2->fetch_object()) {
+        $data2[$i] = array(
+            "detail" => $row->detail,
+            "row" => round($row->row_dis),
+        );
     }
-    
-   
-    echo json_encode($data);
+    echo json_encode($data2);
 }

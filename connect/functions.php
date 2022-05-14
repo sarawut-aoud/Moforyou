@@ -350,10 +350,13 @@ class herd extends Database
     }
     public function refherdcountcow($id)
     {
-        $refherdcountcow = mysqli_query($this->dbcon, "SELECT * , COUNT(c.id) as cow FROM tbl_cow AS c 
-        INNER JOIN tbl_herd AS hr ON c.herd_id = hr.id 
-         INNER JOIN tbl_house AS h ON c.house_id = h.id
-         WHERE c.farm_id = '6' GROUP BY hr.herd_name;");
+        $refherdcountcow = mysqli_query($this->dbcon, "SELECT hr.herd_name,h.house_name,
+        COUNT(c.id) as cow
+        FROM tbl_herd AS hr
+        INNER JOIN tbl_house AS h ON (hr.house_id=h.id)
+        LEFT JOIN tbl_cow AS c ON(c.herd_id = hr.id)
+        WHERE h.farm_id = '$id'
+        GROUP BY hr.herd_name");
         // }
 
         return $refherdcountcow;
@@ -1305,22 +1308,22 @@ class reports extends Database
         ORDER BY h.date LIMIT 1");
         return $re;
     }
-    public function req_healanddis($month, $year)
+    public function req_healanddis()
     {
-        if (empty($month) && empty($year)) {
-            $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
+
+        $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
             FROM tbl_disease as d 
             INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
             WHERE d.id != '1' 
             GROUP BY d.detail");
-        } else {
-            $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(*) as dis 
-            FROM tbl_disease as d 
-            INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
-            WHERE d.id != '1'AND MONTH(h.datestart) ='$month' AND YEAR(h.datestart) ='$year'
-            GROUP BY d.detail");
-        }
-
+        return $re;
+    }
+    public function req_healanddis2($month, $year)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT d.detail, COUNT(h.id) as row_dis 
+        FROM tbl_disease as d 
+        INNER JOIN tbl_heal as h ON(h.diseaseid = d.id) 
+        WHERE d.id != '1'AND (MONTH(h.datestart) ='$month' AND YEAR(h.datestart) ='$year') GROUP BY d.detail;");
         return $re;
     }
     public function req_healyearindex()
@@ -1337,8 +1340,22 @@ class reports extends Database
         FROM tbl_house AS h
         INNER JOIN tbl_farm AS f ON (h.farm_id = f.id)
         INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
-        INNER JOIN tbl_cow AS c ON (c.farm_id = f.id)
+        INNER JOIN tbl_cow AS c ON (c.house_id = h.id)
         WHERE f.id = '$farm_id' GROUP BY h.house_name
+        ");
+        return $re;
+    }
+    public function print_req_herd($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "SELECT hr.herd_name,h.house_name,f.farmname,f.address,f.district_id,fm.fullname,fm.email,fm.phone,
+        COUNT(c.id) as cow
+        FROM tbl_herd AS hr
+        INNER JOIN tbl_house AS h ON (hr.house_id=h.id)
+        INNER JOIN tbl_farm AS f ON (h.farm_id = f.id)
+        INNER JOIN tbl_farmer AS fm ON (f.farmmer_id = fm.id)
+        LEFT JOIN tbl_cow AS c ON(c.herd_id = hr.id)
+        WHERE h.farm_id = '$farm_id'
+        GROUP BY hr.herd_name
         ");
         return $re;
     }

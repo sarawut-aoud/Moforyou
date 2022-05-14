@@ -2,12 +2,20 @@
 require_once('../../connect/session_ckeck.php');
 require_once('../../connect/function_datetime.php');
 require_once('../../connect/functions.php');
+$get_tombon = file_get_contents('https://raw.githubusercontent.com/sarawut-pcru/Thailand_Map/main/json/tombon.json');
+
 $date = date('Y-m-d');
 $farm_id = $_REQUEST['farm'];
 
 $sql = new reports();
 $query = $sql->print_req_house($farm_id);
 $result = $query->fetch_object();
+$tombon = json_decode($get_tombon);
+foreach ($tombon as $value) {
+    if ($result->district_id == $value->id) { //? check id amphur
+        $name_th =  $value->name_th;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,42 +65,60 @@ $result = $query->fetch_object();
                 <td style="font-size: 24px;"><strong>ประเภทโคทื่เลี้ยง</strong> : </td>
             </tr>
             <tr>
-                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . "  " . $result->district_id; ?></td>
+                <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . " ตำบล  " . $name_th; ?></td>
             </tr>
 
         </table>
         <br>
-        <span style="font-size: 30px;"><strong>โรงเรือนของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
+        <span style="font-size: 30px;"><strong>โคเนื้อของ </strong>: <?php echo "<strong>ฟาร์ม </strong>" . $result->farmname . "<strong> คุณ </strong>" .  $result->fullname;  ?></span>
         <table width="100%" cellspacing="0" class="border">
             <br>
 
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <th>ลำดับ</th>
+                <th style="width: 20%;">#</th>
+                <th>ชื่อ</th>
+                <th>เพศ</th>
+                <th>สายพันธุ์</th>
+                <th>โรงเรือน</th>
+                <th>ฝูง</th>
+                <th>อายุ</th>
 
             </tr>
             <?php
+            $datahouse = new cow();
+            $row = $datahouse->selectdatacowbyfarmer($farmid);
             $i = 1;
-            $query2 = $sql->print_req_house($farm_id);
-            while ($row = $query2->fetch_object()) {
-                $sum = $row->cow + $row->cow;
+            while ($rs = mysqli_fetch_object($row)) {
 
+                if ($rs->cow_pic != NULL) {
+                    $img =   "src='../../dist/img/cow_upload/" . $rs->cow_pic . "'";
+                } else {
+                    $img =   "src='../../dist/img/icon/sacred-cow.png'";
+                }
+                $datenew = date_create($rs->date);
+                $datenow = date_create(date('d-m-Y'));
+                $datediff = date_diff($datenow, $datenew);
+                $diff = $datediff->format("%a");
+                $years = floor($diff / 365);
+                $months = floor(($diff - ($years * 365)) / 30);
+                $day =  $diff - (($years * 365) + ($months * 30));
             ?>
-                <tr>
-                    <td align="center"><?php echo $i; ?></td>
-                    <td align="center"><?php echo $row->house_name; ?></td>
-                    <td align="center"><?php echo $row->cow; ?></td>
-
+                <tr align="center">
+                    <td><?php echo $i; ?></td>
+                    <td style="width:10%"><img <?php echo $img; ?> width="100px"></td>
+                    <td><?php echo $rs->cow_name; ?></td>
+                    <td><?php echo $rs->gender; ?></td>
+                    <td><?php echo $rs->spec_name; ?></td>
+                    <td><?php echo $rs->house_name; ?></td>
+                    <td><?php echo $rs->herd_name; ?></td>
+                    <td><?php echo  $years . " ปี " . $months . " เดือน " . $day . " วัน "; ?></td>
+                    <!--  -->
                 </tr>
             <?php
                 $i++;
             } ?>
 
-            <tr>
-                <td colspan="2" align="center"><strong>รวมโคทุกโรงเรือน</strong></td>
-                <td align="center"><?php echo $sum; ?> ตัว</td>
-            </tr>
         </table>
 
     </div>
