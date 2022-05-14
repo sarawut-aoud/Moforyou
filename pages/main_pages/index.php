@@ -1,7 +1,7 @@
 <?php
 require_once '../../connect/functions.php';
 require_once '../../connect/function_datetime.php';
-
+$date = date("Y-m-d");
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -50,7 +50,7 @@ if (empty($result)) {
                                     <h2 class=" col-md-12 col-sm-12 text-center"><i class="fa fa-file-chart-pie"></i> รายงานข้อมูล</h2>
                                     <hr class="mt-2 mb-2">
                                     <!-- list Manage -->
-                                    <ul class="nav nav-pills " id="custom-content-below-tab">
+                                    <ul class="nav nav-pills justify-content-center" id="custom-content-below-tab">
 
                                         <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg box_list-1 shadow" href="../report/rep-house.php" role="button">

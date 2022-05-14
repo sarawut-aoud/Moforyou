@@ -1096,6 +1096,11 @@ class recordfood extends Database
         $se = mysqli_query($this->dbcon, "SELECT COUNT(*) AS food_id FROM tbl_foodrecord WHERE food_id = '$id'");
         return $se;
     }
+    public function select_year()
+    {
+        $se = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(date,'%Y') as year FROM `tbl_foodrecord`GROUP BY YEAR(date)");
+        return $se;
+    }
 }
 // All Report
 class reports extends Database
@@ -1321,6 +1326,11 @@ class reports extends Database
     public function req_healyearindex()
     {
         $re = mysqli_query($this->dbcon, "SELECT DATE_FORMAT(h.datestart,'%Y') AS year FROM tbl_heal as h GROUP BY YEAR(h.datestart);");
+        return $re;
+    }
+    public function print_req_house($farm_id)
+    {
+        $re = mysqli_query($this->dbcon, "");
         return $re;
     }
 }

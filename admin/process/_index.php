@@ -9,7 +9,7 @@ $sql_cow = new cow();
 $func = $_REQUEST['function'];
 $userfarmer = array();
 if (isset($func) && $func == 'showdatauser') {
-    $query = $sql_farmer->select_allfarmer('');
+    $query = $sql_farmer->select_allfarmer('', '');
     $i = 0;
     while ($row = $query->fetch_object()) {
         $userfarmer[$i] = array(
@@ -80,8 +80,8 @@ if (isset($func) && $func == 'barchartbreed2') {
             "farmname" => $row->farmname,
             "numbreed" => $row->numbreed . "ตัว",
         );
-    echo json_encode($data);
-        
+        echo json_encode($data);
+
         $i++;
     }
 }

@@ -1,7 +1,8 @@
 <?php
 require '../../connect/session_ckeck.php';
 require_once '../../connect/functions.php';
-
+require_once '../../connect/function_datetime.php';
+$date = date('Y-m-d');
 $id = $_SESSION['id'];
 $sql = new farm();
 $fcheck = $sql->checkregisfarm($id);
@@ -217,95 +218,73 @@ if (empty($result)) {
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-end">
-                                        <div class="col-md-5">
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <label class="col-form-label col-4" for="month_id">เลือกเดือน : </label>
-                                                    <div class="col-md">
-                                                        <select class="form-select" id="month_id">
-                                                            <?php for ($i = 1; $i <= 12; $i++) {
-                                                                if ($i <= 9) {
-                                                                    $month = "0" . $i;
-                                                                } else if ($i >= 10) {
-                                                                    $month = $i;
-                                                                }
-                                                                switch ($month) {
-                                                                    case '01':
-                                                                        $month_name = "มกราคม";
-                                                                        break;
-                                                                    case '02':
-                                                                        $month_name = "กุมภาพันธ์";
-                                                                        break;
-                                                                    case '03':
-                                                                        $month_name = "มีนาคม";
-                                                                        break;
-                                                                    case '04':
-                                                                        $month_name = "เมษายน";
-                                                                        break;
-                                                                    case '05':
-                                                                        $month_name = "พฤษภาคม";
-                                                                        break;
-                                                                    case '06':
-                                                                        $month_name = "มิถุนายน";
-                                                                        break;
-                                                                    case '07':
-                                                                        $month_name = "กรกฎาคม";
-                                                                        break;
-                                                                    case '08':
-                                                                        $month_name = "สิงหาคม";
-                                                                        break;
-                                                                    case '09':
-                                                                        $month_name = "กันยายน";
-                                                                        break;
-                                                                    case '10':
-                                                                        $month_name = "ตุลาคม";
-                                                                        break;
-                                                                    case '11':
-                                                                        $month_name = "พฤศจิกายน";
-                                                                        break;
-                                                                    case '12':
-                                                                        $month_name = "ธันวาคม";
-                                                                        break;
-                                                                }
-                                                            ?>
-                                                                <option value="<?php echo $month; ?>"><?php echo  $month_name; ?> </option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <label class="col-form-label " for="month_id">เลือกเดือน : </label>
+                                                <div class="col-md">
+                                                    <select class="form-select" id="month_id">
+                                                        <?php for ($i = 1; $i <= 12; $i++) {
+                                                            if ($i <= 9) {
+                                                                $month = "0" . $i;
+                                                            } else if ($i >= 10) {
+                                                                $month = $i;
+                                                            }
+
+                                                        ?>
+                                                            <option value="<?php echo $month; ?>"><?php echo  month($month); ?> </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <label class="col-form-label " for="year_id">เลือกปี : </label>
+                                                <div class="col-md">
+                                                    <select class="form-select" id="year_id">
+                                                        <?php $sql2 = new recordfood();
+                                                        $query2 = $sql2->select_year();
+                                                        while ($row = $query2->fetch_object()) {
+                                                        ?>
+                                                            <option value="<?php echo $row->year; ?>"><?php echo $row->year; ?> </option>
+                                                        <?php } ?>
+
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-
-
-
+                                    <div id="bar-chart" style="width: 1000px; height: 500px;margin-left:3rem"></div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">ข้อมูล ณ วันที่ : <?php echo DateThai($date) ?> </div>
                                 </div>
 
-                                <div id="bar-chart" style="width: 1000px; height: 500px;margin-left:3rem"></div>
+
                             </div>
 
                         </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 ">
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="far fa-chart-bar"></i>
-                                    โคแต่ละสายพันธุ์
-                                </h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        โคแต่ละสายพันธุ์
+                                    </h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="donut-chart" style="width: 900px; height: 500px;margin-left:6rem"></div>
+                                <div class="card-body">
+                                    <div id="donut-chart" style="width: 900px; height: 500px;margin-left:6rem"></div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">ข้อมูล ณ วันที่ : <?php echo DateThai($date) ?> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- /.row -->
                 </div>
             </div>

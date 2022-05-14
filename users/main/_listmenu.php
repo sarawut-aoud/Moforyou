@@ -120,11 +120,11 @@ if (empty($result)) {
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="nav-item  col-md-4 col-sm-12 col-12 mt-2">
+                                        <li class="nav-item  col-md-4 col-sm-12 col-6 mt-2">
                                             <a class="btn btn-lg bt_list-9 shadow" href="./_listReport.php" role="button">
                                                 <div class="row justify-content-center">
                                                     <img class="imggg" src="../../dist/img/icon/report.png">
-                                                    <span class="txt-resp smt-2">รายงานข้อมูล</span>
+                                                    <span class="txt-resp mt-2">รายงานข้อมูล</span>
                                                 </div>
                                             </a>
                                         </li>

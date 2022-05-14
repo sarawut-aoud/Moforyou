@@ -42,6 +42,9 @@
                     <div id="bar1" class="w-100 " style="height: 500px;"></div>
 
                 </div>
+                <div class="card-footer">
+                    <div class="text-center">ข้อมูล ณ วันที่ : <?php echo DateThai($date); ?></div>
+                </div>
             </div>
         </div>
         <div class="col-md-10 ">
@@ -84,6 +87,9 @@
                     </div>
                     <div id="bar2" class="w-100 " style="height: 500px;"></div>
 
+                </div>
+                <div class="card-footer">
+                    <div class="text-center">ข้อมูล ณ วันที่ : <?php echo DateThai($date); ?></div>
                 </div>
             </div>
         </div>
