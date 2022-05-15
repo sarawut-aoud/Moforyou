@@ -56,14 +56,12 @@ foreach ($tombon as $value) {
                 <td style="font-size: 24px;"><strong>ฟาร์ม </strong> : <?php echo $result->farmname; ?></td>
             </tr>
             <tr>
-                <td style="font-size: 24px;"><strong>ผู้ดูแลฟาร์ม </strong>: <?php echo $result->farmname; ?></td>
+                <td style="font-size: 24px;"><strong>ผู้ดูแลฟาร์ม </strong>: <?php echo $result->fullname; ?></td>
             </tr>
             <tr>
                 <td style="font-size: 24px;"><strong>ติดต่อ </strong>: <?php echo $result->phone; ?> หรือที่ <?php echo $result->email; ?> </td>
             </tr>
-            <tr>
-                <td style="font-size: 24px;"><strong>ประเภทโคทื่เลี้ยง</strong> : </td>
-            </tr>
+            
             <tr>
                 <td style="font-size: 24px;"><strong>ที่อยู่ </strong>: <?php echo $result->address . " ตำบล " . $name_th; ?></td>
             </tr>
