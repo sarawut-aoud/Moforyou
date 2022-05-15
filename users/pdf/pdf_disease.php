@@ -21,15 +21,27 @@ function fetch_data()
     $farm_id = $_REQUEST['farm'];
     $output = '';
     require_once('../../connect/functions.php');
-    $sql = new reports();
-    $query2 = $sql->print_req_house($farm_id);
+    require_once('../../connect/function_datetime.php');
+
+    $data = new heal();
+    $query2 = $data->select_healbyfarm($farm_id);
     $i = 1;
     while ($row = $query2->fetch_object()) {
-
+        if ($row->dis_id == '1') {
+            $dis = '';
+        } else {
+            $dis = $row->detail;
+        }
+        if ($row->healmore != NULL && $dis == '') {
+            $disa = $row->healmore;
+        } else {
+            $disa =  $dis . " และ " . $row->healmore;
+        }
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
-                         <td>' . $row->house_name . '</td>  
-                         <td>' . $row->cow . '</td>  
+                         <td>' . $row->cow_name . '</td>  
+                         <td>' . $disa . '</td>  
+                         <td>' . DateThai($row->datestart) . '</td>  
                     </tr>  
                          ';
     }
@@ -81,13 +93,14 @@ $content .= '
 
 
 $content .= ' <table width="100%"  border="1" style="margin-left:30px">
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td>ลำดับ </td>
+                <td>ชื่อโค </td>
+                <td>โรคหรืออาการป่วย</td>
+                <td>เริ่มแสดงอาการวันที่</td>
             </tr>
 ';
 $content .= fetch_data();
 $content .= '</table>';
 $obj_pdf->writeHTML($content);
-$obj_pdf->Output('houses.pdf', 'I');
+$obj_pdf->Output('disease.pdf', 'I');

@@ -22,16 +22,18 @@ function fetch_data()
     $output = '';
     require_once('../../connect/functions.php');
     $sql = new reports();
-    $query2 = $sql->print_req_house($farm_id);
+    $query2 = $sql->print_req_herd($farm_id);
     $i = 1;
     while ($row = $query2->fetch_object()) {
 
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
                          <td>' . $row->house_name . '</td>  
+                         <td>' . $row->herd_name . '</td>  
                          <td>' . $row->cow . '</td>  
                     </tr>  
                          ';
+        $i++;
     }
     return $output;
 }
@@ -56,7 +58,7 @@ $content .= '
 <table width="100%" >
             <tr>
                 <td colspan="3">&nbsp;</td>
-                <td align="right">สั่งพิมพ์ ณ วันที่ : ' . Datethai($date) . '</td>
+                <td align="right">เอกสาร ณ วันที่ : ' . Datethai($date) . '</td>
             </tr>
             <tr>
                 <td height="30"></td>
@@ -81,13 +83,14 @@ $content .= '
 
 
 $content .= ' <table width="100%"  border="1" style="margin-left:30px">
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td>ลำดับ </td>
+                <td>ชื่อโรงเรือน</td>
+                <td>ชื่อฝูง</td>
+                <td>จำนวนโคในโรงเรือน</td>
             </tr>
 ';
 $content .= fetch_data();
 $content .= '</table>';
 $obj_pdf->writeHTML($content);
-$obj_pdf->Output('houses.pdf', 'I');
+$obj_pdf->Output('herd.pdf', 'I');

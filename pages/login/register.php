@@ -238,9 +238,9 @@
             var password = $('#password-input').val();
             var con_password = $('#confirm_password').val();
             $.ajax({
-                type: "post",
+                method: "post",
                 dataType: "json",
-                url: '_recov-password.php',
+                url: './_recov-password.php',
                 data: {
                     function: "register",
                     email: email,

@@ -69,8 +69,8 @@ if (empty($result)) {
                                     <div class="card-body">
                                         <!-- table -->
                                         <div class=" text-end mb-3">
-                                            <a class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
-                                            <a href="../print/print_heal.php?farm=<?php echo $farmid; ?>"class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
+                                            <a href="../pdf/pdf_heal.php?farm=<?php echo $farmid; ?>" class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
+                                            <a href="../print/print_heal.php?farm=<?php echo $farmid; ?>" class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
                                         </div>
                                         <table id="example1" class="table table-bordered table-striped table-hover">
                                             <!-- head table -->
@@ -115,6 +115,16 @@ if (empty($result)) {
                                                     } else {
                                                         $doctor = '';
                                                     }
+                                                    if ($rs->healstart == null) {
+                                                        $start = '';
+                                                    } else {
+                                                        $start = DateThai($rs->healstart);
+                                                    }
+                                                    if ($rs->healend == NULL) {
+                                                        $end = '';
+                                                    } else {
+                                                        $end = DateThai($rs->healend);
+                                                    }
 
 
                                                 ?>
@@ -123,8 +133,8 @@ if (empty($result)) {
                                                         <td><?php echo $rs->cow_name; ?></td>
                                                         <td><?php echo  $dis; ?></td>
 
-                                                        <td><?php echo DateThai($rs->healstart); ?></td>
-                                                        <td><?php echo DateThai($rs->healend); ?></td>
+                                                        <td><?php echo $start; ?></td>
+                                                        <td><?php echo  $end; ?></td>
                                                         <td><?php echo  $doctor; ?></td>
 
 

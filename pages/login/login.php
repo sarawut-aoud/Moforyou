@@ -55,7 +55,7 @@ ob_start();
                     </p>
 
                     <p class="mb-0  mt-5">
-                        </i><a href="register" class="text-center"><small> สร้างบัญชีใหม่ <i class="fas fa-arrow-right"></i></a> <small>
+                        </i><a href="register.php" class="text-center"><small> สร้างบัญชีใหม่ <i class="fas fa-arrow-right"></i></a> <small>
                     </p>
                 </center>
 
@@ -118,7 +118,7 @@ if (isset($_POST['username'])) {
                     $person_id =  $row_login['card'];
                     $phone =  $row_login['phone'];
                     $email =  strval($row_login['email']);
-
+                   
                     require '../../connect/func_login.php';
                     echo login($id, $username, $fullname, $person_id, $phone, $email);
 

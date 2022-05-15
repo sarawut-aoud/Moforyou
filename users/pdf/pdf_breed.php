@@ -21,15 +21,27 @@ function fetch_data()
     $farm_id = $_REQUEST['farm'];
     $output = '';
     require_once('../../connect/functions.php');
-    $sql = new reports();
-    $query2 = $sql->print_req_house($farm_id);
-    $i = 1;
-    while ($row = $query2->fetch_object()) {
+    require_once('../../connect/function_datetime.php');
 
+    $data = new breed();
+    $row = $data->select_breed_all($farm_id);
+    $i = 1;
+
+    while ($rs = mysqli_fetch_object($row)) {
+
+        if ($rs->breed_status == 'y') {
+            $msg = 'แม่โคมีการตั้งท้อง';
+        } else if ($rs->breed_status == 'n') {
+            $msg = 'แม่โคผสมพันธุ์ไม่ติด';
+        } else {
+            $msg = 'รอดูผลการตั้งครรภ์';
+        }
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
-                         <td>' . $row->house_name . '</td>  
-                         <td>' . $row->cow . '</td>  
+                         <td>' . $rs->namemale . " และ " . $rs->namefemale . '</td>  
+                         <td>' . DateThai($rs->breed_date) . '</td>  
+                         <td>' . DateThai($rs->breednext) . '</td>  
+                         <td>' . $msg . '</td>  
                     </tr>  
                          ';
     }
@@ -81,13 +93,15 @@ $content .= '
 
 
 $content .= ' <table width="100%"  border="1" style="margin-left:30px">
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td>ลำดับ </td>
+                <td>ระหว่าง</td>
+                <td>วันที่ / เวลา</td>
+                <td>ประมาณวันที่คลอด</td>
+                <td>สถานะการตั้งท้อง</td>
             </tr>
 ';
 $content .= fetch_data();
 $content .= '</table>';
 $obj_pdf->writeHTML($content);
-$obj_pdf->Output('houses.pdf', 'I');
+$obj_pdf->Output('breed.pdf', 'I');

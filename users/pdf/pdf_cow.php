@@ -21,17 +21,29 @@ function fetch_data()
     $farm_id = $_REQUEST['farm'];
     $output = '';
     require_once('../../connect/functions.php');
-    $sql = new reports();
-    $query2 = $sql->print_req_house($farm_id);
+    $datahouse = new cow();
+    $query2 = $datahouse->selectdatacowbyfarmer($farmid);
+    $datenew = date_create($rs->date);
+    $datenow = date_create(date('d-m-Y'));
+    $datediff = date_diff($datenow, $datenew);
+    $diff = $datediff->format("%a");
+    $years = floor($diff / 365);
+    $months = floor(($diff - ($years * 365)) / 30);
+    $day =  $diff - (($years * 365) + ($months * 30));
     $i = 1;
-    while ($row = $query2->fetch_object()) {
+    while ($rs = $query2->fetch_object()) {
 
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
-                         <td>' . $row->house_name . '</td>  
-                         <td>' . $row->cow . '</td>  
+                         <td>' . $rs->cow_name . '</td>  
+                         <td>' . $rs->gender . '</td>  
+                         <td>' . $rs->spec_name . '</td>  
+                         <td>' . $rs->house_name . '</td>  
+                         <td>' . $rs->herd_name . '</td>  
+                         <td>' . $years . " ปี " . $months . " เดือน " . $day . " วัน " . '</td>  
                     </tr>  
                          ';
+        $i++;
     }
     return $output;
 }
@@ -81,13 +93,17 @@ $content .= '
 
 
 $content .= ' <table width="100%"  border="1" style="margin-left:30px">
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td>ลำดับ </td>
+                <td>ชื่อ</td>
+                <td>เพศ</td>
+                <td>สายพันธุ์</td>
+                <td>โรงเรือน</td>
+                <td>ฝูง</td>
+                <td>อายุ</td>
             </tr>
 ';
 $content .= fetch_data();
 $content .= '</table>';
 $obj_pdf->writeHTML($content);
-$obj_pdf->Output('houses.pdf', 'I');
+$obj_pdf->Output('cow.pdf', 'I');

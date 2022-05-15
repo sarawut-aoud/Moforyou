@@ -68,7 +68,7 @@ if (empty($result)) {
                                         <!-- /.card-header -->
                                         <div class="card-body">
                                             <div class=" text-end mb-3">
-                                                <a class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
+                                                <a href="../pdf/pdf_breed.php?farm=<?php echo $farmid; ?>"class="btn btn-outline-danger "><img src="../../dist/img/icon/pdf.png" width="40px"></a>
                                                 <a href="../print/print_breed.php?farm=<?php echo $farmid; ?>" class="btn btn-outline-primary "><img src="../../dist/img/icon/printer.png" width="40px"></a>
                                             </div>
                                             <!-- table -->

@@ -32,6 +32,7 @@ function fetch_data()
                          <td>' . $row->cow . '</td>  
                     </tr>  
                          ';
+        $i++;
     }
     return $output;
 }
@@ -40,6 +41,8 @@ require_once('tcpdf/tcpdf.php');
 $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $obj_pdf->SetCreator(PDF_CREATOR);
 $obj_pdf->SetTitle("Export HTML Table data to PDF using TCPDF in PHP");
+// $obj_pdf->SetHeaderData('../../dist/img/pic2.png', 20, 'Mindphp Example 06', 'การแทรกรูปภาพ กำหนดขนาด เส้นขอบและความละเอียดของภาพ', array (0, 64, 255), array (0, 64, 128));
+
 $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);
 $obj_pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $obj_pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -56,7 +59,9 @@ $content .= '
 <table width="100%" >
             <tr>
                 <td colspan="3">&nbsp;</td>
-                <td align="right">สั่งพิมพ์ ณ วันที่ : ' . Datethai($date) . '</td>
+                <td align="right">เอกสาร ณ วันที่ : ' . Datethai($date) . '</td>
+            </tr>
+            
             </tr>
             <tr>
                 <td height="30"></td>

@@ -20,16 +20,50 @@ function fetch_data()
 {
     $farm_id = $_REQUEST['farm'];
     $output = '';
-    require_once('../../connect/functions.php');
-    $sql = new reports();
-    $query2 = $sql->print_req_house($farm_id);
-    $i = 1;
-    while ($row = $query2->fetch_object()) {
+    require_once('../../connect/function_datetime.php');
 
+    require_once('../../connect/functions.php');
+    $data = new heal();
+    $row = $data->select_healbyfarm($farm_id);
+    $i = 1;
+    while ($rs = $row->fetch_object()) {
+        if ($rs->detail != NULL && $rs->healmore != NULL) {
+            $dis = $rs->detail . ' และ ' . $rs->healmore;
+        } else if ($rs->detail == NULL) {
+            $dis = $rs->healmore;
+        } else {
+            $dis = $rs->detail;
+        }
+        if ($rs->doctor_id != NULL) {
+            $data = new doctor();
+            $row = $data->select_docbyfarm($farmid);
+            while ($rsdoc = $row->fetch_object()) {
+                if ($rsdoc->id == $rs->doctor_id) {
+                    $doctor = $rsdoc->name;
+                } else {
+                    $doctor = '';
+                }
+            }
+        } else {
+            $doctor = '';
+        }
+        if ($rs->healstart == null) {
+            $start = '';
+        } else {
+            $start = DateThai($rs->healstart);
+        }
+        if ($rs->healend == NULL) {
+            $end = '';
+        } else {
+            $end = DateThai($rs->healend);
+        }
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
-                         <td>' . $row->house_name . '</td>  
-                         <td>' . $row->cow . '</td>  
+                         <td>' . $rs->cow_name . '</td>  
+                         <td>' .  $dis . '</td>  
+                         <td>' .  $start . '</td>  
+                         <td>' .  $end . '</td>  
+                         <td>' .  $doctor . '</td>  
                     </tr>  
                          ';
     }
@@ -81,13 +115,16 @@ $content .= '
 
 
 $content .= ' <table width="100%"  border="1" style="margin-left:30px">
-            <tr>
-                <td width="10%" align="center">ลำดับ </td>
-                <td width="40%" align="center">ชื่อโรงเรือน</td>
-                <td width="40%" align="center">จำนวนโคในโรงเรือน</td>
+            <tr align="center">
+                <td>ลำดับ </td>
+                <td>ชื่อโค</td>
+                <td>โรค / อาการป่วย</td>
+                <td>วันที่เริ่มรักษา</td>
+                <td>วันที่สิ้นสุดการรักษา</td>
+                <td>รักษากับสัตวแพยท์</td>
             </tr>
 ';
 $content .= fetch_data();
 $content .= '</table>';
 $obj_pdf->writeHTML($content);
-$obj_pdf->Output('houses.pdf', 'I');
+$obj_pdf->Output('heal.pdf', 'I');

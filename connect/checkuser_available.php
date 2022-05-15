@@ -31,7 +31,10 @@ if ($func == 'checkmail') {
 
     $queryemail = $sql->checkemail($email);
     $num = mysqli_num_rows($queryemail);
-    if ($num > 0) {
+    if ($email == '') {
+        echo "<span ><small></small></span>";
+        echo "<script>$('#submit').prop('disabled', false);</script>";
+    } else if ($num > 0) {
         echo "<span style='color: red;'><small>อีเมลนี้ซ้ำ ไม่สามารถใช้ได้</small></span>";
         echo "<script>$('#submit').prop('disabled', true);</script>";
     }
@@ -41,9 +44,11 @@ if ($func == 'checkname') {
 
     $queryname = $sql->checkname($name);
     $num = mysqli_num_rows($queryname);
-    if ($num > 0) {
+    if ($name == '') {
+        echo "<span ><small></small></span>";
+        echo "<script>$('#submit').prop('disabled', false);</script>";
+    } else if ($num > 0) {
         echo "<span style='color: red;'><small>ชื่อ - นามสกุลนี้มีการลงทะเบียนแล้ว ไม่สามารถใช้ได้</small></span>";
         echo "<script>$('#submit').prop('disabled', true);</script>";
     }
 }
-
