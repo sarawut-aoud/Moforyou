@@ -123,13 +123,11 @@ $date = date("Y-m-d");
     </script>
     <script type="text/javascript">
         google.charts.load('current', {
-            'packages': ['corechart']
+            packages: ['corechart', 'bar']
         });
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback();
 
         function load_monthwise_data(month, year) {
-            var year = year;
-            var month = month;
 
             $.ajax({
                 url: "./_reqindex.php",
@@ -140,35 +138,36 @@ $date = date("Y-m-d");
                     function: 'barchart1'
                 },
                 dataType: "JSON",
-                success: function(data2) {
-                    drawChart(data2);
+                success: function(data) {
+                    drawMonthwiseChart1(data);
                 }
             });
         }
 
-        function drawChart(data2) {
-            var jsonData = data2;
-
-            function arrayToDataTable(a, types) {
-                var data = new google.visualization.DataTable();
-                var firstRow = a.shift();
-                for (var i = 0; i < firstRow.length; i++) {
-                    var type = types[i] != null ? types[i] : 'number';
-                    data.addColumn(type, firstRow[i]);
-                }
-                data.addRows(a);
-                return data;
-            }
-            var data = arrayToDataTable(jsonData, ["detail", "row"]);
-
-
-
+        function drawMonthwiseChart1(chart_data) {
+            var jsonData = chart_data;
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'name');
+            data.addColumn('number', '');
+            $.each(jsonData, function(i, jsonData) {
+                var detail = jsonData.detail;
+                // var row = parseFloat($.trim(jsonData.row));
+                var row = jsonData.row;
+                data.addRows([
+                    [detail, row ]
+                ]);
+            });
             var options = {
-                is3D: true,
                 title: '',
-                pieHole: 0.4,
+                hAxis: {
+                    title: ""
+                },
+                legend: {
+                    position: "none"
+                },
             };
-            var chart = new google.visualization.PieChart(document.getElementById('bar2'));
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('bar2'));
             chart.draw(data, options);
         }
     </script>

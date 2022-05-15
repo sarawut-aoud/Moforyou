@@ -151,8 +151,8 @@ if (isset($func) && $func == 'reqhealloop') {
 if (isset($func) && $func == 'barchart1') {
     $sqlreq2 = new reports();
     $i = 0;
-    $total = 0;
-    $month = $_GET['month'];;
+
+    $month = $_GET['month'];
     $year = $_GET['year'];
     $query2 = $sqlreq2->req_healanddis2($month, $year);
     while ($row = $query2->fetch_object()) {
@@ -160,6 +160,7 @@ if (isset($func) && $func == 'barchart1') {
             "detail" => $row->detail,
             "row" => round($row->row_dis),
         );
+        $i++;
     }
     echo json_encode($data2);
 }

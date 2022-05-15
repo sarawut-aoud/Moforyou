@@ -19,7 +19,7 @@ class registra extends Database
     }
     public function checkname($name)
     {
-        $checkuser = mysqli_query($this->dbcon, "SELECT fullname FROM tbl_farmer WHERE fullname = '$name'  ");
+        $checkuser = mysqli_query($this->dbcon, "SELECT fullname FROM tbl_farmer WHERE fullname LIKE  '%$name%'  ");
         return $checkuser;
     }
     // Resgistration 
@@ -37,6 +37,16 @@ class registra extends Database
             $up = mysqli_query($this->dbcon, "SELECT active FROM tbl_farmer WHERE email = '$email'");
         }
         return $up;
+    }
+    public function report_reg($email)
+    {
+        $checkuser = mysqli_query($this->dbcon, "SELECT * FROM tbl_farmer WHERE  email = '$email'  ");
+        return $checkuser;
+    }
+    public function delete_reg($email)
+    {
+        $checkuser = mysqli_query($this->dbcon, "DELETE  FROM tbl_farmer WHERE  email = '$email'  ");
+        return $checkuser;
     }
 
     // Login 

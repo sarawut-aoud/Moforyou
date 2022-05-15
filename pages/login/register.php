@@ -33,7 +33,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">ชื่อ - นามสกุล</label>
-                                            <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล"onblur="checkname(this.value)" required>
+                                            <input class="form-control py-4" id="fname" name="fname" type="text" placeholder="ชื่อ - นามสกุล" onblur="checkname(this.value)" required>
                                             <span class="text-center " id="namecheck"></span>
 
                                         </div>
@@ -211,6 +211,23 @@
 </script>
 <script>
     $(document).ready(function() {
+        toastr.options = {
+            'closeButton': false,
+            'debug': false,
+            'newestOnTop': false,
+            'progressBar': false,
+            'positionClass': 'toast-top-right',
+            'preventDuplicates': false,
+            'onclick': null,
+            'showDuration': '300',
+            'hideDuration': '1000',
+            'timeOut': '5000',
+            'extendedTimeOut': '1000',
+            'showEasing': 'swing',
+            'hideEasing': 'linear',
+            'showMethod': 'fadeIn',
+            'hideMethod': 'fadeOut'
+        }
         $(document).on('click', '#submit', function(e) {
             e.preventDefault();
             var email = $('#email').val();
@@ -236,7 +253,8 @@
                 },
                 success: function(result) {
                     if (result.status == 200) {
-                        window.location = '../email/email_active.php?email=' + email + '';
+                        // window.location = '../email/email_active.php?email=' + email + '';
+                        window.location = '../login/report_regis.php?email=' + email + '';
                     } else {
                         toastr.warning(
                             result.message,

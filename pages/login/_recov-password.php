@@ -93,3 +93,20 @@ if (isset($func) && $func == 'recovepass') {
     echo json_encode($msg);
     // http_response_code(200);
 }
+if (isset($func) && $func == 'cancel') {
+    $sql = new registra();
+    $email = $_POST['email'];
+    if (empty($email)) {
+        $msg = array(
+            "status" => 0,
+            "message" => "ไม่สามารถทำรายการได้"
+        );
+    } else {
+        $query = $sql->delete_reg($email);
+        $msg = array(
+            "status" => 200,
+            "message" => "ยกเลิกการสมัครสมาชิก"
+        );
+    }
+    echo json_encode($msg);
+}
