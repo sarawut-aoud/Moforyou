@@ -90,7 +90,7 @@ $content .= '
 <table width="100%" >
             <tr>
                 <td colspan="3">&nbsp;</td>
-                <td align="right">สั่งพิมพ์ ณ วันที่ : ' . Datethai($date) . '</td>
+                <td align="right">เอกสาร ณ วันที่ : ' . Datethai($date) . '</td>
             </tr>
             <tr>
                 <td height="30"></td>

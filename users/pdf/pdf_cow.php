@@ -22,17 +22,17 @@ function fetch_data()
     $output = '';
     require_once('../../connect/functions.php');
     $datahouse = new cow();
-    $query2 = $datahouse->selectdatacowbyfarmer($farmid);
-    $datenew = date_create($rs->date);
-    $datenow = date_create(date('d-m-Y'));
-    $datediff = date_diff($datenow, $datenew);
-    $diff = $datediff->format("%a");
-    $years = floor($diff / 365);
-    $months = floor(($diff - ($years * 365)) / 30);
-    $day =  $diff - (($years * 365) + ($months * 30));
+    $query2 = $datahouse->selectdatacowbyfarmer($farm_id);
+
     $i = 1;
     while ($rs = $query2->fetch_object()) {
-
+        $datenew = date_create($rs->date);
+        $datenow = date_create(date('d-m-Y'));
+        $datediff = date_diff($datenow, $datenew);
+        $diff = $datediff->format("%a");
+        $years = floor($diff / 365);
+        $months = floor(($diff - ($years * 365)) / 30);
+        $day =  $diff - (($years * 365) + ($months * 30));
         $output .= '<tr align="center">  
                          <td>' . $i . '</td>  
                          <td>' . $rs->cow_name . '</td>  
@@ -68,7 +68,7 @@ $content .= '
 <table width="100%" >
             <tr>
                 <td colspan="3">&nbsp;</td>
-                <td align="right">สั่งพิมพ์ ณ วันที่ : ' . Datethai($date) . '</td>
+                <td align="right">เอกสาร ณ วันที่ : ' . Datethai($date) . '</td>
             </tr>
             <tr>
                 <td height="30"></td>
