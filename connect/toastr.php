@@ -94,7 +94,7 @@ function warning_toast($msg)
                 </script>";
 }
 
-function info_toast($msg)
+function info_toast($msg, $email)
 {
   return "<script>
         toastr.options = {
@@ -116,7 +116,14 @@ function info_toast($msg)
        }
        toastr.info(
          '$msg',
-         
+         '',
+         {
+           timeOut: 1000,
+           fadeOut: 1000,
+           onHidden: function () {
+            window.location.href = '../../pages/email/email_active.php?email=$email';
+             }
+         }
        );
                  </script>";
 }

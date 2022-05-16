@@ -217,7 +217,7 @@ class farm extends Database
 
     public function pagin()
     {
-        $pag = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
+        $pag = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , f.address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
         FROM tbl_cow as c
         RIGHT JOIN tbl_farm as f ON (c.farm_id = f.id)
         RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) GROUP BY f.farmname");
@@ -225,7 +225,7 @@ class farm extends Database
     }
     public function pagin_page($start, $perpage)
     {
-        $page = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
+        $page = mysqli_query($this->dbcon, "SELECT f.id, f.farmname , f.district_id , f.address , fm.fullname ,fm.email,fm.phone ,COUNT(c.id) as cow
         FROM tbl_cow as c
         RIGHT JOIN tbl_farm as f ON (c.farm_id = f.id)
         RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id) GROUP BY f.farmname limit {$start},{$perpage} ");

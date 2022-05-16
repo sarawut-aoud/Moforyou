@@ -1,36 +1,37 @@
 <?php
+
 require '../../plugins/phpmailer/PHPMailerAutoload.php';
 $email = $_REQUEST['email'];
 header('Content-Type: text/html; charset=utf-8');
-$path = $_SERVER['HTTP_HOST'] . '/pages/login/_active_id.php?email=' . $email . '';
-// $path = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/_active_id.php?email=' . $email . '';
+$path = $_SERVER['HTTP_HOST'] .  '/pages/login/_active_id.php?email=' . $email . '';
+
 $mail = new PHPMailer;
-
-// //mail server//
-// $mail->CharSet = "UTF-8";
-// $mail->isSMTP();
-// $mail->Mailer = 'stmp';
-// $mail->Host = 'mail.primary-serv.com';
-// $mail->Port = 25;
-// $mail->SMTPAuth = false;
-// $mail->SMTPAutoTLS = false;
-// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-// $gmail_username = "uat@primary-serv.com"; // gmail ที่ใช้ส่ง
-// $gmail_password = "Aa123456"; // รหัสผ่าน gmail
-
 //mail server//
-//gamil
 $mail->CharSet = "utf-8";
 $mail->isSMTP();
 $mail->Mailer = 'stmp';
-$mail->SMTPSecure = 'ssl';
-$mail->Host = 'smtp.gmail.com';
-$mail->Port = '465';
-$mail->SMTPAuth = true;
+$mail->Host = 'mail.primary-serv.com';
+$mail->Port = '25';
+$mail->SMTPAuth = false;
+$mail->SMTPAutoTLS = false;
 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-$gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
-$gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
-//gamil
+$gmail_username = "moforyou@primary-serv.com"; // gmail ที่ใช้ส่ง
+$gmail_password = "Pass123456"; // รหัสผ่าน gmail
+//mail server//
+
+//gamil//
+//$mail->CharSet = "utf-8";
+//$mail->isSMTP();
+// $mail->Mailer = 'stmp';
+// $mail->SMTPSecure = 'ssl';
+// $mail->Host = 'smtp.gmail.com';
+// $mail->Port = '465';
+//$mail->SMTPAuth = true;
+//$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+//$gmail_username = "u.sarawut586@gmail.com"; // gmail ที่ใช้ส่ง
+//$gmail_password = "Pass0979284920"; // รหัสผ่าน gmail
+//gamil//
+
 
 $sender = "MOFORYOU"; // ชื่อผู้ส่ง
 $email_sender = "MOFORYOU@gmail.com"; // เมล์ผู้ส่ง 
@@ -41,7 +42,7 @@ $subject = "ยืนยันตัวตน"; // หัวข้อเมล�
 
 $mail->Username = $gmail_username;
 $mail->Password = $gmail_password;
-$mail->setFrom($email_sender, $sender);
+$mail->setFrom($gmail_username, $sender);
 $mail->addAddress($email_receiver);
 $mail->Subject = $subject;
 
@@ -122,9 +123,9 @@ if ($email_receiver) {
   } else {
     // กรณีส่ง email สำเร็จ
     echo "<script>
-          window.setTimeout(function() {
+         window.setTimeout(function() {
             window.location = '../email/sendmail.html';
-          }, 1000);
+         }, 1000);
         </script>";
   }
 }

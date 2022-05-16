@@ -123,8 +123,8 @@ if (isset($_POST['username'])) {
                     echo login($id, $username, $fullname, $person_id, $phone, $email);
 
                     exit();
-                } else if (password_verify($pass_sha, $row['password']) && $row['active'] == 'NO') {
-                    echo info_toast("โปรดยืนยันตัวตนที่ Email ของท่านก่อนเข้าสู่ระบบ ");
+                } else if ((md5($pass_sha) == $row['password']) && $row['active'] == 'NO') {
+                    echo info_toast("โปรดยืนยันตัวตนที่ Email ของท่านก่อนเข้าสู่ระบบ ",$row['email']);
                 } else {
                     echo warning_toast("รหัสผ่านผิด โปรดลองอีกครั้ง");
                     exit();
