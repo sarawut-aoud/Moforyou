@@ -1137,15 +1137,15 @@ class reports extends Database
             $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname ,fm.fullname
             FROM tbl_cow as c
             RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
-            INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
-            GROUP BY f.farmname
+            RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
+            GROUP BY fm.fullname
             ");
         } else {
             $re = mysqli_query($this->dbcon, "SELECT count(c.id) as cou_cow ,f.farmname ,fm.fullname
             FROM tbl_cow as c
             RIGHT JOIN tbl_farm as f ON (c.farm_id  = f.id) 
-            INNER JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
-            WHERE c.farm_id = '$farm_id' GROUP BY f.farmname
+            RIGHT JOIN tbl_farmer as fm ON (f.farmmer_id = fm.id)
+            WHERE c.farm_id = '$farm_id' GROUP BY fm.fullname
         ");
         }
 

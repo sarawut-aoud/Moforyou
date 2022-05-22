@@ -9,7 +9,7 @@ $paths = $_SERVER['HTTP_HOST'] . '/moforyou/pages/login/login.php';
 
 
 if ($rs->active == 'YES') {
-
+   
     echo "<script>  window.location = '" . $paths . "';</script>";
 } else {
     $query = $sql->active_id($email, 'update');
